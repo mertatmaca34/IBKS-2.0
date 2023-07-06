@@ -5,6 +5,6 @@ namespace Entities.Concrete
     public class Plc : IEntity
     {
         public int Id { get; set; }
-        public required string IpAdress { get; set; }
+        public string IpAdress { get; set; }
     }
 }

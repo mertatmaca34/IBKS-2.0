@@ -6,7 +6,7 @@ namespace Entities.Concrete
     {
         public int Id { get; set; }
         public DateTime TimeStamp { get; set; }
-        public required string Parameter { get; set; }
+        public  string Parameter { get; set; }
         public double ZeroRef { get; set; }
         public double ZeroMeas { get; set; }
         public double ZeroDiff { get; set; }

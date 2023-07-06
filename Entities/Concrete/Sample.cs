@@ -6,10 +6,10 @@ namespace Entities.Concrete
     {
         public int Id { get; set; }
         public DateTime DateTime { get; set; }
-        public required string SampleCode { get; set; }
-        public required string SampleType { get; set; }
-        public required string PlaceOfDelivery { get; set; }
-        public required string LastState { get; set; }
-        public required string Sampler { get; set; }
+        public string SampleCode { get; set; }
+        public string SampleType { get; set; }
+        public string PlaceOfDelivery { get; set; }
+        public string LastState { get; set; }
+        public string Sampler { get; set; }
     }
 }
