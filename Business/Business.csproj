@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <Folder Include="Concrete\" />
+    <Folder Include="CCS\" />
+    <Folder Include="Constants\" />
+    <Folder Include="DependencyResolvers\" />
+    <Folder Include="BusinessAspects\" />
+    <Folder Include="ValidationRules\" />
   </ItemGroup>
 
   <ItemGroup>
