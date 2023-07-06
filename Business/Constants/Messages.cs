@@ -2,7 +2,7 @@
 {
     public static class Messages
     {
-        public static string ProductAdded = "Ürün eklendi";
+        public static string ApiAlreadyExist = "Bu bilgilere ait API zaten sisteme tanımlanmış";
         public static string ApiAdded = "Api bilgileri sisteme eklendi";
         public static string ProductNameInvalid = "Ürün ismi geçersiz";
         public static string MaintenanceTime = "Sistem bakımda";

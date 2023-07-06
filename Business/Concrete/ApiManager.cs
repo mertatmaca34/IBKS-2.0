@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -16,7 +17,16 @@ namespace Business.Concrete
 
         public IResult Add(Api api)
         {
-            IResult result = BusinessRules.Run()
+            IResult result = BusinessRules.Run(CheckApiExist(api));
+
+            if(result != null)
+            {
+                return result;
+            }
+
+            _apiDal.Add(api);
+
+            return new SuccessResult(Messages.ApiAdded);
         }
 
         public IDataResult<List<Api>> GetAll()
@@ -36,11 +46,14 @@ namespace Business.Concrete
 
         private IResult CheckApiExist(Api api)
         {
-            var result = _apiDal.GetAll(a => a.ApiAdress == api.ApiAdress).Any();
-            if(result)
+            var result = _apiDal.GetAll(a => a == api).Any();
+
+            if (result)
             {
-                return ErrorResult
+                return new ErrorResult(Messages.ApiAlreadyExist);
             }
+
+            return new SuccessResult();
         }
     }
 }
