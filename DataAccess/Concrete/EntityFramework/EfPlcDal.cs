@@ -4,5 +4,5 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class CalibrationDal : EfEntityRepositoryBase<Calibration, IBKSContext>, ICalibrationDal { }
+    public class EfPlcDal : EfEntityRepositoryBase<Plc, IBKSContext>, IPlcDal { }
 }

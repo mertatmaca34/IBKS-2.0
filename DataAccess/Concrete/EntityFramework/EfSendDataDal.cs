@@ -4,5 +4,5 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class PlcDal : EfEntityRepositoryBase<Plc, IBKSContext>, IPlcDal { }
+    public class EfSendDataDal : EfEntityRepositoryBase<SendData, IBKSContext>, ISendDataDal { }
 }

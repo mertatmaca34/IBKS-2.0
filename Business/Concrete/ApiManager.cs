@@ -9,7 +9,7 @@ namespace Business.Concrete
 {
     internal class ApiManager : IApiService
     {
-        IApiDal _apiDal;
+        readonly IApiDal _apiDal;
         public ApiManager(IApiDal apiDal)
         {
             _apiDal = apiDal;
@@ -21,7 +21,7 @@ namespace Business.Concrete
 
             if(result != null)
             {
-                return result;
+                _apiDal.Update(api);
             }
 
             _apiDal.Add(api);
@@ -29,19 +29,22 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ApiAdded);
         }
 
-        public IDataResult<List<Api>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDataResult<Api> GetById(int apiId)
-        {
-            throw new NotImplementedException();
-        }
-
         public IResult Update(Api api)
         {
-            throw new NotImplementedException();
+            IResult result = BusinessRules.Run(CheckApiExist(api));
+
+            if (!result.Success)
+            {
+                this.Add(api);
+            }
+            _apiDal.Update(api);
+
+            return new SuccessResult(Messages.ApiUpdated);
+        }
+        
+        public IDataResult<Api> Get()
+        {
+            return new SuccessDataResult<Api>(_apiDal.Get(a => a.Id == 1));
         }
 
         private IResult CheckApiExist(Api api)

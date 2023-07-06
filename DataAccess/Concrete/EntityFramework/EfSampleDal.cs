@@ -4,5 +4,5 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class SampleDal : EfEntityRepositoryBase<Sample, IBKSContext>, ISampleDal { }
+    public class EfSampleDal : EfEntityRepositoryBase<Sample, IBKSContext>, ISampleDal { }
 }

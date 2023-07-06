@@ -4,5 +4,5 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class SendDataDal : EfEntityRepositoryBase<SendData, IBKSContext>, ISendDataDal { }
+    public class EfMailServerRepository : EfEntityRepositoryBase<MailServer, IBKSContext>, IMailServerDal { }
 }

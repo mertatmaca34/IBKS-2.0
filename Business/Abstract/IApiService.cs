@@ -5,10 +5,8 @@ namespace Business.Abstract
 {
     public interface IApiService
     {
-        IDataResult<List<Api>> GetAll();
-        IDataResult<Api> GetById(int apiId);
+        IDataResult<Api> Get();
         IResult Add(Api api);
         IResult Update(Api api);
-        //IResult AddTransactionalTest(Api product);
     }
 }

@@ -4,5 +4,5 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class MailServerRepository : EfEntityRepositoryBase<MailServer, IBKSContext>, IMailServerDal { }
+    public class EfCalibrationDal : EfEntityRepositoryBase<Calibration, IBKSContext>, ICalibrationDal { }
 }

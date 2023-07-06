@@ -2,8 +2,14 @@
 {
     public static class Messages
     {
-        public static string ApiAlreadyExist = "Bu bilgilere ait API zaten sisteme tanımlanmış";
         public static string ApiAdded = "Api bilgileri sisteme eklendi";
+        public static string ApiUpdated = "Api bilgileri güncellendi";
+        public static string ApiAlreadyExist = "Bu bilgilere ait API zaten sisteme tanımlanmış";
+
+        public static string CalibrationAdded = "Kalibrasyon kaydedildi";
+        public static string CalibrationNotAdded = "Kalibrasyon kaydedilemedi";
+        public static string CalibrationNotFound = "Silinecek kalibrasyon bulunamadı";
+
         public static string ProductNameInvalid = "Ürün ismi geçersiz";
         public static string MaintenanceTime = "Sistem bakımda";
         public static string ProductsListed = "Ürünler listelendi";

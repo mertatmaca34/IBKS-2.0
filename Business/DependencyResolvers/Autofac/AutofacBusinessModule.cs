@@ -12,8 +12,11 @@ namespace Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
-            builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
+            builder.RegisterType<ApiManager>().As<IApiService>().SingleInstance();
+            builder.RegisterType<EfApiDal>().As<IApiDal>().SingleInstance();
+
+            builder.RegisterType<CalibrationManager>().As<ICalibrationService>().SingleInstance();
+            builder.RegisterType<EfCalibrationDal>().As<ICalibrationDal>().SingleInstance();
 
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();

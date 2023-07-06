@@ -4,5 +4,5 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class StationDal : EfEntityRepositoryBase<Station, IBKSContext>, IStationDal { }
+    public class EfApiDal : EfEntityRepositoryBase<Api, IBKSContext>, IApiDal { }
 }
