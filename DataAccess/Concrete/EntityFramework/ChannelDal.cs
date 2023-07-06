@@ -4,5 +4,5 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class ChannelRepository : EfEntityRepositoryBase<Channel, IBKSContext>, IChannelDal { }
+    public class ChannelDal : EfEntityRepositoryBase<Channel, IBKSContext>, IChannelDal { }
 }
