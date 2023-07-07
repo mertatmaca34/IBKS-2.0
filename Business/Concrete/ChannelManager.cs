@@ -36,20 +36,26 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ChannelAdded);
         }
 
-
         public IDataResult<Channel> Get()
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<Channel> GetAll()
+        public IDataResult<List<Channel>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Channel>>(_channelDal.GetAll());
         }
 
         public IResult Update(Channel channel)
         {
-            throw new NotImplementedException();
+            var existChannel = _channelDal.GetAll(c => c.Id == channel.Id);
+
+            if (existChannel != null)
+            {
+                _channelDal.Update(channel);
+            }
+
+            return new SuccessDataResult<List<Channel>>(_channelDal.GetAll());
         }
 
         private IResult CheckChannelExist(Channel channel)
