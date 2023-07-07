@@ -1,6 +1,9 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,7 +15,7 @@ namespace Business.Concrete
 {
     internal class ChannelManager : IChannelService
     {
-        IChannelDal _channelDal;
+        readonly IChannelDal _channelDal;
 
         public ChannelManager(IChannelDal channelDal)
         {
@@ -21,7 +24,16 @@ namespace Business.Concrete
 
         public IResult Add(Channel channel)
         {
-            throw new NotImplementedException();
+            IResult result = BusinessRules.Run(CheckChannelExist(channel));
+
+            if (result != null)
+            {
+                _channelDal.Update(channel);
+            }
+
+            _channelDal.Add(channel);
+
+            return new SuccessResult(Messages.ApiAdded);
         }
 
         public IResult Delete(Channel channel)
@@ -42,6 +54,11 @@ namespace Business.Concrete
         public IResult Update(Channel channel)
         {
             throw new NotImplementedException();
+        }
+
+        private IResult CheckChannelExist(Channel channel)
+        {
+
         }
     }
 }
