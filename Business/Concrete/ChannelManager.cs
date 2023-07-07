@@ -58,7 +58,15 @@ namespace Business.Concrete
 
         private IResult CheckChannelExist(Channel channel)
         {
+            var result = _channelDal.GetAll(c => c == channel).Any();
 
+            if (result)
+            {
+                return new ErrorResult(Messages.ItsAlreadyExist);
+            }
+
+            return new SuccessResult();
         }
+    }
     }
 }

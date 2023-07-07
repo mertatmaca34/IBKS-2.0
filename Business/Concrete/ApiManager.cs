@@ -53,7 +53,7 @@ namespace Business.Concrete
 
             if (result)
             {
-                return new ErrorResult(Messages.ApiAlreadyExist);
+                return new ErrorResult(Messages.ItsAlreadyExist);
             }
 
             return new SuccessResult();
