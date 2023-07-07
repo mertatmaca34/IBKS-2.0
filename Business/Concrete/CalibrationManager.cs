@@ -1,15 +1,11 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -42,13 +38,24 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CalibrationValidator))]
         public IDataResult<List<Calibration>> GetByDateTime(DateTime startTime, DateTime endTime)
         {
-            IResult result = BusinessRules.Run();
+            IResult result = BusinessRules.Run(CheckIfDateTimeInCorrect(startTime, endTime));
 
             if (result != null)
             {
-                return new SuccessResult(Messages.CalibrationNotAdded);
+                return new ErrorDataResult<List<Calibration>>(Messages.CalibrationNotFound);
             }
+
             return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(c => c.TimeStamp > startTime && c.TimeStamp < endTime));
+        }
+
+        private IResult CheckIfDateTimeInCorrect(DateTime startTime, DateTime endTime)
+        {
+            if (startTime > endTime && startTime > DateTime.Now)
+            {
+                return new ErrorResult(Messages.InvalidDateTimes);
+            }
+
+            return new SuccessResult();
         }
     }
 }
