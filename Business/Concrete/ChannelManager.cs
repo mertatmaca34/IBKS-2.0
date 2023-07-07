@@ -33,13 +33,9 @@ namespace Business.Concrete
 
             _channelDal.Add(channel);
 
-            return new SuccessResult(Messages.ApiAdded);
+            return new SuccessResult(Messages.ChannelAdded);
         }
 
-        public IResult Delete(Channel channel)
-        {
-            throw new NotImplementedException();
-        }
 
         public IDataResult<Channel> Get()
         {
@@ -67,6 +63,5 @@ namespace Business.Concrete
 
             return new SuccessResult();
         }
-    }
     }
 }

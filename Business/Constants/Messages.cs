@@ -14,6 +14,8 @@
         public static string CalibrationNotAdded = "Kalibrasyon kaydedilemedi";
         public static string CalibrationNotFound = "Silinecek kalibrasyon bulunamadı";
 
+        public static string ChannelAdded = "Kanal sisteme kaydedildi";
+
         public static string ProductNameInvalid = "Ürün ismi geçersiz";
         public static string MaintenanceTime = "Sistem bakımda";
         public static string ProductsListed = "Ürünler listelendi";

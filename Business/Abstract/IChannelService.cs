@@ -9,6 +9,5 @@ namespace Business.Abstract
         IDataResult<Channel> GetAll();
         IResult Add(Channel channel);
         IResult Update(Channel channel);
-        IResult Delete(Channel channel);
     }
 }
