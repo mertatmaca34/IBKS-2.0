@@ -5,6 +5,8 @@
         //Global
         public static string ItsAlreadyExist = "Bu bilgilere zaten sisteme tanımlanmış";
         public static string InvalidDateTimes = "Seçilen tarih aralıkları geçersiz";
+        public static string InvalidDelete = "Silinecek veri veritabanında kayıtlı değil";
+
 
         //Custom
         public static string ApiAdded = "Api bilgileri sisteme eklendi";
@@ -15,6 +17,17 @@
         public static string CalibrationNotFound = "Silinecek kalibrasyon bulunamadı";
 
         public static string ChannelAdded = "Kanal sisteme kaydedildi";
+
+        public static string MailServerAdded = "Mail sunucu bilgileri başarıyla eklendi";
+        public static string MailServerUpdated = "Seçili mail sunucu bilgileri başarıyla güncellendi";
+
+
+        public static string MailStatementDeleted = "Seçili mail durumu başarıyla silindi";
+        public static string MailStatementUpdated = "Seçili mail durumu başarıyla güncellendi";
+        public static string MailStatementAdded = "Mail durumu başarıyla eklendi";
+
+        public static string PlcAdded = "PLC bilgileri başarıyla eklendi";
+        public static string PlcUpdated = "PLC bilgileri başarıyla güncellendi";
 
         public static string ProductNameInvalid = "Ürün ismi geçersiz";
         public static string MaintenanceTime = "Sistem bakımda";

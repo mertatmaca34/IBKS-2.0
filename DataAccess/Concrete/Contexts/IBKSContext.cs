@@ -1,7 +1,7 @@
 ﻿using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.Concrete.EntityFramework
+namespace DataAccess.Concrete.Contexts
 {
     public class IBKSContext : DbContext
     {

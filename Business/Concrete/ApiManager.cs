@@ -21,7 +21,7 @@ namespace Business.Concrete
 
             if(result != null)
             {
-                _apiDal.Update(api);
+                this.Update(api);
             }
 
             _apiDal.Add(api);
