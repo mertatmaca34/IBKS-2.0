@@ -32,6 +32,9 @@
         public static string SampleAdded = "Numune bilgileri başarıyla eklendi";
         public static string SampleUpdated = "Numune bilgileri başarıyla güncellendi";
 
+        public static string StationAdded = "İstasyon bilgileri sisteme eklendi";
+        public static string StationUpdated = "İstasyon bilgileri güncellendi";
+
         public static string ProductNameInvalid = "Ürün ismi geçersiz";
         public static string MaintenanceTime = "Sistem bakımda";
         public static string ProductsListed = "Ürünler listelendi";

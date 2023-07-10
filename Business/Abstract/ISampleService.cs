@@ -5,7 +5,7 @@ namespace Business.Abstract
 {
     public interface ISampleService
     {
-        IResult Add(Sample sample;
+        IResult Add(Sample sample);
         IDataResult<List<Sample>> GetAll();
     }
 }
