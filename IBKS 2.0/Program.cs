@@ -1,3 +1,5 @@
+using IBKS_2._0.Forms;
+
 namespace IBKS_2._0
 {
     internal static class Program
@@ -11,7 +13,7 @@ namespace IBKS_2._0
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new Main());
         }
     }
 }
