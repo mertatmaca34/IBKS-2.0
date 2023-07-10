@@ -21,7 +21,6 @@
         public static string MailServerAdded = "Mail sunucu bilgileri başarıyla eklendi";
         public static string MailServerUpdated = "Seçili mail sunucu bilgileri başarıyla güncellendi";
 
-
         public static string MailStatementDeleted = "Seçili mail durumu başarıyla silindi";
         public static string MailStatementUpdated = "Seçili mail durumu başarıyla güncellendi";
         public static string MailStatementAdded = "Mail durumu başarıyla eklendi";
@@ -34,6 +33,10 @@
 
         public static string StationAdded = "İstasyon bilgileri sisteme eklendi";
         public static string StationUpdated = "İstasyon bilgileri güncellendi";
+
+        public static string SendDataDeleted = "Seçili mail durumu başarıyla silindi";
+        public static string SendDataUpdated = "Seçili mail durumu başarıyla güncellendi";
+        public static string SendDataAdded = "Mail durumu başarıyla eklendi";
 
         public static string ProductNameInvalid = "Ürün ismi geçersiz";
         public static string MaintenanceTime = "Sistem bakımda";
