@@ -20,8 +20,6 @@ namespace IBKS_2._0
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-
-
             Application.Run(new Main());
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -6,19 +6,17 @@ namespace IBKS_2._0.Forms
     public partial class Main : Form
     {
         HomePage _homePage;
-        public Main(HomePage homePage)
+
+        public Main()
         {
-            _homePage = homePage;
+            _homePage = new HomePage();
 
             InitializeComponent();
         }
 
         private void ButtonHomePage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(this,_homePage);
-            /*HomePage homePage = new HomePage();
-            homePage.MdiParent = this;
-            homePage.Show();*/
+            PageChange.Change(this, _homePage);
         }
 
         private void ButtonSimulationPage_Click(object sender, EventArgs e)

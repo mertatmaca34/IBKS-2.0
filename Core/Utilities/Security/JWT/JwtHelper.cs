@@ -1,5 +1,6 @@
 ﻿using Castle.Core.Configuration;
 using Core.Entities.Concrete;
+using Core.Extensions;
 using Core.Utilities.Security.Encryption;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,8 +16,6 @@ namespace Core.Utilities.Security.JWT
         public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
-            _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-
         }
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
         {
