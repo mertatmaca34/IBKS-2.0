@@ -6,10 +6,12 @@ namespace IBKS_2._0.Forms
     public partial class Main : Form
     {
         HomePage _homePage;
+        SimulationPage _simulationPage;
 
         public Main()
         {
             _homePage = new HomePage();
+            _simulationPage = new SimulationPage();
 
             InitializeComponent();
         }
@@ -21,30 +23,22 @@ namespace IBKS_2._0.Forms
 
         private void ButtonSimulationPage_Click(object sender, EventArgs e)
         {
-            /*SimulationPage simulationPage = new SimulationPage();
-            simulationPage.MdiParent = this;
-            simulationPage.Show();*/
+            PageChange.Change(this, _homePage);
         }
 
         private void ButtonCalibrationPage_Click(object sender, EventArgs e)
         {
-            CalibrationPage calibrationPage = new CalibrationPage();
-            calibrationPage.MdiParent = this;
-            calibrationPage.Show();
+            PageChange.Change(this, new CalibrationPage());
         }
 
         private void ButtonMailPage_Click(object sender, EventArgs e)
         {
-            MailPage mailPage = new MailPage();
-            mailPage.MdiParent = this;
-            mailPage.Show();
+            PageChange.Change(this, new MailPage());
         }
 
         private void ButtonReportingPage_Click(object sender, EventArgs e)
         {
-            /*ReportingPage calibrationPage = new CalibrationPage();
-            calibrationPage.MdiParent = this;
-            calibrationPage.Show();*/
+            PageChange.Change(this, new ReportingPage());
         }
     }
 }
