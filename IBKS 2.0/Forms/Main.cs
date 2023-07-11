@@ -1,26 +1,31 @@
 ﻿using IBKS_2._0.Forms.Pages;
+using IBKS_2._0.Utils;
 
 namespace IBKS_2._0.Forms
 {
     public partial class Main : Form
     {
-        public Main()
+        HomePage _homePage;
+        public Main(HomePage homePage)
         {
+            _homePage = homePage;
+
             InitializeComponent();
         }
 
         private void ButtonHomePage_Click(object sender, EventArgs e)
         {
-            HomePage homePage = new HomePage();
+            PageChange.Change(this,_homePage);
+            /*HomePage homePage = new HomePage();
             homePage.MdiParent = this;
-            homePage.Show();
+            homePage.Show();*/
         }
 
         private void ButtonSimulationPage_Click(object sender, EventArgs e)
         {
-            SimulationPage simulationPage = new SimulationPage();
+            /*SimulationPage simulationPage = new SimulationPage();
             simulationPage.MdiParent = this;
-            simulationPage.Show();
+            simulationPage.Show();*/
         }
 
         private void ButtonCalibrationPage_Click(object sender, EventArgs e)
@@ -39,9 +44,9 @@ namespace IBKS_2._0.Forms
 
         private void ButtonReportingPage_Click(object sender, EventArgs e)
         {
-            ReportingPage calibrationPage = new CalibrationPage();
+            /*ReportingPage calibrationPage = new CalibrationPage();
             calibrationPage.MdiParent = this;
-            calibrationPage.Show();
+            calibrationPage.Show();*/
         }
     }
 }

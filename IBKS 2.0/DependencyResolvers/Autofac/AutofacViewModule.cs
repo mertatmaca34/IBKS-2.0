@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Castle.DynamicProxy;
+using Core.Utilities.Interceptors;
 using IBKS_2._0.Forms.Pages;
 
 namespace IBKS_2._0.DependencyResolvers.Autofac
@@ -25,8 +26,6 @@ namespace IBKS_2._0.DependencyResolvers.Autofac
                 {
                     Selector = new AspectInterceptorSelector()
                 }).SingleInstance();
-
-
         }
     }
 }
