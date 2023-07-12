@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PLC.Sharp7.Concrete;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,15 @@ namespace IBKS_2._0.Forms.Pages
 {
     public partial class HomePage : Form
     {
+        PlcService _plcService = PlcService.Instance;
         public HomePage()
         {
             InitializeComponent();
+        }
+
+        private void TimerPlcRead_Tick(object sender, EventArgs e)
+        {
+            ChannelAkm.InstantData = _plcService.Akm.ToString();
         }
     }
 }
