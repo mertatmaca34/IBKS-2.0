@@ -1,4 +1,5 @@
-﻿using IBKS_2._0.Utils;
+﻿using Entities.Concrete;
+using IBKS_2._0.Utils;
 using PLC.Sharp7;
 
 namespace IBKS_2._0.Forms.Pages
@@ -25,6 +26,8 @@ namespace IBKS_2._0.Forms.Pages
 
             AssignAnalogSensors();
             AssignDigitalSensors();
+
+            AssignAnalogSensorStatements();
         }
 
         private void AssignAnalogSensors()
@@ -39,17 +42,29 @@ namespace IBKS_2._0.Forms.Pages
             ChannelDebi.InstantData = _sharp7Service.S71200.DB41.TesisDebi.ToString();
         }
 
+        private void AssignAnalogSensorStatements()
+        {
+            ChannelAkm.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.Akm);
+            ChannelCozunmusOksijen.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.CozunmusOksijen);
+            ChannelSicaklik.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.KabinSicaklik);
+            ChannelPh.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.Ph);
+            ChannelIletkenlik.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.Iletkenlik);
+            ChannelKoi.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.Koi);
+            ChannelAkisHizi.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.NumuneHiz);
+            ChannelDebi.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.TesisDebi);
+        }
+
         private void AssignDigitalSensors()
         {
-            DigitalSensorKapi.BackColor = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Kapi);
-            DigitalSensorDuman.BackColor = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Duman);
-            DigitalSensorSuBaskini.BackColor = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.SuBaskini);
-            DigitalSensorAcilStop.BackColor = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.AcilStop);
-            DigitalSensorPompa1Termik.BackColor = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Pompa1Termik);
-            DigitalSensorPompa2Termik.BackColor = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Pompa2Termik);
-            DigitalSensorTSuPompaTermik.BackColor = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.TemizSuTermik);
-            DigitalSensorYikamaTanki.BackColor = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.YikamaTanki);
-            DigitalSensorEnerji.BackColor = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Enerji);
+            DigitalSensorKapi.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Kapi);
+            DigitalSensorDuman.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Duman);
+            DigitalSensorSuBaskini.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.SuBaskini);
+            DigitalSensorAcilStop.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.AcilStop);
+            DigitalSensorPompa1Termik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Pompa1Termik);
+            DigitalSensorPompa2Termik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Pompa2Termik);
+            DigitalSensorTSuPompaTermik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.TemizSuTermik);
+            DigitalSensorYikamaTanki.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.YikamaTanki);
+            DigitalSensorEnerji.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Enerji);
         }
     }
 }
