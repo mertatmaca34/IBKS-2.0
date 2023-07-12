@@ -210,6 +210,7 @@
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Main";
+            Load += Main_Load;
             SizeChanged += Main_SizeChanged;
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);

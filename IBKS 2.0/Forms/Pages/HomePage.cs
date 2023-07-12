@@ -1,19 +1,11 @@
 ﻿using PLC.Sharp7.Concrete;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace IBKS_2._0.Forms.Pages
 {
     public partial class HomePage : Form
     {
-        PlcService _plcService = PlcService.Instance;
+        readonly PlcService _plcService = PlcService.Instance;
+
         public HomePage()
         {
             InitializeComponent();

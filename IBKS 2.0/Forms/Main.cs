@@ -16,6 +16,11 @@ namespace IBKS_2._0.Forms
             InitializeComponent();
         }
 
+        private void Main_Load(object sender, EventArgs e)
+        {
+            PageChange.Change(PanelContent, this, _homePage);
+        }
+
         private void ButtonHomePage_Click(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, _homePage);
