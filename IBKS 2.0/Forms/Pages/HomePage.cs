@@ -8,7 +8,7 @@ namespace IBKS_2._0.Forms.Pages
     {
         readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
-        private DateTime _lastMinute = new DateTime();
+        private DateTime _lastMinute = new();
 
         public HomePage()
         {
