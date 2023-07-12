@@ -5,8 +5,8 @@ namespace IBKS_2._0.Forms
 {
     public partial class Main : Form
     {
-        HomePage _homePage;
-        SimulationPage _simulationPage;
+        readonly HomePage _homePage;
+        readonly SimulationPage _simulationPage;
 
         public Main()
         {
@@ -23,7 +23,7 @@ namespace IBKS_2._0.Forms
 
         private void ButtonSimulationPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(this, _homePage);
+            PageChange.Change(this, _simulationPage);
         }
 
         private void ButtonCalibrationPage_Click(object sender, EventArgs e)

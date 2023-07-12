@@ -40,6 +40,22 @@ namespace IBKS_2._0.Components
             set => PanelStatement.BackColor = value;
         }
 
+        [Description("1. Ayraç"), Category("IBKS")]
+        [DefaultValue(typeof(bool), "true")]
+        public bool PanelSplit1Visible
+        {
+            get => PanelSplit1.Visible;
+            set => PanelSplit1.Visible = value;
+        }
+
+        [Description("2. Ayraç"), Category("IBKS")]
+        [DefaultValue(typeof(bool), "true")]
+        public bool PanelSplit2Visible
+        {
+            get => PanelSplit2.Visible;
+            set => PanelSplit2.Visible = value;
+        }
+
         public ChannelControl()
         {
             InitializeComponent();

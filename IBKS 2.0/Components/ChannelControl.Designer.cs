@@ -31,8 +31,8 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             PanelStatement = new Panel();
-            panel2 = new Panel();
-            panel3 = new Panel();
+            PanelSplit2 = new Panel();
+            PanelSplit1 = new Panel();
             LabelAvgOf60Min = new Label();
             LabelInstantData = new Label();
             tableLayoutPanel3 = new TableLayoutPanel();
@@ -68,8 +68,8 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel2.Controls.Add(PanelStatement, 0, 0);
-            tableLayoutPanel2.Controls.Add(panel2, 4, 0);
-            tableLayoutPanel2.Controls.Add(panel3, 2, 0);
+            tableLayoutPanel2.Controls.Add(PanelSplit2, 4, 0);
+            tableLayoutPanel2.Controls.Add(PanelSplit1, 2, 0);
             tableLayoutPanel2.Controls.Add(LabelAvgOf60Min, 5, 0);
             tableLayoutPanel2.Controls.Add(LabelInstantData, 3, 0);
             tableLayoutPanel2.Controls.Add(tableLayoutPanel3, 1, 0);
@@ -92,23 +92,23 @@
             PanelStatement.Size = new Size(8, 46);
             PanelStatement.TabIndex = 0;
             // 
-            // panel2
+            // PanelSplit2
             // 
-            panel2.Anchor = AnchorStyles.None;
-            panel2.BackColor = Color.FromArgb(235, 235, 235);
-            panel2.Location = new Point(388, 4);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1, 37);
-            panel2.TabIndex = 1;
+            PanelSplit2.Anchor = AnchorStyles.None;
+            PanelSplit2.BackColor = Color.FromArgb(235, 235, 235);
+            PanelSplit2.Location = new Point(388, 4);
+            PanelSplit2.Name = "PanelSplit2";
+            PanelSplit2.Size = new Size(1, 37);
+            PanelSplit2.TabIndex = 1;
             // 
-            // panel3
+            // PanelSplit1
             // 
-            panel3.Anchor = AnchorStyles.None;
-            panel3.BackColor = Color.FromArgb(235, 235, 235);
-            panel3.Location = new Point(195, 4);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1, 37);
-            panel3.TabIndex = 1;
+            PanelSplit1.Anchor = AnchorStyles.None;
+            PanelSplit1.BackColor = Color.FromArgb(235, 235, 235);
+            PanelSplit1.Location = new Point(195, 4);
+            PanelSplit1.Name = "PanelSplit1";
+            PanelSplit1.Size = new Size(1, 37);
+            PanelSplit1.TabIndex = 1;
             // 
             // LabelAvgOf60Min
             // 
@@ -190,8 +190,8 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
         private Panel PanelStatement;
-        private Panel panel2;
-        private Panel panel3;
+        private Panel PanelSplit2;
+        private Panel PanelSplit1;
         private Label LabelInstantData;
         private Label LabelAvgOf60Min;
         private TableLayoutPanel tableLayoutPanel3;
