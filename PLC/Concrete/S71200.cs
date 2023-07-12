@@ -13,7 +13,7 @@ namespace Entities.Concrete
         public DB12 DB12 { get; set; }
         public DB41 DB41 { get; set; }
         public InputTags InputTags { get; set; }
-        public MbTags MbTags { get; set; }
+        public MBTags MBTags { get; set; }
 
         public byte[] Buffer4 { get; set; }
         public byte[] Buffer12 { get; set; }
@@ -27,7 +27,7 @@ namespace Entities.Concrete
             DB12 = new DB12();
             DB41 = new DB41();
             InputTags = new InputTags();
-            MbTags = new MbTags();
+            MBTags = new MBTags();
 
             Buffer4 = new byte[12];
             Buffer12 = new byte[28];

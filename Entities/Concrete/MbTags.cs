@@ -2,7 +2,7 @@
 
 namespace Entities.Concrete
 {
-    public class MbTags : IEntity
+    public class MBTags : IEntity
     {
         public int Id { get; set; }
         public DateTime ReadTime { get; set; }
