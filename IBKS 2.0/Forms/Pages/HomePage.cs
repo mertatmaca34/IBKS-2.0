@@ -21,7 +21,14 @@ namespace IBKS_2._0.Forms.Pages
 
         private void TimerPlcRead_Tick(object sender, EventArgs e)
         {
-            ChannelAkm.InstantData = _plcService.Akm.ToString();
+            ChannelAkm.InstantData = _plcService.DB41.Akm.ToString();
+            ChannelCozunmusOksijen.InstantData = _plcService.DB41.CozunmusOksijen.ToString();
+            ChannelSicaklik.InstantData = _plcService.DB41.KabinSicaklik.ToString();
+            ChannelPh.InstantData = _plcService.DB41.Ph.ToString();
+            ChannelIletkenlik.InstantData = _plcService.DB41.Iletkenlik.ToString();
+            ChannelKoi.InstantData = _plcService.DB41.Koi.ToString();
+            ChannelAkisHizi.InstantData = _plcService.DB41.NumuneHiz.ToString();
+            ChannelDebi.InstantData = _plcService.DB41.TesisDebi.ToString();
         }
     }
 }
