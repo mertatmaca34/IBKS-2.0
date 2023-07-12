@@ -30,7 +30,15 @@
         {
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
+            channelControl9 = new Components.ChannelControl();
+            channelControl8 = new Components.ChannelControl();
+            channelControl7 = new Components.ChannelControl();
+            channelControl6 = new Components.ChannelControl();
+            channelControl5 = new Components.ChannelControl();
+            channelControl4 = new Components.ChannelControl();
+            channelControl3 = new Components.ChannelControl();
             channelControl1 = new Components.ChannelControl();
+            channelControl2 = new Components.ChannelControl();
             tableLayoutPanel3 = new TableLayoutPanel();
             channelControl10 = new Components.ChannelControl();
             digitalSensorControl1 = new Components.DigitalSensorControl();
@@ -42,16 +50,8 @@
             digitalSensorControl7 = new Components.DigitalSensorControl();
             digitalSensorControl8 = new Components.DigitalSensorControl();
             digitalSensorControl9 = new Components.DigitalSensorControl();
-            tableLayoutPanel4 = new TableLayoutPanel();
             tableLayoutPanel5 = new TableLayoutPanel();
-            channelControl2 = new Components.ChannelControl();
-            channelControl3 = new Components.ChannelControl();
-            channelControl4 = new Components.ChannelControl();
-            channelControl5 = new Components.ChannelControl();
-            channelControl6 = new Components.ChannelControl();
-            channelControl7 = new Components.ChannelControl();
-            channelControl8 = new Components.ChannelControl();
-            channelControl9 = new Components.ChannelControl();
+            washingCalibrationInfoControl1 = new Components.WashingCalibrationInfoControl();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -65,8 +65,8 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 1, 0);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 1, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel5, 0, 2);
+            tableLayoutPanel1.Controls.Add(washingCalibrationInfoControl1, 1, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -110,6 +110,90 @@
             tableLayoutPanel2.Size = new Size(569, 615);
             tableLayoutPanel2.TabIndex = 0;
             // 
+            // channelControl9
+            // 
+            channelControl9.AvgDataOf60Min = "-";
+            channelControl9.ChannelDescription = "-";
+            channelControl9.ChannelName = "-";
+            channelControl9.Dock = DockStyle.Fill;
+            channelControl9.InstantData = "-";
+            channelControl9.Location = new Point(3, 547);
+            channelControl9.Name = "channelControl9";
+            channelControl9.Size = new Size(563, 65);
+            channelControl9.TabIndex = 8;
+            // 
+            // channelControl8
+            // 
+            channelControl8.AvgDataOf60Min = "-";
+            channelControl8.ChannelDescription = "-";
+            channelControl8.ChannelName = "-";
+            channelControl8.Dock = DockStyle.Fill;
+            channelControl8.InstantData = "-";
+            channelControl8.Location = new Point(3, 479);
+            channelControl8.Name = "channelControl8";
+            channelControl8.Size = new Size(563, 62);
+            channelControl8.TabIndex = 7;
+            // 
+            // channelControl7
+            // 
+            channelControl7.AvgDataOf60Min = "-";
+            channelControl7.ChannelDescription = "-";
+            channelControl7.ChannelName = "-";
+            channelControl7.Dock = DockStyle.Fill;
+            channelControl7.InstantData = "-";
+            channelControl7.Location = new Point(3, 411);
+            channelControl7.Name = "channelControl7";
+            channelControl7.Size = new Size(563, 62);
+            channelControl7.TabIndex = 6;
+            // 
+            // channelControl6
+            // 
+            channelControl6.AvgDataOf60Min = "-";
+            channelControl6.ChannelDescription = "-";
+            channelControl6.ChannelName = "-";
+            channelControl6.Dock = DockStyle.Fill;
+            channelControl6.InstantData = "-";
+            channelControl6.Location = new Point(3, 343);
+            channelControl6.Name = "channelControl6";
+            channelControl6.Size = new Size(563, 62);
+            channelControl6.TabIndex = 5;
+            // 
+            // channelControl5
+            // 
+            channelControl5.AvgDataOf60Min = "-";
+            channelControl5.ChannelDescription = "-";
+            channelControl5.ChannelName = "-";
+            channelControl5.Dock = DockStyle.Fill;
+            channelControl5.InstantData = "-";
+            channelControl5.Location = new Point(3, 275);
+            channelControl5.Name = "channelControl5";
+            channelControl5.Size = new Size(563, 62);
+            channelControl5.TabIndex = 4;
+            // 
+            // channelControl4
+            // 
+            channelControl4.AvgDataOf60Min = "-";
+            channelControl4.ChannelDescription = "-";
+            channelControl4.ChannelName = "-";
+            channelControl4.Dock = DockStyle.Fill;
+            channelControl4.InstantData = "-";
+            channelControl4.Location = new Point(3, 207);
+            channelControl4.Name = "channelControl4";
+            channelControl4.Size = new Size(563, 62);
+            channelControl4.TabIndex = 3;
+            // 
+            // channelControl3
+            // 
+            channelControl3.AvgDataOf60Min = "-";
+            channelControl3.ChannelDescription = "-";
+            channelControl3.ChannelName = "-";
+            channelControl3.Dock = DockStyle.Fill;
+            channelControl3.InstantData = "-";
+            channelControl3.Location = new Point(3, 139);
+            channelControl3.Name = "channelControl3";
+            channelControl3.Size = new Size(563, 62);
+            channelControl3.TabIndex = 2;
+            // 
             // channelControl1
             // 
             channelControl1.AvgDataOf60Min = "SAATLİK ORTALAMA";
@@ -124,6 +208,18 @@
             channelControl1.PanelSplit2Visible = false;
             channelControl1.Size = new Size(563, 62);
             channelControl1.TabIndex = 0;
+            // 
+            // channelControl2
+            // 
+            channelControl2.AvgDataOf60Min = "-";
+            channelControl2.ChannelDescription = "-";
+            channelControl2.ChannelName = "-";
+            channelControl2.Dock = DockStyle.Fill;
+            channelControl2.InstantData = "-";
+            channelControl2.Location = new Point(3, 71);
+            channelControl2.Name = "channelControl2";
+            channelControl2.Size = new Size(563, 62);
+            channelControl2.TabIndex = 1;
             // 
             // tableLayoutPanel3
             // 
@@ -267,19 +363,6 @@
             digitalSensorControl9.Size = new Size(185, 45);
             digitalSensorControl9.TabIndex = 1;
             // 
-            // tableLayoutPanel4
-            // 
-            tableLayoutPanel4.BackColor = Color.White;
-            tableLayoutPanel4.ColumnCount = 1;
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Dock = DockStyle.Fill;
-            tableLayoutPanel4.Location = new Point(588, 220);
-            tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 1;
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Size = new Size(569, 408);
-            tableLayoutPanel4.TabIndex = 2;
-            // 
             // tableLayoutPanel5
             // 
             tableLayoutPanel5.BackColor = Color.White;
@@ -294,101 +377,35 @@
             tableLayoutPanel5.Size = new Size(1144, 30);
             tableLayoutPanel5.TabIndex = 3;
             // 
-            // channelControl2
+            // washingCalibrationInfoControl1
             // 
-            channelControl2.AvgDataOf60Min = "-";
-            channelControl2.ChannelDescription = "-";
-            channelControl2.ChannelName = "-";
-            channelControl2.Dock = DockStyle.Fill;
-            channelControl2.InstantData = "-";
-            channelControl2.Location = new Point(3, 71);
-            channelControl2.Name = "channelControl2";
-            channelControl2.Size = new Size(563, 62);
-            channelControl2.TabIndex = 1;
-            // 
-            // channelControl3
-            // 
-            channelControl3.AvgDataOf60Min = "-";
-            channelControl3.ChannelDescription = "-";
-            channelControl3.ChannelName = "-";
-            channelControl3.Dock = DockStyle.Fill;
-            channelControl3.InstantData = "-";
-            channelControl3.Location = new Point(3, 139);
-            channelControl3.Name = "channelControl3";
-            channelControl3.Size = new Size(563, 62);
-            channelControl3.TabIndex = 2;
-            // 
-            // channelControl4
-            // 
-            channelControl4.AvgDataOf60Min = "-";
-            channelControl4.ChannelDescription = "-";
-            channelControl4.ChannelName = "-";
-            channelControl4.Dock = DockStyle.Fill;
-            channelControl4.InstantData = "-";
-            channelControl4.Location = new Point(3, 207);
-            channelControl4.Name = "channelControl4";
-            channelControl4.Size = new Size(563, 62);
-            channelControl4.TabIndex = 3;
-            // 
-            // channelControl5
-            // 
-            channelControl5.AvgDataOf60Min = "-";
-            channelControl5.ChannelDescription = "-";
-            channelControl5.ChannelName = "-";
-            channelControl5.Dock = DockStyle.Fill;
-            channelControl5.InstantData = "-";
-            channelControl5.Location = new Point(3, 275);
-            channelControl5.Name = "channelControl5";
-            channelControl5.Size = new Size(563, 62);
-            channelControl5.TabIndex = 4;
-            // 
-            // channelControl6
-            // 
-            channelControl6.AvgDataOf60Min = "-";
-            channelControl6.ChannelDescription = "-";
-            channelControl6.ChannelName = "-";
-            channelControl6.Dock = DockStyle.Fill;
-            channelControl6.InstantData = "-";
-            channelControl6.Location = new Point(3, 343);
-            channelControl6.Name = "channelControl6";
-            channelControl6.Size = new Size(563, 62);
-            channelControl6.TabIndex = 5;
-            // 
-            // channelControl7
-            // 
-            channelControl7.AvgDataOf60Min = "-";
-            channelControl7.ChannelDescription = "-";
-            channelControl7.ChannelName = "-";
-            channelControl7.Dock = DockStyle.Fill;
-            channelControl7.InstantData = "-";
-            channelControl7.Location = new Point(3, 411);
-            channelControl7.Name = "channelControl7";
-            channelControl7.Size = new Size(563, 62);
-            channelControl7.TabIndex = 6;
-            // 
-            // channelControl8
-            // 
-            channelControl8.AvgDataOf60Min = "-";
-            channelControl8.ChannelDescription = "-";
-            channelControl8.ChannelName = "-";
-            channelControl8.Dock = DockStyle.Fill;
-            channelControl8.InstantData = "-";
-            channelControl8.Location = new Point(3, 479);
-            channelControl8.Name = "channelControl8";
-            channelControl8.Size = new Size(563, 62);
-            channelControl8.TabIndex = 7;
-            // 
-            // channelControl9
-            // 
-            channelControl9.AvgDataOf60Min = "-";
-            channelControl9.ChannelDescription = "-";
-            channelControl9.ChannelName = "-";
-            channelControl9.Dock = DockStyle.Fill;
-            channelControl9.InstantData = "-";
-            channelControl9.Location = new Point(3, 547);
-            channelControl9.Name = "channelControl9";
-            channelControl9.Size = new Size(563, 65);
-            channelControl9.TabIndex = 8;
+            washingCalibrationInfoControl1.BackColor = Color.FromArgb(235, 235, 235);
+            washingCalibrationInfoControl1.Dock = DockStyle.Fill;
+            washingCalibrationInfoControl1.LastWashAkm = "     -";
+            washingCalibrationInfoControl1.LastWashAkmImage = null;
+            washingCalibrationInfoControl1.LastWashCozunmusOksijen = "     -";
+            washingCalibrationInfoControl1.LastWashCozunmusOksijenImage = null;
+            washingCalibrationInfoControl1.LastWashDebi = "     -";
+            washingCalibrationInfoControl1.LastWashDebiImage = null;
+            washingCalibrationInfoControl1.LastWashDesarjDebi = "     -";
+            washingCalibrationInfoControl1.LastWashDesarjDebiImage = null;
+            washingCalibrationInfoControl1.LastWashHariciDebi = "     -";
+            washingCalibrationInfoControl1.LastWashHariciDebi2 = "     -";
+            washingCalibrationInfoControl1.LastWashHariciDebi2Image = null;
+            washingCalibrationInfoControl1.LastWashHariciDebiImage = null;
+            washingCalibrationInfoControl1.LastWashIletkenlik = "     -";
+            washingCalibrationInfoControl1.LastWashIletkenlikImage = null;
+            washingCalibrationInfoControl1.LastWashKoi = "     -";
+            washingCalibrationInfoControl1.LastWashKoiImage = null;
+            washingCalibrationInfoControl1.LastWashPh = "     -";
+            washingCalibrationInfoControl1.LastWashPhImage = null;
+            washingCalibrationInfoControl1.LastWashSicaklik = "     -";
+            washingCalibrationInfoControl1.LastWashSicaklikImage = null;
+            washingCalibrationInfoControl1.Location = new Point(588, 220);
+            washingCalibrationInfoControl1.Name = "washingCalibrationInfoControl1";
+            washingCalibrationInfoControl1.Padding = new Padding(1);
+            washingCalibrationInfoControl1.Size = new Size(569, 408);
+            washingCalibrationInfoControl1.TabIndex = 4;
             // 
             // HomePage
             // 
@@ -410,7 +427,6 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
         private TableLayoutPanel tableLayoutPanel3;
-        private TableLayoutPanel tableLayoutPanel4;
         private TableLayoutPanel tableLayoutPanel5;
         private Components.ChannelControl channelControl1;
         private Components.ChannelControl channelControl10;
@@ -431,5 +447,6 @@
         private Components.ChannelControl channelControl4;
         private Components.ChannelControl channelControl3;
         private Components.ChannelControl channelControl2;
+        private Components.WashingCalibrationInfoControl washingCalibrationInfoControl1;
     }
 }
