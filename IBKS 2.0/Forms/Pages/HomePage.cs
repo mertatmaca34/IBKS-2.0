@@ -24,6 +24,7 @@ namespace IBKS_2._0.Forms.Pages
             }
 
             AssignAnalogSensors();
+            AssignDigitalSensors();
         }
 
         private void AssignAnalogSensors()
