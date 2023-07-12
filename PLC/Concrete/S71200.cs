@@ -35,7 +35,5 @@ namespace Entities.Concrete
             InputTagsBuffer = new byte[30];
             MBTagsBuffer = new byte[102];
         }
-
-
     }
 }
