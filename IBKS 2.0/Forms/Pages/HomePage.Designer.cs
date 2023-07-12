@@ -42,15 +42,15 @@
             ChannelAkm = new Components.ChannelControl();
             tableLayoutPanel3 = new TableLayoutPanel();
             channelControl10 = new Components.ChannelControl();
-            digitalSensorControl1 = new Components.DigitalSensorControl();
-            digitalSensorControl2 = new Components.DigitalSensorControl();
-            digitalSensorControl3 = new Components.DigitalSensorControl();
-            digitalSensorControl4 = new Components.DigitalSensorControl();
-            digitalSensorControl5 = new Components.DigitalSensorControl();
-            digitalSensorControl6 = new Components.DigitalSensorControl();
-            digitalSensorControl7 = new Components.DigitalSensorControl();
-            digitalSensorControl8 = new Components.DigitalSensorControl();
-            digitalSensorControl9 = new Components.DigitalSensorControl();
+            DigitalSensorKapi = new Components.DigitalSensorControl();
+            DigitalSensorDuman = new Components.DigitalSensorControl();
+            DigitalSensorSuBaskini = new Components.DigitalSensorControl();
+            DigitalSensorPompa2Termik = new Components.DigitalSensorControl();
+            DigitalSensorPompa1Termik = new Components.DigitalSensorControl();
+            DigitalSensorAcilStop = new Components.DigitalSensorControl();
+            DigitalSensorTSuPompaTermik = new Components.DigitalSensorControl();
+            DigitalSensorYikamaTanki = new Components.DigitalSensorControl();
+            DigitalSensorEnerji = new Components.DigitalSensorControl();
             tableLayoutPanel5 = new TableLayoutPanel();
             washingCalibrationInfoControl1 = new Components.WashingCalibrationInfoControl();
             TimerPlcRead = new System.Windows.Forms.Timer(components);
@@ -231,15 +231,15 @@
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel3.Controls.Add(channelControl10, 0, 0);
-            tableLayoutPanel3.Controls.Add(digitalSensorControl1, 0, 1);
-            tableLayoutPanel3.Controls.Add(digitalSensorControl2, 1, 1);
-            tableLayoutPanel3.Controls.Add(digitalSensorControl3, 2, 1);
-            tableLayoutPanel3.Controls.Add(digitalSensorControl4, 2, 2);
-            tableLayoutPanel3.Controls.Add(digitalSensorControl5, 1, 2);
-            tableLayoutPanel3.Controls.Add(digitalSensorControl6, 0, 2);
-            tableLayoutPanel3.Controls.Add(digitalSensorControl7, 0, 3);
-            tableLayoutPanel3.Controls.Add(digitalSensorControl8, 1, 3);
-            tableLayoutPanel3.Controls.Add(digitalSensorControl9, 2, 3);
+            tableLayoutPanel3.Controls.Add(DigitalSensorKapi, 0, 1);
+            tableLayoutPanel3.Controls.Add(DigitalSensorDuman, 1, 1);
+            tableLayoutPanel3.Controls.Add(DigitalSensorSuBaskini, 2, 1);
+            tableLayoutPanel3.Controls.Add(DigitalSensorPompa2Termik, 2, 2);
+            tableLayoutPanel3.Controls.Add(DigitalSensorPompa1Termik, 1, 2);
+            tableLayoutPanel3.Controls.Add(DigitalSensorAcilStop, 0, 2);
+            tableLayoutPanel3.Controls.Add(DigitalSensorTSuPompaTermik, 0, 3);
+            tableLayoutPanel3.Controls.Add(DigitalSensorYikamaTanki, 1, 3);
+            tableLayoutPanel3.Controls.Add(DigitalSensorEnerji, 2, 3);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(588, 13);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -266,104 +266,104 @@
             channelControl10.Size = new Size(563, 44);
             channelControl10.TabIndex = 0;
             // 
-            // digitalSensorControl1
+            // DigitalSensorKapi
             // 
-            digitalSensorControl1.BackColor = Color.White;
-            digitalSensorControl1.Dock = DockStyle.Fill;
-            digitalSensorControl1.Location = new Point(3, 53);
-            digitalSensorControl1.Name = "digitalSensorControl1";
-            digitalSensorControl1.SensorDescription = "-";
-            digitalSensorControl1.SensorName = "-";
-            digitalSensorControl1.Size = new Size(183, 44);
-            digitalSensorControl1.TabIndex = 1;
+            DigitalSensorKapi.BackColor = Color.White;
+            DigitalSensorKapi.Dock = DockStyle.Fill;
+            DigitalSensorKapi.Location = new Point(3, 53);
+            DigitalSensorKapi.Name = "DigitalSensorKapi";
+            DigitalSensorKapi.SensorDescription = "Kabin Kapısı";
+            DigitalSensorKapi.SensorName = "Kapı";
+            DigitalSensorKapi.Size = new Size(183, 44);
+            DigitalSensorKapi.TabIndex = 1;
             // 
-            // digitalSensorControl2
+            // DigitalSensorDuman
             // 
-            digitalSensorControl2.BackColor = Color.White;
-            digitalSensorControl2.Dock = DockStyle.Fill;
-            digitalSensorControl2.Location = new Point(192, 53);
-            digitalSensorControl2.Name = "digitalSensorControl2";
-            digitalSensorControl2.SensorDescription = "-";
-            digitalSensorControl2.SensorName = "-";
-            digitalSensorControl2.Size = new Size(183, 44);
-            digitalSensorControl2.TabIndex = 1;
+            DigitalSensorDuman.BackColor = Color.White;
+            DigitalSensorDuman.Dock = DockStyle.Fill;
+            DigitalSensorDuman.Location = new Point(192, 53);
+            DigitalSensorDuman.Name = "DigitalSensorDuman";
+            DigitalSensorDuman.SensorDescription = "Kabin içi duman durumu";
+            DigitalSensorDuman.SensorName = "Duman";
+            DigitalSensorDuman.Size = new Size(183, 44);
+            DigitalSensorDuman.TabIndex = 1;
             // 
-            // digitalSensorControl3
+            // DigitalSensorSuBaskini
             // 
-            digitalSensorControl3.BackColor = Color.White;
-            digitalSensorControl3.Dock = DockStyle.Fill;
-            digitalSensorControl3.Location = new Point(381, 53);
-            digitalSensorControl3.Name = "digitalSensorControl3";
-            digitalSensorControl3.SensorDescription = "-";
-            digitalSensorControl3.SensorName = "-";
-            digitalSensorControl3.Size = new Size(185, 44);
-            digitalSensorControl3.TabIndex = 1;
+            DigitalSensorSuBaskini.BackColor = Color.White;
+            DigitalSensorSuBaskini.Dock = DockStyle.Fill;
+            DigitalSensorSuBaskini.Location = new Point(381, 53);
+            DigitalSensorSuBaskini.Name = "DigitalSensorSuBaskini";
+            DigitalSensorSuBaskini.SensorDescription = "Kabiniçi su baskını";
+            DigitalSensorSuBaskini.SensorName = "Su Baskını";
+            DigitalSensorSuBaskini.Size = new Size(185, 44);
+            DigitalSensorSuBaskini.TabIndex = 1;
             // 
-            // digitalSensorControl4
+            // DigitalSensorPompa2Termik
             // 
-            digitalSensorControl4.BackColor = Color.White;
-            digitalSensorControl4.Dock = DockStyle.Fill;
-            digitalSensorControl4.Location = new Point(381, 103);
-            digitalSensorControl4.Name = "digitalSensorControl4";
-            digitalSensorControl4.SensorDescription = "-";
-            digitalSensorControl4.SensorName = "-";
-            digitalSensorControl4.Size = new Size(185, 44);
-            digitalSensorControl4.TabIndex = 1;
+            DigitalSensorPompa2Termik.BackColor = Color.White;
+            DigitalSensorPompa2Termik.Dock = DockStyle.Fill;
+            DigitalSensorPompa2Termik.Location = new Point(381, 103);
+            DigitalSensorPompa2Termik.Name = "DigitalSensorPompa2Termik";
+            DigitalSensorPompa2Termik.SensorDescription = "Pompa 2 Termik atma durumu";
+            DigitalSensorPompa2Termik.SensorName = "Pompa 2 Termik";
+            DigitalSensorPompa2Termik.Size = new Size(185, 44);
+            DigitalSensorPompa2Termik.TabIndex = 1;
             // 
-            // digitalSensorControl5
+            // DigitalSensorPompa1Termik
             // 
-            digitalSensorControl5.BackColor = Color.White;
-            digitalSensorControl5.Dock = DockStyle.Fill;
-            digitalSensorControl5.Location = new Point(192, 103);
-            digitalSensorControl5.Name = "digitalSensorControl5";
-            digitalSensorControl5.SensorDescription = "-";
-            digitalSensorControl5.SensorName = "-";
-            digitalSensorControl5.Size = new Size(183, 44);
-            digitalSensorControl5.TabIndex = 1;
+            DigitalSensorPompa1Termik.BackColor = Color.White;
+            DigitalSensorPompa1Termik.Dock = DockStyle.Fill;
+            DigitalSensorPompa1Termik.Location = new Point(192, 103);
+            DigitalSensorPompa1Termik.Name = "DigitalSensorPompa1Termik";
+            DigitalSensorPompa1Termik.SensorDescription = "Pompa 1 Termik atma durumu";
+            DigitalSensorPompa1Termik.SensorName = "Pompa 1 Termik";
+            DigitalSensorPompa1Termik.Size = new Size(183, 44);
+            DigitalSensorPompa1Termik.TabIndex = 1;
             // 
-            // digitalSensorControl6
+            // DigitalSensorAcilStop
             // 
-            digitalSensorControl6.BackColor = Color.White;
-            digitalSensorControl6.Dock = DockStyle.Fill;
-            digitalSensorControl6.Location = new Point(3, 103);
-            digitalSensorControl6.Name = "digitalSensorControl6";
-            digitalSensorControl6.SensorDescription = "-";
-            digitalSensorControl6.SensorName = "-";
-            digitalSensorControl6.Size = new Size(183, 44);
-            digitalSensorControl6.TabIndex = 1;
+            DigitalSensorAcilStop.BackColor = Color.White;
+            DigitalSensorAcilStop.Dock = DockStyle.Fill;
+            DigitalSensorAcilStop.Location = new Point(3, 103);
+            DigitalSensorAcilStop.Name = "DigitalSensorAcilStop";
+            DigitalSensorAcilStop.SensorDescription = "Acil Stop butonu durumu";
+            DigitalSensorAcilStop.SensorName = "Acil Stop";
+            DigitalSensorAcilStop.Size = new Size(183, 44);
+            DigitalSensorAcilStop.TabIndex = 1;
             // 
-            // digitalSensorControl7
+            // DigitalSensorTSuPompaTermik
             // 
-            digitalSensorControl7.BackColor = Color.White;
-            digitalSensorControl7.Dock = DockStyle.Fill;
-            digitalSensorControl7.Location = new Point(3, 153);
-            digitalSensorControl7.Name = "digitalSensorControl7";
-            digitalSensorControl7.SensorDescription = "-";
-            digitalSensorControl7.SensorName = "-";
-            digitalSensorControl7.Size = new Size(183, 45);
-            digitalSensorControl7.TabIndex = 1;
+            DigitalSensorTSuPompaTermik.BackColor = Color.White;
+            DigitalSensorTSuPompaTermik.Dock = DockStyle.Fill;
+            DigitalSensorTSuPompaTermik.Location = new Point(3, 153);
+            DigitalSensorTSuPompaTermik.Name = "DigitalSensorTSuPompaTermik";
+            DigitalSensorTSuPompaTermik.SensorDescription = "Temiz Su P. Termik atma durumu";
+            DigitalSensorTSuPompaTermik.SensorName = "T. Su Pompa Termik";
+            DigitalSensorTSuPompaTermik.Size = new Size(183, 45);
+            DigitalSensorTSuPompaTermik.TabIndex = 1;
             // 
-            // digitalSensorControl8
+            // DigitalSensorYikamaTanki
             // 
-            digitalSensorControl8.BackColor = Color.White;
-            digitalSensorControl8.Dock = DockStyle.Fill;
-            digitalSensorControl8.Location = new Point(192, 153);
-            digitalSensorControl8.Name = "digitalSensorControl8";
-            digitalSensorControl8.SensorDescription = "-";
-            digitalSensorControl8.SensorName = "-";
-            digitalSensorControl8.Size = new Size(183, 45);
-            digitalSensorControl8.TabIndex = 1;
+            DigitalSensorYikamaTanki.BackColor = Color.White;
+            DigitalSensorYikamaTanki.Dock = DockStyle.Fill;
+            DigitalSensorYikamaTanki.Location = new Point(192, 153);
+            DigitalSensorYikamaTanki.Name = "DigitalSensorYikamaTanki";
+            DigitalSensorYikamaTanki.SensorDescription = "Yıkama Tankı dolu/boş bilgisi";
+            DigitalSensorYikamaTanki.SensorName = "Yıkama Tankı";
+            DigitalSensorYikamaTanki.Size = new Size(183, 45);
+            DigitalSensorYikamaTanki.TabIndex = 1;
             // 
-            // digitalSensorControl9
+            // DigitalSensorEnerji
             // 
-            digitalSensorControl9.BackColor = Color.White;
-            digitalSensorControl9.Dock = DockStyle.Fill;
-            digitalSensorControl9.Location = new Point(381, 153);
-            digitalSensorControl9.Name = "digitalSensorControl9";
-            digitalSensorControl9.SensorDescription = "-";
-            digitalSensorControl9.SensorName = "-";
-            digitalSensorControl9.Size = new Size(185, 45);
-            digitalSensorControl9.TabIndex = 1;
+            DigitalSensorEnerji.BackColor = Color.White;
+            DigitalSensorEnerji.Dock = DockStyle.Fill;
+            DigitalSensorEnerji.Location = new Point(381, 153);
+            DigitalSensorEnerji.Name = "DigitalSensorEnerji";
+            DigitalSensorEnerji.SensorDescription = "Kabin elektrik enerjisi durumu";
+            DigitalSensorEnerji.SensorName = "Enerji";
+            DigitalSensorEnerji.Size = new Size(185, 45);
+            DigitalSensorEnerji.TabIndex = 1;
             // 
             // tableLayoutPanel5
             // 
@@ -438,15 +438,15 @@
         private TableLayoutPanel tableLayoutPanel5;
         private Components.ChannelControl channelControl1;
         private Components.ChannelControl channelControl10;
-        private Components.DigitalSensorControl digitalSensorControl1;
-        private Components.DigitalSensorControl digitalSensorControl2;
-        private Components.DigitalSensorControl digitalSensorControl3;
-        private Components.DigitalSensorControl digitalSensorControl4;
-        private Components.DigitalSensorControl digitalSensorControl5;
-        private Components.DigitalSensorControl digitalSensorControl6;
-        private Components.DigitalSensorControl digitalSensorControl7;
-        private Components.DigitalSensorControl digitalSensorControl8;
-        private Components.DigitalSensorControl digitalSensorControl9;
+        private Components.DigitalSensorControl DigitalSensorKapi;
+        private Components.DigitalSensorControl DigitalSensorDuman;
+        private Components.DigitalSensorControl DigitalSensorSuBaskini;
+        private Components.DigitalSensorControl DigitalSensorPompa2Termik;
+        private Components.DigitalSensorControl DigitalSensorPompa1Termik;
+        private Components.DigitalSensorControl DigitalSensorAcilStop;
+        private Components.DigitalSensorControl DigitalSensorTSuPompaTermik;
+        private Components.DigitalSensorControl DigitalSensorYikamaTanki;
+        private Components.DigitalSensorControl DigitalSensorEnerji;
         private Components.ChannelControl ChannelDebi;
         private Components.ChannelControl ChannelAkisHizi;
         private Components.ChannelControl ChannelKoi;
