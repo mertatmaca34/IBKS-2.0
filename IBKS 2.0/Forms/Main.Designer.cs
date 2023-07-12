@@ -36,6 +36,7 @@
             ButtonCalibrationPage = new Button();
             ButtonSimulationPage = new Button();
             ButtonHomePage = new Button();
+            PanelContent = new Panel();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -190,17 +191,26 @@
             ButtonHomePage.UseVisualStyleBackColor = true;
             ButtonHomePage.Click += ButtonHomePage_Click;
             // 
+            // PanelContent
+            // 
+            PanelContent.Dock = DockStyle.Fill;
+            PanelContent.Location = new Point(90, 0);
+            PanelContent.Name = "PanelContent";
+            PanelContent.Size = new Size(1174, 681);
+            PanelContent.TabIndex = 1;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(1264, 681);
+            Controls.Add(PanelContent);
             Controls.Add(tableLayoutPanel1);
-            IsMdiContainer = true;
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Main";
+            SizeChanged += Main_SizeChanged;
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -215,5 +225,6 @@
         private Button ButtonMailPage;
         private Button ButtonCalibrationPage;
         private Button ButtonSimulationPage;
+        private Panel PanelContent;
     }
 }
