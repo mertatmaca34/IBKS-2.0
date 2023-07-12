@@ -3,7 +3,7 @@ using PLC.Sharp7.Utils;
 using Sharp7;
 using System.ComponentModel;
 
-namespace PLC.Sharp7.Concrete
+namespace PLC.Sharp7
 {
     public class Sharp7Service
     {
@@ -83,7 +83,7 @@ namespace PLC.Sharp7.Concrete
 
                     if (res == 0)
                     {
-                        S71200.DB41.Akm = S7.GetRealAt(S71200.Buffer41, 56);
+                        S71200.DB41.Akm = S71200.Buffer41.GetRealAt(56);
                         S71200.DB41.TesisDebi = Get.Real(S71200.Buffer41, 0, 60);
                         S71200.DB41.TesisGünlükDebi = Get.Real(S71200.Buffer41, 12, 60);
                         S71200.DB41.DesarjDebi = Get.Real(S71200.Buffer41, 60, 60);  //Taşkan Debisi
