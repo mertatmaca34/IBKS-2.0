@@ -1,5 +1,4 @@
-﻿using Entities.Concrete;
-using IBKS_2._0.Utils;
+﻿using IBKS_2._0.Utils;
 using PLC.Sharp7;
 
 namespace IBKS_2._0.Forms.Pages
