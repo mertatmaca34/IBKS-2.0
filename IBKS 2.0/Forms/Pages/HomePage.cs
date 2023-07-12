@@ -6,6 +6,8 @@ namespace IBKS_2._0.Forms.Pages
     {
         readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
+        private DateTime _lastMinute = new DateTime();
+
         public HomePage()
         {
             InitializeComponent();
@@ -13,6 +15,13 @@ namespace IBKS_2._0.Forms.Pages
 
         private void TimerPlcRead_Tick(object sender, EventArgs e)
         {
+            if(_lastMinute.Minute != DateTime.Now.Minute)
+            {
+                _lastMinute = DateTime.Now;
+
+                //TODO
+            }
+
             ChannelAkm.InstantData = _sharp7Service.S71200.DB41.Akm.ToString();
             ChannelCozunmusOksijen.InstantData = _sharp7Service.S71200.DB41.CozunmusOksijen.ToString();
             ChannelSicaklik.InstantData = _sharp7Service.S71200.DB41.KabinSicaklik.ToString();
