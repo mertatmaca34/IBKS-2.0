@@ -1,4 +1,6 @@
-﻿using IBKS_2._0.Utils;
+﻿using Business.Abstract;
+using Business.Concrete;
+using IBKS_2._0.Utils;
 using PLC.Sharp7;
 
 namespace IBKS_2._0.Forms.Pages
@@ -9,8 +11,12 @@ namespace IBKS_2._0.Forms.Pages
 
         private DateTime _lastMinute = new();
 
-        public HomePage()
+        IDB41Service _dB41Manager;
+
+        public HomePage(IDB41Service dB41Manager)
         {
+            _dB41Manager = dB41Manager;
+
             InitializeComponent();
         }
 
@@ -20,7 +26,7 @@ namespace IBKS_2._0.Forms.Pages
             {
                 _lastMinute = DateTime.Now;
 
-                //TODO
+                _dB41Manager.Add(_sharp7Service.S71200.DB41);
             }
 
             AssignAnalogSensors();

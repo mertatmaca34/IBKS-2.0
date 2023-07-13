@@ -2,6 +2,7 @@
 using Autofac.Extras.DynamicProxy;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
+using IBKS_2._0.Forms;
 using IBKS_2._0.Forms.Pages;
 
 namespace IBKS_2._0.DependencyResolvers.Autofac
@@ -10,6 +11,7 @@ namespace IBKS_2._0.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<Main>().AsSelf();
             builder.RegisterType<HomePage>().As<Form>().SingleInstance();
             builder.RegisterType<CalibrationPage>().As<Form>().SingleInstance();
 

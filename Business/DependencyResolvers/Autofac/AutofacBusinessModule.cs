@@ -20,6 +20,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CalibrationManager>().As<ICalibrationService>().SingleInstance();
             builder.RegisterType<EfCalibrationDal>().As<ICalibrationDal>().SingleInstance();
 
+            builder.RegisterType<DB41Manager>().As<IDB41Service>().SingleInstance();
+            builder.RegisterType<EfDB41Dal>().As<IDB41Dal>().SingleInstance();
+
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
 

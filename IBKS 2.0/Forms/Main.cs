@@ -1,4 +1,5 @@
-﻿using IBKS_2._0.Forms.Pages;
+﻿using Business.Abstract;
+using IBKS_2._0.Forms.Pages;
 using IBKS_2._0.Utils;
 
 namespace IBKS_2._0.Forms
@@ -7,10 +8,12 @@ namespace IBKS_2._0.Forms
     {
         readonly HomePage _homePage;
         readonly SimulationPage _simulationPage;
-
-        public Main()
+        IDB41Service _dB41Manager;
+        public Main(IDB41Service dB41Manager)
         {
-            _homePage = new HomePage();
+            _dB41Manager = dB41Manager;
+
+            _homePage = new HomePage(_dB41Manager);
             _simulationPage = new SimulationPage();
 
             InitializeComponent();
