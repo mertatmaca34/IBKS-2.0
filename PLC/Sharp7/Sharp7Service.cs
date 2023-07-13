@@ -11,10 +11,13 @@ namespace PLC.Sharp7
 
         public S7Client client = new();
 
-        private readonly BackgroundWorker _worker = new();
+        private readonly BackgroundWorker _worker = new BackgroundWorker();
+
         private readonly Timer _timer;
 
         public S71200 S71200 = new();
+
+        public TimeSpan ConnectionTime = new TimeSpan(0, 0, 0);
 
         public Sharp7Service()
         {
@@ -26,6 +29,18 @@ namespace PLC.Sharp7
         private void TimerTick(object? state)
         {
             ReadDB41();
+
+            if (client.Connected)
+            {
+                ConnectionTime = ConnectionTime.Add(new TimeSpan(0, 0, 1));
+            }
+            else
+            {
+                ConnectionTime = new TimeSpan(0, 0, 0);
+
+                Reconnect();
+            }
+
         }
 
         public static Sharp7Service Instance
@@ -106,6 +121,44 @@ namespace PLC.Sharp7
                         S71200.DB41.UpsKapasite = Get.Real(S71200.Buffer41, 156);
                         S71200.DB41.UpsSicaklik = Get.Real(S71200.Buffer41, 160);
                         S71200.DB41.UpsYuk = Get.Real(S71200.Buffer41, 164);
+
+                        res = client.DBRead(4, 0, 12, S71200.Buffer4);
+
+                        S71200.DB4.SystemTime = Get.Time(S71200.Buffer4, 0);
+                        res = client.DBRead(12, 0, 28, S71200.Buffer12);
+
+                        S71200.DB12.HaftaGunu = Get.Byte(S71200.Buffer12, 4);
+                        S71200.DB12.HaftaGunuSaat = Get.Byte(S71200.Buffer12, 5);
+                        S71200.DB12.HaftaGunuDakika = Get.Byte(S71200.Buffer12, 6);
+                        S71200.DB12.GunlukYikamaSaat = Get.Byte(S71200.Buffer12, 25);
+                        S71200.DB12.GunlukYikamaDakika = Get.Byte(S71200.Buffer12, 26);
+
+                        res = client.EBRead(0, 30, S71200.InputTagsBuffer);
+
+                        S71200.InputTags.ReadTime = S71200.DB4.SystemTime;
+                        S71200.InputTags.Kapi = Get.Input(S71200.InputTagsBuffer, 25, 5);
+                        S71200.InputTags.Duman = Get.Input(S71200.InputTagsBuffer, 1, 1);
+                        S71200.InputTags.SuBaskini = Get.Input(S71200.InputTagsBuffer, 0, 7);
+                        S71200.InputTags.AcilStop = Get.Input(S71200.InputTagsBuffer, 25, 7);
+                        S71200.InputTags.Pompa1Termik = Get.Input(S71200.InputTagsBuffer, 27, 3);
+                        S71200.InputTags.Pompa2Termik = Get.Input(S71200.InputTagsBuffer, 27, 6);
+                        S71200.InputTags.TemizSuTermik = Get.Input(S71200.InputTagsBuffer, 28, 2);
+                        S71200.InputTags.YikamaTanki = Get.Input(S71200.InputTagsBuffer, 28, 3);
+                        S71200.InputTags.Enerji = Get.Input(S71200.InputTagsBuffer, 25, 6);
+                        S71200.InputTags.Pompa1CalisiyorMu = Get.Input(S71200.InputTagsBuffer, 27, 4);
+                        S71200.InputTags.Pompa2CalisiyorMu = Get.Input(S71200.InputTagsBuffer, 27, 7);
+
+                        res = client.MBRead(0, 102, S71200.MBTagsBuffer);
+
+                        S71200.MBTags.ReadTime = S71200.DB4.SystemTime;
+                        S71200.MBTags.YikamaVarMi = Get.MB(S71200.MBTagsBuffer, 24, 1);
+                        S71200.MBTags.HaftalikYikamaVarMi = Get.MB(S71200.MBTagsBuffer, 24, 2);
+                        S71200.MBTags.ModAutoMu = Get.MB(S71200.MBTagsBuffer, 10, 6);
+                        S71200.MBTags.ModBakimMi = Get.MB(S71200.MBTagsBuffer, 10, 4);
+                        S71200.MBTags.ModKalibrasyonMu = Get.MB(S71200.MBTagsBuffer, 10, 5);
+                        S71200.MBTags.AkmTetik = Get.MB(S71200.MBTagsBuffer, 101, 1);
+                        S71200.MBTags.KoiTetik = Get.MB(S71200.MBTagsBuffer, 101, 2);
+                        S71200.MBTags.PhTetik = Get.MB(S71200.MBTagsBuffer, 101, 3);
                     }
                     else
                     {
@@ -202,7 +255,7 @@ namespace PLC.Sharp7
             }
         }
 
-        public void ReadMbTags()
+        public void ReadMBTags()
         {
             if (!_worker.IsBusy)
             {

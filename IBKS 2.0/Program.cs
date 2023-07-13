@@ -4,7 +4,6 @@ using Business.DependencyResolvers.Autofac;
 using DataAccess.Concrete.Contexts;
 using IBKS_2._0.DependencyResolvers.Autofac;
 using IBKS_2._0.Forms;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

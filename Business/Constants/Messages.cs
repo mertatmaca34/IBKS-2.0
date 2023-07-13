@@ -7,7 +7,6 @@
         public static string InvalidDateTimes = "Seçilen tarih aralıkları geçersiz";
         public static string InvalidDelete = "Silinecek veri veritabanında kayıtlı değil";
 
-
         //Custom
         public static string ApiAdded = "Api bilgileri sisteme eklendi";
         public static string ApiUpdated = "Api bilgileri güncellendi";

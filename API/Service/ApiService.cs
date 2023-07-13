@@ -1,4 +1,5 @@
-﻿using API.Enums;
+﻿using API.Abstract;
+using API.Enums;
 using API.Models;
 using Entities.Concrete;
 using Newtonsoft.Json;
@@ -8,16 +9,17 @@ using System.Text;
 
 namespace API.Service
 {
-    public class APIService
+    public class APIService : IApiConnection
     {
         private string Url { get; set; }
         private Guid? TicketId { get; set; }
         private StationInformation StationInfo { get; set; }
         private StationType stationType { get; set; }
-        public APIService(string url, StationType stationType)
+
+        IApiConnection _apiConnection;
+        public APIService(IApiConnection apiConnection, )
         {
-            this.Url = url;
-            this.stationType = stationType;
+            _apiConnection = apiConnection;
         }
 
         private string MD5Hash(string input)
