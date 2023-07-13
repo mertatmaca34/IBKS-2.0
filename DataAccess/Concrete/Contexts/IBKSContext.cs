@@ -6,6 +6,15 @@ namespace DataAccess.Concrete.Contexts
 {
     public class IBKSContext : DbContext
     {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=IKBS;Trusted_Connection=True;MultipleActiveResultSets=true");
+        }
+        public IBKSContext(DbContextOptions<IBKSContext> options) : base(options)
+        {
+            Database.EnsureCreated();
+        }
+
         public DbSet<Api> Apis { get; set; }
         public DbSet<Calibration> Calibrations { get; set; }
         public DbSet<Channel> Channels { get; set; }
