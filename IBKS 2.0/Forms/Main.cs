@@ -10,17 +10,19 @@ namespace IBKS_2._0.Forms
         readonly HomePage _homePage;
         readonly SimulationPage _simulationPage;
 
+        readonly IApiService _apiService;
         readonly IDB41Service _dB41Manager;
         readonly IStationService _stationManager;
         readonly IApiService _apiManager;
         readonly IApiConnection _apiConnection;
 
-        public Main(IDB41Service dB41Manager, IStationService stationManager, IApiService apiManager, IApiConnection apiConnection)
+        public Main(IDB41Service dB41Manager, IStationService stationManager, IApiService apiManager, IApiConnection apiConnection, IApiService apiService)
         {
             _dB41Manager = dB41Manager;
             _stationManager = stationManager;
             _apiManager = apiManager;
             _apiConnection = apiConnection;
+            _apiService = apiService;
 
             _homePage = new HomePage(_dB41Manager, _stationManager, _apiManager, _apiConnection);
 

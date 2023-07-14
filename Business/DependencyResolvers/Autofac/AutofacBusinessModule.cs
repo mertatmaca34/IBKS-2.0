@@ -1,6 +1,4 @@
-﻿using API.Abstract;
-using API.Service;
-using Autofac;
+﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
@@ -33,8 +31,6 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<StationManager>().As<IStationService>();
             builder.RegisterType<EfStationDal>().As<IStationDal>();
-
-            builder.RegisterType<APIService>().As<IApiConnection>();
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();

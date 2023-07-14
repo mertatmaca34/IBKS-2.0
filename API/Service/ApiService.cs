@@ -16,10 +16,9 @@ namespace API.Service
         private StationInformation StationInfo { get; set; }
         private StationType stationType { get; set; }
 
-        IApiConnection _apiConnection;
-        public APIService(IApiConnection apiConnection, )
+        public APIService()
         {
-            _apiConnection = apiConnection;
+            stationType = StationType.SAIS;
         }
 
         private string MD5Hash(string input)

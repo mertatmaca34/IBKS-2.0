@@ -36,9 +36,11 @@ namespace IBKS_2._0.Forms.Pages
 
                 _dB41Manager.Add(_sharp7Service.S71200.DB41);
 
-                var mergedData = DataProcessingService.MergedSendData(_stationManager, _apiManager);
+                var mergedData = DataProcessingService.MergedSendData(_stationManager);
 
-                _apiConnection.SendData(mergedData);
+                var res = _apiConnection.SendData(mergedData);
+
+                MessageBox.Show(res.message);
             }
 
             AssignAnalogSensors();

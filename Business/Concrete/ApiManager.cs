@@ -7,7 +7,7 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    internal class ApiManager : IApiService
+    public class ApiManager : IApiService
     {
         readonly IApiDal _apiDal;
         public ApiManager(IApiDal apiDal)

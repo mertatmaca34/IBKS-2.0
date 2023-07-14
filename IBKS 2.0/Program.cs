@@ -1,3 +1,4 @@
+using API.DependencyResolvers.Autofac;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
@@ -33,6 +34,7 @@ namespace IBKS_2._0
             {
                 builder.RegisterModule(new AutofacViewModule());
                 builder.RegisterModule(new AutofacBusinessModule());
+                builder.RegisterModule(new AutofacApiModule());
             })
             .ConfigureServices((hostContext, services) =>
             {
