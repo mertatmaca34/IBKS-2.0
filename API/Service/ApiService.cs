@@ -19,6 +19,7 @@ namespace API.Service
         public APIService()
         {
             stationType = StationType.SAIS;
+            Url = "https://entegrationsais.csb.gov.tr/";
         }
 
         private string MD5Hash(string input)

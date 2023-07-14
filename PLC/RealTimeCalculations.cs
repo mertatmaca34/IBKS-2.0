@@ -8,7 +8,7 @@ namespace PLC
 
         public static string ConnectionStatus()
         {
-            if (_sharp7Service.client.Connected)
+            if (_sharp7Service.client?.Connected == true)
             {
                 return "Bağlı";
             }
@@ -20,7 +20,7 @@ namespace PLC
 
         public static TimeSpan GunlukYikamayaKalan()
         {
-            if (_sharp7Service.client.Connected)
+            if (_sharp7Service.client?.Connected == true)
             {
                 var SystemTime = _sharp7Service.S71200.DB4.SystemTime;
 
@@ -41,7 +41,7 @@ namespace PLC
 
         public static TimeSpan HaftalikYikamayaKalan()
         {
-            if (_sharp7Service.client.Connected)
+            if (_sharp7Service.client?.Connected == true)
             {
                 var SystemTime = _sharp7Service.S71200.DB4.SystemTime;
 

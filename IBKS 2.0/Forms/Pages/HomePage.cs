@@ -17,13 +17,17 @@ namespace IBKS_2._0.Forms.Pages
         readonly IStationService _stationManager;
         readonly IApiService _apiManager;
         readonly IApiConnection _apiConnection;
+        readonly ISendDataService _sendDataManager;
 
-        public HomePage(IDB41Service dB41Manager, IStationService stationManager, IApiService apiManager, IApiConnection apiConnection)
+        public HomePage(IDB41Service dB41Manager, IStationService stationManager, IApiService apiManager, IApiConnection apiConnection, ISendDataService sendDataManager)
         {
             _dB41Manager = dB41Manager;
             _stationManager = stationManager;
             _apiManager = apiManager;
             _apiConnection = apiConnection;
+            _sendDataManager = sendDataManager;
+
+            _apiConnection.Login("istanbul_pasakoy", "1q2w3e");
 
             InitializeComponent();
         }
@@ -40,7 +44,7 @@ namespace IBKS_2._0.Forms.Pages
 
                 var res = _apiConnection.SendData(mergedData);
 
-                MessageBox.Show(res.message);
+                
             }
 
             AssignAnalogSensors();
@@ -52,14 +56,14 @@ namespace IBKS_2._0.Forms.Pages
 
         private void AssignAnalogSensors()
         {
-            ChannelAkm.InstantData = _sharp7Service.S71200.DB41.Akm.ToString();
-            ChannelCozunmusOksijen.InstantData = _sharp7Service.S71200.DB41.CozunmusOksijen.ToString();
-            ChannelSicaklik.InstantData = _sharp7Service.S71200.DB41.KabinSicaklik.ToString();
+            ChannelAkm.InstantData = _sharp7Service.S71200.DB41.Akm + " mg/l";
+            ChannelCozunmusOksijen.InstantData = _sharp7Service.S71200.DB41.CozunmusOksijen + " mg/l";
+            ChannelSicaklik.InstantData = _sharp7Service.S71200.DB41.KabinSicaklik + "°C";
             ChannelPh.InstantData = _sharp7Service.S71200.DB41.Ph.ToString();
-            ChannelIletkenlik.InstantData = _sharp7Service.S71200.DB41.Iletkenlik.ToString();
-            ChannelKoi.InstantData = _sharp7Service.S71200.DB41.Koi.ToString();
-            ChannelAkisHizi.InstantData = _sharp7Service.S71200.DB41.NumuneHiz.ToString();
-            ChannelDebi.InstantData = _sharp7Service.S71200.DB41.TesisDebi.ToString();
+            ChannelIletkenlik.InstantData = _sharp7Service.S71200.DB41.Iletkenlik + " mS/cm";
+            ChannelKoi.InstantData = _sharp7Service.S71200.DB41.Koi + " mg/l";
+            ChannelAkisHizi.InstantData = _sharp7Service.S71200.DB41.NumuneHiz + " m³/d";
+            ChannelDebi.InstantData = _sharp7Service.S71200.DB41.TesisDebi + " m/s";
         }
 
         private void AssignAnalogSensorStatements()
