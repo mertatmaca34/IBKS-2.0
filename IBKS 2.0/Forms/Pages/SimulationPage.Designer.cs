@@ -31,6 +31,10 @@
             components = new System.ComponentModel.Container();
             PanelDoor = new Panel();
             TimerSimulation = new System.Windows.Forms.Timer(components);
+            PictureBoxPump1 = new PictureBox();
+            PictureBoxPump2 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)PictureBoxPump1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PictureBoxPump2).BeginInit();
             SuspendLayout();
             // 
             // PanelDoor
@@ -49,6 +53,28 @@
             TimerSimulation.Interval = 1000;
             TimerSimulation.Tick += TimerSimulation_Tick;
             // 
+            // PictureBoxPump1
+            // 
+            PictureBoxPump1.BackColor = Color.Transparent;
+            PictureBoxPump1.Image = Properties.Resources.pump1_animation;
+            PictureBoxPump1.Location = new Point(775, 476);
+            PictureBoxPump1.Name = "PictureBoxPump1";
+            PictureBoxPump1.Size = new Size(70, 76);
+            PictureBoxPump1.SizeMode = PictureBoxSizeMode.AutoSize;
+            PictureBoxPump1.TabIndex = 1;
+            PictureBoxPump1.TabStop = false;
+            // 
+            // PictureBoxPump2
+            // 
+            PictureBoxPump2.BackColor = Color.Transparent;
+            PictureBoxPump2.Image = Properties.Resources.pump2_idle;
+            PictureBoxPump2.Location = new Point(908, 476);
+            PictureBoxPump2.Name = "PictureBoxPump2";
+            PictureBoxPump2.Size = new Size(70, 76);
+            PictureBoxPump2.SizeMode = PictureBoxSizeMode.AutoSize;
+            PictureBoxPump2.TabIndex = 1;
+            PictureBoxPump2.TabStop = false;
+            // 
             // SimulationPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -57,17 +83,24 @@
             BackgroundImage = Properties.Resources.system_auto1;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1170, 677);
+            Controls.Add(PictureBoxPump2);
+            Controls.Add(PictureBoxPump1);
             Controls.Add(PanelDoor);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "SimulationPage";
             Text = "SimulationPage";
+            ((System.ComponentModel.ISupportInitialize)PictureBoxPump1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PictureBoxPump2).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Panel PanelDoor;
         private System.Windows.Forms.Timer TimerSimulation;
+        private PictureBox PictureBoxPump1;
+        private PictureBox PictureBoxPump2;
     }
 }

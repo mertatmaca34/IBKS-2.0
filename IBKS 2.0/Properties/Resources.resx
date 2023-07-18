@@ -118,47 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="monitor_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\monitor_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="filled_alarm_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\filled_alarm_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="filled_settings_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\filled_settings_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="settings_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\settings_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="filled_save_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\filled_save_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="black_and_white_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\black_and_white_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="filled_black_and_white_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\filled_black_and_white_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="home_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\home_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="azimuth_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\azimuth_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="filled_home_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\filled_home_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="system_wait" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\system_wait.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="filled_log_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filled_log_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="close_button_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\close_button_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="maximize_button_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\maximize_button_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="minimize_button_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minimize_button_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pump1_idle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pump1_idle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="alarm_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\alarm_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,46 +133,91 @@
   <data name="log_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\log_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="filled_azimuth_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\filled_azimuth_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="door_closed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\door_closed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="save_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Checkmark_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Checkmark_12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="filled_monitor_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\filled_monitor_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="minimize_button_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minimize_button_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="filter_wash1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filter_wash1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="filter_wash2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\filter_wash2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="door_opened" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\door_opened.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="close_button_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\close_button_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="azimuth_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\azimuth_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filled_azimuth_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filled_azimuth_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pump2_idle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pump2_idle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="monitor_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\monitor_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filled_black_and_white_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filled_black_and_white_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="settings_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\settings_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filled_save_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filled_save_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="maximize_button_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\maximize_button_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Checkmark_12px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Checkmark_12px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="system_auto1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\system_auto1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="system_auto2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\system_auto2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="system_wait" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\system_wait.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="wash1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\wash1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="save_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\save_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="system_auto2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\system_auto2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="wash2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\wash2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="door_closed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\door_closed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="filter_wash2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filter_wash2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="door_opened" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\door_opened.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="black_and_white_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\black_and_white_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filled_home_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filled_home_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pump1_animation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pump1_animation.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filled_monitor_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filled_monitor_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="home_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\home_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filled_alarm_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filled_alarm_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filled_settings_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filled_settings_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pump2_animation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pump2_animation.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
