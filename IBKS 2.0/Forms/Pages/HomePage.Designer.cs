@@ -72,7 +72,7 @@
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.Padding = new Padding(8);
+            tableLayoutPanel1.Padding = new Padding(5);
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.43F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 66.57F));
@@ -95,7 +95,7 @@
             tableLayoutPanel2.Controls.Add(channelControl1, 0, 0);
             tableLayoutPanel2.Controls.Add(ChannelAkm, 0, 1);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(11, 11);
+            tableLayoutPanel2.Location = new Point(8, 8);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 9;
             tableLayoutPanel1.SetRowSpan(tableLayoutPanel2, 2);
@@ -109,7 +109,7 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(571, 619);
+            tableLayoutPanel2.Size = new Size(574, 625);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // ChannelDebi
@@ -119,9 +119,9 @@
             ChannelDebi.ChannelName = "Debi";
             ChannelDebi.Dock = DockStyle.Fill;
             ChannelDebi.InstantData = "-";
-            ChannelDebi.Location = new Point(3, 547);
+            ChannelDebi.Location = new Point(3, 555);
             ChannelDebi.Name = "ChannelDebi";
-            ChannelDebi.Size = new Size(565, 69);
+            ChannelDebi.Size = new Size(568, 67);
             ChannelDebi.TabIndex = 8;
             // 
             // ChannelAkisHizi
@@ -131,9 +131,9 @@
             ChannelAkisHizi.ChannelName = "Akış Hızı";
             ChannelAkisHizi.Dock = DockStyle.Fill;
             ChannelAkisHizi.InstantData = "-";
-            ChannelAkisHizi.Location = new Point(3, 479);
+            ChannelAkisHizi.Location = new Point(3, 486);
             ChannelAkisHizi.Name = "ChannelAkisHizi";
-            ChannelAkisHizi.Size = new Size(565, 62);
+            ChannelAkisHizi.Size = new Size(568, 63);
             ChannelAkisHizi.TabIndex = 7;
             // 
             // ChannelKoi
@@ -143,9 +143,9 @@
             ChannelKoi.ChannelName = "KOi";
             ChannelKoi.Dock = DockStyle.Fill;
             ChannelKoi.InstantData = "-";
-            ChannelKoi.Location = new Point(3, 411);
+            ChannelKoi.Location = new Point(3, 417);
             ChannelKoi.Name = "ChannelKoi";
-            ChannelKoi.Size = new Size(565, 62);
+            ChannelKoi.Size = new Size(568, 63);
             ChannelKoi.TabIndex = 6;
             // 
             // ChannelIletkenlik
@@ -155,9 +155,9 @@
             ChannelIletkenlik.ChannelName = "İletkenlik";
             ChannelIletkenlik.Dock = DockStyle.Fill;
             ChannelIletkenlik.InstantData = "-";
-            ChannelIletkenlik.Location = new Point(3, 343);
+            ChannelIletkenlik.Location = new Point(3, 348);
             ChannelIletkenlik.Name = "ChannelIletkenlik";
-            ChannelIletkenlik.Size = new Size(565, 62);
+            ChannelIletkenlik.Size = new Size(568, 63);
             ChannelIletkenlik.TabIndex = 5;
             // 
             // ChannelPh
@@ -167,9 +167,9 @@
             ChannelPh.ChannelName = "pH";
             ChannelPh.Dock = DockStyle.Fill;
             ChannelPh.InstantData = "-";
-            ChannelPh.Location = new Point(3, 275);
+            ChannelPh.Location = new Point(3, 279);
             ChannelPh.Name = "ChannelPh";
-            ChannelPh.Size = new Size(565, 62);
+            ChannelPh.Size = new Size(568, 63);
             ChannelPh.TabIndex = 4;
             // 
             // ChannelSicaklik
@@ -179,9 +179,9 @@
             ChannelSicaklik.ChannelName = "Sıcaklık";
             ChannelSicaklik.Dock = DockStyle.Fill;
             ChannelSicaklik.InstantData = "-";
-            ChannelSicaklik.Location = new Point(3, 207);
+            ChannelSicaklik.Location = new Point(3, 210);
             ChannelSicaklik.Name = "ChannelSicaklik";
-            ChannelSicaklik.Size = new Size(565, 62);
+            ChannelSicaklik.Size = new Size(568, 63);
             ChannelSicaklik.TabIndex = 3;
             // 
             // ChannelCozunmusOksijen
@@ -191,9 +191,9 @@
             ChannelCozunmusOksijen.ChannelName = "Çözünmüş Oksijen";
             ChannelCozunmusOksijen.Dock = DockStyle.Fill;
             ChannelCozunmusOksijen.InstantData = "-";
-            ChannelCozunmusOksijen.Location = new Point(3, 139);
+            ChannelCozunmusOksijen.Location = new Point(3, 141);
             ChannelCozunmusOksijen.Name = "ChannelCozunmusOksijen";
-            ChannelCozunmusOksijen.Size = new Size(565, 62);
+            ChannelCozunmusOksijen.Size = new Size(568, 63);
             ChannelCozunmusOksijen.TabIndex = 2;
             // 
             // channelControl1
@@ -208,7 +208,7 @@
             channelControl1.Name = "channelControl1";
             channelControl1.PanelSplit1Visible = false;
             channelControl1.PanelSplit2Visible = false;
-            channelControl1.Size = new Size(565, 62);
+            channelControl1.Size = new Size(568, 63);
             channelControl1.TabIndex = 0;
             // 
             // ChannelAkm
@@ -218,9 +218,9 @@
             ChannelAkm.ChannelName = "AKM";
             ChannelAkm.Dock = DockStyle.Fill;
             ChannelAkm.InstantData = "-";
-            ChannelAkm.Location = new Point(3, 71);
+            ChannelAkm.Location = new Point(3, 72);
             ChannelAkm.Name = "ChannelAkm";
-            ChannelAkm.Size = new Size(565, 62);
+            ChannelAkm.Size = new Size(568, 63);
             ChannelAkm.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -241,14 +241,14 @@
             tableLayoutPanel3.Controls.Add(DigitalSensorYikamaTanki, 1, 3);
             tableLayoutPanel3.Controls.Add(DigitalSensorEnerji, 2, 3);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(588, 11);
+            tableLayoutPanel3.Location = new Point(588, 8);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 4;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel3.Size = new Size(571, 203);
+            tableLayoutPanel3.Size = new Size(574, 205);
             tableLayoutPanel3.TabIndex = 1;
             // 
             // channelControl10
@@ -264,106 +264,106 @@
             channelControl10.Name = "channelControl10";
             channelControl10.PanelSplit1Visible = false;
             channelControl10.PanelSplit2Visible = false;
-            channelControl10.Size = new Size(565, 44);
+            channelControl10.Size = new Size(568, 45);
             channelControl10.TabIndex = 0;
             // 
             // DigitalSensorKapi
             // 
             DigitalSensorKapi.BackColor = Color.White;
             DigitalSensorKapi.Dock = DockStyle.Fill;
-            DigitalSensorKapi.Location = new Point(3, 53);
+            DigitalSensorKapi.Location = new Point(3, 54);
             DigitalSensorKapi.Name = "DigitalSensorKapi";
             DigitalSensorKapi.SensorDescription = "Kabin Kapısı";
             DigitalSensorKapi.SensorName = "Kapı";
-            DigitalSensorKapi.Size = new Size(184, 44);
+            DigitalSensorKapi.Size = new Size(185, 45);
             DigitalSensorKapi.TabIndex = 1;
             // 
             // DigitalSensorDuman
             // 
             DigitalSensorDuman.BackColor = Color.White;
             DigitalSensorDuman.Dock = DockStyle.Fill;
-            DigitalSensorDuman.Location = new Point(193, 53);
+            DigitalSensorDuman.Location = new Point(194, 54);
             DigitalSensorDuman.Name = "DigitalSensorDuman";
             DigitalSensorDuman.SensorDescription = "Kabin içi duman durumu";
             DigitalSensorDuman.SensorName = "Duman";
-            DigitalSensorDuman.Size = new Size(184, 44);
+            DigitalSensorDuman.Size = new Size(185, 45);
             DigitalSensorDuman.TabIndex = 1;
             // 
             // DigitalSensorSuBaskini
             // 
             DigitalSensorSuBaskini.BackColor = Color.White;
             DigitalSensorSuBaskini.Dock = DockStyle.Fill;
-            DigitalSensorSuBaskini.Location = new Point(383, 53);
+            DigitalSensorSuBaskini.Location = new Point(385, 54);
             DigitalSensorSuBaskini.Name = "DigitalSensorSuBaskini";
             DigitalSensorSuBaskini.SensorDescription = "Kabiniçi su baskını";
             DigitalSensorSuBaskini.SensorName = "Su Baskını";
-            DigitalSensorSuBaskini.Size = new Size(185, 44);
+            DigitalSensorSuBaskini.Size = new Size(186, 45);
             DigitalSensorSuBaskini.TabIndex = 1;
             // 
             // DigitalSensorPompa2Termik
             // 
             DigitalSensorPompa2Termik.BackColor = Color.White;
             DigitalSensorPompa2Termik.Dock = DockStyle.Fill;
-            DigitalSensorPompa2Termik.Location = new Point(383, 103);
+            DigitalSensorPompa2Termik.Location = new Point(385, 105);
             DigitalSensorPompa2Termik.Name = "DigitalSensorPompa2Termik";
             DigitalSensorPompa2Termik.SensorDescription = "Pompa 2 Termik atma durumu";
             DigitalSensorPompa2Termik.SensorName = "Pompa 2 Termik";
-            DigitalSensorPompa2Termik.Size = new Size(185, 44);
+            DigitalSensorPompa2Termik.Size = new Size(186, 45);
             DigitalSensorPompa2Termik.TabIndex = 1;
             // 
             // DigitalSensorPompa1Termik
             // 
             DigitalSensorPompa1Termik.BackColor = Color.White;
             DigitalSensorPompa1Termik.Dock = DockStyle.Fill;
-            DigitalSensorPompa1Termik.Location = new Point(193, 103);
+            DigitalSensorPompa1Termik.Location = new Point(194, 105);
             DigitalSensorPompa1Termik.Name = "DigitalSensorPompa1Termik";
             DigitalSensorPompa1Termik.SensorDescription = "Pompa 1 Termik atma durumu";
             DigitalSensorPompa1Termik.SensorName = "Pompa 1 Termik";
-            DigitalSensorPompa1Termik.Size = new Size(184, 44);
+            DigitalSensorPompa1Termik.Size = new Size(185, 45);
             DigitalSensorPompa1Termik.TabIndex = 1;
             // 
             // DigitalSensorAcilStop
             // 
             DigitalSensorAcilStop.BackColor = Color.White;
             DigitalSensorAcilStop.Dock = DockStyle.Fill;
-            DigitalSensorAcilStop.Location = new Point(3, 103);
+            DigitalSensorAcilStop.Location = new Point(3, 105);
             DigitalSensorAcilStop.Name = "DigitalSensorAcilStop";
             DigitalSensorAcilStop.SensorDescription = "Acil Stop butonu durumu";
             DigitalSensorAcilStop.SensorName = "Acil Stop";
-            DigitalSensorAcilStop.Size = new Size(184, 44);
+            DigitalSensorAcilStop.Size = new Size(185, 45);
             DigitalSensorAcilStop.TabIndex = 1;
             // 
             // DigitalSensorTSuPompaTermik
             // 
             DigitalSensorTSuPompaTermik.BackColor = Color.White;
             DigitalSensorTSuPompaTermik.Dock = DockStyle.Fill;
-            DigitalSensorTSuPompaTermik.Location = new Point(3, 153);
+            DigitalSensorTSuPompaTermik.Location = new Point(3, 156);
             DigitalSensorTSuPompaTermik.Name = "DigitalSensorTSuPompaTermik";
             DigitalSensorTSuPompaTermik.SensorDescription = "Temiz Su P. Termik atma durumu";
             DigitalSensorTSuPompaTermik.SensorName = "T. Su Pompa Termik";
-            DigitalSensorTSuPompaTermik.Size = new Size(184, 47);
+            DigitalSensorTSuPompaTermik.Size = new Size(185, 46);
             DigitalSensorTSuPompaTermik.TabIndex = 1;
             // 
             // DigitalSensorYikamaTanki
             // 
             DigitalSensorYikamaTanki.BackColor = Color.White;
             DigitalSensorYikamaTanki.Dock = DockStyle.Fill;
-            DigitalSensorYikamaTanki.Location = new Point(193, 153);
+            DigitalSensorYikamaTanki.Location = new Point(194, 156);
             DigitalSensorYikamaTanki.Name = "DigitalSensorYikamaTanki";
             DigitalSensorYikamaTanki.SensorDescription = "Yıkama Tankı dolu/boş bilgisi";
             DigitalSensorYikamaTanki.SensorName = "Yıkama Tankı";
-            DigitalSensorYikamaTanki.Size = new Size(184, 47);
+            DigitalSensorYikamaTanki.Size = new Size(185, 46);
             DigitalSensorYikamaTanki.TabIndex = 1;
             // 
             // DigitalSensorEnerji
             // 
             DigitalSensorEnerji.BackColor = Color.White;
             DigitalSensorEnerji.Dock = DockStyle.Fill;
-            DigitalSensorEnerji.Location = new Point(383, 153);
+            DigitalSensorEnerji.Location = new Point(385, 156);
             DigitalSensorEnerji.Name = "DigitalSensorEnerji";
             DigitalSensorEnerji.SensorDescription = "Kabin elektrik enerjisi durumu";
             DigitalSensorEnerji.SensorName = "Enerji";
-            DigitalSensorEnerji.Size = new Size(185, 47);
+            DigitalSensorEnerji.Size = new Size(186, 46);
             DigitalSensorEnerji.TabIndex = 1;
             // 
             // washingCalibrationInfoControl1
@@ -390,10 +390,10 @@
             washingCalibrationInfoControl1.LastWashPhImage = null;
             washingCalibrationInfoControl1.LastWashSicaklik = "     -";
             washingCalibrationInfoControl1.LastWashSicaklikImage = null;
-            washingCalibrationInfoControl1.Location = new Point(588, 220);
+            washingCalibrationInfoControl1.Location = new Point(588, 219);
             washingCalibrationInfoControl1.Name = "washingCalibrationInfoControl1";
             washingCalibrationInfoControl1.Padding = new Padding(1);
-            washingCalibrationInfoControl1.Size = new Size(571, 410);
+            washingCalibrationInfoControl1.Size = new Size(574, 414);
             washingCalibrationInfoControl1.TabIndex = 4;
             // 
             // StatusBarControl
@@ -405,11 +405,11 @@
             StatusBarControl.Dock = DockStyle.Fill;
             StatusBarControl.GunlukYikamaKalan = "G. Yıkamaya Kalan: ";
             StatusBarControl.HaftalikYikamaKalan = "H. Yıkamaya Kalan: ";
-            StatusBarControl.Location = new Point(11, 636);
+            StatusBarControl.Location = new Point(8, 639);
             StatusBarControl.Name = "StatusBarControl";
             StatusBarControl.Padding = new Padding(1);
             StatusBarControl.SistemSaati = "Sistem Saati: ";
-            StatusBarControl.Size = new Size(1148, 30);
+            StatusBarControl.Size = new Size(1154, 30);
             StatusBarControl.TabIndex = 5;
             // 
             // TimerPlcRead

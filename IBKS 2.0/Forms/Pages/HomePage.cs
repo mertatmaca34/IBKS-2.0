@@ -44,7 +44,7 @@ namespace IBKS_2._0.Forms.Pages
 
                 var res = _apiConnection.SendData(mergedData);
 
-                
+                _sendDataManager.Add(mergedData);
             }
 
             AssignAnalogSensors();
