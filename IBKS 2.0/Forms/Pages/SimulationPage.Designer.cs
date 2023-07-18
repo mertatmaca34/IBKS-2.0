@@ -28,13 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            panel1 = new Panel();
+            TimerSimulation = new System.Windows.Forms.Timer(components);
             SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Transparent;
+            panel1.BackgroundImage = Properties.Resources.door_closed;
+            panel1.BackgroundImageLayout = ImageLayout.None;
+            panel1.Location = new Point(947, 616);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(127, 63);
+            panel1.TabIndex = 0;
+            // 
+            // TimerSimulation
+            // 
+            TimerSimulation.Enabled = true;
+            TimerSimulation.Interval = 1000;
+            TimerSimulation.Tick += TimerSimulation_Tick;
             // 
             // SimulationPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.WhiteSmoke;
+            BackgroundImage = Properties.Resources.system_auto1;
+            BackgroundImageLayout = ImageLayout.Center;
+            ClientSize = new Size(1170, 677);
+            Controls.Add(panel1);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "SimulationPage";
             Text = "SimulationPage";
@@ -42,5 +66,8 @@
         }
 
         #endregion
+
+        private Panel panel1;
+        private System.Windows.Forms.Timer TimerSimulation;
     }
 }
