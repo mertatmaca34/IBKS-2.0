@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            panel1 = new Panel();
+            PanelDoor = new Panel();
             TimerSimulation = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
-            // panel1
+            // PanelDoor
             // 
-            panel1.BackColor = Color.Transparent;
-            panel1.BackgroundImage = Properties.Resources.door_closed;
-            panel1.BackgroundImageLayout = ImageLayout.None;
-            panel1.Location = new Point(947, 616);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(127, 63);
-            panel1.TabIndex = 0;
+            PanelDoor.BackColor = Color.Transparent;
+            PanelDoor.BackgroundImage = Properties.Resources.door_closed;
+            PanelDoor.BackgroundImageLayout = ImageLayout.None;
+            PanelDoor.Location = new Point(947, 616);
+            PanelDoor.Name = "PanelDoor";
+            PanelDoor.Size = new Size(127, 63);
+            PanelDoor.TabIndex = 0;
             // 
             // TimerSimulation
             // 
@@ -57,7 +57,7 @@
             BackgroundImage = Properties.Resources.system_auto1;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1170, 677);
-            Controls.Add(panel1);
+            Controls.Add(PanelDoor);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "SimulationPage";
@@ -67,7 +67,7 @@
 
         #endregion
 
-        private Panel panel1;
+        private Panel PanelDoor;
         private System.Windows.Forms.Timer TimerSimulation;
     }
 }
