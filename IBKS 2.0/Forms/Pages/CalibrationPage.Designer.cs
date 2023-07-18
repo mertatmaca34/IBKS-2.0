@@ -85,7 +85,7 @@
             titleBarControl1 = new Components.TitleBarControl();
             tableLayoutPanel27 = new TableLayoutPanel();
             titleBarControl2 = new Components.TitleBarControl();
-            calibrationStatusBarControl1 = new Components.CalibrationStatusBarControl();
+            calibrationStatusBarControl1 = new Components.CalibrationStatusBarZeroControl();
             tableLayoutPanel7 = new TableLayoutPanel();
             tableLayoutPanel8 = new TableLayoutPanel();
             panel4 = new Panel();
@@ -110,7 +110,7 @@
             tableLayoutPanel14 = new TableLayoutPanel();
             label11 = new Label();
             label12 = new Label();
-            calibrationStatusBarControl2 = new Components.CalibrationStatusBarControl();
+            calibrationStatusBarControl2 = new Components.CalibrationStatusBarZeroControl();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel23.SuspendLayout();
@@ -1374,7 +1374,7 @@
         private Label label12;
         private TableLayoutPanel tableLayoutPanel27;
         private Components.TitleBarControl titleBarControl2;
-        private Components.CalibrationStatusBarControl calibrationStatusBarControl1;
-        private Components.CalibrationStatusBarControl calibrationStatusBarControl2;
+        private Components.CalibrationStatusBarZeroControl calibrationStatusBarControl1;
+        private Components.CalibrationStatusBarZeroControl calibrationStatusBarControl2;
     }
 }
