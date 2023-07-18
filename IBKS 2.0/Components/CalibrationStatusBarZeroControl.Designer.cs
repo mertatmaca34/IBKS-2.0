@@ -1,6 +1,6 @@
 ﻿namespace IBKS_2._0.Components
 {
-    partial class CalibrationStatusBarControl
+    partial class CalibrationStatusBarZeroControl
     {
         /// <summary> 
         ///Gerekli tasarımcı değişkeni.

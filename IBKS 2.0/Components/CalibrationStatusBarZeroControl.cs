@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace IBKS_2._0.Components
 {
-    public partial class CalibrationStatusBarControl : UserControl
+    public partial class CalibrationStatusBarZeroControl : UserControl
     {
         [Description("Zero Ref Değeri"), Category("IBKS")]
         public string ZeroRef
@@ -40,7 +40,7 @@ namespace IBKS_2._0.Components
             set => LabelZeroStd.Text = value;
         }
 
-        public CalibrationStatusBarControl()
+        public CalibrationStatusBarZeroControl()
         {
             InitializeComponent();
         }
