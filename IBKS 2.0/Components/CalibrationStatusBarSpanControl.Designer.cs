@@ -109,7 +109,7 @@
             LabelSpanStd.Anchor = AnchorStyles.None;
             LabelSpanStd.AutoSize = true;
             LabelSpanStd.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            LabelSpanStd.Location = new Point(528, 5);
+            LabelSpanStd.Location = new Point(527, 4);
             LabelSpanStd.Margin = new Padding(0);
             LabelSpanStd.Name = "LabelSpanStd";
             LabelSpanStd.Size = new Size(13, 18);
@@ -143,11 +143,11 @@
             tableLayoutPanel2.Controls.Add(LabelSpanStd, 10, 0);
             tableLayoutPanel2.Controls.Add(LabelSpanDiff, 7, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(0, 0);
+            tableLayoutPanel2.Location = new Point(1, 1);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(571, 29);
+            tableLayoutPanel2.Size = new Size(569, 27);
             tableLayoutPanel2.TabIndex = 1;
             // 
             // label3
@@ -155,7 +155,7 @@
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
             label3.Font = new Font("Arial Narrow", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(8, 7);
+            label3.Location = new Point(8, 6);
             label3.Margin = new Padding(0);
             label3.Name = "label3";
             label3.Size = new Size(51, 15);
@@ -166,7 +166,7 @@
             // 
             panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = Color.FromArgb(235, 235, 235);
-            panel1.Location = new Point(138, 4);
+            panel1.Location = new Point(138, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(1, 21);
             panel1.TabIndex = 0;
@@ -175,7 +175,7 @@
             // 
             panel2.Anchor = AnchorStyles.None;
             panel2.BackColor = Color.FromArgb(235, 235, 235);
-            panel2.Location = new Point(282, 4);
+            panel2.Location = new Point(282, 3);
             panel2.Name = "panel2";
             panel2.Size = new Size(1, 21);
             panel2.TabIndex = 0;
@@ -184,7 +184,7 @@
             // 
             panel3.Anchor = AnchorStyles.None;
             panel3.BackColor = Color.FromArgb(235, 235, 235);
-            panel3.Location = new Point(426, 4);
+            panel3.Location = new Point(426, 3);
             panel3.Name = "panel3";
             panel3.Size = new Size(1, 21);
             panel3.TabIndex = 0;
@@ -194,7 +194,7 @@
             LabelSpanRef.Anchor = AnchorStyles.None;
             LabelSpanRef.AutoSize = true;
             LabelSpanRef.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            LabelSpanRef.Location = new Point(94, 5);
+            LabelSpanRef.Location = new Point(94, 4);
             LabelSpanRef.Margin = new Padding(0);
             LabelSpanRef.Name = "LabelSpanRef";
             LabelSpanRef.Size = new Size(13, 18);
@@ -206,7 +206,7 @@
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
             label4.Font = new Font("Arial Narrow", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(148, 7);
+            label4.Location = new Point(148, 6);
             label4.Margin = new Padding(0);
             label4.Name = "label4";
             label4.Size = new Size(59, 15);
@@ -218,7 +218,7 @@
             LabelSpanMeas.Anchor = AnchorStyles.None;
             LabelSpanMeas.AutoSize = true;
             LabelSpanMeas.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            LabelSpanMeas.Location = new Point(238, 5);
+            LabelSpanMeas.Location = new Point(238, 4);
             LabelSpanMeas.Margin = new Padding(0);
             LabelSpanMeas.Name = "LabelSpanMeas";
             LabelSpanMeas.Size = new Size(13, 18);
@@ -233,7 +233,7 @@
             label5.Location = new Point(295, 0);
             label5.Margin = new Padding(0);
             label5.Name = "label5";
-            label5.Size = new Size(52, 29);
+            label5.Size = new Size(52, 27);
             label5.TabIndex = 1;
             label5.Text = "Span Diff (%):";
             // 
@@ -242,7 +242,7 @@
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
             label6.Font = new Font("Arial Narrow", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(440, 7);
+            label6.Location = new Point(440, 6);
             label6.Margin = new Padding(0);
             label6.Name = "label6";
             label6.Size = new Size(51, 15);
@@ -254,19 +254,21 @@
             LabelSpanDiff.Anchor = AnchorStyles.None;
             LabelSpanDiff.AutoSize = true;
             LabelSpanDiff.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            LabelSpanDiff.Location = new Point(382, 5);
+            LabelSpanDiff.Location = new Point(382, 4);
             LabelSpanDiff.Margin = new Padding(0);
             LabelSpanDiff.Name = "LabelSpanDiff";
             LabelSpanDiff.Size = new Size(13, 18);
             LabelSpanDiff.TabIndex = 1;
             LabelSpanDiff.Text = "-";
             // 
-            // CalibrationStatusBarControl2
+            // CalibrationStatusBarSpanControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(235, 235, 235);
             Controls.Add(tableLayoutPanel2);
-            Name = "CalibrationStatusBarControl2";
+            Name = "CalibrationStatusBarSpanControl";
+            Padding = new Padding(1);
             Size = new Size(571, 29);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
