@@ -71,6 +71,7 @@ namespace Business.Concrete
 
             return new SuccessResult(Messages.SendDataUpdated);
         }
+
         private IResult CheckSendDataExist(SendData sendData)
         {
             var result = _sendDataDal.GetAll(m => m == sendData).Any();

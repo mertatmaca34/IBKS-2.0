@@ -1,7 +1,9 @@
 ﻿using API.Abstract;
+using API.Models;
 using Business.Abstract;
-using Business.Concrete;
+using Business.Helpers;
 using IBKS_2._0.Utils;
+using Newtonsoft.Json;
 using PLC;
 using PLC.Sharp7;
 
@@ -38,11 +40,14 @@ namespace IBKS_2._0.Forms.Pages
             {
                 _lastMinute = DateTime.Now;
 
-                _dB41Manager.Add(_sharp7Service.S71200.DB41);
-
-                var mergedData = DataProcessingService.MergedSendData(_stationManager);
+                var mergedData = DataProcessingHelper.MergedSendData(_stationManager);
 
                 var res = _apiConnection.SendData(mergedData);
+
+                if (res.result)
+                {
+                    var resultOfApi = JsonConvert.DeserializeObject<DeserializeResult>(res.objects.ToString());
+                }
 
                 _sendDataManager.Add(mergedData);
             }
@@ -102,16 +107,16 @@ namespace IBKS_2._0.Forms.Pages
 
         private void AssignAverageOfLast60Minutes()
         {
-            var data = _sendDataManager.GetLast60Minutes();
+            var data = ValueAvarages.Last60MinAvg(_sendDataManager);
 
-            ChannelAkm.AvgDataOf60Min = data.Data.Average(d => d.AKM).ToString();
-            ChannelCozunmusOksijen.AvgDataOf60Min = data.Data.Average(d => d.CozunmusOksijen).ToString();
-            ChannelSicaklik.AvgDataOf60Min = data.Data.Average(d => d.Sicaklik).ToString();
-            ChannelPh.AvgDataOf60Min = data.Data.Average(d => d.pH).ToString();
-            ChannelIletkenlik.AvgDataOf60Min = data.Data.Average(d => d.Iletkenlik).ToString();
-            ChannelKoi.AvgDataOf60Min = data.Data.Average(d => d.KOi).ToString();
-            ChannelAkisHizi.AvgDataOf60Min = data.Data.Average(d => d.AkisHizi).ToString();
-            ChannelDebi.AvgDataOf60Min = data.Data.Average(d => d.Debi).ToString();
+            ChannelAkm.AvgDataOf60Min = data.Akm.ToString();
+            ChannelCozunmusOksijen.AvgDataOf60Min = data.CozunmusOksijen.ToString();
+            ChannelSicaklik.AvgDataOf60Min = data.KabinSicaklik.ToString();
+            ChannelPh.AvgDataOf60Min = data.Ph.ToString();
+            ChannelIletkenlik.AvgDataOf60Min = data.Iletkenlik.ToString();
+            ChannelKoi.AvgDataOf60Min = data.Koi.ToString();
+            ChannelAkisHizi.AvgDataOf60Min = data.NumuneHiz.ToString();
+            ChannelDebi.AvgDataOf60Min = data.TesisDebi.ToString();
         }
     }
 }

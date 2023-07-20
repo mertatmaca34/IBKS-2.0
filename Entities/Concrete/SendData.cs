@@ -7,7 +7,7 @@ namespace Entities.Concrete
         public int Id { get; set; }
         public Guid Stationid { get; set; }
         public DateTime Readtime { get; set; }
-        public  string SoftwareVersion { get; set; }
+        public string SoftwareVersion { get; set; }
         public double AkisHizi { get; set; }
         public double AKM { get; set; }
         public double CozunmusOksijen { get; set; }

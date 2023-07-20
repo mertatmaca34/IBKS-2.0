@@ -1,20 +1,22 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using PLC.Sharp7;
 
-namespace Business.Concrete
+namespace Business.Helpers
 {
-    public static class DataProcessingService
+    public static class DataProcessingHelper
     {
         readonly static Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
         public static int _status = Status;
 
-        public static SendData MergedSendData(IStationService stationManager)
+        public static IDataResult<SendData> MergedSendData(IStationService stationManager)
         {
             if (stationManager.Get().Success)
             {
-                return new SendData
+                return new SuccessDataResult<SendData>(new SendData
                 {
                     Stationid = stationManager.Get().Data.StationId,
                     AkisHizi = _sharp7Service.S71200.DB41.NumuneHiz,
@@ -42,11 +44,11 @@ namespace Business.Concrete
                     Sicaklik = _sharp7Service.S71200.DB41.KabinSicaklik,
                     Sicaklik_Status = _status,
                     SoftwareVersion = "1.0.0"
-                };
+                });
             }
             else
             {
-                return null;
+                return new ErrorDataResult<SendData>(Messages.StationIsNotDefined);
             }
         }
 

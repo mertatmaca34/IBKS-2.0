@@ -1,6 +1,6 @@
 ﻿namespace IBKS_2._0.Components
 {
-    partial class WashingCalibrationInfoControl
+    partial class StationInfoControl
     {
         /// <summary> 
         ///Gerekli tasarımcı değişkeni.

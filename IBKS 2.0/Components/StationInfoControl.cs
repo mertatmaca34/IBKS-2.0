@@ -2,7 +2,7 @@
 
 namespace IBKS_2._0.Components
 {
-    public partial class WashingCalibrationInfoControl : UserControl
+    public partial class StationInfoControl : UserControl
     {
         [Description("Son Yıkama Akm"), Category("IBKS")]
         public string LastWashAkm
@@ -143,7 +143,7 @@ namespace IBKS_2._0.Components
             get => LabelLastWashHariciDebi2.Image;
             set => LabelLastWashHariciDebi2.Image = value;
         }
-        public WashingCalibrationInfoControl()
+        public StationInfoControl()
         {
             InitializeComponent();
         }

@@ -51,7 +51,7 @@
             DigitalSensorTSuPompaTermik = new Components.DigitalSensorControl();
             DigitalSensorYikamaTanki = new Components.DigitalSensorControl();
             DigitalSensorEnerji = new Components.DigitalSensorControl();
-            washingCalibrationInfoControl1 = new Components.WashingCalibrationInfoControl();
+            StationInfoControl = new Components.StationInfoControl();
             StatusBarControl = new Components.StatusBarControl();
             TimerPlcRead = new System.Windows.Forms.Timer(components);
             tableLayoutPanel1.SuspendLayout();
@@ -67,7 +67,7 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 1, 0);
-            tableLayoutPanel1.Controls.Add(washingCalibrationInfoControl1, 1, 1);
+            tableLayoutPanel1.Controls.Add(StationInfoControl, 1, 1);
             tableLayoutPanel1.Controls.Add(StatusBarControl, 0, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
@@ -366,35 +366,35 @@
             DigitalSensorEnerji.Size = new Size(186, 46);
             DigitalSensorEnerji.TabIndex = 1;
             // 
-            // washingCalibrationInfoControl1
+            // StationInfoControl
             // 
-            washingCalibrationInfoControl1.BackColor = Color.FromArgb(235, 235, 235);
-            washingCalibrationInfoControl1.Dock = DockStyle.Fill;
-            washingCalibrationInfoControl1.LastWashAkm = "     -";
-            washingCalibrationInfoControl1.LastWashAkmImage = null;
-            washingCalibrationInfoControl1.LastWashCozunmusOksijen = "     -";
-            washingCalibrationInfoControl1.LastWashCozunmusOksijenImage = null;
-            washingCalibrationInfoControl1.LastWashDebi = "     -";
-            washingCalibrationInfoControl1.LastWashDebiImage = null;
-            washingCalibrationInfoControl1.LastWashDesarjDebi = "     -";
-            washingCalibrationInfoControl1.LastWashDesarjDebiImage = null;
-            washingCalibrationInfoControl1.LastWashHariciDebi = "     -";
-            washingCalibrationInfoControl1.LastWashHariciDebi2 = "     -";
-            washingCalibrationInfoControl1.LastWashHariciDebi2Image = null;
-            washingCalibrationInfoControl1.LastWashHariciDebiImage = null;
-            washingCalibrationInfoControl1.LastWashIletkenlik = "     -";
-            washingCalibrationInfoControl1.LastWashIletkenlikImage = null;
-            washingCalibrationInfoControl1.LastWashKoi = "     -";
-            washingCalibrationInfoControl1.LastWashKoiImage = null;
-            washingCalibrationInfoControl1.LastWashPh = "     -";
-            washingCalibrationInfoControl1.LastWashPhImage = null;
-            washingCalibrationInfoControl1.LastWashSicaklik = "     -";
-            washingCalibrationInfoControl1.LastWashSicaklikImage = null;
-            washingCalibrationInfoControl1.Location = new Point(588, 219);
-            washingCalibrationInfoControl1.Name = "washingCalibrationInfoControl1";
-            washingCalibrationInfoControl1.Padding = new Padding(1);
-            washingCalibrationInfoControl1.Size = new Size(574, 414);
-            washingCalibrationInfoControl1.TabIndex = 4;
+            StationInfoControl.BackColor = Color.FromArgb(235, 235, 235);
+            StationInfoControl.Dock = DockStyle.Fill;
+            StationInfoControl.LastWashAkm = "     -";
+            StationInfoControl.LastWashAkmImage = null;
+            StationInfoControl.LastWashCozunmusOksijen = "     -";
+            StationInfoControl.LastWashCozunmusOksijenImage = null;
+            StationInfoControl.LastWashDebi = "     -";
+            StationInfoControl.LastWashDebiImage = null;
+            StationInfoControl.LastWashDesarjDebi = "     -";
+            StationInfoControl.LastWashDesarjDebiImage = null;
+            StationInfoControl.LastWashHariciDebi = "     -";
+            StationInfoControl.LastWashHariciDebi2 = "     -";
+            StationInfoControl.LastWashHariciDebi2Image = null;
+            StationInfoControl.LastWashHariciDebiImage = null;
+            StationInfoControl.LastWashIletkenlik = "     -";
+            StationInfoControl.LastWashIletkenlikImage = null;
+            StationInfoControl.LastWashKoi = "     -";
+            StationInfoControl.LastWashKoiImage = null;
+            StationInfoControl.LastWashPh = "     -";
+            StationInfoControl.LastWashPhImage = null;
+            StationInfoControl.LastWashSicaklik = "     -";
+            StationInfoControl.LastWashSicaklikImage = null;
+            StationInfoControl.Location = new Point(588, 219);
+            StationInfoControl.Name = "StationInfoControl";
+            StationInfoControl.Padding = new Padding(1);
+            StationInfoControl.Size = new Size(574, 414);
+            StationInfoControl.TabIndex = 4;
             // 
             // StatusBarControl
             // 
@@ -457,7 +457,7 @@
         private Components.ChannelControl ChannelSicaklik;
         private Components.ChannelControl ChannelCozunmusOksijen;
         private Components.ChannelControl ChannelAkm;
-        private Components.WashingCalibrationInfoControl washingCalibrationInfoControl1;
+        private Components.StationInfoControl StationInfoControl;
         private System.Windows.Forms.Timer TimerPlcRead;
         private Components.StatusBarControl StatusBarControl;
     }

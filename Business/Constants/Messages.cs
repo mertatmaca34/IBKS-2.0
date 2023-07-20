@@ -21,6 +21,8 @@
         public static string DB41Updated = "Data başarıyla güncellendi";
         public static string DB41Deleted = "Data başarıyla silindi";
 
+        public static string SameMinuteData = "Bu dakikanın verisi daha önce kaydedilmiştir";
+
         public static string MailServerAdded = "Mail sunucu bilgileri başarıyla eklendi";
         public static string MailServerUpdated = "Seçili mail sunucu bilgileri başarıyla güncellendi";
 
@@ -36,10 +38,12 @@
 
         public static string StationAdded = "İstasyon bilgileri sisteme eklendi";
         public static string StationUpdated = "İstasyon bilgileri güncellendi";
+        public static string StationIsNotDefined = "İstasyon bilgileri tanımlı değil";
 
         public static string SendDataDeleted = "Gönderilen data başarıyla silindi";
         public static string SendDataUpdated = "Gönderilen data güncellendi";
         public static string SendDataAdded = "Gönderilen data başarıyla kaydedildi";
+
 
         public static string ProductNameInvalid = "Ürün ismi geçersiz";
         public static string MaintenanceTime = "Sistem bakımda";
