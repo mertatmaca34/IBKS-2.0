@@ -77,8 +77,8 @@ namespace IBKS_2._0.Components
         [Description("AKM Image"), Category("IBKS")]
         public Image LastWashAkmImage
         {
-            get => LabelLastWashHariciDebi2.Image;
-            set => LabelLastWashHariciDebi2.Image = value;
+            get => LabelLastWashAkm.Image;
+            set => LabelLastWashAkm.Image = value;
         }
 
         [Description("CozunmusOksijen Image"), Category("IBKS")]

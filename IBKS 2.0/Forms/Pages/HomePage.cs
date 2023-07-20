@@ -2,6 +2,8 @@
 using API.Models;
 using Business.Abstract;
 using Business.Helpers;
+using Core.Utilities.Results;
+using IBKS_2._0.Properties;
 using IBKS_2._0.Utils;
 using Newtonsoft.Json;
 using PLC;
@@ -13,19 +15,13 @@ namespace IBKS_2._0.Forms.Pages
     {
         readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
-        private DateTime _lastMinute = new();
-
-        readonly IDB41Service _dB41Manager;
         readonly IStationService _stationManager;
-        readonly IApiService _apiManager;
         readonly IApiConnection _apiConnection;
         readonly ISendDataService _sendDataManager;
 
-        public HomePage(IDB41Service dB41Manager, IStationService stationManager, IApiService apiManager, IApiConnection apiConnection, ISendDataService sendDataManager)
+        public HomePage(IStationService stationManager, IApiConnection apiConnection, ISendDataService sendDataManager)
         {
-            _dB41Manager = dB41Manager;
             _stationManager = stationManager;
-            _apiManager = apiManager;
             _apiConnection = apiConnection;
             _sendDataManager = sendDataManager;
 
@@ -36,27 +32,12 @@ namespace IBKS_2._0.Forms.Pages
 
         private void TimerPlcRead_Tick(object sender, EventArgs e)
         {
-            if (_lastMinute.Minute != DateTime.Now.Minute)
-            {
-                _lastMinute = DateTime.Now;
-
-                var mergedData = DataProcessingHelper.MergedSendData(_stationManager);
-
-                var res = _apiConnection.SendData(mergedData);
-
-                if (res.result)
-                {
-                    var resultOfApi = JsonConvert.DeserializeObject<DeserializeResult>(res.objects.ToString());
-                }
-
-                _sendDataManager.Add(mergedData);
-            }
-
             AssignAnalogSensors();
             AssignDigitalSensors();
             AssignStatusBar();
             AssignAnalogSensorStatements();
             AssignAverageOfLast60Minutes();
+            AssignStationInfoControl(SendDataHelper.SendData(_sendDataManager,_stationManager, _apiConnection));
         }
 
         private void AssignAnalogSensors()
@@ -117,6 +98,21 @@ namespace IBKS_2._0.Forms.Pages
             ChannelKoi.AvgDataOf60Min = data.Koi.ToString();
             ChannelAkisHizi.AvgDataOf60Min = data.NumuneHiz.ToString();
             ChannelDebi.AvgDataOf60Min = data.TesisDebi.ToString();
+        }
+
+        private void AssignStationInfoControl(IDataResult<DeserializeResult> deserializeResult)
+        {
+            if(deserializeResult.Success)
+            {
+                if(deserializeResult.Data.AKM_N_Status == 1)
+                {
+                    StationInfoControl.LastWashAkmImage = Resources.Checkmark_12px;
+                }
+                else if(deserializeResult.Data.AKM_N_Status == 201)
+                {
+                    StationInfoControl.LastWashAkmImage = Resources.cancel;
+                }
+            }
         }
     }
 }

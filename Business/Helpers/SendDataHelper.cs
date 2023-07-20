@@ -9,11 +9,11 @@ namespace Business.Helpers
 {
     public static class SendDataHelper
     {
-        private static int _lastMinute = DateTime.Now.Minute;
+        private static int LastMinute { get; set; }
 
-        public static IDataResult<DeserializeResult> SendData(IStationService stationManager, IApiConnection apiConnection)
+        public static IDataResult<DeserializeResult> SendData(ISendDataService sendDataManager, IStationService stationManager, IApiConnection apiConnection)
         {
-            if (_lastMinute != DateTime.Now.Minute)
+            if (LastMinute != DateTime.Now.Minute)
             {
                 var mergedDataRes = DataProcessingHelper.MergedSendData(stationManager);
 
@@ -25,9 +25,13 @@ namespace Business.Helpers
                     {
                         string apiObject = apiRes.objects.ToString()!;
 
-                        var deserialiedObject = JsonConvert.DeserializeObject<DeserializeResult>(apiObject);
+                        var deserializededObject = JsonConvert.DeserializeObject<DeserializeResult>(apiObject);
 
-                        return new SuccessDataResult<DeserializeResult>(deserialiedObject!);
+                        sendDataManager.Add(mergedDataRes.Data);
+
+                        LastMinute = DateTime.Now.Minute;
+
+                        return new SuccessDataResult<DeserializeResult>(deserializededObject!);
                     }
 
                     return new ErrorDataResult<DeserializeResult>(apiRes.message);
