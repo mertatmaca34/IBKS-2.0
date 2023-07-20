@@ -39,13 +39,13 @@ namespace Business.Helpers
         {
             var res = calibrationManager.GetPhCalibrations();
 
-            if (res.Success)
+            if (res.Success && res.Data.Count > 0)
             {
                 return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).LastOrDefault());
             }
             else
             {
-                return new ErrorDataResult<Calibration>(Messages.WashDataNotFound);
+                return new ErrorDataResult<Calibration>(Messages.DataNotFound);
             }
         }
 
@@ -53,13 +53,13 @@ namespace Business.Helpers
         {
             var res = calibrationManager.GetIletkenlikCalibrations();
 
-            if (res.Success)
+            if (res.Success && res.Data.Count > 0)
             {
                 return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).LastOrDefault());
             }
             else
             {
-                return new ErrorDataResult<Calibration>(Messages.WashDataNotFound);
+                return new ErrorDataResult<Calibration>(Messages.DataNotFound);
             }
         }
     }

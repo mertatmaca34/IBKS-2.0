@@ -90,6 +90,10 @@ namespace IBKS_2._0.Utils
 
                 stationInfoControl.PhCalibration = lastCalibrationPh;
             }
+            else
+            {
+                stationInfoControl.PhCalibration = $"     {resPh.Message}";
+            }
 
             var resIletkenlik = StationStatementHelper.GetLastIletkenlikCalibration(calibrationManager);
 
@@ -97,7 +101,11 @@ namespace IBKS_2._0.Utils
             {
                 string lastCalibrationIletkenlik = $"     {resIletkenlik.Data.TimeStamp:g}";
 
-                stationInfoControl.PhCalibration = lastCalibrationIletkenlik;
+                stationInfoControl.IletkenlikCalibration = lastCalibrationIletkenlik;
+            }
+            else
+            {
+                stationInfoControl.IletkenlikCalibration = $"     {resPh.Message}";
             }
 
             if (deserializedResult.Success)

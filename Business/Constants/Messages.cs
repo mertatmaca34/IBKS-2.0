@@ -17,6 +17,8 @@
 
         public static string ChannelAdded = "Kanal sisteme kaydedildi";
 
+        public static string DataNotFound = "Veri Yok";
+
         public static string DB41Added = "Data başarıyla eklendi";
         public static string DB41Updated = "Data başarıyla güncellendi";
         public static string DB41Deleted = "Data başarıyla silindi";
