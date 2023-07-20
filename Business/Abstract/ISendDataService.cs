@@ -9,5 +9,6 @@ namespace Business.Abstract
         IResult Delete(SendData sendData);
         IResult Update(SendData sendData);
         IDataResult<List<SendData>> GetAll();
+        IDataResult<List<SendData>> GetLast60Minutes();
     }
 }

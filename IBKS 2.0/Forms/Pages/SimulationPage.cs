@@ -2,6 +2,7 @@
 using IBKS_2._0.Properties;
 using IBKS_2._0.Utils;
 using PLC.Sharp7;
+using System.ComponentModel;
 
 namespace IBKS_2._0.Forms.Pages
 {
@@ -32,6 +33,8 @@ namespace IBKS_2._0.Forms.Pages
 
         public SimulationPage()
         {
+            CheckForIllegalCrossThreadCalls = false;
+
             InitializeComponent();
 
             _autoFrame = Resources.system_auto1;
@@ -45,6 +48,7 @@ namespace IBKS_2._0.Forms.Pages
 
             _pump1Animation = Resources.pump1_animation;
             _pump2Animation = Resources.pump2_animation;
+
             _pump1Idle = Resources.pump1_idle;
             _pump2Idle = Resources.pump2_idle;
 
@@ -52,9 +56,33 @@ namespace IBKS_2._0.Forms.Pages
 
             this.BackgroundImage = _autoFrame;
             PanelDoor.BackgroundImage = _doorClosed;
+            PictureBoxPump1.Image = _pump1Idle;
+            PictureBoxPump2.Image = _pump2Idle;
         }
 
         private void TimerSimulation_Tick(object sender, EventArgs e)
+        {
+            var bgw = new BackgroundWorker();
+            bgw.DoWork += delegate
+            {
+                Animation();
+                AssignLabelValues();
+            };
+            bgw.RunWorkerAsync();
+        }
+
+        private void AssignLabelValues()
+        {
+            LabelAkm.Text = _sharp7Service.S71200.DB41.Akm.ToString();
+            LabelPh.Text = _sharp7Service.S71200.DB41.Ph.ToString();
+            LabelKoi.Text = _sharp7Service.S71200.DB41.Koi.ToString();
+            LabelIletkenlik.Text = _sharp7Service.S71200.DB41.Iletkenlik.ToString();
+            LabelOksijen.Text = _sharp7Service.S71200.DB41.CozunmusOksijen.ToString();
+            LabelAkisHizi.Text = _sharp7Service.S71200.DB41.NumuneHiz.ToString();
+            LabelSicaklik.Text = _sharp7Service.S71200.DB41.KabinSicaklik.ToString();
+        }
+
+        private void Animation()
         {
             //Sistem Durumu
             if (_sharp7Service.S71200?.MBTags?.ModAutoMu == true)

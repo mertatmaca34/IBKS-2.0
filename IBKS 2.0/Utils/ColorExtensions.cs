@@ -1,22 +1,34 @@
-﻿namespace IBKS_2._0.Utils
+﻿using PLC.Sharp7;
+
+namespace IBKS_2._0.Utils
 {
     public static class ColorExtensions
     {
+        readonly static Sharp7Service _sharp7Service = Sharp7Service.Instance;
+
         public static Color FromBoolean(bool value)
         {
-            return value ? Color.Red : Color.PaleGreen;
+            return IsPlcConnected() ? (value ? Color.Red : Color.PaleGreen) : Color.Gray;
         }
+
         public static Color FromDouble(double value)
         {
-            return value > 0 ? Color.PaleGreen : Color.Red;
+            return IsPlcConnected() ? (value > 0 ? Color.PaleGreen : Color.Red) : Color.Gray;
         }
+
         public static Color FromDouble(double value, double limit)
         {
-            return (value > 0 && value < limit) ? Color.PaleGreen : Color.Red;
+            return IsPlcConnected() ? ((value > 0 && value < limit) ? Color.PaleGreen : Color.Red) : Color.Gray;
         }
+
         public static Color FromDouble(double value, double lowerLimit, double upperLimit)
         {
-            return (value > lowerLimit && value < upperLimit) ? Color.PaleGreen : Color.Red;
+            return IsPlcConnected() ? ((value > lowerLimit && value < upperLimit) ? Color.PaleGreen : Color.Red) : Color.Gray;
+        }
+
+        public static bool IsPlcConnected()
+        {
+            return _sharp7Service.client?.Connected == true;
         }
     }
 }

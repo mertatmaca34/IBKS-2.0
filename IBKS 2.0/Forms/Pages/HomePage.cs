@@ -50,8 +50,8 @@ namespace IBKS_2._0.Forms.Pages
             AssignAnalogSensors();
             AssignDigitalSensors();
             AssignStatusBar();
-
             AssignAnalogSensorStatements();
+            AssignAverageOfLast60Minutes();
         }
 
         private void AssignAnalogSensors()
@@ -98,6 +98,20 @@ namespace IBKS_2._0.Forms.Pages
             StatusBarControl.GunlukYikamaKalan = "Günlük Yıkamaya Kalan: " + RealTimeCalculations.GunlukYikamayaKalan();
             StatusBarControl.HaftalikYikamaKalan = "Haftalık Yıkamaya Kalan: " + RealTimeCalculations.HaftalikYikamayaKalan();
             StatusBarControl.SistemSaati = "Sistem Saati: " + _sharp7Service.S71200.DB4.SystemTime.ToString();
+        }
+
+        private void AssignAverageOfLast60Minutes()
+        {
+            var data = _sendDataManager.GetLast60Minutes();
+
+            ChannelAkm.AvgDataOf60Min = data.Data.Average(d => d.AKM).ToString();
+            ChannelCozunmusOksijen.AvgDataOf60Min = data.Data.Average(d => d.CozunmusOksijen).ToString();
+            ChannelSicaklik.AvgDataOf60Min = data.Data.Average(d => d.Sicaklik).ToString();
+            ChannelPh.AvgDataOf60Min = data.Data.Average(d => d.pH).ToString();
+            ChannelIletkenlik.AvgDataOf60Min = data.Data.Average(d => d.Iletkenlik).ToString();
+            ChannelKoi.AvgDataOf60Min = data.Data.Average(d => d.KOi).ToString();
+            ChannelAkisHizi.AvgDataOf60Min = data.Data.Average(d => d.AkisHizi).ToString();
+            ChannelDebi.AvgDataOf60Min = data.Data.Average(d => d.Debi).ToString();
         }
     }
 }

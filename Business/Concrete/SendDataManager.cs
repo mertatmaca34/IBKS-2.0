@@ -51,6 +51,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<SendData>>(_sendDataDal.GetAll());
         }
 
+        public IDataResult<List<SendData>> GetLast60Minutes()
+        {
+            return new SuccessDataResult<List<SendData>>(_sendDataDal.GetAll(d=> d.Readtime >= DateTime.Now.AddMinutes(-60)));
+        }
+
         public IResult Update(SendData sendData)
         {
             IResult result = BusinessRules.Run(CheckSendDataExist(sendData));
