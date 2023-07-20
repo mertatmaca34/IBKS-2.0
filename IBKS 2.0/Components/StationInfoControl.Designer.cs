@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label45 = new Label();
-            label44 = new Label();
+            LabelLastWashWeekHariciDebi = new Label();
+            LabelLastWashWeekHariciDebi2 = new Label();
             LabelLastWashHariciDebi2 = new Label();
             LabelLastWashHariciDebi = new Label();
             label38 = new Label();
             label37 = new Label();
-            label35 = new Label();
-            label33 = new Label();
-            LabelLastWeeklyWashAkm = new Label();
-            label27 = new Label();
-            label26 = new Label();
-            label25 = new Label();
-            label24 = new Label();
-            label23 = new Label();
-            label22 = new Label();
-            label21 = new Label();
+            LabelIletkenlikCalibration = new Label();
+            LabelPhCalibration = new Label();
+            LabelLastWashWeekAkm = new Label();
+            LabelLastWashWeekCozunmusOksijen = new Label();
+            LabelLastWashWeekDebi = new Label();
+            LabelLastWashWeekKoi = new Label();
+            LabelLastWashWeekPh = new Label();
+            LabelLastWashWeekSicaklik = new Label();
+            LabelLastWashWeekIletkenlik = new Label();
+            LabelLastWashWeekDesarjDebi = new Label();
             LabelLastWashDesarjDebi = new Label();
             LabelLastWashIletkenlik = new Label();
             LabelLastWashSicaklik = new Label();
@@ -70,31 +70,31 @@
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
-            // label45
+            // LabelLastWashWeekHariciDebi
             // 
-            label45.Anchor = AnchorStyles.None;
-            label45.AutoSize = true;
-            label45.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label45.ImageAlign = ContentAlignment.MiddleLeft;
-            label45.Location = new Point(347, 354);
-            label45.Name = "label45";
-            label45.Size = new Size(26, 14);
-            label45.TabIndex = 2;
-            label45.Text = "     -";
-            label45.TextAlign = ContentAlignment.MiddleCenter;
+            LabelLastWashWeekHariciDebi.Anchor = AnchorStyles.None;
+            LabelLastWashWeekHariciDebi.AutoSize = true;
+            LabelLastWashWeekHariciDebi.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelLastWashWeekHariciDebi.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelLastWashWeekHariciDebi.Location = new Point(347, 354);
+            LabelLastWashWeekHariciDebi.Name = "LabelLastWashWeekHariciDebi";
+            LabelLastWashWeekHariciDebi.Size = new Size(26, 14);
+            LabelLastWashWeekHariciDebi.TabIndex = 2;
+            LabelLastWashWeekHariciDebi.Text = "     -";
+            LabelLastWashWeekHariciDebi.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label44
+            // LabelLastWashWeekHariciDebi2
             // 
-            label44.Anchor = AnchorStyles.None;
-            label44.AutoSize = true;
-            label44.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label44.ImageAlign = ContentAlignment.MiddleLeft;
-            label44.Location = new Point(347, 397);
-            label44.Name = "label44";
-            label44.Size = new Size(26, 14);
-            label44.TabIndex = 2;
-            label44.Text = "     -";
-            label44.TextAlign = ContentAlignment.MiddleCenter;
+            LabelLastWashWeekHariciDebi2.Anchor = AnchorStyles.None;
+            LabelLastWashWeekHariciDebi2.AutoSize = true;
+            LabelLastWashWeekHariciDebi2.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelLastWashWeekHariciDebi2.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelLastWashWeekHariciDebi2.Location = new Point(347, 397);
+            LabelLastWashWeekHariciDebi2.Name = "LabelLastWashWeekHariciDebi2";
+            LabelLastWashWeekHariciDebi2.Size = new Size(26, 14);
+            LabelLastWashWeekHariciDebi2.TabIndex = 2;
+            LabelLastWashWeekHariciDebi2.Text = "     -";
+            LabelLastWashWeekHariciDebi2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // LabelLastWashHariciDebi2
             // 
@@ -146,135 +146,135 @@
             label37.Text = "Harici Debi";
             label37.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label35
+            // LabelIletkenlikCalibration
             // 
-            label35.Anchor = AnchorStyles.None;
-            label35.AutoSize = true;
-            label35.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label35.ImageAlign = ContentAlignment.MiddleLeft;
-            label35.Location = new Point(491, 278);
-            label35.Name = "label35";
-            label35.Size = new Size(26, 14);
-            label35.TabIndex = 2;
-            label35.Text = "     -";
-            label35.TextAlign = ContentAlignment.MiddleCenter;
+            LabelIletkenlikCalibration.Anchor = AnchorStyles.None;
+            LabelIletkenlikCalibration.AutoSize = true;
+            LabelIletkenlikCalibration.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelIletkenlikCalibration.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelIletkenlikCalibration.Location = new Point(491, 278);
+            LabelIletkenlikCalibration.Name = "LabelIletkenlikCalibration";
+            LabelIletkenlikCalibration.Size = new Size(26, 14);
+            LabelIletkenlikCalibration.TabIndex = 2;
+            LabelIletkenlikCalibration.Text = "     -";
+            LabelIletkenlikCalibration.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label33
+            // LabelPhCalibration
             // 
-            label33.Anchor = AnchorStyles.None;
-            label33.AutoSize = true;
-            label33.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label33.ImageAlign = ContentAlignment.MiddleLeft;
-            label33.Location = new Point(491, 202);
-            label33.Name = "label33";
-            label33.Size = new Size(26, 14);
-            label33.TabIndex = 2;
-            label33.Text = "     -";
-            label33.TextAlign = ContentAlignment.MiddleCenter;
+            LabelPhCalibration.Anchor = AnchorStyles.None;
+            LabelPhCalibration.AutoSize = true;
+            LabelPhCalibration.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelPhCalibration.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelPhCalibration.Location = new Point(491, 202);
+            LabelPhCalibration.Name = "LabelPhCalibration";
+            LabelPhCalibration.Size = new Size(26, 14);
+            LabelPhCalibration.TabIndex = 2;
+            LabelPhCalibration.Text = "     -";
+            LabelPhCalibration.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // LabelLastWeeklyWashAkm
+            // LabelLastWashWeekAkm
             // 
-            LabelLastWeeklyWashAkm.Anchor = AnchorStyles.None;
-            LabelLastWeeklyWashAkm.AutoSize = true;
-            LabelLastWeeklyWashAkm.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            LabelLastWeeklyWashAkm.ImageAlign = ContentAlignment.MiddleLeft;
-            LabelLastWeeklyWashAkm.Location = new Point(347, 50);
-            LabelLastWeeklyWashAkm.Name = "LabelLastWeeklyWashAkm";
-            LabelLastWeeklyWashAkm.Size = new Size(26, 14);
-            LabelLastWeeklyWashAkm.TabIndex = 2;
-            LabelLastWeeklyWashAkm.Text = "     -";
-            LabelLastWeeklyWashAkm.TextAlign = ContentAlignment.MiddleCenter;
+            LabelLastWashWeekAkm.Anchor = AnchorStyles.None;
+            LabelLastWashWeekAkm.AutoSize = true;
+            LabelLastWashWeekAkm.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelLastWashWeekAkm.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelLastWashWeekAkm.Location = new Point(347, 50);
+            LabelLastWashWeekAkm.Name = "LabelLastWashWeekAkm";
+            LabelLastWashWeekAkm.Size = new Size(26, 14);
+            LabelLastWashWeekAkm.TabIndex = 2;
+            LabelLastWashWeekAkm.Text = "     -";
+            LabelLastWashWeekAkm.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label27
+            // LabelLastWashWeekCozunmusOksijen
             // 
-            label27.Anchor = AnchorStyles.None;
-            label27.AutoSize = true;
-            label27.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label27.ImageAlign = ContentAlignment.MiddleLeft;
-            label27.Location = new Point(347, 88);
-            label27.Name = "label27";
-            label27.Size = new Size(26, 14);
-            label27.TabIndex = 2;
-            label27.Text = "     -";
-            label27.TextAlign = ContentAlignment.MiddleCenter;
+            LabelLastWashWeekCozunmusOksijen.Anchor = AnchorStyles.None;
+            LabelLastWashWeekCozunmusOksijen.AutoSize = true;
+            LabelLastWashWeekCozunmusOksijen.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelLastWashWeekCozunmusOksijen.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelLastWashWeekCozunmusOksijen.Location = new Point(347, 88);
+            LabelLastWashWeekCozunmusOksijen.Name = "LabelLastWashWeekCozunmusOksijen";
+            LabelLastWashWeekCozunmusOksijen.Size = new Size(26, 14);
+            LabelLastWashWeekCozunmusOksijen.TabIndex = 2;
+            LabelLastWashWeekCozunmusOksijen.Text = "     -";
+            LabelLastWashWeekCozunmusOksijen.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label26
+            // LabelLastWashWeekDebi
             // 
-            label26.Anchor = AnchorStyles.None;
-            label26.AutoSize = true;
-            label26.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label26.ImageAlign = ContentAlignment.MiddleLeft;
-            label26.Location = new Point(347, 126);
-            label26.Name = "label26";
-            label26.Size = new Size(26, 14);
-            label26.TabIndex = 2;
-            label26.Text = "     -";
-            label26.TextAlign = ContentAlignment.MiddleCenter;
+            LabelLastWashWeekDebi.Anchor = AnchorStyles.None;
+            LabelLastWashWeekDebi.AutoSize = true;
+            LabelLastWashWeekDebi.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelLastWashWeekDebi.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelLastWashWeekDebi.Location = new Point(347, 126);
+            LabelLastWashWeekDebi.Name = "LabelLastWashWeekDebi";
+            LabelLastWashWeekDebi.Size = new Size(26, 14);
+            LabelLastWashWeekDebi.TabIndex = 2;
+            LabelLastWashWeekDebi.Text = "     -";
+            LabelLastWashWeekDebi.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label25
+            // LabelLastWashWeekKoi
             // 
-            label25.Anchor = AnchorStyles.None;
-            label25.AutoSize = true;
-            label25.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label25.ImageAlign = ContentAlignment.MiddleLeft;
-            label25.Location = new Point(347, 164);
-            label25.Name = "label25";
-            label25.Size = new Size(26, 14);
-            label25.TabIndex = 2;
-            label25.Text = "     -";
-            label25.TextAlign = ContentAlignment.MiddleCenter;
+            LabelLastWashWeekKoi.Anchor = AnchorStyles.None;
+            LabelLastWashWeekKoi.AutoSize = true;
+            LabelLastWashWeekKoi.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelLastWashWeekKoi.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelLastWashWeekKoi.Location = new Point(347, 164);
+            LabelLastWashWeekKoi.Name = "LabelLastWashWeekKoi";
+            LabelLastWashWeekKoi.Size = new Size(26, 14);
+            LabelLastWashWeekKoi.TabIndex = 2;
+            LabelLastWashWeekKoi.Text = "     -";
+            LabelLastWashWeekKoi.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label24
+            // LabelLastWashWeekPh
             // 
-            label24.Anchor = AnchorStyles.None;
-            label24.AutoSize = true;
-            label24.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label24.ImageAlign = ContentAlignment.MiddleLeft;
-            label24.Location = new Point(347, 202);
-            label24.Name = "label24";
-            label24.Size = new Size(26, 14);
-            label24.TabIndex = 2;
-            label24.Text = "     -";
-            label24.TextAlign = ContentAlignment.MiddleCenter;
+            LabelLastWashWeekPh.Anchor = AnchorStyles.None;
+            LabelLastWashWeekPh.AutoSize = true;
+            LabelLastWashWeekPh.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelLastWashWeekPh.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelLastWashWeekPh.Location = new Point(347, 202);
+            LabelLastWashWeekPh.Name = "LabelLastWashWeekPh";
+            LabelLastWashWeekPh.Size = new Size(26, 14);
+            LabelLastWashWeekPh.TabIndex = 2;
+            LabelLastWashWeekPh.Text = "     -";
+            LabelLastWashWeekPh.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label23
+            // LabelLastWashWeekSicaklik
             // 
-            label23.Anchor = AnchorStyles.None;
-            label23.AutoSize = true;
-            label23.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label23.ImageAlign = ContentAlignment.MiddleLeft;
-            label23.Location = new Point(347, 240);
-            label23.Name = "label23";
-            label23.Size = new Size(26, 14);
-            label23.TabIndex = 2;
-            label23.Text = "     -";
-            label23.TextAlign = ContentAlignment.MiddleCenter;
+            LabelLastWashWeekSicaklik.Anchor = AnchorStyles.None;
+            LabelLastWashWeekSicaklik.AutoSize = true;
+            LabelLastWashWeekSicaklik.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelLastWashWeekSicaklik.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelLastWashWeekSicaklik.Location = new Point(347, 240);
+            LabelLastWashWeekSicaklik.Name = "LabelLastWashWeekSicaklik";
+            LabelLastWashWeekSicaklik.Size = new Size(26, 14);
+            LabelLastWashWeekSicaklik.TabIndex = 2;
+            LabelLastWashWeekSicaklik.Text = "     -";
+            LabelLastWashWeekSicaklik.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label22
+            // LabelLastWashWeekIletkenlik
             // 
-            label22.Anchor = AnchorStyles.None;
-            label22.AutoSize = true;
-            label22.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label22.ImageAlign = ContentAlignment.MiddleLeft;
-            label22.Location = new Point(347, 278);
-            label22.Name = "label22";
-            label22.Size = new Size(26, 14);
-            label22.TabIndex = 2;
-            label22.Text = "     -";
-            label22.TextAlign = ContentAlignment.MiddleCenter;
+            LabelLastWashWeekIletkenlik.Anchor = AnchorStyles.None;
+            LabelLastWashWeekIletkenlik.AutoSize = true;
+            LabelLastWashWeekIletkenlik.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelLastWashWeekIletkenlik.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelLastWashWeekIletkenlik.Location = new Point(347, 278);
+            LabelLastWashWeekIletkenlik.Name = "LabelLastWashWeekIletkenlik";
+            LabelLastWashWeekIletkenlik.Size = new Size(26, 14);
+            LabelLastWashWeekIletkenlik.TabIndex = 2;
+            LabelLastWashWeekIletkenlik.Text = "     -";
+            LabelLastWashWeekIletkenlik.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label21
+            // LabelLastWashWeekDesarjDebi
             // 
-            label21.Anchor = AnchorStyles.None;
-            label21.AutoSize = true;
-            label21.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label21.ImageAlign = ContentAlignment.MiddleLeft;
-            label21.Location = new Point(347, 316);
-            label21.Name = "label21";
-            label21.Size = new Size(26, 14);
-            label21.TabIndex = 2;
-            label21.Text = "     -";
-            label21.TextAlign = ContentAlignment.MiddleCenter;
+            LabelLastWashWeekDesarjDebi.Anchor = AnchorStyles.None;
+            LabelLastWashWeekDesarjDebi.AutoSize = true;
+            LabelLastWashWeekDesarjDebi.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelLastWashWeekDesarjDebi.ImageAlign = ContentAlignment.MiddleLeft;
+            LabelLastWashWeekDesarjDebi.Location = new Point(347, 316);
+            LabelLastWashWeekDesarjDebi.Name = "LabelLastWashWeekDesarjDebi";
+            LabelLastWashWeekDesarjDebi.Size = new Size(26, 14);
+            LabelLastWashWeekDesarjDebi.TabIndex = 2;
+            LabelLastWashWeekDesarjDebi.Text = "     -";
+            LabelLastWashWeekDesarjDebi.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // LabelLastWashDesarjDebi
             // 
@@ -572,22 +572,22 @@
             tableLayoutPanel1.Controls.Add(LabelLastWashSicaklik, 1, 6);
             tableLayoutPanel1.Controls.Add(LabelLastWashIletkenlik, 1, 7);
             tableLayoutPanel1.Controls.Add(LabelLastWashDesarjDebi, 1, 8);
-            tableLayoutPanel1.Controls.Add(label21, 2, 8);
-            tableLayoutPanel1.Controls.Add(label22, 2, 7);
-            tableLayoutPanel1.Controls.Add(label23, 2, 6);
-            tableLayoutPanel1.Controls.Add(label24, 2, 5);
-            tableLayoutPanel1.Controls.Add(label25, 2, 4);
-            tableLayoutPanel1.Controls.Add(label26, 2, 3);
-            tableLayoutPanel1.Controls.Add(label27, 2, 2);
-            tableLayoutPanel1.Controls.Add(LabelLastWeeklyWashAkm, 2, 1);
-            tableLayoutPanel1.Controls.Add(label33, 3, 5);
-            tableLayoutPanel1.Controls.Add(label35, 3, 7);
+            tableLayoutPanel1.Controls.Add(LabelLastWashWeekDesarjDebi, 2, 8);
+            tableLayoutPanel1.Controls.Add(LabelLastWashWeekIletkenlik, 2, 7);
+            tableLayoutPanel1.Controls.Add(LabelLastWashWeekSicaklik, 2, 6);
+            tableLayoutPanel1.Controls.Add(LabelLastWashWeekPh, 2, 5);
+            tableLayoutPanel1.Controls.Add(LabelLastWashWeekKoi, 2, 4);
+            tableLayoutPanel1.Controls.Add(LabelLastWashWeekDebi, 2, 3);
+            tableLayoutPanel1.Controls.Add(LabelLastWashWeekCozunmusOksijen, 2, 2);
+            tableLayoutPanel1.Controls.Add(LabelLastWashWeekAkm, 2, 1);
+            tableLayoutPanel1.Controls.Add(LabelPhCalibration, 3, 5);
+            tableLayoutPanel1.Controls.Add(LabelIletkenlikCalibration, 3, 7);
             tableLayoutPanel1.Controls.Add(label37, 0, 9);
             tableLayoutPanel1.Controls.Add(label38, 0, 10);
             tableLayoutPanel1.Controls.Add(LabelLastWashHariciDebi, 1, 9);
             tableLayoutPanel1.Controls.Add(LabelLastWashHariciDebi2, 1, 10);
-            tableLayoutPanel1.Controls.Add(label44, 2, 10);
-            tableLayoutPanel1.Controls.Add(label45, 2, 9);
+            tableLayoutPanel1.Controls.Add(LabelLastWashWeekHariciDebi2, 2, 10);
+            tableLayoutPanel1.Controls.Add(LabelLastWashWeekHariciDebi, 2, 9);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(1, 1);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -607,13 +607,13 @@
             tableLayoutPanel1.Size = new Size(577, 429);
             tableLayoutPanel1.TabIndex = 0;
             // 
-            // WashingCalibrationInfoControl
+            // StationInfoControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(235, 235, 235);
             Controls.Add(tableLayoutPanel1);
-            Name = "WashingCalibrationInfoControl";
+            Name = "StationInfoControl";
             Padding = new Padding(1);
             Size = new Size(579, 431);
             tableLayoutPanel2.ResumeLayout(false);
@@ -624,22 +624,22 @@
         }
 
         #endregion
-        private Label label45;
-        private Label label44;
+        private Label LabelLastWashWeekHariciDebi;
+        private Label LabelLastWashWeekHariciDebi2;
         private Label LabelLastWashHariciDebi2;
         private Label LabelLastWashHariciDebi;
         private Label label38;
         private Label label37;
-        private Label label35;
-        private Label label33;
-        private Label LabelLastWeeklyWashAkm;
-        private Label label27;
-        private Label label26;
-        private Label label25;
-        private Label label24;
-        private Label label23;
-        private Label label22;
-        private Label label21;
+        private Label LabelIletkenlikCalibration;
+        private Label LabelPhCalibration;
+        private Label LabelLastWashWeekAkm;
+        private Label LabelLastWashWeekCozunmusOksijen;
+        private Label LabelLastWashWeekDebi;
+        private Label LabelLastWashWeekKoi;
+        private Label LabelLastWashWeekPh;
+        private Label LabelLastWashWeekSicaklik;
+        private Label LabelLastWashWeekIletkenlik;
+        private Label LabelLastWashWeekDesarjDebi;
         private Label LabelLastWashDesarjDebi;
         private Label LabelLastWashIletkenlik;
         private Label LabelLastWashSicaklik;

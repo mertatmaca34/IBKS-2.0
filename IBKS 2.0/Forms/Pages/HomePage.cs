@@ -100,37 +100,7 @@ namespace IBKS_2._0.Forms.Pages
 
         private void AssignStationInfoControl(IDataResult<DeserializeResult> deserializedResult)
         {
-            var res = StationStatementHelper.GetLastWashTime(_sendDataManager);
-
-            var lastWashTime = $"     { res.Data.Readtime:t}";
-
-            if (res.Success && res.Data != null)
-            {
-                StationInfoControl.LastWashAkm = lastWashTime;
-                StationInfoControl.LastWashCozunmusOksijen = lastWashTime;
-                StationInfoControl.LastWashDebi = lastWashTime;
-                StationInfoControl.LastWashDesarjDebi = lastWashTime;
-                StationInfoControl.LastWashHariciDebi = lastWashTime;
-                StationInfoControl.LastWashHariciDebi2 = lastWashTime;
-                StationInfoControl.LastWashIletkenlik = lastWashTime;
-                StationInfoControl.LastWashKoi = lastWashTime;
-                StationInfoControl.LastWashPh = lastWashTime;
-                StationInfoControl.LastWashSicaklik = lastWashTime;
-            }
-            
-            if (deserializedResult.Success)
-            {
-                StationInfoControl.LastWashAkmImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                StationInfoControl.LastWashCozunmusOksijenImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                StationInfoControl.LastWashDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                StationInfoControl.LastWashDesarjDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                StationInfoControl.LastWashIletkenlikImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                StationInfoControl.LastWashKoiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                StationInfoControl.LastWashPhImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                StationInfoControl.LastWashSicaklikImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                StationInfoControl.LastWashHariciDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                StationInfoControl.LastWashHariciDebi2Image = ImageAssigns.AssignImage(deserializedResult.Data);
-            }
+            StationInfoStatements.AssignLastWashStatements(deserializedResult, _sendDataManager, StationInfoControl);
         }
     }
 }
