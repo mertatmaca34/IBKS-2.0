@@ -56,14 +56,14 @@ namespace Business.Concrete
             return new SuccessDataResult<List<SendData>>(_sendDataDal.GetAll(d=> d.Readtime >= DateTime.Now.AddMinutes(-60)));
         }
 
-        public IDataResult<SendData> GetLastWashTime()
+        public IDataResult<List<SendData>> GetLastWashTime()
         {
-            return new SuccessDataResult<SendData>(_sendDataDal.Get(d => d.AKM_Status == 23));
+            return new SuccessDataResult<List<SendData>>(_sendDataDal.GetAll(d => d.AKM_Status == 23));
         }
 
-        public IDataResult<SendData> GetLastWeeklyWashTime()
+        public IDataResult<List<SendData>> GetLastWeeklyWashTime()
         {
-            return new SuccessDataResult<SendData>(_sendDataDal.Get(d => d.AKM_Status == 24));
+            return new SuccessDataResult<List<SendData>>(_sendDataDal.GetAll(d => d.AKM_Status == 24));
         }
 
         public IResult Update(SendData sendData)

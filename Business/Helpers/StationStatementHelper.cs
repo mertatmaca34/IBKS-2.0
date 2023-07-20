@@ -13,7 +13,7 @@ namespace Business.Helpers
 
             if (res.Success)
             {
-                return new SuccessDataResult<SendData>(res.Data);
+                return new SuccessDataResult<SendData>(res.Data.OrderByDescending(p=> p.Readtime).LastOrDefault());
             }
             else
             {

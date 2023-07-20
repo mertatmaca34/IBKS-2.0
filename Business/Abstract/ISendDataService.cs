@@ -1,6 +1,5 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
-using System.Linq.Expressions;
 
 namespace Business.Abstract
 {
@@ -11,7 +10,7 @@ namespace Business.Abstract
         IResult Update(SendData sendData);
         IDataResult<List<SendData>> GetAll();
         IDataResult<List<SendData>> GetLast60Minutes();
-        IDataResult<SendData> GetLastWashTime();
-        IDataResult<SendData> GetLastWeeklyWashTime();
+        IDataResult<List<SendData>> GetLastWashTime();
+        IDataResult<List<SendData>> GetLastWeeklyWashTime();
     }
 }
