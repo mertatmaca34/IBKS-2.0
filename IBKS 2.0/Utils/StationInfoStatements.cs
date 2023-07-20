@@ -1,5 +1,6 @@
 ﻿using API.Models;
 using Business.Abstract;
+using Business.Constants;
 using Business.Helpers;
 using Core.Utilities.Results;
 using IBKS_2._0.Components;
@@ -68,38 +69,57 @@ namespace IBKS_2._0.Utils
             }
         }
 
-        public static void AssignCalibrationStatements(IDataResult<DeserializeResult> deserializedResult, ICalibrationService calibrationManager, StationInfoControl stationInfoControl)
+        public static string AssignCalibrationStatements(ICalibrationService calibrationManager, string parameter)
         {
-            var resPh = StationStatementHelper.GetLastPhCalibration(calibrationManager);
-
-            if (resPh.Success && resPh.Data != null)
+            if (parameter == "Ph")
             {
-                string lastCalibrationPh = $"     {resPh.Data.TimeStamp:g}";
+                var resPh = StationStatementHelper.GetLastPhCalibration(calibrationManager);
 
-                stationInfoControl.PhCalibration = lastCalibrationPh;
+                if (resPh.Success && resPh.Data != null)
+                {
+                    string lastCalibrationPh = $"     {resPh.Data.TimeStamp:g}";
+
+                    return lastCalibrationPh;
+                }
+                else
+                {
+                    return $"     {resPh.Message}";
+                }
+            }
+            else if (parameter == "Iletkenlik")
+            {
+                var resIletkenlik = StationStatementHelper.GetLastIletkenlikCalibration(calibrationManager);
+
+                if (resIletkenlik.Success && resIletkenlik.Data != null)
+                {
+                    string lastCalibrationIletkenlik = $"     {resIletkenlik.Data.TimeStamp:g}";
+
+                    return lastCalibrationIletkenlik;
+                }
+                else
+                {
+                    return $"     {resIletkenlik.Message}";
+                }
             }
             else
             {
-                stationInfoControl.PhCalibration = $"     {resPh.Message}";
+                return $"     {Messages.DataNotFound}";
             }
+        }
 
-            var resIletkenlik = StationStatementHelper.GetLastIletkenlikCalibration(calibrationManager);
-
-            if (resIletkenlik.Success && resIletkenlik.Data != null)
-            {
-                string lastCalibrationIletkenlik = $"     {resIletkenlik.Data.TimeStamp:g}";
-
-                stationInfoControl.IletkenlikCalibration = lastCalibrationIletkenlik;
-            }
-            else
-            {
-                stationInfoControl.IletkenlikCalibration = $"     {resPh.Message}";
-            }
-
+        public static void AssignCalibrationImage(IDataResult<DeserializeResult> deserializedResult, Control control)
+        {
             if (deserializedResult.Success)
             {
-                stationInfoControl.PhCalibrationImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.IletkenlikCalibrationImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                if (control is StationInfoControl)
+                {
+                    ((StationInfoControl)control).PhCalibrationImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                    ((StationInfoControl)control).IletkenlikCalibrationImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                }
+                else
+                {
+                    ((Label)control).Image = ImageAssigns.AssignImage(deserializedResult.Data);
+                }
             }
         }
     }

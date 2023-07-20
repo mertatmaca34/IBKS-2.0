@@ -111,7 +111,9 @@ namespace IBKS_2._0.Forms.Pages
         {
             StationInfoStatements.AssignLastWashStatements(deserializedResult, _sendDataManager, StationInfoControl);
             StationInfoStatements.AssignLastWashWeekStatements(deserializedResult, _sendDataManager, StationInfoControl);
-            StationInfoStatements.AssignCalibrationStatements(deserializedResult, _calibrationManager, StationInfoControl);
+            StationInfoControl.PhCalibration = StationInfoStatements.AssignCalibrationStatements(_calibrationManager, "Ph");
+            StationInfoControl.IletkenlikCalibration = StationInfoStatements.AssignCalibrationStatements(_calibrationManager, "Iletkenlik");
+            StationInfoStatements.AssignCalibrationImage(deserializedResult, StationInfoControl);
         }
 
         private void AssignSystemStatement()

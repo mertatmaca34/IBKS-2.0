@@ -49,7 +49,7 @@ namespace IBKS_2._0.Forms
 
         private void ButtonCalibrationPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new CalibrationPage());
+            PageChange.Change(PanelContent, this, new CalibrationPage(_calibrationManager));
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonCalibrationPage);
         }
 
