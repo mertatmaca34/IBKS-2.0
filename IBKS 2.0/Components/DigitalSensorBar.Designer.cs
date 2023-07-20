@@ -169,11 +169,11 @@
             LabelSystemStatementTitle.Anchor = AnchorStyles.Bottom;
             LabelSystemStatementTitle.AutoSize = true;
             LabelSystemStatementTitle.Font = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            LabelSystemStatementTitle.Location = new Point(48, 4);
+            LabelSystemStatementTitle.Location = new Point(42, 4);
             LabelSystemStatementTitle.Name = "LabelSystemStatementTitle";
-            LabelSystemStatementTitle.Size = new Size(76, 14);
+            LabelSystemStatementTitle.Size = new Size(89, 14);
             LabelSystemStatementTitle.TabIndex = 0;
-            LabelSystemStatementTitle.Text = "VERİ DURUMU";
+            LabelSystemStatementTitle.Text = "SİSTEM DURUMU";
             // 
             // LabelSystemStatementDescription
             // 

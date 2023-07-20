@@ -6,6 +6,7 @@ using Core.Utilities.Results;
 using IBKS_2._0.Utils;
 using PLC;
 using PLC.Sharp7;
+using System.ComponentModel;
 
 namespace IBKS_2._0.Forms.Pages
 {
@@ -32,13 +33,18 @@ namespace IBKS_2._0.Forms.Pages
 
         private void TimerPlcRead_Tick(object sender, EventArgs e)
         {
-            AssignAnalogSensors();
-            AssignDigitalSensors();
-            AssignStatusBar();
-            AssignAnalogSensorStatements();
-            AssignAverageOfLast60Minutes();
-            AssignSystemStatement();
-            AssignStationInfoControl(SendDataHelper.SendData(_sendDataManager, _stationManager, _apiConnection));
+            var bgw = new BackgroundWorker();
+            bgw.DoWork += delegate
+            {
+                AssignAnalogSensors();
+                AssignDigitalSensors();
+                AssignStatusBar();
+                AssignAnalogSensorStatements();
+                AssignAverageOfLast60Minutes();
+                AssignSystemStatement();
+                AssignStationInfoControl(SendDataHelper.SendData(_sendDataManager, _stationManager, _apiConnection));
+
+            }; bgw.RunWorkerAsync();
         }
 
         private void AssignAnalogSensors()
@@ -113,6 +119,7 @@ namespace IBKS_2._0.Forms.Pages
             DigitalSensorBar.SystemStatementColor = ColorExtensions.FromStatus();
             DigitalSensorBar.SystemStatementDescriptionTextColor = ColorExtensions.FromStatusText();
             DigitalSensorBar.SystemStatementTitleTextColor = ColorExtensions.FromStatusText();
+            DigitalSensorBar.SystemStatementText = TextExtensions.FromStatus();
         }
     }
 }
