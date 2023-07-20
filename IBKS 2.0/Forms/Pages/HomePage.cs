@@ -104,18 +104,18 @@ namespace IBKS_2._0.Forms.Pages
         {
             var res = StationStatementHelper.GetLastWashTime(_sendDataManager);
 
-            if(res.Success)
+            if(res.Success && res.Data != null)
             {
-                StationInfoControl.LastWashAkm = res.Data?.Readtime.ToString("t");
-                StationInfoControl.LastWashCozunmusOksijen = res.Data?.Readtime.ToString("t");
-                StationInfoControl.LastWashDebi = res.Data?.Readtime.ToString("t");
-                StationInfoControl.LastWashDesarjDebi = res.Data?.Readtime.ToString("t");
-                StationInfoControl.LastWashHariciDebi = res.Data?.Readtime.ToString("t");
-                StationInfoControl.LastWashHariciDebi2 = res.Data?.Readtime.ToString("t");
-                StationInfoControl.LastWashIletkenlik = res.Data?.Readtime.ToString("t");
-                StationInfoControl.LastWashKoi = res.Data?.Readtime.ToString("t");
-                StationInfoControl.LastWashPh = res.Data?.Readtime.ToString("t");
-                StationInfoControl.LastWashSicaklik = res.Data?.Readtime.ToString("t");
+                StationInfoControl.LastWashAkm = res.Data.Readtime.ToString("t");
+                StationInfoControl.LastWashCozunmusOksijen = res.Data.Readtime.ToString("t");
+                StationInfoControl.LastWashDebi = res.Data.Readtime.ToString("t");
+                StationInfoControl.LastWashDesarjDebi = res.Data.Readtime.ToString("t");
+                StationInfoControl.LastWashHariciDebi = res.Data.Readtime.ToString("t");
+                StationInfoControl.LastWashHariciDebi2 = res.Data.Readtime.ToString("t");
+                StationInfoControl.LastWashIletkenlik = res.Data.Readtime.ToString("t");
+                StationInfoControl.LastWashKoi = res.Data.Readtime.ToString("t");
+                StationInfoControl.LastWashPh = res.Data.Readtime.ToString("t");
+                StationInfoControl.LastWashSicaklik = res.Data.Readtime.ToString("t");
             }
 
             if(deserializedResult.Success)
