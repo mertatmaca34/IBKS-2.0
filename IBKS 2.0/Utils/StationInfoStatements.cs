@@ -1,9 +1,7 @@
 ﻿using API.Models;
 using Business.Abstract;
-using Business.Concrete;
 using Business.Helpers;
 using Core.Utilities.Results;
-using DataAccess.Abstract;
 using IBKS_2._0.Components;
 
 namespace IBKS_2._0.Utils
@@ -114,5 +112,7 @@ namespace IBKS_2._0.Utils
                 stationInfoControl.IletkenlikCalibrationImage = ImageAssigns.AssignImage(deserializedResult.Data);
             }
         }
+
+
     }
 }

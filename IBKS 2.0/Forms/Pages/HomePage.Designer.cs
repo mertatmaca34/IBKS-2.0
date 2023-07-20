@@ -41,7 +41,6 @@
             channelControl1 = new Components.ChannelControl();
             ChannelAkm = new Components.ChannelControl();
             tableLayoutPanel3 = new TableLayoutPanel();
-            channelControl10 = new Components.ChannelControl();
             DigitalSensorKapi = new Components.DigitalSensorControl();
             DigitalSensorDuman = new Components.DigitalSensorControl();
             DigitalSensorSuBaskini = new Components.DigitalSensorControl();
@@ -51,6 +50,7 @@
             DigitalSensorTSuPompaTermik = new Components.DigitalSensorControl();
             DigitalSensorYikamaTanki = new Components.DigitalSensorControl();
             DigitalSensorEnerji = new Components.DigitalSensorControl();
+            DigitalSensorBar = new Components.DigitalSensorBar();
             StationInfoControl = new Components.StationInfoControl();
             StatusBarControl = new Components.StatusBarControl();
             TimerPlcRead = new System.Windows.Forms.Timer(components);
@@ -230,7 +230,6 @@
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel3.Controls.Add(channelControl10, 0, 0);
             tableLayoutPanel3.Controls.Add(DigitalSensorKapi, 0, 1);
             tableLayoutPanel3.Controls.Add(DigitalSensorDuman, 1, 1);
             tableLayoutPanel3.Controls.Add(DigitalSensorSuBaskini, 2, 1);
@@ -240,6 +239,7 @@
             tableLayoutPanel3.Controls.Add(DigitalSensorTSuPompaTermik, 0, 3);
             tableLayoutPanel3.Controls.Add(DigitalSensorYikamaTanki, 1, 3);
             tableLayoutPanel3.Controls.Add(DigitalSensorEnerji, 2, 3);
+            tableLayoutPanel3.Controls.Add(DigitalSensorBar, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(588, 8);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -250,22 +250,6 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableLayoutPanel3.Size = new Size(574, 205);
             tableLayoutPanel3.TabIndex = 1;
-            // 
-            // channelControl10
-            // 
-            channelControl10.AvgDataOf60Min = "";
-            channelControl10.ChannelDescription = "SENSÖR İSİMLERİ";
-            channelControl10.ChannelName = "DİJİTAL SENSÖRLER";
-            channelControl10.ChannelStatement = Color.FromArgb(0, 131, 200);
-            tableLayoutPanel3.SetColumnSpan(channelControl10, 3);
-            channelControl10.Dock = DockStyle.Fill;
-            channelControl10.InstantData = "";
-            channelControl10.Location = new Point(3, 3);
-            channelControl10.Name = "channelControl10";
-            channelControl10.PanelSplit1Visible = false;
-            channelControl10.PanelSplit2Visible = false;
-            channelControl10.Size = new Size(568, 45);
-            channelControl10.TabIndex = 0;
             // 
             // DigitalSensorKapi
             // 
@@ -366,10 +350,31 @@
             DigitalSensorEnerji.Size = new Size(186, 46);
             DigitalSensorEnerji.TabIndex = 1;
             // 
+            // DigitalSensorBar
+            // 
+            DigitalSensorBar.BackColor = Color.FromArgb(235, 235, 235);
+            DigitalSensorBar.ChannelDescription = "SENSÖR İSİMLERİ";
+            DigitalSensorBar.ChannelName = "DİJİTAL SENSÖRLER";
+            DigitalSensorBar.ChannelStatement = Color.FromArgb(0, 131, 200);
+            tableLayoutPanel3.SetColumnSpan(DigitalSensorBar, 3);
+            DigitalSensorBar.Dock = DockStyle.Fill;
+            DigitalSensorBar.Location = new Point(3, 3);
+            DigitalSensorBar.Name = "DigitalSensorBar";
+            DigitalSensorBar.PanelSplit1Visible = false;
+            DigitalSensorBar.PanelSplit2Visible = false;
+            DigitalSensorBar.Size = new Size(568, 45);
+            DigitalSensorBar.SystemStatementColor = Color.White;
+            DigitalSensorBar.SystemStatementDescriptionTextColor = Color.White;
+            DigitalSensorBar.SystemStatementText = "-";
+            DigitalSensorBar.SystemStatementTitleTextColor = Color.White;
+            DigitalSensorBar.TabIndex = 2;
+            // 
             // StationInfoControl
             // 
             StationInfoControl.BackColor = Color.FromArgb(235, 235, 235);
             StationInfoControl.Dock = DockStyle.Fill;
+            StationInfoControl.IletkenlikCalibration = "     -";
+            StationInfoControl.IletkenlikCalibrationImage = null;
             StationInfoControl.LastWashAkm = "     -";
             StationInfoControl.LastWashAkmImage = null;
             StationInfoControl.LastWashCozunmusOksijen = "     -";
@@ -390,9 +395,31 @@
             StationInfoControl.LastWashPhImage = null;
             StationInfoControl.LastWashSicaklik = "     -";
             StationInfoControl.LastWashSicaklikImage = null;
+            StationInfoControl.LastWashWeekAkm = "     -";
+            StationInfoControl.LastWashWeekAkmImage = null;
+            StationInfoControl.LastWashWeekCozunmusOksijen = "     -";
+            StationInfoControl.LastWashWeekCozunmusOksijenImage = null;
+            StationInfoControl.LastWashWeekDebi = "     -";
+            StationInfoControl.LastWashWeekDebiImage = null;
+            StationInfoControl.LastWashWeekDesarjDebi = "     -";
+            StationInfoControl.LastWashWeekDesarjDebiImage = null;
+            StationInfoControl.LastWashWeekHariciDebi = "     -";
+            StationInfoControl.LastWashWeekHariciDebi2 = "     -";
+            StationInfoControl.LastWashWeekHariciDebi2Image = null;
+            StationInfoControl.LastWashWeekHariciDebiImage = null;
+            StationInfoControl.LastWashWeekIletkenlik = "     -";
+            StationInfoControl.LastWashWeekIletkenlikImage = null;
+            StationInfoControl.LastWashWeekKoi = "     -";
+            StationInfoControl.LastWashWeekKoiImage = null;
+            StationInfoControl.LastWashWeekPh = "     -";
+            StationInfoControl.LastWashWeekPhImage = null;
+            StationInfoControl.LastWashWeekSicaklik = "     -";
+            StationInfoControl.LastWashWeekSicaklikImage = null;
             StationInfoControl.Location = new Point(588, 219);
             StationInfoControl.Name = "StationInfoControl";
             StationInfoControl.Padding = new Padding(1);
+            StationInfoControl.PhCalibration = "     -";
+            StationInfoControl.PhCalibrationImage = null;
             StationInfoControl.Size = new Size(574, 414);
             StationInfoControl.TabIndex = 4;
             // 
@@ -439,7 +466,6 @@
         private TableLayoutPanel tableLayoutPanel2;
         private TableLayoutPanel tableLayoutPanel3;
         private Components.ChannelControl channelControl1;
-        private Components.ChannelControl channelControl10;
         private Components.DigitalSensorControl DigitalSensorKapi;
         private Components.DigitalSensorControl DigitalSensorDuman;
         private Components.DigitalSensorControl DigitalSensorSuBaskini;
@@ -460,5 +486,6 @@
         private Components.StationInfoControl StationInfoControl;
         private System.Windows.Forms.Timer TimerPlcRead;
         private Components.StatusBarControl StatusBarControl;
+        private Components.DigitalSensorBar DigitalSensorBar;
     }
 }

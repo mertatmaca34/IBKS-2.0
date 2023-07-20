@@ -37,6 +37,7 @@ namespace IBKS_2._0.Forms.Pages
             AssignStatusBar();
             AssignAnalogSensorStatements();
             AssignAverageOfLast60Minutes();
+            AssignSystemStatement();
             AssignStationInfoControl(SendDataHelper.SendData(_sendDataManager, _stationManager, _apiConnection));
         }
 
@@ -105,6 +106,13 @@ namespace IBKS_2._0.Forms.Pages
             StationInfoStatements.AssignLastWashStatements(deserializedResult, _sendDataManager, StationInfoControl);
             StationInfoStatements.AssignLastWashWeekStatements(deserializedResult, _sendDataManager, StationInfoControl);
             StationInfoStatements.AssignCalibrationStatements(deserializedResult, _calibrationManager, StationInfoControl);
+        }
+
+        private void AssignSystemStatement()
+        {
+            DigitalSensorBar.SystemStatementColor = ColorExtensions.FromStatus();
+            DigitalSensorBar.SystemStatementDescriptionTextColor = ColorExtensions.FromStatusText();
+            DigitalSensorBar.SystemStatementTitleTextColor = ColorExtensions.FromStatusText();
         }
     }
 }

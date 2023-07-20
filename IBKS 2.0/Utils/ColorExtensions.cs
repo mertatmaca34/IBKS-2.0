@@ -1,4 +1,5 @@
-﻿using PLC.Sharp7;
+﻿using Business.Helpers;
+using PLC.Sharp7;
 
 namespace IBKS_2._0.Utils
 {
@@ -29,6 +30,28 @@ namespace IBKS_2._0.Utils
         public static bool IsPlcConnected()
         {
             return _sharp7Service.client?.Connected == true;
+        }
+
+        public static Color FromStatus()
+        {
+            return GetSystemStatus.GetStatus() == 1 ? Color.PaleGreen
+                 : GetSystemStatus.GetStatus() == 23 ? Color.PaleGreen
+                 : GetSystemStatus.GetStatus() == 24 ? Color.PaleGreen
+                 : GetSystemStatus.GetStatus() == 25 ? Color.Red
+                 : GetSystemStatus.GetStatus() == 9 ? Color.Red
+                 : GetSystemStatus.GetStatus() == 0 ? Color.Red
+                 : Color.Red;
+        }
+
+        public static Color FromStatusText()
+        {
+            return GetSystemStatus.GetStatus() == 1 ? Color.Black
+                 : GetSystemStatus.GetStatus() == 23 ? Color.Black
+                 : GetSystemStatus.GetStatus() == 24 ? Color.Black
+                 : GetSystemStatus.GetStatus() == 25 ? Color.White
+                 : GetSystemStatus.GetStatus() == 9 ? Color.White
+                 : GetSystemStatus.GetStatus() == 0 ? Color.White
+                 : Color.White;
         }
     }
 }
