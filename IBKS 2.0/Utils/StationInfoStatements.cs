@@ -12,21 +12,16 @@ namespace IBKS_2._0.Utils
         {
             var res = StationStatementHelper.GetLastWashTime(sendDataManager);
 
-            if (res.Success && res.Data != null)
-            {
-                string lastWashTime = $"     {res.Data.Readtime:t}";
-
-                stationInfoControl.LastWashAkm = lastWashTime;
-                stationInfoControl.LastWashCozunmusOksijen = lastWashTime;
-                stationInfoControl.LastWashDebi = lastWashTime;
-                stationInfoControl.LastWashDesarjDebi = lastWashTime;
-                stationInfoControl.LastWashHariciDebi = lastWashTime;
-                stationInfoControl.LastWashHariciDebi2 = lastWashTime;
-                stationInfoControl.LastWashIletkenlik = lastWashTime;
-                stationInfoControl.LastWashKoi = lastWashTime;
-                stationInfoControl.LastWashPh = lastWashTime;
-                stationInfoControl.LastWashSicaklik = lastWashTime;
-            }
+            stationInfoControl.LastWashAkm = res.Message;
+            stationInfoControl.LastWashCozunmusOksijen = res.Message;
+            stationInfoControl.LastWashDebi = res.Message;
+            stationInfoControl.LastWashDesarjDebi = res.Message;
+            stationInfoControl.LastWashHariciDebi = res.Message;
+            stationInfoControl.LastWashHariciDebi2 = res.Message;
+            stationInfoControl.LastWashIletkenlik = res.Message;
+            stationInfoControl.LastWashKoi = res.Message;
+            stationInfoControl.LastWashPh = res.Message;
+            stationInfoControl.LastWashSicaklik = res.Message;
 
             if (deserializedResult.Success)
             {
@@ -47,21 +42,16 @@ namespace IBKS_2._0.Utils
         {
             var res = StationStatementHelper.GetLastWashWeekTime(sendDataManager);
 
-            if (res.Success && res.Data != null)
-            {
-                string lastWeekWashTime = $"     {res.Data.Readtime:g}";
-
-                stationInfoControl.LastWashWeekAkm = lastWeekWashTime;
-                stationInfoControl.LastWashWeekCozunmusOksijen = lastWeekWashTime;
-                stationInfoControl.LastWashWeekDebi = lastWeekWashTime;
-                stationInfoControl.LastWashWeekDesarjDebi = lastWeekWashTime;
-                stationInfoControl.LastWashWeekHariciDebi = lastWeekWashTime;
-                stationInfoControl.LastWashWeekHariciDebi2 = lastWeekWashTime;
-                stationInfoControl.LastWashWeekIletkenlik = lastWeekWashTime;
-                stationInfoControl.LastWashWeekKoi = lastWeekWashTime;
-                stationInfoControl.LastWashWeekPh = lastWeekWashTime;
-                stationInfoControl.LastWashWeekSicaklik = lastWeekWashTime;
-            }
+            stationInfoControl.LastWashWeekAkm = res.Message;
+            stationInfoControl.LastWashWeekCozunmusOksijen = res.Message;
+            stationInfoControl.LastWashWeekDebi = res.Message;
+            stationInfoControl.LastWashWeekDesarjDebi = res.Message;
+            stationInfoControl.LastWashWeekHariciDebi = res.Message;
+            stationInfoControl.LastWashWeekHariciDebi2 = res.Message;
+            stationInfoControl.LastWashWeekIletkenlik = res.Message;
+            stationInfoControl.LastWashWeekKoi = res.Message;
+            stationInfoControl.LastWashWeekPh = res.Message;
+            stationInfoControl.LastWashWeekSicaklik = res.Message;
 
             if (deserializedResult.Success)
             {
@@ -112,7 +102,5 @@ namespace IBKS_2._0.Utils
                 stationInfoControl.IletkenlikCalibrationImage = ImageAssigns.AssignImage(deserializedResult.Data);
             }
         }
-
-
     }
 }

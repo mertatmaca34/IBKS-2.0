@@ -11,13 +11,15 @@ namespace Business.Helpers
         {
             var res = sendDataManager.GetLastWashTime();
 
-            if (res.Success)
+            if (res.Success && res.Data != null && res.Data.Count > 0)
             {
-                return new SuccessDataResult<SendData>(res.Data.OrderByDescending(p=> p.Readtime).FirstOrDefault());
+                var data = res.Data.OrderByDescending(p => p.Readtime).FirstOrDefault()!;
+
+                return new SuccessDataResult<SendData>(data, $"     {data.Readtime:g}");
             }
             else
             {
-                return new ErrorDataResult<SendData>(Messages.WashDataNotFound);
+                return new ErrorDataResult<SendData>($"     {Messages.DataNotFound}");
             }
         }
 
@@ -25,13 +27,15 @@ namespace Business.Helpers
         {
             var res = sendDataManager.GetLastWashWeekTime();
 
-            if (res.Success)
+            if (res.Success && res.Data != null && res.Data.Count > 0)
             {
-                return new SuccessDataResult<SendData>(res.Data.OrderByDescending(p=> p.Readtime).FirstOrDefault());
+                var data = res.Data.OrderByDescending(p => p.Readtime).FirstOrDefault()!;
+
+                return new SuccessDataResult<SendData>(data, $"     {data.Readtime:g}");
             }
             else
             {
-                return new ErrorDataResult<SendData>(Messages.WashDataNotFound);
+                return new ErrorDataResult<SendData>($"     {Messages.DataNotFound}");
             }
         }
 

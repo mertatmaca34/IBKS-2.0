@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanel1 = new TableLayoutPanel();
-            button8 = new Button();
+            TableLayoutPanelLeftBar = new TableLayoutPanel();
+            ButtonNightMode = new Button();
             ButtonSettingPage = new Button();
             ButtonReportingPage = new Button();
             ButtonMailPage = new Button();
@@ -37,52 +37,52 @@
             ButtonSimulationPage = new Button();
             ButtonHomePage = new Button();
             PanelContent = new Panel();
-            tableLayoutPanel1.SuspendLayout();
+            TableLayoutPanelLeftBar.SuspendLayout();
             SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // TableLayoutPanelLeftBar
             // 
-            tableLayoutPanel1.BackColor = Color.White;
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(button8, 0, 7);
-            tableLayoutPanel1.Controls.Add(ButtonSettingPage, 0, 5);
-            tableLayoutPanel1.Controls.Add(ButtonReportingPage, 0, 4);
-            tableLayoutPanel1.Controls.Add(ButtonMailPage, 0, 3);
-            tableLayoutPanel1.Controls.Add(ButtonCalibrationPage, 0, 2);
-            tableLayoutPanel1.Controls.Add(ButtonSimulationPage, 0, 1);
-            tableLayoutPanel1.Controls.Add(ButtonHomePage, 0, 0);
-            tableLayoutPanel1.Dock = DockStyle.Left;
-            tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 8;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
-            tableLayoutPanel1.Size = new Size(90, 681);
-            tableLayoutPanel1.TabIndex = 0;
+            TableLayoutPanelLeftBar.BackColor = Color.White;
+            TableLayoutPanelLeftBar.ColumnCount = 1;
+            TableLayoutPanelLeftBar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            TableLayoutPanelLeftBar.Controls.Add(ButtonNightMode, 0, 7);
+            TableLayoutPanelLeftBar.Controls.Add(ButtonSettingPage, 0, 5);
+            TableLayoutPanelLeftBar.Controls.Add(ButtonReportingPage, 0, 4);
+            TableLayoutPanelLeftBar.Controls.Add(ButtonMailPage, 0, 3);
+            TableLayoutPanelLeftBar.Controls.Add(ButtonCalibrationPage, 0, 2);
+            TableLayoutPanelLeftBar.Controls.Add(ButtonSimulationPage, 0, 1);
+            TableLayoutPanelLeftBar.Controls.Add(ButtonHomePage, 0, 0);
+            TableLayoutPanelLeftBar.Dock = DockStyle.Left;
+            TableLayoutPanelLeftBar.Location = new Point(0, 0);
+            TableLayoutPanelLeftBar.Name = "TableLayoutPanelLeftBar";
+            TableLayoutPanelLeftBar.RowCount = 8;
+            TableLayoutPanelLeftBar.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
+            TableLayoutPanelLeftBar.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
+            TableLayoutPanelLeftBar.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
+            TableLayoutPanelLeftBar.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
+            TableLayoutPanelLeftBar.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
+            TableLayoutPanelLeftBar.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
+            TableLayoutPanelLeftBar.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            TableLayoutPanelLeftBar.RowStyles.Add(new RowStyle(SizeType.Absolute, 84F));
+            TableLayoutPanelLeftBar.Size = new Size(90, 681);
+            TableLayoutPanelLeftBar.TabIndex = 0;
             // 
-            // button8
+            // ButtonNightMode
             // 
-            button8.Dock = DockStyle.Fill;
-            button8.FlatAppearance.BorderSize = 0;
-            button8.FlatStyle = FlatStyle.Flat;
-            button8.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            button8.ForeColor = Color.DimGray;
-            button8.Image = Properties.Resources.black_and_white_24px;
-            button8.Location = new Point(8, 605);
-            button8.Margin = new Padding(8);
-            button8.Name = "button8";
-            button8.Size = new Size(74, 68);
-            button8.TabIndex = 8;
-            button8.Text = "Gece Modu";
-            button8.TextAlign = ContentAlignment.BottomCenter;
-            button8.UseVisualStyleBackColor = true;
+            ButtonNightMode.Dock = DockStyle.Fill;
+            ButtonNightMode.FlatAppearance.BorderSize = 0;
+            ButtonNightMode.FlatStyle = FlatStyle.Flat;
+            ButtonNightMode.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            ButtonNightMode.ForeColor = Color.DimGray;
+            ButtonNightMode.Image = Properties.Resources.black_and_white_24px;
+            ButtonNightMode.Location = new Point(8, 605);
+            ButtonNightMode.Margin = new Padding(8);
+            ButtonNightMode.Name = "ButtonNightMode";
+            ButtonNightMode.Size = new Size(74, 68);
+            ButtonNightMode.TabIndex = 8;
+            ButtonNightMode.Text = "Gece Modu";
+            ButtonNightMode.TextAlign = ContentAlignment.BottomCenter;
+            ButtonNightMode.UseVisualStyleBackColor = true;
             // 
             // ButtonSettingPage
             // 
@@ -100,6 +100,7 @@
             ButtonSettingPage.Text = "Ayarlar";
             ButtonSettingPage.TextAlign = ContentAlignment.BottomCenter;
             ButtonSettingPage.UseVisualStyleBackColor = true;
+            ButtonSettingPage.Click += ButtonSettingPage_Click;
             // 
             // ButtonReportingPage
             // 
@@ -206,22 +207,22 @@
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(1264, 681);
             Controls.Add(PanelContent);
-            Controls.Add(tableLayoutPanel1);
+            Controls.Add(TableLayoutPanelLeftBar);
             MinimumSize = new Size(1280, 720);
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Main";
+            Text = "İBKS - İSKİ BAKANLIK KABİNİ SİSTEMİ";
             Load += Main_Load;
             SizeChanged += Main_SizeChanged;
-            tableLayoutPanel1.ResumeLayout(false);
+            TableLayoutPanelLeftBar.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel TableLayoutPanelLeftBar;
         private Button ButtonHomePage;
-        private Button button8;
+        private Button ButtonNightMode;
         private Button ButtonSettingPage;
         private Button ButtonReportingPage;
         private Button ButtonMailPage;

@@ -32,31 +32,43 @@ namespace IBKS_2._0.Forms
         private void Main_Load(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, _homePage);
+            RoundedCorners.MakeRounded(ButtonHomePage, ButtonSimulationPage, ButtonCalibrationPage, ButtonMailPage, ButtonReportingPage, ButtonSettingPage, ButtonNightMode);
         }
 
         private void ButtonHomePage_Click(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, _homePage);
+            ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonHomePage);
         }
 
         private void ButtonSimulationPage_Click(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, _simulationPage);
+            ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSimulationPage);
         }
 
         private void ButtonCalibrationPage_Click(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, new CalibrationPage());
+            ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonCalibrationPage);
         }
 
         private void ButtonMailPage_Click(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, new MailPage());
+            ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonMailPage);
         }
 
         private void ButtonReportingPage_Click(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, new ReportingPage());
+            ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonReportingPage);
+        }
+
+        private void ButtonSettingPage_Click(object sender, EventArgs e)
+        {
+            PageChange.Change(PanelContent, this, new SettingsPage());
+            ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
         }
 
         private void Main_SizeChanged(object sender, EventArgs e)
