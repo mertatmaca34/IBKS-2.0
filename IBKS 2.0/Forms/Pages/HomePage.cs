@@ -16,12 +16,14 @@ namespace IBKS_2._0.Forms.Pages
         readonly IStationService _stationManager;
         readonly IApiConnection _apiConnection;
         readonly ISendDataService _sendDataManager;
+        readonly ICalibrationService _calibrationManager;
 
-        public HomePage(IStationService stationManager, IApiConnection apiConnection, ISendDataService sendDataManager)
+        public HomePage(IStationService stationManager, IApiConnection apiConnection, ISendDataService sendDataManager, ICalibrationService calibrationManager)
         {
             _stationManager = stationManager;
             _apiConnection = apiConnection;
             _sendDataManager = sendDataManager;
+            _calibrationManager = calibrationManager;
 
             _apiConnection.Login("istanbul_pasakoy", "1q2w3e");
 
@@ -101,6 +103,8 @@ namespace IBKS_2._0.Forms.Pages
         private void AssignStationInfoControl(IDataResult<DeserializeResult> deserializedResult)
         {
             StationInfoStatements.AssignLastWashStatements(deserializedResult, _sendDataManager, StationInfoControl);
+            StationInfoStatements.AssignLastWashWeekStatements(deserializedResult, _sendDataManager, StationInfoControl);
+            StationInfoStatements.AssignCalibrationStatements(deserializedResult, _calibrationManager, StationInfoControl);
         }
     }
 }

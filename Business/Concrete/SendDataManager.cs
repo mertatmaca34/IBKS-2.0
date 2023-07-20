@@ -61,7 +61,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<SendData>>(_sendDataDal.GetAll(d => d.AKM_Status == 23));
         }
 
-        public IDataResult<List<SendData>> GetLastWeeklyWashTime()
+        public IDataResult<List<SendData>> GetLastWashWeekTime()
         {
             return new SuccessDataResult<List<SendData>>(_sendDataDal.GetAll(d => d.AKM_Status == 24));
         }

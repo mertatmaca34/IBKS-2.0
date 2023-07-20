@@ -20,5 +20,47 @@ namespace Business.Helpers
                 return new ErrorDataResult<SendData>(Messages.WashDataNotFound);
             }
         }
+
+        public static IDataResult<SendData> GetLastWashWeekTime(ISendDataService sendDataManager)
+        {
+            var res = sendDataManager.GetLastWashWeekTime();
+
+            if (res.Success)
+            {
+                return new SuccessDataResult<SendData>(res.Data.OrderByDescending(p=> p.Readtime).LastOrDefault());
+            }
+            else
+            {
+                return new ErrorDataResult<SendData>(Messages.WashDataNotFound);
+            }
+        }
+
+        public static IDataResult<Calibration> GetLastPhCalibration(ICalibrationService calibrationManager)
+        {
+            var res = calibrationManager.GetPhCalibrations();
+
+            if (res.Success)
+            {
+                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).LastOrDefault());
+            }
+            else
+            {
+                return new ErrorDataResult<Calibration>(Messages.WashDataNotFound);
+            }
+        }
+
+        public static IDataResult<Calibration> GetLastIletkenlikCalibration(ICalibrationService calibrationManager)
+        {
+            var res = calibrationManager.GetIletkenlikCalibrations();
+
+            if (res.Success)
+            {
+                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).LastOrDefault());
+            }
+            else
+            {
+                return new ErrorDataResult<Calibration>(Messages.WashDataNotFound);
+            }
+        }
     }
 }

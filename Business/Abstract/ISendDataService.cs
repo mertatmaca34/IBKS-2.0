@@ -11,6 +11,6 @@ namespace Business.Abstract
         IDataResult<List<SendData>> GetAll();
         IDataResult<List<SendData>> GetLast60Minutes();
         IDataResult<List<SendData>> GetLastWashTime();
-        IDataResult<List<SendData>> GetLastWeeklyWashTime();
+        IDataResult<List<SendData>> GetLastWashWeekTime();
     }
 }

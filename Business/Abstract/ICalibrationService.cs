@@ -8,5 +8,7 @@ namespace Business.Abstract
         IDataResult<List<Calibration>> GetAll();
         IResult Add(Calibration calibration);
         IDataResult<List<Calibration>> GetByDateTime(DateTime startTime, DateTime endTime);
+        IDataResult<List<Calibration>> GetPhCalibrations();
+        IDataResult<List<Calibration>> GetIletkenlikCalibrations();
     }
 }

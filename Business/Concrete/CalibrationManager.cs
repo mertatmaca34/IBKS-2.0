@@ -48,6 +48,16 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(c => c.TimeStamp > startTime && c.TimeStamp < endTime));
         }
 
+        public IDataResult<List<Calibration>> GetIletkenlikCalibrations()
+        {
+            return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(c=> c.Parameter == "Iletkenlik"));
+        }
+
+        public IDataResult<List<Calibration>> GetPhCalibrations()
+        {
+            return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(c=> c.Parameter == "Ph"));
+        }
+
         private IResult CheckIfDateTimeInCorrect(DateTime startTime, DateTime endTime)
         {
             if (startTime > endTime && startTime > DateTime.Now)

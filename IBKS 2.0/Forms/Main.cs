@@ -13,13 +13,16 @@ namespace IBKS_2._0.Forms
         readonly IStationService _stationManager;
         readonly IApiConnection _apiConnection;
         readonly ISendDataService _sendDataManager;
-        public Main(IStationService stationManager, IApiConnection apiConnection, ISendDataService sendDataManager)
+        readonly ICalibrationService _calibrationManager;
+
+        public Main(IStationService stationManager, IApiConnection apiConnection, ISendDataService sendDataManager, ICalibrationService calibrationManager)
         {
             _stationManager = stationManager;
             _apiConnection = apiConnection;
             _sendDataManager = sendDataManager;
+            _calibrationManager = calibrationManager;
 
-            _homePage = new HomePage(_stationManager, _apiConnection, _sendDataManager);
+            _homePage = new HomePage(_stationManager, _apiConnection, _sendDataManager, _calibrationManager);
 
             _simulationPage = new SimulationPage();
 
