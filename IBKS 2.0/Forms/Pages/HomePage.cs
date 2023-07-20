@@ -100,18 +100,13 @@ namespace IBKS_2._0.Forms.Pages
             ChannelDebi.AvgDataOf60Min = data.TesisDebi.ToString();
         }
 
-        private void AssignStationInfoControl(IDataResult<DeserializeResult> deserializeResult)
+        private void AssignStationInfoControl(IDataResult<DeserializeResult> deserializedResult)
         {
-            if(deserializeResult.Success)
+            var res = StationStatementHelper.GetLastWashTime(_sendDataManager);
+
+            if(res.Success)
             {
-                if(deserializeResult.Data.AKM_N_Status == 1)
-                {
-                    StationInfoControl.LastWashAkmImage = Resources.Checkmark_12px;
-                }
-                else if(deserializeResult.Data.AKM_N_Status == 201)
-                {
-                    StationInfoControl.LastWashAkmImage = Resources.cancel;
-                }
+                StationInfoControl.LastWashAkm = res.Data?.Readtime.ToString("t");
             }
         }
     }
