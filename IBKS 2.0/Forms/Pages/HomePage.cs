@@ -3,9 +3,7 @@ using API.Models;
 using Business.Abstract;
 using Business.Helpers;
 using Core.Utilities.Results;
-using IBKS_2._0.Properties;
 using IBKS_2._0.Utils;
-using Newtonsoft.Json;
 using PLC;
 using PLC.Sharp7;
 
@@ -37,7 +35,7 @@ namespace IBKS_2._0.Forms.Pages
             AssignStatusBar();
             AssignAnalogSensorStatements();
             AssignAverageOfLast60Minutes();
-            AssignStationInfoControl(SendDataHelper.SendData(_sendDataManager,_stationManager, _apiConnection));
+            AssignStationInfoControl(SendDataHelper.SendData(_sendDataManager, _stationManager, _apiConnection));
         }
 
         private void AssignAnalogSensors()
@@ -104,23 +102,34 @@ namespace IBKS_2._0.Forms.Pages
         {
             var res = StationStatementHelper.GetLastWashTime(_sendDataManager);
 
-            if(res.Success && res.Data != null)
-            {
-                StationInfoControl.LastWashAkm = res.Data.Readtime.ToString("t");
-                StationInfoControl.LastWashCozunmusOksijen = res.Data.Readtime.ToString("t");
-                StationInfoControl.LastWashDebi = res.Data.Readtime.ToString("t");
-                StationInfoControl.LastWashDesarjDebi = res.Data.Readtime.ToString("t");
-                StationInfoControl.LastWashHariciDebi = res.Data.Readtime.ToString("t");
-                StationInfoControl.LastWashHariciDebi2 = res.Data.Readtime.ToString("t");
-                StationInfoControl.LastWashIletkenlik = res.Data.Readtime.ToString("t");
-                StationInfoControl.LastWashKoi = res.Data.Readtime.ToString("t");
-                StationInfoControl.LastWashPh = res.Data.Readtime.ToString("t");
-                StationInfoControl.LastWashSicaklik = res.Data.Readtime.ToString("t");
-            }
+            var lastWashTime = $"     { res.Data.Readtime:t}";
 
-            if(deserializedResult.Success)
+            if (res.Success && res.Data != null)
             {
-                
+                StationInfoControl.LastWashAkm = lastWashTime;
+                StationInfoControl.LastWashCozunmusOksijen = lastWashTime;
+                StationInfoControl.LastWashDebi = lastWashTime;
+                StationInfoControl.LastWashDesarjDebi = lastWashTime;
+                StationInfoControl.LastWashHariciDebi = lastWashTime;
+                StationInfoControl.LastWashHariciDebi2 = lastWashTime;
+                StationInfoControl.LastWashIletkenlik = lastWashTime;
+                StationInfoControl.LastWashKoi = lastWashTime;
+                StationInfoControl.LastWashPh = lastWashTime;
+                StationInfoControl.LastWashSicaklik = lastWashTime;
+            }
+            
+            if (deserializedResult.Success)
+            {
+                StationInfoControl.LastWashAkmImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                StationInfoControl.LastWashCozunmusOksijenImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                StationInfoControl.LastWashDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                StationInfoControl.LastWashDesarjDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                StationInfoControl.LastWashIletkenlikImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                StationInfoControl.LastWashKoiImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                StationInfoControl.LastWashPhImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                StationInfoControl.LastWashSicaklikImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                StationInfoControl.LastWashHariciDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                StationInfoControl.LastWashHariciDebi2Image = ImageAssigns.AssignImage(deserializedResult.Data);
             }
         }
     }

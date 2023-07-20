@@ -1,4 +1,4 @@
-﻿using IBKS_2._0.Enums;
+﻿using Business.Enums;
 
 namespace IBKS_2._0.Utils
 {

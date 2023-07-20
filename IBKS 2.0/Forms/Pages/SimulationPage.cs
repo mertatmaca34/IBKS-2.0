@@ -1,4 +1,4 @@
-﻿using IBKS_2._0.Enums;
+﻿using Business.Enums;
 using IBKS_2._0.Properties;
 using IBKS_2._0.Utils;
 using PLC.Sharp7;
