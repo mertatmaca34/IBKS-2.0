@@ -1,4 +1,5 @@
 ﻿using Business.Enums;
+using Business.Helpers;
 using IBKS_2._0.Properties;
 using IBKS_2._0.Utils;
 using PLC.Sharp7;
@@ -16,6 +17,7 @@ namespace IBKS_2._0.Forms.Pages
         private readonly Bitmap _wash1, _wash2;
         private readonly Bitmap _pump1Idle, _pump2Idle;
         private readonly Bitmap _pump1Animation, _pump2Animation;
+        private readonly Bitmap _waterTankEmpty, _waterTankFull;
 
         #region No Image-Flick
 
@@ -54,10 +56,14 @@ namespace IBKS_2._0.Forms.Pages
 
             _systemMaintenance1 = Resources.system_wait;
 
+            _waterTankEmpty = Resources.water_tank_empty;
+            _waterTankFull = Resources.water_tank_full;
+
             this.BackgroundImage = _autoFrame;
             PanelDoor.BackgroundImage = _doorClosed;
             PictureBoxPump1.Image = _pump1Idle;
             PictureBoxPump2.Image = _pump2Idle;
+            PanelWaterTank.BackgroundImage = _waterTankEmpty;
         }
 
         private void TimerSimulation_Tick(object sender, EventArgs e)
@@ -80,6 +86,13 @@ namespace IBKS_2._0.Forms.Pages
             LabelOksijen.Text = _sharp7Service.S71200.DB41.CozunmusOksijen.ToString();
             LabelAkisHizi.Text = _sharp7Service.S71200.DB41.NumuneHiz.ToString();
             LabelSicaklik.Text = _sharp7Service.S71200.DB41.KabinSicaklik.ToString();
+            LabelDebi.Text = _sharp7Service.S71200.DB41.TesisDebi.ToString();
+            LabelDesarjDebi.Text = _sharp7Service.S71200.DB41.DesarjDebi.ToString();
+            LabelHariciDebi.Text = _sharp7Service.S71200.DB41.HariciDebi.ToString();
+            LabelHariciDebi2.Text = _sharp7Service.S71200.DB41.HariciDebi2.ToString();
+            LabelNem.Text = _sharp7Service.S71200.DB41.KabinNem.ToString();
+            LabelFrekans.Text = ActivePump.Frekans;
+            LabelAktifPompa.Text = ActivePump.Pump;
         }
 
         private void Animation()
@@ -126,6 +139,16 @@ namespace IBKS_2._0.Forms.Pages
             else
             {
                 FrameOperations.ChangePanelFrame(PanelDoor, _doorClosed);
+            }
+
+            //Yıkama Tankı Durumu
+            if (_sharp7Service.S71200?.InputTags.YikamaTanki == true)
+            {
+                FrameOperations.ChangePanelFrame(PanelWaterTank, _waterTankEmpty);
+            }
+            else
+            {
+                FrameOperations.ChangePanelFrame(PanelWaterTank, _waterTankFull);
             }
         }
     }

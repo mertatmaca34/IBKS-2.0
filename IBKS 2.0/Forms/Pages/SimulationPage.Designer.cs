@@ -53,28 +53,29 @@
             LabelAkisHizi = new Label();
             tableLayoutPanel7 = new TableLayoutPanel();
             label13 = new Label();
-            label14 = new Label();
+            LabelDebi = new Label();
             tableLayoutPanel8 = new TableLayoutPanel();
             label15 = new Label();
-            label16 = new Label();
+            LabelDesarjDebi = new Label();
             tableLayoutPanel9 = new TableLayoutPanel();
             label17 = new Label();
-            label18 = new Label();
+            LabelHariciDebi = new Label();
             tableLayoutPanel10 = new TableLayoutPanel();
             label19 = new Label();
-            label20 = new Label();
+            LabelHariciDebi2 = new Label();
             tableLayoutPanel11 = new TableLayoutPanel();
             label21 = new Label();
-            label22 = new Label();
+            LabelAktifPompa = new Label();
             tableLayoutPanel12 = new TableLayoutPanel();
             label23 = new Label();
-            label24 = new Label();
+            LabelFrekans = new Label();
             tableLayoutPanel13 = new TableLayoutPanel();
             label25 = new Label();
             LabelSicaklik = new Label();
             tableLayoutPanel14 = new TableLayoutPanel();
             label27 = new Label();
-            label28 = new Label();
+            LabelNem = new Label();
+            PanelWaterTank = new Panel();
             ((System.ComponentModel.ISupportInitialize)PictureBoxPump1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PictureBoxPump2).BeginInit();
             tableLayoutPanel1.SuspendLayout();
@@ -383,7 +384,7 @@
             tableLayoutPanel7.ColumnCount = 1;
             tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel7.Controls.Add(label13, 0, 0);
-            tableLayoutPanel7.Controls.Add(label14, 0, 1);
+            tableLayoutPanel7.Controls.Add(LabelDebi, 0, 1);
             tableLayoutPanel7.Location = new Point(329, 503);
             tableLayoutPanel7.Name = "tableLayoutPanel7";
             tableLayoutPanel7.RowCount = 2;
@@ -404,19 +405,19 @@
             label13.TabIndex = 2;
             label13.Text = "Debi";
             // 
-            // label14
+            // LabelDebi
             // 
-            label14.Anchor = AnchorStyles.Top;
-            label14.AutoSize = true;
-            label14.BackColor = Color.Transparent;
-            label14.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.ForeColor = Color.Lime;
-            label14.Location = new Point(30, 20);
-            label14.Name = "label14";
-            label14.Size = new Size(14, 15);
-            label14.TabIndex = 2;
-            label14.Text = "0";
-            label14.TextAlign = ContentAlignment.MiddleCenter;
+            LabelDebi.Anchor = AnchorStyles.Top;
+            LabelDebi.AutoSize = true;
+            LabelDebi.BackColor = Color.Transparent;
+            LabelDebi.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelDebi.ForeColor = Color.Lime;
+            LabelDebi.Location = new Point(30, 20);
+            LabelDebi.Name = "LabelDebi";
+            LabelDebi.Size = new Size(14, 15);
+            LabelDebi.TabIndex = 2;
+            LabelDebi.Text = "0";
+            LabelDebi.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel8
             // 
@@ -424,7 +425,7 @@
             tableLayoutPanel8.ColumnCount = 1;
             tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel8.Controls.Add(label15, 0, 0);
-            tableLayoutPanel8.Controls.Add(label16, 0, 1);
+            tableLayoutPanel8.Controls.Add(LabelDesarjDebi, 0, 1);
             tableLayoutPanel8.Location = new Point(97, 621);
             tableLayoutPanel8.Name = "tableLayoutPanel8";
             tableLayoutPanel8.RowCount = 2;
@@ -445,19 +446,19 @@
             label15.TabIndex = 2;
             label15.Text = "Deş. Debi";
             // 
-            // label16
+            // LabelDesarjDebi
             // 
-            label16.Anchor = AnchorStyles.Top;
-            label16.AutoSize = true;
-            label16.BackColor = Color.Transparent;
-            label16.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label16.ForeColor = Color.Lime;
-            label16.Location = new Point(30, 20);
-            label16.Name = "label16";
-            label16.Size = new Size(14, 15);
-            label16.TabIndex = 2;
-            label16.Text = "0";
-            label16.TextAlign = ContentAlignment.MiddleCenter;
+            LabelDesarjDebi.Anchor = AnchorStyles.Top;
+            LabelDesarjDebi.AutoSize = true;
+            LabelDesarjDebi.BackColor = Color.Transparent;
+            LabelDesarjDebi.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelDesarjDebi.ForeColor = Color.Lime;
+            LabelDesarjDebi.Location = new Point(30, 20);
+            LabelDesarjDebi.Name = "LabelDesarjDebi";
+            LabelDesarjDebi.Size = new Size(14, 15);
+            LabelDesarjDebi.TabIndex = 2;
+            LabelDesarjDebi.Text = "0";
+            LabelDesarjDebi.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel9
             // 
@@ -465,7 +466,7 @@
             tableLayoutPanel9.ColumnCount = 1;
             tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel9.Controls.Add(label17, 0, 0);
-            tableLayoutPanel9.Controls.Add(label18, 0, 1);
+            tableLayoutPanel9.Controls.Add(LabelHariciDebi, 0, 1);
             tableLayoutPanel9.Location = new Point(185, 621);
             tableLayoutPanel9.Name = "tableLayoutPanel9";
             tableLayoutPanel9.RowCount = 2;
@@ -486,19 +487,19 @@
             label17.TabIndex = 2;
             label17.Text = "H. Debi";
             // 
-            // label18
+            // LabelHariciDebi
             // 
-            label18.Anchor = AnchorStyles.Top;
-            label18.AutoSize = true;
-            label18.BackColor = Color.Transparent;
-            label18.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label18.ForeColor = Color.Lime;
-            label18.Location = new Point(30, 20);
-            label18.Name = "label18";
-            label18.Size = new Size(14, 15);
-            label18.TabIndex = 2;
-            label18.Text = "0";
-            label18.TextAlign = ContentAlignment.MiddleCenter;
+            LabelHariciDebi.Anchor = AnchorStyles.Top;
+            LabelHariciDebi.AutoSize = true;
+            LabelHariciDebi.BackColor = Color.Transparent;
+            LabelHariciDebi.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelHariciDebi.ForeColor = Color.Lime;
+            LabelHariciDebi.Location = new Point(30, 20);
+            LabelHariciDebi.Name = "LabelHariciDebi";
+            LabelHariciDebi.Size = new Size(14, 15);
+            LabelHariciDebi.TabIndex = 2;
+            LabelHariciDebi.Text = "0";
+            LabelHariciDebi.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel10
             // 
@@ -506,7 +507,7 @@
             tableLayoutPanel10.ColumnCount = 1;
             tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel10.Controls.Add(label19, 0, 0);
-            tableLayoutPanel10.Controls.Add(label20, 0, 1);
+            tableLayoutPanel10.Controls.Add(LabelHariciDebi2, 0, 1);
             tableLayoutPanel10.Location = new Point(273, 621);
             tableLayoutPanel10.Name = "tableLayoutPanel10";
             tableLayoutPanel10.RowCount = 2;
@@ -527,19 +528,19 @@
             label19.TabIndex = 2;
             label19.Text = "H. Debi 2";
             // 
-            // label20
+            // LabelHariciDebi2
             // 
-            label20.Anchor = AnchorStyles.Top;
-            label20.AutoSize = true;
-            label20.BackColor = Color.Transparent;
-            label20.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label20.ForeColor = Color.Lime;
-            label20.Location = new Point(30, 20);
-            label20.Name = "label20";
-            label20.Size = new Size(14, 15);
-            label20.TabIndex = 2;
-            label20.Text = "0";
-            label20.TextAlign = ContentAlignment.MiddleCenter;
+            LabelHariciDebi2.Anchor = AnchorStyles.Top;
+            LabelHariciDebi2.AutoSize = true;
+            LabelHariciDebi2.BackColor = Color.Transparent;
+            LabelHariciDebi2.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelHariciDebi2.ForeColor = Color.Lime;
+            LabelHariciDebi2.Location = new Point(30, 20);
+            LabelHariciDebi2.Name = "LabelHariciDebi2";
+            LabelHariciDebi2.Size = new Size(14, 15);
+            LabelHariciDebi2.TabIndex = 2;
+            LabelHariciDebi2.Text = "0";
+            LabelHariciDebi2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel11
             // 
@@ -547,7 +548,7 @@
             tableLayoutPanel11.ColumnCount = 1;
             tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel11.Controls.Add(label21, 0, 0);
-            tableLayoutPanel11.Controls.Add(label22, 0, 1);
+            tableLayoutPanel11.Controls.Add(LabelAktifPompa, 0, 1);
             tableLayoutPanel11.Location = new Point(198, 64);
             tableLayoutPanel11.Name = "tableLayoutPanel11";
             tableLayoutPanel11.RowCount = 2;
@@ -568,19 +569,19 @@
             label21.TabIndex = 2;
             label21.Text = "AKTİF P.";
             // 
-            // label22
+            // LabelAktifPompa
             // 
-            label22.Anchor = AnchorStyles.Top;
-            label22.AutoSize = true;
-            label22.BackColor = Color.Transparent;
-            label22.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label22.ForeColor = Color.Lime;
-            label22.Location = new Point(7, 20);
-            label22.Name = "label22";
-            label22.Size = new Size(59, 15);
-            label22.TabIndex = 2;
-            label22.Text = "POMPA 1";
-            label22.TextAlign = ContentAlignment.MiddleCenter;
+            LabelAktifPompa.Anchor = AnchorStyles.Top;
+            LabelAktifPompa.AutoSize = true;
+            LabelAktifPompa.BackColor = Color.Transparent;
+            LabelAktifPompa.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelAktifPompa.ForeColor = Color.Lime;
+            LabelAktifPompa.Location = new Point(21, 20);
+            LabelAktifPompa.Name = "LabelAktifPompa";
+            LabelAktifPompa.Size = new Size(31, 15);
+            LabelAktifPompa.TabIndex = 2;
+            LabelAktifPompa.Text = "YOK";
+            LabelAktifPompa.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel12
             // 
@@ -588,7 +589,7 @@
             tableLayoutPanel12.ColumnCount = 1;
             tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel12.Controls.Add(label23, 0, 0);
-            tableLayoutPanel12.Controls.Add(label24, 0, 1);
+            tableLayoutPanel12.Controls.Add(LabelFrekans, 0, 1);
             tableLayoutPanel12.Location = new Point(198, 112);
             tableLayoutPanel12.Name = "tableLayoutPanel12";
             tableLayoutPanel12.RowCount = 2;
@@ -609,19 +610,19 @@
             label23.TabIndex = 2;
             label23.Text = "Frekans";
             // 
-            // label24
+            // LabelFrekans
             // 
-            label24.Anchor = AnchorStyles.Top;
-            label24.AutoSize = true;
-            label24.BackColor = Color.Transparent;
-            label24.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label24.ForeColor = Color.Lime;
-            label24.Location = new Point(18, 20);
-            label24.Name = "label24";
-            label24.Size = new Size(38, 15);
-            label24.TabIndex = 2;
-            label24.Text = "45 Hz";
-            label24.TextAlign = ContentAlignment.MiddleCenter;
+            LabelFrekans.Anchor = AnchorStyles.Top;
+            LabelFrekans.AutoSize = true;
+            LabelFrekans.BackColor = Color.Transparent;
+            LabelFrekans.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelFrekans.ForeColor = Color.Lime;
+            LabelFrekans.Location = new Point(30, 20);
+            LabelFrekans.Name = "LabelFrekans";
+            LabelFrekans.Size = new Size(14, 15);
+            LabelFrekans.TabIndex = 2;
+            LabelFrekans.Text = "0";
+            LabelFrekans.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel13
             // 
@@ -670,7 +671,7 @@
             tableLayoutPanel14.ColumnCount = 1;
             tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel14.Controls.Add(label27, 0, 0);
-            tableLayoutPanel14.Controls.Add(label28, 0, 1);
+            tableLayoutPanel14.Controls.Add(LabelNem, 0, 1);
             tableLayoutPanel14.Location = new Point(197, 224);
             tableLayoutPanel14.Name = "tableLayoutPanel14";
             tableLayoutPanel14.RowCount = 2;
@@ -691,19 +692,29 @@
             label27.TabIndex = 2;
             label27.Text = "Nem";
             // 
-            // label28
+            // LabelNem
             // 
-            label28.Anchor = AnchorStyles.Top;
-            label28.AutoSize = true;
-            label28.BackColor = Color.Transparent;
-            label28.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label28.ForeColor = Color.Lime;
-            label28.Location = new Point(30, 20);
-            label28.Name = "label28";
-            label28.Size = new Size(14, 15);
-            label28.TabIndex = 2;
-            label28.Text = "0";
-            label28.TextAlign = ContentAlignment.MiddleCenter;
+            LabelNem.Anchor = AnchorStyles.Top;
+            LabelNem.AutoSize = true;
+            LabelNem.BackColor = Color.Transparent;
+            LabelNem.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelNem.ForeColor = Color.Lime;
+            LabelNem.Location = new Point(30, 20);
+            LabelNem.Name = "LabelNem";
+            LabelNem.Size = new Size(14, 15);
+            LabelNem.TabIndex = 2;
+            LabelNem.Text = "0";
+            LabelNem.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // PanelWaterTank
+            // 
+            PanelWaterTank.BackColor = Color.Transparent;
+            PanelWaterTank.BackgroundImage = Properties.Resources.water_tank_empty;
+            PanelWaterTank.BackgroundImageLayout = ImageLayout.None;
+            PanelWaterTank.Location = new Point(341, 45);
+            PanelWaterTank.Name = "PanelWaterTank";
+            PanelWaterTank.Size = new Size(87, 230);
+            PanelWaterTank.TabIndex = 4;
             // 
             // SimulationPage
             // 
@@ -713,6 +724,7 @@
             BackgroundImage = Properties.Resources.system_auto1;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1170, 677);
+            Controls.Add(PanelWaterTank);
             Controls.Add(tableLayoutPanel10);
             Controls.Add(tableLayoutPanel9);
             Controls.Add(tableLayoutPanel8);
@@ -794,27 +806,28 @@
         private Label LabelAkisHizi;
         private TableLayoutPanel tableLayoutPanel7;
         private Label label13;
-        private Label label14;
+        private Label LabelDebi;
         private TableLayoutPanel tableLayoutPanel8;
         private Label label15;
-        private Label label16;
+        private Label LabelDesarjDebi;
         private TableLayoutPanel tableLayoutPanel9;
         private Label label17;
-        private Label label18;
+        private Label LabelHariciDebi;
         private TableLayoutPanel tableLayoutPanel10;
         private Label label19;
-        private Label label20;
+        private Label LabelHariciDebi2;
         private TableLayoutPanel tableLayoutPanel11;
         private Label label21;
-        private Label label22;
+        private Label LabelAktifPompa;
         private TableLayoutPanel tableLayoutPanel12;
         private Label label23;
-        private Label label24;
+        private Label LabelFrekans;
         private TableLayoutPanel tableLayoutPanel13;
         private Label label25;
         private Label LabelSicaklik;
         private TableLayoutPanel tableLayoutPanel14;
         private Label label27;
-        private Label label28;
+        private Label LabelNem;
+        private Panel PanelWaterTank;
     }
 }
