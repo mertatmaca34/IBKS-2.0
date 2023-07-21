@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace IBKS_2._0.Components
 {
@@ -26,10 +27,9 @@ namespace IBKS_2._0.Components
         }
 
         [Description("Span Referans Değeri"), Category("IBKS")]
-        public string SpanRef
+        public StringCollection SpanRef
         {
-            get => ComboBoxSpanRef.Text;
-            set => ComboBoxSpanRef.Text = value;
+            set => ComboBoxSpanRef.Items.Add(value);
         }
 
         [Description("Span Süre Değeri"), Category("IBKS")]

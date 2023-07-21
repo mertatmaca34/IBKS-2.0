@@ -81,14 +81,14 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(993, 72);
+            tableLayoutPanel1.Size = new Size(993, 58);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.None;
             panel2.BackColor = Color.FromArgb(235, 235, 235);
-            panel2.Location = new Point(194, 11);
+            panel2.Location = new Point(194, 4);
             panel2.Name = "panel2";
             panel2.Size = new Size(1, 50);
             panel2.TabIndex = 4;
@@ -98,7 +98,7 @@
             LabelParameter.Anchor = AnchorStyles.None;
             LabelParameter.AutoSize = true;
             LabelParameter.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            LabelParameter.Location = new Point(74, 27);
+            LabelParameter.Location = new Point(74, 20);
             LabelParameter.Name = "LabelParameter";
             LabelParameter.Size = new Size(41, 18);
             LabelParameter.TabIndex = 3;
@@ -108,7 +108,7 @@
             // 
             panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = Color.FromArgb(235, 235, 235);
-            panel1.Location = new Point(394, 11);
+            panel1.Location = new Point(394, 4);
             panel1.Name = "panel1";
             panel1.Size = new Size(1, 50);
             panel1.TabIndex = 5;
@@ -117,7 +117,7 @@
             // 
             panel3.Anchor = AnchorStyles.None;
             panel3.BackColor = Color.FromArgb(235, 235, 235);
-            panel3.Location = new Point(594, 11);
+            panel3.Location = new Point(594, 4);
             panel3.Name = "panel3";
             panel3.Size = new Size(1, 50);
             panel3.TabIndex = 5;
@@ -133,16 +133,18 @@
             tableLayoutPanel2.Margin = new Padding(0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 2;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(190, 72);
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 65F));
+            tableLayoutPanel2.Size = new Size(190, 58);
             tableLayoutPanel2.TabIndex = 6;
             // 
             // ComboBoxZeroRef
             // 
+            ComboBoxZeroRef.BackColor = Color.WhiteSmoke;
             ComboBoxZeroRef.Dock = DockStyle.Fill;
+            ComboBoxZeroRef.FlatStyle = FlatStyle.Popup;
             ComboBoxZeroRef.FormattingEnabled = true;
-            ComboBoxZeroRef.Location = new Point(8, 44);
+            ComboBoxZeroRef.Location = new Point(8, 28);
             ComboBoxZeroRef.Margin = new Padding(8);
             ComboBoxZeroRef.Name = "ComboBoxZeroRef";
             ComboBoxZeroRef.Size = new Size(174, 23);
@@ -153,7 +155,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(38, 9);
+            label1.Location = new Point(38, 1);
             label1.Name = "label1";
             label1.Size = new Size(113, 18);
             label1.TabIndex = 3;
@@ -170,9 +172,9 @@
             tableLayoutPanel3.Margin = new Padding(0);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 2;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(190, 72);
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 65F));
+            tableLayoutPanel3.Size = new Size(190, 58);
             tableLayoutPanel3.TabIndex = 6;
             // 
             // label3
@@ -180,7 +182,7 @@
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
             label3.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(48, 9);
+            label3.Location = new Point(48, 1);
             label3.Name = "label3";
             label3.Size = new Size(94, 18);
             label3.TabIndex = 3;
@@ -188,9 +190,11 @@
             // 
             // ComboBoxZeroTime
             // 
+            ComboBoxZeroTime.BackColor = Color.WhiteSmoke;
             ComboBoxZeroTime.Dock = DockStyle.Fill;
+            ComboBoxZeroTime.FlatStyle = FlatStyle.Popup;
             ComboBoxZeroTime.FormattingEnabled = true;
-            ComboBoxZeroTime.Location = new Point(8, 44);
+            ComboBoxZeroTime.Location = new Point(8, 28);
             ComboBoxZeroTime.Margin = new Padding(8);
             ComboBoxZeroTime.Name = "ComboBoxZeroTime";
             ComboBoxZeroTime.Size = new Size(174, 23);
@@ -207,16 +211,18 @@
             tableLayoutPanel4.Margin = new Padding(0);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 2;
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Size = new Size(190, 72);
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 65F));
+            tableLayoutPanel4.Size = new Size(190, 58);
             tableLayoutPanel4.TabIndex = 6;
             // 
             // ComboBoxSpanRef
             // 
+            ComboBoxSpanRef.BackColor = Color.WhiteSmoke;
             ComboBoxSpanRef.Dock = DockStyle.Fill;
+            ComboBoxSpanRef.FlatStyle = FlatStyle.Popup;
             ComboBoxSpanRef.FormattingEnabled = true;
-            ComboBoxSpanRef.Location = new Point(8, 44);
+            ComboBoxSpanRef.Location = new Point(8, 28);
             ComboBoxSpanRef.Margin = new Padding(8);
             ComboBoxSpanRef.Name = "ComboBoxSpanRef";
             ComboBoxSpanRef.Size = new Size(174, 23);
@@ -227,7 +233,7 @@
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
             label4.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(36, 9);
+            label4.Location = new Point(36, 1);
             label4.Name = "label4";
             label4.Size = new Size(117, 18);
             label4.TabIndex = 3;
@@ -237,7 +243,7 @@
             // 
             panel4.Anchor = AnchorStyles.None;
             panel4.BackColor = Color.FromArgb(235, 235, 235);
-            panel4.Location = new Point(794, 11);
+            panel4.Location = new Point(794, 4);
             panel4.Name = "panel4";
             panel4.Size = new Size(1, 50);
             panel4.TabIndex = 5;
@@ -253,16 +259,18 @@
             tableLayoutPanel5.Margin = new Padding(0);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 2;
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.Size = new Size(193, 72);
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 65F));
+            tableLayoutPanel5.Size = new Size(193, 58);
             tableLayoutPanel5.TabIndex = 6;
             // 
             // ComboBoxSpanTime
             // 
+            ComboBoxSpanTime.BackColor = Color.WhiteSmoke;
             ComboBoxSpanTime.Dock = DockStyle.Fill;
+            ComboBoxSpanTime.FlatStyle = FlatStyle.Popup;
             ComboBoxSpanTime.FormattingEnabled = true;
-            ComboBoxSpanTime.Location = new Point(8, 44);
+            ComboBoxSpanTime.Location = new Point(8, 28);
             ComboBoxSpanTime.Margin = new Padding(8);
             ComboBoxSpanTime.Name = "ComboBoxSpanTime";
             ComboBoxSpanTime.Size = new Size(177, 23);
@@ -273,7 +281,7 @@
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
             label5.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(47, 9);
+            label5.Location = new Point(47, 1);
             label5.Name = "label5";
             label5.Size = new Size(98, 18);
             label5.TabIndex = 3;
@@ -288,7 +296,7 @@
             Controls.Add(tableLayoutPanel1);
             Name = "CalibrationSettingsBar";
             Padding = new Padding(1);
-            Size = new Size(995, 74);
+            Size = new Size(995, 60);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);

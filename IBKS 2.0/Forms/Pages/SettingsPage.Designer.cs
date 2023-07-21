@@ -32,14 +32,15 @@
             istasyonAyarlarıToolStripMenuItem = new ToolStripMenuItem();
             aPIAyarlarıToolStripMenuItem = new ToolStripMenuItem();
             plcAyarlarıToolStripMenuItem = new ToolStripMenuItem();
-            kalibrasyonAyarlarıToolStripMenuItem = new ToolStripMenuItem();
+            ButtonCalibrationSettings = new ToolStripMenuItem();
             PanelContent = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { istasyonAyarlarıToolStripMenuItem, aPIAyarlarıToolStripMenuItem, plcAyarlarıToolStripMenuItem, kalibrasyonAyarlarıToolStripMenuItem });
+            menuStrip1.BackColor = Color.White;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { istasyonAyarlarıToolStripMenuItem, aPIAyarlarıToolStripMenuItem, plcAyarlarıToolStripMenuItem, ButtonCalibrationSettings });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1170, 56);
@@ -73,14 +74,15 @@
             plcAyarlarıToolStripMenuItem.Size = new Size(132, 52);
             plcAyarlarıToolStripMenuItem.Text = "Plc Ayarları";
             // 
-            // kalibrasyonAyarlarıToolStripMenuItem
+            // ButtonCalibrationSettings
             // 
-            kalibrasyonAyarlarıToolStripMenuItem.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            kalibrasyonAyarlarıToolStripMenuItem.Image = Properties.Resources.azimuth_48px;
-            kalibrasyonAyarlarıToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
-            kalibrasyonAyarlarıToolStripMenuItem.Name = "kalibrasyonAyarlarıToolStripMenuItem";
-            kalibrasyonAyarlarıToolStripMenuItem.Size = new Size(181, 52);
-            kalibrasyonAyarlarıToolStripMenuItem.Text = "Kalibrasyon Ayarları";
+            ButtonCalibrationSettings.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ButtonCalibrationSettings.Image = Properties.Resources.azimuth_48px;
+            ButtonCalibrationSettings.ImageScaling = ToolStripItemImageScaling.None;
+            ButtonCalibrationSettings.Name = "ButtonCalibrationSettings";
+            ButtonCalibrationSettings.Size = new Size(181, 52);
+            ButtonCalibrationSettings.Text = "Kalibrasyon Ayarları";
+            ButtonCalibrationSettings.Click += ButtonCalibrationSettings_Click;
             // 
             // PanelContent
             // 
@@ -114,7 +116,7 @@
         private ToolStripMenuItem istasyonAyarlarıToolStripMenuItem;
         private ToolStripMenuItem aPIAyarlarıToolStripMenuItem;
         private ToolStripMenuItem plcAyarlarıToolStripMenuItem;
-        private ToolStripMenuItem kalibrasyonAyarlarıToolStripMenuItem;
+        private ToolStripMenuItem ButtonCalibrationSettings;
         private Panel PanelContent;
     }
 }
