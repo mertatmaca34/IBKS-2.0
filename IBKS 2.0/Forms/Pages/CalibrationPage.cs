@@ -24,6 +24,5 @@ namespace IBKS_2._0.Forms.Pages
             LabelPhLastCalibration.Text = StationInfoStatements.AssignCalibrationStatements(_calibrationManager, "Ph");
             LabelIletkenlikLastCalibration.Text = StationInfoStatements.AssignCalibrationStatements(_calibrationManager, "Iletkenlik");
         }
-
     }
 }

@@ -97,14 +97,17 @@ namespace IBKS_2._0.Forms.Pages
         {
             var data = ValueAvarages.Last60MinAvg(_sendDataManager);
 
-            ChannelAkm.AvgDataOf60Min = data.Akm.ToString();
-            ChannelCozunmusOksijen.AvgDataOf60Min = data.CozunmusOksijen.ToString();
-            ChannelSicaklik.AvgDataOf60Min = data.KabinSicaklik.ToString();
-            ChannelPh.AvgDataOf60Min = data.Ph.ToString();
-            ChannelIletkenlik.AvgDataOf60Min = data.Iletkenlik.ToString();
-            ChannelKoi.AvgDataOf60Min = data.Koi.ToString();
-            ChannelAkisHizi.AvgDataOf60Min = data.NumuneHiz.ToString();
-            ChannelDebi.AvgDataOf60Min = data.TesisDebi.ToString();
+            if(data != null)
+            {
+                ChannelAkm.AvgDataOf60Min = data.Data.Akm.ToString();
+                ChannelCozunmusOksijen.AvgDataOf60Min = data.Data.CozunmusOksijen.ToString();
+                ChannelSicaklik.AvgDataOf60Min = data.Data.KabinSicaklik.ToString();
+                ChannelPh.AvgDataOf60Min = data.Data.Ph.ToString();
+                ChannelIletkenlik.AvgDataOf60Min = data.Data.Iletkenlik.ToString();
+                ChannelKoi.AvgDataOf60Min = data.Data.Koi.ToString();
+                ChannelAkisHizi.AvgDataOf60Min = data.Data.NumuneHiz.ToString();
+                ChannelDebi.AvgDataOf60Min = data.Data.TesisDebi.ToString();
+            }
         }
 
         private void AssignStationInfoControl(IDataResult<DeserializeResult> deserializedResult)
