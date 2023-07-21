@@ -97,7 +97,7 @@ namespace IBKS_2._0.Forms.Pages
         {
             var data = ValueAvarages.Last60MinAvg(_sendDataManager);
 
-            if(data != null)
+            if (data != null)
             {
                 ChannelAkm.AvgDataOf60Min = data.Data.Akm.ToString();
                 ChannelCozunmusOksijen.AvgDataOf60Min = data.Data.CozunmusOksijen.ToString();
