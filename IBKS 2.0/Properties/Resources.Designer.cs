@@ -83,6 +83,16 @@ namespace IBKS_2._0.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap azimuth_48px {
+            get {
+                object obj = ResourceManager.GetObject("azimuth_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap black_and_white_24px {
             get {
                 object obj = ResourceManager.GetObject("black_and_white_24px", resourceCulture);
@@ -136,6 +146,16 @@ namespace IBKS_2._0.Properties {
         internal static System.Drawing.Bitmap door_opened {
             get {
                 object obj = ResourceManager.GetObject("door_opened", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap electronics_48px {
+            get {
+                object obj = ResourceManager.GetObject("electronics_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,6 +313,16 @@ namespace IBKS_2._0.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap place_marker_48px {
+            get {
+                object obj = ResourceManager.GetObject("place_marker_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap pump1_animation {
             get {
                 object obj = ResourceManager.GetObject("pump1_animation", resourceCulture);
@@ -326,6 +356,16 @@ namespace IBKS_2._0.Properties {
         internal static System.Drawing.Bitmap pump2_idle {
             get {
                 object obj = ResourceManager.GetObject("pump2_idle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap rest_api_48px {
+            get {
+                object obj = ResourceManager.GetObject("rest_api_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
