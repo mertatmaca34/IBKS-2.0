@@ -144,6 +144,7 @@
             ComboBoxZeroRef.Dock = DockStyle.Fill;
             ComboBoxZeroRef.FlatStyle = FlatStyle.Popup;
             ComboBoxZeroRef.FormattingEnabled = true;
+            ComboBoxZeroRef.Items.AddRange(new object[] { "0", "7" });
             ComboBoxZeroRef.Location = new Point(8, 28);
             ComboBoxZeroRef.Margin = new Padding(8);
             ComboBoxZeroRef.Name = "ComboBoxZeroRef";
@@ -194,6 +195,7 @@
             ComboBoxZeroTime.Dock = DockStyle.Fill;
             ComboBoxZeroTime.FlatStyle = FlatStyle.Popup;
             ComboBoxZeroTime.FormattingEnabled = true;
+            ComboBoxZeroTime.Items.AddRange(new object[] { "10", "15", "30", "60", "90", "180" });
             ComboBoxZeroTime.Location = new Point(8, 28);
             ComboBoxZeroTime.Margin = new Padding(8);
             ComboBoxZeroTime.Name = "ComboBoxZeroTime";
@@ -222,6 +224,7 @@
             ComboBoxSpanRef.Dock = DockStyle.Fill;
             ComboBoxSpanRef.FlatStyle = FlatStyle.Popup;
             ComboBoxSpanRef.FormattingEnabled = true;
+            ComboBoxSpanRef.Items.AddRange(new object[] { "4", "10", "1413" });
             ComboBoxSpanRef.Location = new Point(8, 28);
             ComboBoxSpanRef.Margin = new Padding(8);
             ComboBoxSpanRef.Name = "ComboBoxSpanRef";
@@ -270,6 +273,7 @@
             ComboBoxSpanTime.Dock = DockStyle.Fill;
             ComboBoxSpanTime.FlatStyle = FlatStyle.Popup;
             ComboBoxSpanTime.FormattingEnabled = true;
+            ComboBoxSpanTime.Items.AddRange(new object[] { "10", "15", "30", "60", "90", "180" });
             ComboBoxSpanTime.Location = new Point(8, 28);
             ComboBoxSpanTime.Margin = new Padding(8);
             ComboBoxSpanTime.Name = "ComboBoxSpanTime";
