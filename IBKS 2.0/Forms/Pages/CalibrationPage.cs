@@ -5,7 +5,7 @@ namespace IBKS_2._0.Forms.Pages
 {
     public partial class CalibrationPage : Form
     {
-        ICalibrationService _calibrationManager;
+        readonly ICalibrationService _calibrationManager;
 
         public CalibrationPage(ICalibrationService calibrationManager)
         {
