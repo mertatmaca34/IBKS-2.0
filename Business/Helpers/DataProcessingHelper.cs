@@ -10,13 +10,11 @@ namespace Business.Helpers
     {
         readonly static Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
-        public static int _status = GetSystemStatus.GetStatus();
-
         public static IDataResult<SendData> MergedSendData(IStationService stationManager)
         {
             if (stationManager.Get().Success)
             {
-                _status = GetSystemStatus.GetStatus();
+                var _status = GetSystemStatus.GetStatus();
 
                 return new SuccessDataResult<SendData>(new SendData
                 {

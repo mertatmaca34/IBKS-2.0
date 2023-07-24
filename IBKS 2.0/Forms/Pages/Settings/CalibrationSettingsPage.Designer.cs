@@ -129,7 +129,7 @@
             calibrationSettingsBar2.Location = new Point(3, 105);
             calibrationSettingsBar2.Name = "calibrationSettingsBar2";
             calibrationSettingsBar2.Padding = new Padding(1);
-            calibrationSettingsBar2.Parameter = "AKM";
+            calibrationSettingsBar2.Parameter = "KOi";
             calibrationSettingsBar2.Size = new Size(1148, 58);
             calibrationSettingsBar2.SpanRef = "";
             calibrationSettingsBar2.SpanTime = "";
@@ -145,7 +145,7 @@
             calibrationSettingsBar3.Location = new Point(3, 169);
             calibrationSettingsBar3.Name = "calibrationSettingsBar3";
             calibrationSettingsBar3.Padding = new Padding(1);
-            calibrationSettingsBar3.Parameter = "AKM";
+            calibrationSettingsBar3.Parameter = "pH";
             calibrationSettingsBar3.Size = new Size(1148, 58);
             calibrationSettingsBar3.SpanRef = "";
             calibrationSettingsBar3.SpanTime = "";
@@ -161,7 +161,7 @@
             calibrationSettingsBar4.Location = new Point(3, 233);
             calibrationSettingsBar4.Name = "calibrationSettingsBar4";
             calibrationSettingsBar4.Padding = new Padding(1);
-            calibrationSettingsBar4.Parameter = "AKM";
+            calibrationSettingsBar4.Parameter = "İletkenlik";
             calibrationSettingsBar4.Size = new Size(1148, 58);
             calibrationSettingsBar4.SpanRef = "";
             calibrationSettingsBar4.SpanTime = "";

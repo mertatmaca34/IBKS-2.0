@@ -23,7 +23,7 @@ namespace DataAccess.Concrete.Contexts
         public DbSet<MBTags> MBTags { get; set; }
         public DbSet<Plc> Plcs { get; set; }
         public DbSet<Sample> Samples { get; set; }
-        public DbSet<SendData> SendDatas{ get; set; }
+        public DbSet<SendData> SendDatas { get; set; }
         public DbSet<Station> Stations { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }

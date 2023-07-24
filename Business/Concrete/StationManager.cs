@@ -3,13 +3,7 @@ using Business.Constants;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -49,7 +43,12 @@ namespace Business.Concrete
 
         public IDataResult<Station> Get()
         {
-            return new SuccessDataResult<Station>(_stationDal.Get(s => s.Id == 1));
+            var result = _stationDal.Get(s => s.Id == 1);
+
+            if (result != null)
+                return new SuccessDataResult<Station>(result);
+
+            return new ErrorDataResult<Station>(Messages.StationIsNotDefined);
         }
 
         private IResult CheckStationExist(Station station)
