@@ -140,7 +140,6 @@
             // 
             // ComboBoxZeroRef
             // 
-            ComboBoxZeroRef.BackColor = Color.WhiteSmoke;
             ComboBoxZeroRef.Dock = DockStyle.Fill;
             ComboBoxZeroRef.FlatStyle = FlatStyle.Popup;
             ComboBoxZeroRef.FormattingEnabled = true;
@@ -191,7 +190,6 @@
             // 
             // ComboBoxZeroTime
             // 
-            ComboBoxZeroTime.BackColor = Color.WhiteSmoke;
             ComboBoxZeroTime.Dock = DockStyle.Fill;
             ComboBoxZeroTime.FlatStyle = FlatStyle.Popup;
             ComboBoxZeroTime.FormattingEnabled = true;
@@ -220,7 +218,6 @@
             // 
             // ComboBoxSpanRef
             // 
-            ComboBoxSpanRef.BackColor = Color.WhiteSmoke;
             ComboBoxSpanRef.Dock = DockStyle.Fill;
             ComboBoxSpanRef.FlatStyle = FlatStyle.Popup;
             ComboBoxSpanRef.FormattingEnabled = true;
@@ -269,7 +266,6 @@
             // 
             // ComboBoxSpanTime
             // 
-            ComboBoxSpanTime.BackColor = Color.WhiteSmoke;
             ComboBoxSpanTime.Dock = DockStyle.Fill;
             ComboBoxSpanTime.FlatStyle = FlatStyle.Popup;
             ComboBoxSpanTime.FormattingEnabled = true;

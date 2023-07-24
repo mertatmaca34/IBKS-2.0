@@ -15,6 +15,9 @@
         public static string CalibrationNotAdded = "Kalibrasyon kaydedilemedi";
         public static string CalibrationNotFound = "Silinecek kalibrasyon bulunamadı";
 
+        public static string CalibrationLimitAdded = "Kalibrasyon limit bilgileri sisteme eklendi";
+        public static string CalibrationLimitUpdated = "Kalibrasyon limit bilgileri güncellendi";
+
         public static string ChannelAdded = "Kanal sisteme kaydedildi";
 
         public static string DataNotFound = "Veri Yok";

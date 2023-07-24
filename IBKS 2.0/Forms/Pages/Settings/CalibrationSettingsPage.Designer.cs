@@ -151,13 +151,18 @@
             // ButtonSave
             // 
             ButtonSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ButtonSave.BackColor = Color.White;
+            ButtonSave.FlatAppearance.BorderColor = Color.FromArgb(235, 235, 235);
+            ButtonSave.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
+            ButtonSave.FlatAppearance.MouseOverBackColor = SystemColors.ButtonFace;
+            ButtonSave.FlatStyle = FlatStyle.Flat;
             ButtonSave.Location = new Point(938, 318);
             ButtonSave.Margin = new Padding(8);
             ButtonSave.Name = "ButtonSave";
             ButtonSave.Size = new Size(224, 43);
             ButtonSave.TabIndex = 1;
             ButtonSave.Text = "Kaydet";
-            ButtonSave.UseVisualStyleBackColor = true;
+            ButtonSave.UseVisualStyleBackColor = false;
             // 
             // CalibrationSettingsPage
             // 
