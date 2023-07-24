@@ -3,13 +3,7 @@ using Business.Constants;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -48,7 +42,7 @@ namespace Business.Concrete
 
                 return new SuccessResult(Messages.MailStatementDeleted);
             }
-                        
+
             return new ErrorDataResult<MailStatement>(Messages.InvalidDelete);
         }
 
