@@ -1,5 +1,4 @@
 ﻿using Business.Abstract;
-using Business.Concrete;
 using Entities.Concrete;
 using IBKS_2._0.Components;
 
