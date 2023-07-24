@@ -27,9 +27,10 @@ namespace IBKS_2._0.Components
         }
 
         [Description("Span Referans Değeri"), Category("IBKS")]
-        public StringCollection SpanRef
+        public string SpanRef
         {
-            set => ComboBoxSpanRef.Items.Add(value);
+            get => ComboBoxSpanRef.Text;
+            set => ComboBoxSpanRef.Text = value;
         }
 
         [Description("Span Süre Değeri"), Category("IBKS")]

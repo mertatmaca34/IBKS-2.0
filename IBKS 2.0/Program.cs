@@ -32,8 +32,8 @@ namespace IBKS_2._0
             .UseServiceProviderFactory(new AutofacServiceProviderFactory())
             .ConfigureContainer<ContainerBuilder>(builder =>
             {
-                builder.RegisterModule(new AutofacViewModule());
                 builder.RegisterModule(new AutofacBusinessModule());
+                builder.RegisterModule(new AutofacViewModule());
                 builder.RegisterModule(new AutofacApiModule());
             })
             .ConfigureServices((hostContext, services) =>

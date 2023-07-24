@@ -14,13 +14,15 @@ namespace IBKS_2._0.Forms
         readonly IApiConnection _apiConnection;
         readonly ISendDataService _sendDataManager;
         readonly ICalibrationService _calibrationManager;
+        readonly ICalibrationLimitService _calibrationLimitManager;
 
-        public Main(IStationService stationManager, IApiConnection apiConnection, ISendDataService sendDataManager, ICalibrationService calibrationManager)
+        public Main(IStationService stationManager, IApiConnection apiConnection, ISendDataService sendDataManager, ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager)
         {
             _stationManager = stationManager;
             _apiConnection = apiConnection;
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
+            _calibrationLimitManager = calibrationLimitManager;
 
             _homePage = new HomePage(_stationManager, _apiConnection, _sendDataManager, _calibrationManager);
 
@@ -67,7 +69,7 @@ namespace IBKS_2._0.Forms
 
         private void ButtonSettingPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new SettingsPage());
+            PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager));
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
         }
 

@@ -50,9 +50,6 @@ namespace API.Service
                     if (!string.IsNullOrEmpty(queryString))
                         queryUrl += "?" + queryString;
 
-                    //Form1 form1 = new Form1(queryUrl);
-                    //form1.Show();
-
                     var resp = webClient.UploadString(fullUrl, queryString);
                     return JsonConvert.DeserializeObject<ResultStatus<T>>(resp);
                 }
@@ -147,7 +144,6 @@ namespace API.Service
 
         public ResultStatus<object> GetLastData(GetLastData getLastData)
         {
-            //var queryString = $"stationId={stationId}&period={period}";
             var res = PostData<object>(this.stationType.ToString() + "/GetLastData", JsonConvert.SerializeObject(getLastData));
 
             return res;

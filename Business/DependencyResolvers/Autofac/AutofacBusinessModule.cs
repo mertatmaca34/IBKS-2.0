@@ -32,6 +32,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<StationManager>().As<IStationService>();
             builder.RegisterType<EfStationDal>().As<IStationDal>();
 
+            builder.RegisterType<CalibrationLimitManager>().As<ICalibrationLimitService>();
+            builder.RegisterType<EfCalibrationLimitDal>().As<ICalibrationLimitDal>();
+
             /*builder.RegisterType<CalibrationLimitManager>().As<ICalibrationLimitService>();
             builder.RegisterType<EfCalibrationDal>().As<ICalibrationLimitDal>();*/
 
