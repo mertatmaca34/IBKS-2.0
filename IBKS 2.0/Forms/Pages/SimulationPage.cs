@@ -98,7 +98,7 @@ namespace IBKS_2._0.Forms.Pages
         private void Animation()
         {
             //Sistem Durumu
-            if (_sharp7Service.S71200?.MBTags?.ModAutoMu == true)
+            if (_sharp7Service.S71200?.MBTags?.ModAutoMu == true && _sharp7Service.S71200?.MBTags?.HaftalikYikamaVarMi == false && _sharp7Service.S71200?.MBTags?.YikamaVarMi == false)
             {
                 FrameOperations.ChangeFormFrame(this, _autoFrame, _autoFrame2);
             }
