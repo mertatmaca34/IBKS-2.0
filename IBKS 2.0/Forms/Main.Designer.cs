@@ -37,7 +37,6 @@
             ButtonSimulationPage = new Button();
             ButtonHomePage = new Button();
             PanelContent = new Panel();
-            comboBox1 = new ComboBox();
             TableLayoutPanelLeftBar.SuspendLayout();
             SuspendLayout();
             // 
@@ -46,7 +45,6 @@
             TableLayoutPanelLeftBar.BackColor = Color.White;
             TableLayoutPanelLeftBar.ColumnCount = 1;
             TableLayoutPanelLeftBar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            TableLayoutPanelLeftBar.Controls.Add(comboBox1, 0, 6);
             TableLayoutPanelLeftBar.Controls.Add(ButtonNightMode, 0, 7);
             TableLayoutPanelLeftBar.Controls.Add(ButtonSettingPage, 0, 5);
             TableLayoutPanelLeftBar.Controls.Add(ButtonReportingPage, 0, 4);
@@ -202,14 +200,6 @@
             PanelContent.Size = new Size(1174, 681);
             PanelContent.TabIndex = 1;
             // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(3, 507);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(84, 23);
-            comboBox1.TabIndex = 0;
-            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -239,6 +229,5 @@
         private Button ButtonCalibrationPage;
         private Button ButtonSimulationPage;
         private Panel PanelContent;
-        private ComboBox comboBox1;
     }
 }

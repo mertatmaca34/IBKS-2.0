@@ -26,6 +26,8 @@ namespace IBKS_2._0
             {
                 var services = scope.ServiceProvider;
 
+                Application.EnableVisualStyles();
+
                 Application.Run(services.GetRequiredService<Main>());
             }
         }
