@@ -17,6 +17,7 @@
 
         public static string CalibrationLimitAdded = "Kalibrasyon limit bilgileri sisteme eklendi";
         public static string CalibrationLimitUpdated = "Kalibrasyon limit bilgileri güncellendi";
+        public static string CalibrationLimitIncompleteInfo = "Kalibrasyon limit bilgilerini tam şekilde girin";
 
         public static string ChannelAdded = "Kanal sisteme kaydedildi";
 

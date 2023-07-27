@@ -28,77 +28,110 @@
         /// </summary>
         private void InitializeComponent()
         {
+            tableLayoutPanel1 = new TableLayoutPanel();
             TableLayoutPanelMain = new TableLayoutPanel();
-            tableLayoutPanel2 = new TableLayoutPanel();
-            ButtonSave = new Button();
+            calibrationSettingsBar4 = new Components.CalibrationSettingsBar();
+            calibrationSettingsBar3 = new Components.CalibrationSettingsBar();
+            calibrationSettingsBar2 = new Components.CalibrationSettingsBar();
             calibrationSettingsBar1 = new Components.CalibrationSettingsBar();
             titleBarControl1 = new Components.TitleBarControl();
-            calibrationSettingsBar2 = new Components.CalibrationSettingsBar();
-            calibrationSettingsBar3 = new Components.CalibrationSettingsBar();
-            calibrationSettingsBar4 = new Components.CalibrationSettingsBar();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            ButtonSave = new Button();
+            comboBox1 = new ComboBox();
+            tableLayoutPanel1.SuspendLayout();
             TableLayoutPanelMain.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(TableLayoutPanelMain, 0, 0);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 1);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Size = new Size(1170, 621);
+            tableLayoutPanel1.TabIndex = 0;
             // 
             // TableLayoutPanelMain
             // 
             TableLayoutPanelMain.ColumnCount = 1;
             TableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            TableLayoutPanelMain.Controls.Add(tableLayoutPanel2, 0, 0);
-            TableLayoutPanelMain.Controls.Add(ButtonSave, 0, 1);
+            TableLayoutPanelMain.Controls.Add(calibrationSettingsBar4, 0, 4);
+            TableLayoutPanelMain.Controls.Add(calibrationSettingsBar3, 0, 3);
+            TableLayoutPanelMain.Controls.Add(calibrationSettingsBar2, 0, 2);
+            TableLayoutPanelMain.Controls.Add(calibrationSettingsBar1, 0, 1);
+            TableLayoutPanelMain.Controls.Add(titleBarControl1, 0, 0);
             TableLayoutPanelMain.Dock = DockStyle.Fill;
-            TableLayoutPanelMain.Location = new Point(0, 0);
+            TableLayoutPanelMain.Location = new Point(8, 8);
+            TableLayoutPanelMain.Margin = new Padding(8);
             TableLayoutPanelMain.Name = "TableLayoutPanelMain";
-            TableLayoutPanelMain.RowCount = 2;
-            TableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            TableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            TableLayoutPanelMain.Size = new Size(1170, 621);
+            TableLayoutPanelMain.RowCount = 5;
+            TableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
+            TableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            TableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            TableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            TableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            TableLayoutPanelMain.Size = new Size(1154, 294);
             TableLayoutPanelMain.TabIndex = 0;
             // 
-            // tableLayoutPanel2
+            // calibrationSettingsBar4
             // 
-            tableLayoutPanel2.ColumnCount = 1;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Controls.Add(calibrationSettingsBar4, 0, 4);
-            tableLayoutPanel2.Controls.Add(calibrationSettingsBar3, 0, 3);
-            tableLayoutPanel2.Controls.Add(calibrationSettingsBar2, 0, 2);
-            tableLayoutPanel2.Controls.Add(calibrationSettingsBar1, 0, 1);
-            tableLayoutPanel2.Controls.Add(titleBarControl1, 0, 0);
-            tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(8, 8);
-            tableLayoutPanel2.Margin = new Padding(8);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 5;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.Size = new Size(1154, 294);
-            tableLayoutPanel2.TabIndex = 0;
+            calibrationSettingsBar4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            calibrationSettingsBar4.BackColor = Color.FromArgb(235, 235, 235);
+            calibrationSettingsBar4.Dock = DockStyle.Fill;
+            calibrationSettingsBar4.Location = new Point(3, 233);
+            calibrationSettingsBar4.Name = "calibrationSettingsBar4";
+            calibrationSettingsBar4.Padding = new Padding(1);
+            calibrationSettingsBar4.Parameter = "Iletkenlik";
+            calibrationSettingsBar4.Size = new Size(1148, 58);
+            calibrationSettingsBar4.SpanRef = "";
+            calibrationSettingsBar4.SpanTime = "";
+            calibrationSettingsBar4.TabIndex = 4;
+            calibrationSettingsBar4.ZeroRef = "";
+            calibrationSettingsBar4.ZeroTime = "";
             // 
-            // ButtonSave
+            // calibrationSettingsBar3
             // 
-            ButtonSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            ButtonSave.BackColor = Color.White;
-            ButtonSave.FlatAppearance.BorderColor = Color.FromArgb(235, 235, 235);
-            ButtonSave.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
-            ButtonSave.FlatAppearance.MouseOverBackColor = SystemColors.ButtonFace;
-            ButtonSave.FlatStyle = FlatStyle.Flat;
-            ButtonSave.Location = new Point(938, 318);
-            ButtonSave.Margin = new Padding(8);
-            ButtonSave.Name = "ButtonSave";
-            ButtonSave.Size = new Size(224, 43);
-            ButtonSave.TabIndex = 1;
-            ButtonSave.Text = "Kaydet";
-            ButtonSave.UseVisualStyleBackColor = false;
-            ButtonSave.Click += ButtonSave_Click;
+            calibrationSettingsBar3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            calibrationSettingsBar3.BackColor = Color.FromArgb(235, 235, 235);
+            calibrationSettingsBar3.Dock = DockStyle.Fill;
+            calibrationSettingsBar3.Location = new Point(3, 169);
+            calibrationSettingsBar3.Name = "calibrationSettingsBar3";
+            calibrationSettingsBar3.Padding = new Padding(1);
+            calibrationSettingsBar3.Parameter = "pH";
+            calibrationSettingsBar3.Size = new Size(1148, 58);
+            calibrationSettingsBar3.SpanRef = "";
+            calibrationSettingsBar3.SpanTime = "";
+            calibrationSettingsBar3.TabIndex = 3;
+            calibrationSettingsBar3.ZeroRef = "";
+            calibrationSettingsBar3.ZeroTime = "";
+            // 
+            // calibrationSettingsBar2
+            // 
+            calibrationSettingsBar2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            calibrationSettingsBar2.BackColor = Color.FromArgb(235, 235, 235);
+            calibrationSettingsBar2.Dock = DockStyle.Fill;
+            calibrationSettingsBar2.Location = new Point(3, 105);
+            calibrationSettingsBar2.Name = "calibrationSettingsBar2";
+            calibrationSettingsBar2.Padding = new Padding(1);
+            calibrationSettingsBar2.Parameter = "KOi";
+            calibrationSettingsBar2.Size = new Size(1148, 58);
+            calibrationSettingsBar2.SpanRef = "";
+            calibrationSettingsBar2.SpanTime = "";
+            calibrationSettingsBar2.TabIndex = 2;
+            calibrationSettingsBar2.ZeroRef = "";
+            calibrationSettingsBar2.ZeroTime = "";
             // 
             // calibrationSettingsBar1
             // 
             calibrationSettingsBar1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             calibrationSettingsBar1.BackColor = Color.FromArgb(235, 235, 235);
-            calibrationSettingsBar1.Dock = DockStyle.Fill;
             calibrationSettingsBar1.Location = new Point(3, 41);
             calibrationSettingsBar1.Name = "calibrationSettingsBar1";
             calibrationSettingsBar1.Padding = new Padding(1);
@@ -121,53 +154,46 @@
             titleBarControl1.TabIndex = 1;
             titleBarControl1.TitleBarText = "KALİBRASYON AYARLARI";
             // 
-            // calibrationSettingsBar2
+            // tableLayoutPanel2
             // 
-            calibrationSettingsBar2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            calibrationSettingsBar2.BackColor = Color.FromArgb(235, 235, 235);
-            calibrationSettingsBar2.Dock = DockStyle.Fill;
-            calibrationSettingsBar2.Location = new Point(3, 105);
-            calibrationSettingsBar2.Name = "calibrationSettingsBar2";
-            calibrationSettingsBar2.Padding = new Padding(1);
-            calibrationSettingsBar2.Parameter = "KOi";
-            calibrationSettingsBar2.Size = new Size(1148, 58);
-            calibrationSettingsBar2.SpanRef = "";
-            calibrationSettingsBar2.SpanTime = "";
-            calibrationSettingsBar2.TabIndex = 2;
-            calibrationSettingsBar2.ZeroRef = "";
-            calibrationSettingsBar2.ZeroTime = "";
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Controls.Add(ButtonSave, 1, 0);
+            tableLayoutPanel2.Controls.Add(comboBox1, 0, 1);
+            tableLayoutPanel2.Dock = DockStyle.Fill;
+            tableLayoutPanel2.Location = new Point(3, 313);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(1164, 305);
+            tableLayoutPanel2.TabIndex = 1;
             // 
-            // calibrationSettingsBar3
+            // ButtonSave
             // 
-            calibrationSettingsBar3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            calibrationSettingsBar3.BackColor = Color.FromArgb(235, 235, 235);
-            calibrationSettingsBar3.Dock = DockStyle.Fill;
-            calibrationSettingsBar3.Location = new Point(3, 169);
-            calibrationSettingsBar3.Name = "calibrationSettingsBar3";
-            calibrationSettingsBar3.Padding = new Padding(1);
-            calibrationSettingsBar3.Parameter = "pH";
-            calibrationSettingsBar3.Size = new Size(1148, 58);
-            calibrationSettingsBar3.SpanRef = "";
-            calibrationSettingsBar3.SpanTime = "";
-            calibrationSettingsBar3.TabIndex = 3;
-            calibrationSettingsBar3.ZeroRef = "";
-            calibrationSettingsBar3.ZeroTime = "";
+            ButtonSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ButtonSave.BackColor = Color.White;
+            ButtonSave.FlatAppearance.BorderColor = Color.FromArgb(235, 235, 235);
+            ButtonSave.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
+            ButtonSave.FlatAppearance.MouseOverBackColor = SystemColors.ButtonFace;
+            ButtonSave.FlatStyle = FlatStyle.Flat;
+            ButtonSave.Location = new Point(932, 8);
+            ButtonSave.Margin = new Padding(8);
+            ButtonSave.Name = "ButtonSave";
+            ButtonSave.Size = new Size(224, 43);
+            ButtonSave.TabIndex = 2;
+            ButtonSave.Text = "Kaydet";
+            ButtonSave.UseVisualStyleBackColor = false;
             // 
-            // calibrationSettingsBar4
+            // comboBox1
             // 
-            calibrationSettingsBar4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            calibrationSettingsBar4.BackColor = Color.FromArgb(235, 235, 235);
-            calibrationSettingsBar4.Dock = DockStyle.Fill;
-            calibrationSettingsBar4.Location = new Point(3, 233);
-            calibrationSettingsBar4.Name = "calibrationSettingsBar4";
-            calibrationSettingsBar4.Padding = new Padding(1);
-            calibrationSettingsBar4.Parameter = "İletkenlik";
-            calibrationSettingsBar4.Size = new Size(1148, 58);
-            calibrationSettingsBar4.SpanRef = "";
-            calibrationSettingsBar4.SpanTime = "";
-            calibrationSettingsBar4.TabIndex = 4;
-            calibrationSettingsBar4.ZeroRef = "";
-            calibrationSettingsBar4.ZeroTime = "";
+            comboBox1.Anchor = AnchorStyles.Right;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(365, 217);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(214, 23);
+            comboBox1.TabIndex = 3;
             // 
             // CalibrationSettingsPage
             // 
@@ -175,10 +201,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(1170, 621);
-            Controls.Add(TableLayoutPanelMain);
+            Controls.Add(tableLayoutPanel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "CalibrationSettingsPage";
             Text = "CalibrationSettingsPage";
+            tableLayoutPanel1.ResumeLayout(false);
             TableLayoutPanelMain.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
@@ -186,13 +213,15 @@
 
         #endregion
 
+        private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel TableLayoutPanelMain;
-        private TableLayoutPanel tableLayoutPanel2;
-        private Button ButtonSave;
-        private Components.CalibrationSettingsBar calibrationSettingsBar1;
         private Components.TitleBarControl titleBarControl1;
+        private Components.CalibrationSettingsBar calibrationSettingsBar1;
         private Components.CalibrationSettingsBar calibrationSettingsBar2;
         private Components.CalibrationSettingsBar calibrationSettingsBar4;
         private Components.CalibrationSettingsBar calibrationSettingsBar3;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Button ButtonSave;
+        private ComboBox comboBox1;
     }
 }

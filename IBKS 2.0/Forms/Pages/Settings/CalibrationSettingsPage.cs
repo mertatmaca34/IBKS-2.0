@@ -17,19 +17,30 @@ namespace IBKS_2._0.Forms.Pages.Settings
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            foreach (var item in TableLayoutPanelMain.Controls)
+            try
             {
-                if (item is CalibrationSettingsBar bar)
+                foreach (Control control in TableLayoutPanelMain.Controls)
                 {
-                    _calibrationLimitManager.Add(new CalibrationLimit
+                    if (control is CalibrationSettingsBar calibrationBar)
                     {
-                        Parameter = bar.Parameter,
-                        ZeroRef = Convert.ToInt16(bar.ZeroRef),
-                        ZeroTimeStamp = Convert.ToInt16(bar.ZeroTime),
-                        SpanRef = Convert.ToInt16(bar.SpanRef),
-                        SpanTimeStamp = Convert.ToInt16(bar.SpanTime)
-                    });
+                        CalibrationLimit calibrationLimit = new CalibrationLimit
+                        {
+                            Parameter = calibrationBar.Parameter,
+                            SpanRef = Convert.ToInt16(calibrationBar.SpanRef),
+                            SpanTimeStamp = Convert.ToInt16(calibrationBar.SpanTime),
+                            ZeroRef = Convert.ToInt16(calibrationBar.ZeroRef),
+                            ZeroTimeStamp = Convert.ToInt16(calibrationBar.ZeroTime),
+                        };
+
+                        var res = _calibrationLimitManager.Add(calibrationLimit);
+
+                        MessageBox.Show(res.Message);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

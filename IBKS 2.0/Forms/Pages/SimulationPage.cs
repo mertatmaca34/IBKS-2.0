@@ -106,7 +106,7 @@ namespace IBKS_2._0.Forms.Pages
             {
                 FrameOperations.ChangeFormFrame(this, _systemMaintenance1, _systemMaintenance1);
             }
-            else if (_sharp7Service.S71200?.MBTags?.YikamaVarMi == true && _sharp7Service.S71200?.MBTags?.HaftalikYikamaVarMi == true)
+            else if (_sharp7Service.S71200?.MBTags?.YikamaVarMi == true || _sharp7Service.S71200?.MBTags?.HaftalikYikamaVarMi == true)
             {
                 FrameOperations.ChangeFormFrame(this, _wash1, _wash2);
             }

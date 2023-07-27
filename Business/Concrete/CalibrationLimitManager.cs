@@ -21,25 +21,41 @@ namespace Business.Concrete
         {
             IResult result = BusinessRules.Run(CheckCalibrationLimitExist(calibrationLimit));
 
-            if (result != null)
+            if (result == null)
             {
                 this.Update(calibrationLimit);
+
+                return new SuccessResult(Messages.CalibrationLimitUpdated);
+            }
+            else if (result != null)
+            {
+                _calibrationLimitDal.Add(calibrationLimit);
+
+                return new SuccessResult(Messages.CalibrationLimitAdded);
             }
 
-            _calibrationLimitDal.Add(calibrationLimit);
-
-            return new SuccessResult(Messages.CalibrationLimitAdded);
+            return new ErrorResult(Messages.CalibrationLimitIncompleteInfo);
         }
 
         public IResult Update(CalibrationLimit calibrationLimit)
         {
             IResult result = BusinessRules.Run(CheckCalibrationLimitExist(calibrationLimit));
 
-            if (!result.Success)
+            if (result == null)
             {
-                this.Add(calibrationLimit);
+                var existEntity = _calibrationLimitDal.GetAll().Where(c => c.Parameter == calibrationLimit.Parameter).FirstOrDefault();
+
+                if (existEntity != null)
+                {
+                    calibrationLimit.Id = existEntity.Id;
+
+                    _calibrationLimitDal.Update(calibrationLimit);
+
+                    return new SuccessResult(Messages.CalibrationLimitUpdated);
+                }
             }
-            _calibrationLimitDal.Update(calibrationLimit);
+
+            this.Add(calibrationLimit);
 
             return new SuccessResult(Messages.CalibrationLimitUpdated);
         }
@@ -51,14 +67,23 @@ namespace Business.Concrete
 
         private IResult CheckCalibrationLimitExist(CalibrationLimit calibrationLimit)
         {
-            var result = _calibrationLimitDal.GetAll(a => a == calibrationLimit).Any();
-
-            if (result)
+            if (calibrationLimit != null)
             {
-                return new ErrorResult(Messages.ItsAlreadyExist);
+                var data = _calibrationLimitDal.GetAll();
+
+                var filteredData = data.Where(d => d.Parameter == calibrationLimit.Parameter).FirstOrDefault();
+
+                if (filteredData != null)
+                {
+                    return new SuccessResult();
+                }
+                else
+                {
+                    return new ErrorResult(Messages.DataNotFound);
+                }
             }
 
-            return new SuccessResult();
+            return new ErrorResult(Messages.CalibrationLimitIncompleteInfo);
         }
     }
 }
