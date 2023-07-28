@@ -97,7 +97,7 @@
             stationSettingsControl3.Dock = DockStyle.Fill;
             stationSettingsControl3.Location = new Point(3, 233);
             stationSettingsControl3.Name = "stationSettingsControl3";
-            stationSettingsControl3.Parameter = "ŞİFRE:";
+            stationSettingsControl3.AyarAdi = "ŞİFRE:";
             stationSettingsControl3.Size = new Size(1148, 58);
             stationSettingsControl3.TabIndex = 4;
             // 
@@ -108,7 +108,7 @@
             stationSettingsControl2.Dock = DockStyle.Fill;
             stationSettingsControl2.Location = new Point(3, 169);
             stationSettingsControl2.Name = "stationSettingsControl2";
-            stationSettingsControl2.Parameter = "KULLANICI ADI:";
+            stationSettingsControl2.AyarAdi = "KULLANICI ADI:";
             stationSettingsControl2.Size = new Size(1148, 58);
             stationSettingsControl2.TabIndex = 3;
             // 
@@ -130,7 +130,7 @@
             stationSettingsControl1.Dock = DockStyle.Fill;
             stationSettingsControl1.Location = new Point(3, 41);
             stationSettingsControl1.Name = "stationSettingsControl1";
-            stationSettingsControl1.Parameter = "API URL:";
+            stationSettingsControl1.AyarAdi = "API URL:";
             stationSettingsControl1.Size = new Size(1148, 58);
             stationSettingsControl1.TabIndex = 2;
             // 

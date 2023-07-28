@@ -98,7 +98,7 @@
             stationSettingsControl2.Dock = DockStyle.Fill;
             stationSettingsControl2.Location = new Point(3, 105);
             stationSettingsControl2.Name = "stationSettingsControl2";
-            stationSettingsControl2.Parameter = "SİM ID:";
+            stationSettingsControl2.AyarAdi = "SİM ID:";
             stationSettingsControl2.Size = new Size(1148, 58);
             stationSettingsControl2.TabIndex = 3;
             // 
@@ -120,7 +120,7 @@
             stationSettingsControl1.Dock = DockStyle.Fill;
             stationSettingsControl1.Location = new Point(3, 41);
             stationSettingsControl1.Name = "stationSettingsControl1";
-            stationSettingsControl1.Parameter = "İSTASYON ADI:";
+            stationSettingsControl1.AyarAdi = "İSTASYON ADI:";
             stationSettingsControl1.Size = new Size(1148, 58);
             stationSettingsControl1.TabIndex = 2;
             // 

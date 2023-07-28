@@ -106,7 +106,7 @@
             stationSettingsControl1.Dock = DockStyle.Fill;
             stationSettingsControl1.Location = new Point(3, 41);
             stationSettingsControl1.Name = "stationSettingsControl1";
-            stationSettingsControl1.Parameter = "IP:";
+            stationSettingsControl1.AyarAdi = "IP:";
             stationSettingsControl1.Size = new Size(1148, 58);
             stationSettingsControl1.TabIndex = 2;
             // 
