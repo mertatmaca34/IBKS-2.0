@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
-            istasyonAyarlarıToolStripMenuItem = new ToolStripMenuItem();
-            aPIAyarlarıToolStripMenuItem = new ToolStripMenuItem();
-            plcAyarlarıToolStripMenuItem = new ToolStripMenuItem();
+            ButtonStationSettings = new ToolStripMenuItem();
+            ButtonApiSettings = new ToolStripMenuItem();
+            ButtonPlcSettings = new ToolStripMenuItem();
             ButtonCalibrationSettings = new ToolStripMenuItem();
             PanelContent = new Panel();
             menuStrip1.SuspendLayout();
@@ -40,39 +40,42 @@
             // menuStrip1
             // 
             menuStrip1.BackColor = Color.White;
-            menuStrip1.Items.AddRange(new ToolStripItem[] { istasyonAyarlarıToolStripMenuItem, aPIAyarlarıToolStripMenuItem, plcAyarlarıToolStripMenuItem, ButtonCalibrationSettings });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { ButtonStationSettings, ButtonApiSettings, ButtonPlcSettings, ButtonCalibrationSettings });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1170, 56);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
-            // istasyonAyarlarıToolStripMenuItem
+            // ButtonStationSettings
             // 
-            istasyonAyarlarıToolStripMenuItem.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            istasyonAyarlarıToolStripMenuItem.Image = Properties.Resources.place_marker_48px;
-            istasyonAyarlarıToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
-            istasyonAyarlarıToolStripMenuItem.Name = "istasyonAyarlarıToolStripMenuItem";
-            istasyonAyarlarıToolStripMenuItem.Size = new Size(182, 52);
-            istasyonAyarlarıToolStripMenuItem.Text = "İSTASYON AYARLARI";
+            ButtonStationSettings.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ButtonStationSettings.Image = Properties.Resources.place_marker_48px;
+            ButtonStationSettings.ImageScaling = ToolStripItemImageScaling.None;
+            ButtonStationSettings.Name = "ButtonStationSettings";
+            ButtonStationSettings.Size = new Size(182, 52);
+            ButtonStationSettings.Text = "İSTASYON AYARLARI";
+            ButtonStationSettings.Click += ButtonStationSettings_Click;
             // 
-            // aPIAyarlarıToolStripMenuItem
+            // ButtonApiSettings
             // 
-            aPIAyarlarıToolStripMenuItem.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            aPIAyarlarıToolStripMenuItem.Image = Properties.Resources.rest_api_48px;
-            aPIAyarlarıToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
-            aPIAyarlarıToolStripMenuItem.Name = "aPIAyarlarıToolStripMenuItem";
-            aPIAyarlarıToolStripMenuItem.Size = new Size(133, 52);
-            aPIAyarlarıToolStripMenuItem.Text = "API Ayarları";
+            ButtonApiSettings.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ButtonApiSettings.Image = Properties.Resources.rest_api_48px;
+            ButtonApiSettings.ImageScaling = ToolStripItemImageScaling.None;
+            ButtonApiSettings.Name = "ButtonApiSettings";
+            ButtonApiSettings.Size = new Size(133, 52);
+            ButtonApiSettings.Text = "API Ayarları";
+            ButtonApiSettings.Click += ButtonApiSettings_Click;
             // 
-            // plcAyarlarıToolStripMenuItem
+            // ButtonPlcSettings
             // 
-            plcAyarlarıToolStripMenuItem.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            plcAyarlarıToolStripMenuItem.Image = Properties.Resources.electronics_48px;
-            plcAyarlarıToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
-            plcAyarlarıToolStripMenuItem.Name = "plcAyarlarıToolStripMenuItem";
-            plcAyarlarıToolStripMenuItem.Size = new Size(132, 52);
-            plcAyarlarıToolStripMenuItem.Text = "Plc Ayarları";
+            ButtonPlcSettings.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ButtonPlcSettings.Image = Properties.Resources.electronics_48px;
+            ButtonPlcSettings.ImageScaling = ToolStripItemImageScaling.None;
+            ButtonPlcSettings.Name = "ButtonPlcSettings";
+            ButtonPlcSettings.Size = new Size(132, 52);
+            ButtonPlcSettings.Text = "Plc Ayarları";
+            ButtonPlcSettings.Click += ButtonPlcSettings_Click;
             // 
             // ButtonCalibrationSettings
             // 
@@ -113,9 +116,9 @@
         #endregion
 
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem istasyonAyarlarıToolStripMenuItem;
-        private ToolStripMenuItem aPIAyarlarıToolStripMenuItem;
-        private ToolStripMenuItem plcAyarlarıToolStripMenuItem;
+        private ToolStripMenuItem ButtonStationSettings;
+        private ToolStripMenuItem ButtonApiSettings;
+        private ToolStripMenuItem ButtonPlcSettings;
         private ToolStripMenuItem ButtonCalibrationSettings;
         private Panel PanelContent;
     }

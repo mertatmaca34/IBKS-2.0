@@ -1,6 +1,6 @@
 ﻿namespace IBKS_2._0.Forms.Pages.Settings
 {
-    partial class StationSettingsPage
+    partial class PlcSettingsPage
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,6 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             TableLayoutPanelMain = new TableLayoutPanel();
             ButtonSave = new Button();
-            stationSettingsControl2 = new Components.StationSettingsControl();
             titleBarControl1 = new Components.TitleBarControl();
             stationSettingsControl1 = new Components.StationSettingsControl();
             tableLayoutPanel1.SuspendLayout();
@@ -50,16 +49,15 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Size = new Size(1170, 621);
-            tableLayoutPanel1.TabIndex = 1;
+            tableLayoutPanel1.TabIndex = 2;
             // 
             // TableLayoutPanelMain
             // 
             TableLayoutPanelMain.ColumnCount = 1;
             TableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            TableLayoutPanelMain.Controls.Add(ButtonSave, 0, 3);
-            TableLayoutPanelMain.Controls.Add(stationSettingsControl2, 0, 2);
             TableLayoutPanelMain.Controls.Add(titleBarControl1, 0, 0);
             TableLayoutPanelMain.Controls.Add(stationSettingsControl1, 0, 1);
+            TableLayoutPanelMain.Controls.Add(ButtonSave, 0, 2);
             TableLayoutPanelMain.Dock = DockStyle.Fill;
             TableLayoutPanelMain.Location = new Point(8, 8);
             TableLayoutPanelMain.Margin = new Padding(8);
@@ -82,25 +80,13 @@
             ButtonSave.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
             ButtonSave.FlatAppearance.MouseOverBackColor = SystemColors.ButtonFace;
             ButtonSave.ForeColor = Color.White;
-            ButtonSave.Location = new Point(930, 174);
+            ButtonSave.Location = new Point(930, 110);
             ButtonSave.Margin = new Padding(8, 8, 0, 8);
             ButtonSave.Name = "ButtonSave";
             ButtonSave.Size = new Size(224, 43);
             ButtonSave.TabIndex = 3;
             ButtonSave.Text = "Kaydet";
             ButtonSave.UseVisualStyleBackColor = false;
-            ButtonSave.Click += ButtonSave_Click;
-            // 
-            // stationSettingsControl2
-            // 
-            stationSettingsControl2.AyarDegeri = "";
-            stationSettingsControl2.BackColor = Color.FromArgb(235, 235, 235);
-            stationSettingsControl2.Dock = DockStyle.Fill;
-            stationSettingsControl2.Location = new Point(3, 105);
-            stationSettingsControl2.Name = "stationSettingsControl2";
-            stationSettingsControl2.Parameter = "SİM ID:";
-            stationSettingsControl2.Size = new Size(1148, 58);
-            stationSettingsControl2.TabIndex = 3;
             // 
             // titleBarControl1
             // 
@@ -111,7 +97,7 @@
             titleBarControl1.Padding = new Padding(1);
             titleBarControl1.Size = new Size(1148, 32);
             titleBarControl1.TabIndex = 1;
-            titleBarControl1.TitleBarText = "İSTASYON AYARLARI";
+            titleBarControl1.TitleBarText = "PLC AYARLARI";
             // 
             // stationSettingsControl1
             // 
@@ -120,11 +106,11 @@
             stationSettingsControl1.Dock = DockStyle.Fill;
             stationSettingsControl1.Location = new Point(3, 41);
             stationSettingsControl1.Name = "stationSettingsControl1";
-            stationSettingsControl1.Parameter = "İSTASYON ADI:";
+            stationSettingsControl1.Parameter = "IP:";
             stationSettingsControl1.Size = new Size(1148, 58);
             stationSettingsControl1.TabIndex = 2;
             // 
-            // StationSettingsPage
+            // PlcSettingsPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -132,8 +118,8 @@
             ClientSize = new Size(1170, 621);
             Controls.Add(tableLayoutPanel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "StationSettingsPage";
-            Text = "StationSettingsPage";
+            Name = "PlcSettingsPage";
+            Text = "PlcSettingsPage";
             tableLayoutPanel1.ResumeLayout(false);
             TableLayoutPanelMain.ResumeLayout(false);
             ResumeLayout(false);
@@ -142,10 +128,9 @@
         #endregion
 
         private TableLayoutPanel tableLayoutPanel1;
-        private Button ButtonSave;
         private TableLayoutPanel TableLayoutPanelMain;
+        private Button ButtonSave;
         private Components.TitleBarControl titleBarControl1;
         private Components.StationSettingsControl stationSettingsControl1;
-        private Components.StationSettingsControl stationSettingsControl2;
     }
 }

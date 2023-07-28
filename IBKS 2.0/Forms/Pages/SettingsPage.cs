@@ -19,5 +19,20 @@ namespace IBKS_2._0.Forms.Pages
         {
             PageChange.Change(PanelContent, this, new CalibrationSettingsPage(_calibrationLimitManager));
         }
+
+        private void ButtonStationSettings_Click(object sender, EventArgs e)
+        {
+            PageChange.Change(PanelContent, this, new StationSettingsPage());
+        }
+
+        private void ButtonApiSettings_Click(object sender, EventArgs e)
+        {
+            PageChange.Change(PanelContent, this, new ApiSettingsPage());
+        }
+
+        private void ButtonPlcSettings_Click(object sender, EventArgs e)
+        {
+            PageChange.Change(PanelContent, this, new PlcSettingsPage());
+        }
     }
 }

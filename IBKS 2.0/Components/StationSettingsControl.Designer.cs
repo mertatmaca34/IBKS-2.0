@@ -76,13 +76,13 @@
             // 
             // textBox1
             // 
-            textBox1.Dock = DockStyle.Fill;
+            textBox1.Anchor = AnchorStyles.None;
             textBox1.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox1.Location = new Point(505, 3);
-            textBox1.Multiline = true;
+            textBox1.Location = new Point(505, 19);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(487, 54);
+            textBox1.Size = new Size(487, 22);
             textBox1.TabIndex = 5;
+            textBox1.TextAlign = HorizontalAlignment.Center;
             // 
             // StationSettingsControl
             // 

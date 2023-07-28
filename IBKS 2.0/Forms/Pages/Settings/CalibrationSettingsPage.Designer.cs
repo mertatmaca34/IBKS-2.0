@@ -58,10 +58,11 @@
             // ButtonSave
             // 
             ButtonSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            ButtonSave.BackColor = Color.White;
+            ButtonSave.BackColor = Color.FromArgb(0, 131, 200);
             ButtonSave.FlatAppearance.BorderColor = Color.FromArgb(235, 235, 235);
             ButtonSave.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
             ButtonSave.FlatAppearance.MouseOverBackColor = SystemColors.ButtonFace;
+            ButtonSave.ForeColor = Color.White;
             ButtonSave.Location = new Point(938, 318);
             ButtonSave.Margin = new Padding(8);
             ButtonSave.Name = "ButtonSave";
