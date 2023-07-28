@@ -6,7 +6,7 @@ namespace Business.Abstract
 {
     public interface IStationService
     {
-        IDataResult<Station> Get(Expression<Func<Station, bool>> filter);
+        IDataResult<Station> Get();
         IResult Add(Station station);
         IResult Update(Station station);
     }

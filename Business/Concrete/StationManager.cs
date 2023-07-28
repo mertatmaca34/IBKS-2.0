@@ -4,7 +4,6 @@ using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using System.Linq.Expressions;
 
 namespace Business.Concrete
 {
@@ -37,9 +36,9 @@ namespace Business.Concrete
             return new ErrorResult(Messages.IncompleteInfo);
         }
 
-        public IDataResult<Station> Get(Expression<Func<Station, bool>> filter)
+        public IDataResult<Station> Get()
         {
-            return new SuccessDataResult<Station>(_stationDal.Get(filter));
+            return new SuccessDataResult<Station>(_stationDal.Get(s => s.Id == 1));
         }
 
 

@@ -3,19 +3,14 @@ using Business.Constants;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
     public class PlcManager : IPlcService
     {
-        IPlcDal _plcDal;
+        readonly IPlcDal _plcDal;
+
         public PlcManager(IPlcDal plcDal)
         {
             _plcDal = plcDal;
@@ -25,47 +20,70 @@ namespace Business.Concrete
         {
             IResult result = BusinessRules.Run(CheckPlcExist(plc));
 
-            if (result != null)
+            if (result == null)
             {
-                _plcDal.Update(plc);
+                this.Update(plc);
 
                 return new SuccessResult(Messages.PlcUpdated);
             }
-
-            _plcDal.Add(plc);
-
-            return new SuccessResult(Messages.PlcAdded);
-        }
-
-        public IDataResult<Plc> Get()
-        {
-            return new SuccessDataResult<Plc>(_plcDal.Get(p => p.Id == 1));
-        }
-
-        public IResult Update(Plc plc)
-        {
-            IResult result = BusinessRules.Run(CheckPlcExist(plc));
-
-            if (!result.Success)
+            else if (result != null)
             {
                 _plcDal.Add(plc);
 
                 return new SuccessResult(Messages.PlcAdded);
             }
-            _plcDal.Update(plc);
+
+            return new ErrorResult(Messages.IncompleteInfo);
+        }
+
+        public IDataResult<Plc> Get()
+        {
+            return new SuccessDataResult<Plc>(_plcDal.Get(s => s.Id == 1));
+        }
+
+
+        public IResult Update(Plc plc)
+        {
+            IResult result = BusinessRules.Run(CheckPlcExist(plc));
+
+            if (result == null)
+            {
+                var existEntity = _plcDal.GetAll().Where(c => c.Id == 1).FirstOrDefault();
+
+                if (existEntity != null)
+                {
+                    plc.Id = existEntity.Id;
+
+                    _plcDal.Update(plc);
+
+                    return new SuccessResult(Messages.PlcUpdated);
+                }
+            }
+
+            this.Add(plc);
 
             return new SuccessResult(Messages.PlcUpdated);
         }
+
         private IResult CheckPlcExist(Plc plc)
         {
-            var result = _plcDal.GetAll(p => p == plc).Any();
-
-            if (result)
+            if (plc != null)
             {
-                return new ErrorResult(Messages.ItsAlreadyExist);
+                var data = _plcDal.GetAll();
+
+                var filteredData = data.Where(d => d.Id == 1).FirstOrDefault();
+
+                if (filteredData != null)
+                {
+                    return new SuccessResult();
+                }
+                else
+                {
+                    return new ErrorResult(Messages.DataNotFound);
+                }
             }
 
-            return new SuccessResult();
+            return new ErrorResult(Messages.IncompleteInfo);
         }
     }
 }

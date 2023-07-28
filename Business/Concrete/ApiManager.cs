@@ -10,6 +10,7 @@ namespace Business.Concrete
     public class ApiManager : IApiService
     {
         readonly IApiDal _apiDal;
+
         public ApiManager(IApiDal apiDal)
         {
             _apiDal = apiDal;
@@ -19,44 +20,70 @@ namespace Business.Concrete
         {
             IResult result = BusinessRules.Run(CheckApiExist(api));
 
-            if(result != null)
+            if (result == null)
             {
                 this.Update(api);
+
+                return new SuccessResult(Messages.ApiUpdated);
+            }
+            else if (result != null)
+            {
+                _apiDal.Add(api);
+
+                return new SuccessResult(Messages.ApiAdded);
             }
 
-            _apiDal.Add(api);
-
-            return new SuccessResult(Messages.ApiAdded);
+            return new ErrorResult(Messages.IncompleteInfo);
         }
+
+        public IDataResult<Api> Get()
+        {
+            return new SuccessDataResult<Api>(_apiDal.Get(s => s.Id == 1));
+        }
+
 
         public IResult Update(Api api)
         {
             IResult result = BusinessRules.Run(CheckApiExist(api));
 
-            if (!result.Success)
+            if (result == null)
             {
-                this.Add(api);
+                var existEntity = _apiDal.GetAll().Where(c => c.Id == 1).FirstOrDefault();
+
+                if (existEntity != null)
+                {
+                    api.Id = existEntity.Id;
+
+                    _apiDal.Update(api);
+
+                    return new SuccessResult(Messages.ApiUpdated);
+                }
             }
-            _apiDal.Update(api);
+
+            this.Add(api);
 
             return new SuccessResult(Messages.ApiUpdated);
-        }
-        
-        public IDataResult<Api> Get()
-        {
-            return new SuccessDataResult<Api>(_apiDal.Get(a => a.Id == 1));
         }
 
         private IResult CheckApiExist(Api api)
         {
-            var result = _apiDal.GetAll(a => a == api).Any();
-
-            if (result)
+            if (api != null)
             {
-                return new ErrorResult(Messages.ItsAlreadyExist);
+                var data = _apiDal.GetAll();
+
+                var filteredData = data.Where(d => d.Id == 1).FirstOrDefault();
+
+                if (filteredData != null)
+                {
+                    return new SuccessResult();
+                }
+                else
+                {
+                    return new ErrorResult(Messages.DataNotFound);
+                }
             }
 
-            return new SuccessResult();
+            return new ErrorResult(Messages.IncompleteInfo);
         }
     }
 }
