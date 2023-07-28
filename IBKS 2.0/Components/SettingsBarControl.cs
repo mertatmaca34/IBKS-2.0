@@ -2,7 +2,7 @@
 
 namespace IBKS_2._0.Components
 {
-    public partial class StationSettingsControl : UserControl
+    public partial class SettingsBarControl : UserControl
     {
         [Description("Ayar Adı"), Category("IBKS")]
         public string AyarAdi
@@ -18,7 +18,7 @@ namespace IBKS_2._0.Components
             set => textBox1.Text = value;
         }
 
-        public StationSettingsControl()
+        public SettingsBarControl()
         {
             InitializeComponent();
         }

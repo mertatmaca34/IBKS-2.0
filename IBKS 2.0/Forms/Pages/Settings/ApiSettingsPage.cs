@@ -1,15 +1,39 @@
-﻿namespace IBKS_2._0.Forms.Pages.Settings
+﻿using Business.Abstract;
+using Business.Constants;
+using Entities.Concrete;
+
+namespace IBKS_2._0.Forms.Pages.Settings
 {
     public partial class ApiSettingsPage : Form
     {
-        public ApiSettingsPage()
+        private readonly IApiService _apiManager;
+
+        public ApiSettingsPage(IApiService apiService)
         {
+            _apiManager = apiService;
+
             InitializeComponent();
         }
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Api api = new()
+                {
+                    ApiAdress = SettingsControlApiUrl.AyarDegeri,
+                    UserName = SettingsControlUsername.AyarDegeri,
+                    Password = SettingsControlPassword.AyarDegeri,
+                };
 
+                var res = _apiManager.Add(api);
+
+                MessageBox.Show(res.Message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Messages.CalibrationLimitIncompleteInfo);
+            }
         }
     }
 }

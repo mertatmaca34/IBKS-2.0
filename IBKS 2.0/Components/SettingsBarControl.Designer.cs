@@ -1,6 +1,6 @@
 ﻿namespace IBKS_2._0.Components
 {
-    partial class StationSettingsControl
+    partial class SettingsBarControl
     {
         /// <summary> 
         ///Gerekli tasarımcı değişkeni.

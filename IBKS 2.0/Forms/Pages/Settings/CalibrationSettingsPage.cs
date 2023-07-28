@@ -24,7 +24,7 @@ namespace IBKS_2._0.Forms.Pages.Settings
                 {
                     if (control is CalibrationSettingsBar calibrationBar)
                     {
-                        CalibrationLimit calibrationLimit = new CalibrationLimit
+                        CalibrationLimit calibrationLimit = new()
                         {
                             Parameter = calibrationBar.Parameter,
                             SpanRef = Convert.ToInt16(calibrationBar.SpanRef),

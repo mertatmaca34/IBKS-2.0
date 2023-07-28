@@ -31,10 +31,10 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             TableLayoutPanelMain = new TableLayoutPanel();
             titleBarControl2 = new Components.TitleBarControl();
-            stationSettingsControl3 = new Components.StationSettingsControl();
-            stationSettingsControl2 = new Components.StationSettingsControl();
+            SettingsControlPassword = new Components.SettingsBarControl();
+            SettingsControlUsername = new Components.SettingsBarControl();
             titleBarControl1 = new Components.TitleBarControl();
-            stationSettingsControl1 = new Components.StationSettingsControl();
+            SettingsControlApiUrl = new Components.SettingsBarControl();
             ButtonSave = new Button();
             tableLayoutPanel1.SuspendLayout();
             TableLayoutPanelMain.SuspendLayout();
@@ -60,10 +60,10 @@
             TableLayoutPanelMain.ColumnCount = 1;
             TableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             TableLayoutPanelMain.Controls.Add(titleBarControl2, 0, 2);
-            TableLayoutPanelMain.Controls.Add(stationSettingsControl3, 0, 4);
-            TableLayoutPanelMain.Controls.Add(stationSettingsControl2, 0, 3);
+            TableLayoutPanelMain.Controls.Add(SettingsControlPassword, 0, 4);
+            TableLayoutPanelMain.Controls.Add(SettingsControlUsername, 0, 3);
             TableLayoutPanelMain.Controls.Add(titleBarControl1, 0, 0);
-            TableLayoutPanelMain.Controls.Add(stationSettingsControl1, 0, 1);
+            TableLayoutPanelMain.Controls.Add(SettingsControlApiUrl, 0, 1);
             TableLayoutPanelMain.Dock = DockStyle.Fill;
             TableLayoutPanelMain.Location = new Point(8, 8);
             TableLayoutPanelMain.Margin = new Padding(8);
@@ -90,27 +90,27 @@
             titleBarControl2.TabIndex = 5;
             titleBarControl2.TitleBarText = "GİRİŞ BİLGİLERİ";
             // 
-            // stationSettingsControl3
+            // SettingsControlPassword
             // 
-            stationSettingsControl3.AyarDegeri = "";
-            stationSettingsControl3.BackColor = Color.FromArgb(235, 235, 235);
-            stationSettingsControl3.Dock = DockStyle.Fill;
-            stationSettingsControl3.Location = new Point(3, 233);
-            stationSettingsControl3.Name = "stationSettingsControl3";
-            stationSettingsControl3.AyarAdi = "ŞİFRE:";
-            stationSettingsControl3.Size = new Size(1148, 58);
-            stationSettingsControl3.TabIndex = 4;
+            SettingsControlPassword.AyarAdi = "ŞİFRE:";
+            SettingsControlPassword.AyarDegeri = "";
+            SettingsControlPassword.BackColor = Color.FromArgb(235, 235, 235);
+            SettingsControlPassword.Dock = DockStyle.Fill;
+            SettingsControlPassword.Location = new Point(3, 233);
+            SettingsControlPassword.Name = "SettingsControlPassword";
+            SettingsControlPassword.Size = new Size(1148, 58);
+            SettingsControlPassword.TabIndex = 4;
             // 
-            // stationSettingsControl2
+            // SettingsControlUsername
             // 
-            stationSettingsControl2.AyarDegeri = "";
-            stationSettingsControl2.BackColor = Color.FromArgb(235, 235, 235);
-            stationSettingsControl2.Dock = DockStyle.Fill;
-            stationSettingsControl2.Location = new Point(3, 169);
-            stationSettingsControl2.Name = "stationSettingsControl2";
-            stationSettingsControl2.AyarAdi = "KULLANICI ADI:";
-            stationSettingsControl2.Size = new Size(1148, 58);
-            stationSettingsControl2.TabIndex = 3;
+            SettingsControlUsername.AyarAdi = "KULLANICI ADI:";
+            SettingsControlUsername.AyarDegeri = "";
+            SettingsControlUsername.BackColor = Color.FromArgb(235, 235, 235);
+            SettingsControlUsername.Dock = DockStyle.Fill;
+            SettingsControlUsername.Location = new Point(3, 169);
+            SettingsControlUsername.Name = "SettingsControlUsername";
+            SettingsControlUsername.Size = new Size(1148, 58);
+            SettingsControlUsername.TabIndex = 3;
             // 
             // titleBarControl1
             // 
@@ -123,16 +123,16 @@
             titleBarControl1.TabIndex = 1;
             titleBarControl1.TitleBarText = "API AYARLARI";
             // 
-            // stationSettingsControl1
+            // SettingsControlApiUrl
             // 
-            stationSettingsControl1.AyarDegeri = "";
-            stationSettingsControl1.BackColor = Color.FromArgb(235, 235, 235);
-            stationSettingsControl1.Dock = DockStyle.Fill;
-            stationSettingsControl1.Location = new Point(3, 41);
-            stationSettingsControl1.Name = "stationSettingsControl1";
-            stationSettingsControl1.AyarAdi = "API URL:";
-            stationSettingsControl1.Size = new Size(1148, 58);
-            stationSettingsControl1.TabIndex = 2;
+            SettingsControlApiUrl.AyarAdi = "API URL:";
+            SettingsControlApiUrl.AyarDegeri = "";
+            SettingsControlApiUrl.BackColor = Color.FromArgb(235, 235, 235);
+            SettingsControlApiUrl.Dock = DockStyle.Fill;
+            SettingsControlApiUrl.Location = new Point(3, 41);
+            SettingsControlApiUrl.Name = "SettingsControlApiUrl";
+            SettingsControlApiUrl.Size = new Size(1148, 58);
+            SettingsControlApiUrl.TabIndex = 2;
             // 
             // ButtonSave
             // 
@@ -171,10 +171,10 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel TableLayoutPanelMain;
         private Button ButtonSave;
-        private Components.StationSettingsControl stationSettingsControl2;
+        private Components.SettingsBarControl SettingsControlUsername;
         private Components.TitleBarControl titleBarControl1;
-        private Components.StationSettingsControl stationSettingsControl1;
-        private Components.StationSettingsControl stationSettingsControl3;
+        private Components.SettingsBarControl SettingsControlApiUrl;
+        private Components.SettingsBarControl SettingsControlPassword;
         private Components.TitleBarControl titleBarControl2;
     }
 }

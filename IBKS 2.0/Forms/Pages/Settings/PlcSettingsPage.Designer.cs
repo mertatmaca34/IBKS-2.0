@@ -32,7 +32,7 @@
             TableLayoutPanelMain = new TableLayoutPanel();
             ButtonSave = new Button();
             titleBarControl1 = new Components.TitleBarControl();
-            stationSettingsControl1 = new Components.StationSettingsControl();
+            stationSettingsControl1 = new Components.SettingsBarControl();
             tableLayoutPanel1.SuspendLayout();
             TableLayoutPanelMain.SuspendLayout();
             SuspendLayout();
@@ -131,6 +131,6 @@
         private TableLayoutPanel TableLayoutPanelMain;
         private Button ButtonSave;
         private Components.TitleBarControl titleBarControl1;
-        private Components.StationSettingsControl stationSettingsControl1;
+        private Components.SettingsBarControl stationSettingsControl1;
     }
 }
