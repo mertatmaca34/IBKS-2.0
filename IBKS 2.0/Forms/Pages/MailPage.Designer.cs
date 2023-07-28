@@ -28,16 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
             SuspendLayout();
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(273, 108);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(155, 23);
-            comboBox1.TabIndex = 0;
             // 
             // MailPage
             // 
@@ -45,7 +36,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(800, 450);
-            Controls.Add(comboBox1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "MailPage";
             Text = "MailPage";
@@ -53,7 +43,5 @@
         }
 
         #endregion
-
-        private ComboBox comboBox1;
     }
 }

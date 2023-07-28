@@ -286,7 +286,6 @@ namespace IBKS_2._0.Forms.Pages
             button6.BackColor = Color.FromArgb(0, 131, 200);
             button6.Dock = DockStyle.Fill;
             button6.FlatAppearance.BorderSize = 0;
-            button6.FlatStyle = FlatStyle.Flat;
             button6.ForeColor = Color.White;
             button6.Location = new Point(395, 15);
             button6.Margin = new Padding(15);
@@ -405,7 +404,6 @@ namespace IBKS_2._0.Forms.Pages
             button7.BackColor = Color.FromArgb(0, 131, 200);
             button7.Dock = DockStyle.Fill;
             button7.FlatAppearance.BorderSize = 0;
-            button7.FlatStyle = FlatStyle.Flat;
             button7.ForeColor = Color.White;
             button7.Location = new Point(485, 15);
             button7.Margin = new Padding(10, 15, 15, 15);
@@ -467,7 +465,6 @@ namespace IBKS_2._0.Forms.Pages
             button8.BackColor = Color.FromArgb(0, 131, 200);
             button8.Dock = DockStyle.Fill;
             button8.FlatAppearance.BorderSize = 0;
-            button8.FlatStyle = FlatStyle.Flat;
             button8.ForeColor = Color.White;
             button8.Location = new Point(395, 15);
             button8.Margin = new Padding(15, 15, 10, 15);
@@ -595,7 +592,6 @@ namespace IBKS_2._0.Forms.Pages
             button4.BackColor = Color.FromArgb(0, 131, 200);
             button4.Dock = DockStyle.Fill;
             button4.FlatAppearance.BorderSize = 0;
-            button4.FlatStyle = FlatStyle.Flat;
             button4.ForeColor = Color.White;
             button4.Location = new Point(485, 15);
             button4.Margin = new Padding(10, 15, 15, 15);
@@ -657,7 +653,6 @@ namespace IBKS_2._0.Forms.Pages
             button5.BackColor = Color.FromArgb(0, 131, 200);
             button5.Dock = DockStyle.Fill;
             button5.FlatAppearance.BorderSize = 0;
-            button5.FlatStyle = FlatStyle.Flat;
             button5.ForeColor = Color.White;
             button5.Location = new Point(395, 15);
             button5.Margin = new Padding(15, 15, 10, 15);
@@ -824,7 +819,6 @@ namespace IBKS_2._0.Forms.Pages
             button1.BackColor = Color.FromArgb(0, 131, 200);
             button1.Dock = DockStyle.Fill;
             button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.White;
             button1.Location = new Point(395, 15);
             button1.Margin = new Padding(15);

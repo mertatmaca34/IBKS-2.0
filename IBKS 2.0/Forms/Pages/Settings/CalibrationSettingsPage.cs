@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Entities.Concrete;
 using IBKS_2._0.Components;
 
@@ -34,13 +35,13 @@ namespace IBKS_2._0.Forms.Pages.Settings
 
                         var res = _calibrationLimitManager.Add(calibrationLimit);
 
-                        MessageBox.Show(res.Message);
+                        MessageBox.Show($"{calibrationBar.Parameter}: {res.Message}");
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(Messages.CalibrationLimitIncompleteInfo);
             }
         }
     }
