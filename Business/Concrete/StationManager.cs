@@ -4,63 +4,87 @@ using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using System.Linq.Expressions;
 
 namespace Business.Concrete
 {
     public class StationManager : IStationService
     {
         readonly IStationDal _stationDal;
+
         public StationManager(IStationDal stationDal)
         {
             _stationDal = stationDal;
         }
+
         public IResult Add(Station station)
         {
             IResult result = BusinessRules.Run(CheckStationExist(station));
 
-            if (result != null)
+            if (result == null)
             {
                 this.Update(station);
+
+                return new SuccessResult(Messages.StationUpdated);
+            }
+            else if (result != null)
+            {
+                _stationDal.Add(station);
+
+                return new SuccessResult(Messages.StationAdded);
             }
 
-            _stationDal.Add(station);
-
-            return new SuccessResult(Messages.StationAdded);
+            return new ErrorResult(Messages.IncompleteInfo);
         }
+
+        public IDataResult<Station> Get(Expression<Func<Station, bool>> filter)
+        {
+            return new SuccessDataResult<Station>(_stationDal.Get(filter));
+        }
+
 
         public IResult Update(Station station)
         {
             IResult result = BusinessRules.Run(CheckStationExist(station));
 
-            if (!result.Success)
+            if (result == null)
             {
-                this.Add(station);
+                var existEntity = _stationDal.GetAll().Where(c => c.Id == 1).FirstOrDefault();
+
+                if (existEntity != null)
+                {
+                    station.Id = existEntity.Id;
+
+                    _stationDal.Update(station);
+
+                    return new SuccessResult(Messages.StationUpdated);
+                }
             }
-            _stationDal.Update(station);
+
+            this.Add(station);
 
             return new SuccessResult(Messages.StationUpdated);
         }
 
-        public IDataResult<Station> Get()
-        {
-            var result = _stationDal.Get(s => s.Id == 1);
-
-            if (result != null)
-                return new SuccessDataResult<Station>(result);
-
-            return new ErrorDataResult<Station>(Messages.StationIsNotDefined);
-        }
-
         private IResult CheckStationExist(Station station)
         {
-            var result = _stationDal.GetAll(s => s == station).Any();
-
-            if (result)
+            if (station != null)
             {
-                return new ErrorResult(Messages.ItsAlreadyExist);
+                var data = _stationDal.GetAll();
+
+                var filteredData = data.Where(d => d.Id == 1).FirstOrDefault();
+
+                if (filteredData != null)
+                {
+                    return new SuccessResult();
+                }
+                else
+                {
+                    return new ErrorResult(Messages.DataNotFound);
+                }
             }
 
-            return new SuccessResult();
+            return new ErrorResult(Messages.IncompleteInfo);
         }
     }
 }

@@ -27,6 +27,8 @@
         public static string DB41Updated = "Data başarıyla güncellendi";
         public static string DB41Deleted = "Data başarıyla silindi";
 
+        public static string IncompleteInfo = "Lütfen bilgileri tam şekilde girin";
+
         public static string MailServerAdded = "Mail sunucu bilgileri başarıyla eklendi";
         public static string MailServerUpdated = "Seçili mail sunucu bilgileri başarıyla güncellendi";
 
