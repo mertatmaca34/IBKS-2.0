@@ -121,7 +121,7 @@
             titleBarControl1.Padding = new Padding(1);
             titleBarControl1.Size = new Size(1148, 32);
             titleBarControl1.TabIndex = 1;
-            titleBarControl1.TitleBarText = "İSTASYON AYARLARI";
+            titleBarControl1.TitleBarText = "API AYARLARI";
             // 
             // stationSettingsControl1
             // 

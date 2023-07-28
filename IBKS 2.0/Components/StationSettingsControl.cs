@@ -5,7 +5,7 @@ namespace IBKS_2._0.Components
     public partial class StationSettingsControl : UserControl
     {
         [Description("Ayar Adı"), Category("IBKS")]
-        public string Parameter
+        public string AyarAdi
         {
             get => LabelParameter.Text;
             set => LabelParameter.Text = value;
