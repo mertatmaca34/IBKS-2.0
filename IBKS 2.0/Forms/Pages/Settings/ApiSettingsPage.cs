@@ -15,6 +15,18 @@ namespace IBKS_2._0.Forms.Pages.Settings
             InitializeComponent();
         }
 
+        private void ApiSettingsPage_Load(object sender, EventArgs e)
+        {
+            var result = _apiManager.Get();
+
+            if (result.Success)
+            {
+                SettingsControlApiUrl.AyarDegeri = result.Data.ApiAdress;
+                SettingsControlUsername.AyarDegeri = result.Data.UserName;
+                SettingsControlPassword.AyarDegeri = result.Data.Password;
+            }
+        }
+
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             try
@@ -35,5 +47,6 @@ namespace IBKS_2._0.Forms.Pages.Settings
                 MessageBox.Show(Messages.CalibrationLimitIncompleteInfo);
             }
         }
+
     }
 }

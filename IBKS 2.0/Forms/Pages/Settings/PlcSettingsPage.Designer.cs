@@ -30,9 +30,9 @@
         {
             tableLayoutPanel1 = new TableLayoutPanel();
             TableLayoutPanelMain = new TableLayoutPanel();
-            ButtonSave = new Button();
             titleBarControl1 = new Components.TitleBarControl();
             stationSettingsControl1 = new Components.SettingsBarControl();
+            ButtonSave = new Button();
             tableLayoutPanel1.SuspendLayout();
             TableLayoutPanelMain.SuspendLayout();
             SuspendLayout();
@@ -72,6 +72,28 @@
             TableLayoutPanelMain.Size = new Size(1154, 294);
             TableLayoutPanelMain.TabIndex = 0;
             // 
+            // titleBarControl1
+            // 
+            titleBarControl1.BackColor = Color.FromArgb(235, 235, 235);
+            titleBarControl1.Dock = DockStyle.Fill;
+            titleBarControl1.Location = new Point(3, 3);
+            titleBarControl1.Name = "titleBarControl1";
+            titleBarControl1.Padding = new Padding(1);
+            titleBarControl1.Size = new Size(1148, 32);
+            titleBarControl1.TabIndex = 1;
+            titleBarControl1.TitleBarText = "PLC AYARLARI";
+            // 
+            // stationSettingsControl1
+            // 
+            stationSettingsControl1.AyarAdi = "IP:";
+            stationSettingsControl1.AyarDegeri = "";
+            stationSettingsControl1.BackColor = Color.FromArgb(235, 235, 235);
+            stationSettingsControl1.Dock = DockStyle.Fill;
+            stationSettingsControl1.Location = new Point(3, 41);
+            stationSettingsControl1.Name = "stationSettingsControl1";
+            stationSettingsControl1.Size = new Size(1148, 58);
+            stationSettingsControl1.TabIndex = 2;
+            // 
             // ButtonSave
             // 
             ButtonSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -88,28 +110,6 @@
             ButtonSave.Text = "Kaydet";
             ButtonSave.UseVisualStyleBackColor = false;
             // 
-            // titleBarControl1
-            // 
-            titleBarControl1.BackColor = Color.FromArgb(235, 235, 235);
-            titleBarControl1.Dock = DockStyle.Fill;
-            titleBarControl1.Location = new Point(3, 3);
-            titleBarControl1.Name = "titleBarControl1";
-            titleBarControl1.Padding = new Padding(1);
-            titleBarControl1.Size = new Size(1148, 32);
-            titleBarControl1.TabIndex = 1;
-            titleBarControl1.TitleBarText = "PLC AYARLARI";
-            // 
-            // stationSettingsControl1
-            // 
-            stationSettingsControl1.AyarDegeri = "";
-            stationSettingsControl1.BackColor = Color.FromArgb(235, 235, 235);
-            stationSettingsControl1.Dock = DockStyle.Fill;
-            stationSettingsControl1.Location = new Point(3, 41);
-            stationSettingsControl1.Name = "stationSettingsControl1";
-            stationSettingsControl1.AyarAdi = "IP:";
-            stationSettingsControl1.Size = new Size(1148, 58);
-            stationSettingsControl1.TabIndex = 2;
-            // 
             // PlcSettingsPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -120,6 +120,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "PlcSettingsPage";
             Text = "PlcSettingsPage";
+            Load += PlcSettingsPage_Load;
             tableLayoutPanel1.ResumeLayout(false);
             TableLayoutPanelMain.ResumeLayout(false);
             ResumeLayout(false);

@@ -1,12 +1,13 @@
-﻿using Business.Constants;
+﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net.Http;
 using System.Text;
 using WebAPI.Enums;
+using WebAPI.Utils;
 
 namespace WebAPI.Controllers
 {
@@ -14,16 +15,19 @@ namespace WebAPI.Controllers
     [ApiController]
     public class SendDataController : ControllerBase
     {
+        readonly IApiService _apiManager;
+
         private readonly HttpClient _httpClient;
-        private const string ApiBaseUrl = "https://entegrationsais.csb.gov.tr";
 
-        readonly Task<ResultStatus<LoginResult>> _loginTask;
+        private string _apiBaseUrl;
 
-        public SendDataController()
+        public SendDataController(IApiService apiManager)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri(ApiBaseUrl) };
+            _apiManager = apiManager;
 
-            _loginTask = new LoginController().Login("istanbul_pasakoy", "1q2w3e");
+            _httpClient = new HttpClient();
+
+            _ = new LoginController().Login("istanbul_pasakoy", "1q2w3e");
         }
 
         [HttpPost]
@@ -31,35 +35,32 @@ namespace WebAPI.Controllers
         {
             try
             {
-                // JSON verisini dönüştürme ve HTTP içeriği ayarlama
                 var content = new StringContent(
                     JsonConvert.SerializeObject(data),
                     Encoding.UTF8,
                     "application/json"
                 );
 
-                // API'ye POST isteği gönderme
-                _httpClient.BaseAddress = new Uri(ApiBaseUrl); // Set the base address
-                _httpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = Constants.Constants.TicketId.ToString()!}));
+                var resAssign = Assigns.AssignHttpClient(_apiManager, _apiBaseUrl, _httpClient);
 
-                var response = await _httpClient.PostAsync(StationType.SAIS.ToString() + "/SendData", content);
+                if (resAssign.Success)
+                {
+                    var response = await _httpClient.PostAsync(StationType.SAIS.ToString() + "/SendData", content);
 
-                // İsteğin başarı durumunu kontrol edin (isteğe göre yapılabilir)
-                response.EnsureSuccessStatusCode();
+                    response.EnsureSuccessStatusCode();
 
-                // API'den dönen cevabı alın
-                var responseContent = await response.Content.ReadAsStringAsync();
+                    var responseContent = await response.Content.ReadAsStringAsync();
 
-                var desResponseContent = JsonConvert.DeserializeObject<SendDataResult>(responseContent);
+                    var desResponseContent = JsonConvert.DeserializeObject<SendDataResult>(responseContent)!;
 
-                return new SuccessDataResult<SendDataResult>(desResponseContent,Messages.ApiSendDataSuccces);
+                    return new SuccessDataResult<SendDataResult>(desResponseContent, Messages.ApiSendDataSuccces);
+                }
 
+                return new ErrorDataResult<SendDataResult>(null, Messages.ApiSendDataFault);
             }
             catch (HttpRequestException ex)
             {
-                // İstisna durumları yönetme (isteğe göre yapılabilir)
-                // Hata durumunda nasıl bir davranış sergileyeceğinize karar verin
-                return new ErrorDataResult<SendDataResult>(null,Messages.ApiSendDataFault);
+                return new ErrorDataResult<SendDataResult>(null, Messages.ApiSendDataFault);
             }
         }
 

@@ -10,24 +10,24 @@ namespace IBKS_2._0.Forms
         readonly SimulationPage _simulationPage;
 
         readonly IStationService _stationManager;
-        //readonly IApiConnection _apiConnection;
+        readonly IApiService _apiManager;
         readonly ISendDataService _sendDataManager;
         readonly ICalibrationService _calibrationManager;
         readonly ICalibrationLimitService _calibrationLimitManager;
-        readonly IApiService _apiManager;
 
-        public Main(IStationService stationManager, /*IApiConnection apiConnection,*/ ISendDataService sendDataManager, ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager, IApiService apiManager)
+        public Main(IStationService stationManager, IApiService apiManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager)
         {
             InitializeComponent();
 
             _apiManager = apiManager;
+
             _stationManager = stationManager;
             //_apiConnection = apiConnection;
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
             _calibrationLimitManager = calibrationLimitManager;
 
-            _homePage = new HomePage(_stationManager, /*_apiConnection,*/ _sendDataManager, _calibrationManager);
+            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager);
 
             _simulationPage = new SimulationPage();
         }

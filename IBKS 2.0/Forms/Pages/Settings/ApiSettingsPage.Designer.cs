@@ -161,6 +161,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "ApiSettingsPage";
             Text = "ApiSettingsPage";
+            Load += ApiSettingsPage_Load;
             tableLayoutPanel1.ResumeLayout(false);
             TableLayoutPanelMain.ResumeLayout(false);
             ResumeLayout(false);

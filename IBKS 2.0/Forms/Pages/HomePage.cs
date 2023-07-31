@@ -17,14 +17,16 @@ namespace IBKS_2._0.Forms.Pages
         readonly IStationService _stationManager;
         readonly ISendDataService _sendDataManager;
         readonly ICalibrationService _calibrationManager;
+        readonly IApiService _apiManager;
 
-        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager)
+        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, IApiService apiManager)
         {
+            InitializeComponent();
+
+            _apiManager = apiManager;
             _stationManager = stationManager;
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
-
-            InitializeComponent();
         }
 
         private void TimerAssignUI_Tick(object sender, EventArgs e)
@@ -45,13 +47,13 @@ namespace IBKS_2._0.Forms.Pages
 
         private void SendDataAndAssignStatationInfoControl()
         {
-            if (SendDataHelper.IsItTime().Success)
-            {
-                var data = DataProcessingHelper.MergedSendData(_stationManager);
+            var data = DataProcessingHelper.MergedSendData(_stationManager);
 
-                if (data.Success)
+            if (data.Success)
+            {
+                if (SendDataHelper.IsItTime().Success)
                 {
-                    var res = new SendDataController().SendData(data.Data);
+                    var res = new SendDataController(_apiManager).SendData(data.Data);
 
                     if (res.Result.Success)
                     {

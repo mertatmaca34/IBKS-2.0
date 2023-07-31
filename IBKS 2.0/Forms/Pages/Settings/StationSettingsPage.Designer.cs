@@ -31,9 +31,9 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             TableLayoutPanelMain = new TableLayoutPanel();
             ButtonSave = new Button();
-            stationSettingsControl2 = new Components.SettingsBarControl();
+            StationSettingsControlStationId = new Components.SettingsBarControl();
             titleBarControl1 = new Components.TitleBarControl();
-            stationSettingsControl1 = new Components.SettingsBarControl();
+            StationSettingsControlStationName = new Components.SettingsBarControl();
             tableLayoutPanel1.SuspendLayout();
             TableLayoutPanelMain.SuspendLayout();
             SuspendLayout();
@@ -57,9 +57,9 @@
             TableLayoutPanelMain.ColumnCount = 1;
             TableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             TableLayoutPanelMain.Controls.Add(ButtonSave, 0, 3);
-            TableLayoutPanelMain.Controls.Add(stationSettingsControl2, 0, 2);
+            TableLayoutPanelMain.Controls.Add(StationSettingsControlStationId, 0, 2);
             TableLayoutPanelMain.Controls.Add(titleBarControl1, 0, 0);
-            TableLayoutPanelMain.Controls.Add(stationSettingsControl1, 0, 1);
+            TableLayoutPanelMain.Controls.Add(StationSettingsControlStationName, 0, 1);
             TableLayoutPanelMain.Dock = DockStyle.Fill;
             TableLayoutPanelMain.Location = new Point(8, 8);
             TableLayoutPanelMain.Margin = new Padding(8);
@@ -91,16 +91,16 @@
             ButtonSave.UseVisualStyleBackColor = false;
             ButtonSave.Click += ButtonSave_Click;
             // 
-            // stationSettingsControl2
+            // StationSettingsControlStationId
             // 
-            stationSettingsControl2.AyarDegeri = "";
-            stationSettingsControl2.BackColor = Color.FromArgb(235, 235, 235);
-            stationSettingsControl2.Dock = DockStyle.Fill;
-            stationSettingsControl2.Location = new Point(3, 105);
-            stationSettingsControl2.Name = "stationSettingsControl2";
-            stationSettingsControl2.AyarAdi = "SİM ID:";
-            stationSettingsControl2.Size = new Size(1148, 58);
-            stationSettingsControl2.TabIndex = 3;
+            StationSettingsControlStationId.AyarAdi = "İSTASYON ID:";
+            StationSettingsControlStationId.AyarDegeri = "";
+            StationSettingsControlStationId.BackColor = Color.FromArgb(235, 235, 235);
+            StationSettingsControlStationId.Dock = DockStyle.Fill;
+            StationSettingsControlStationId.Location = new Point(3, 105);
+            StationSettingsControlStationId.Name = "StationSettingsControlStationId";
+            StationSettingsControlStationId.Size = new Size(1148, 58);
+            StationSettingsControlStationId.TabIndex = 3;
             // 
             // titleBarControl1
             // 
@@ -113,16 +113,16 @@
             titleBarControl1.TabIndex = 1;
             titleBarControl1.TitleBarText = "İSTASYON AYARLARI";
             // 
-            // stationSettingsControl1
+            // StationSettingsControlStationName
             // 
-            stationSettingsControl1.AyarDegeri = "";
-            stationSettingsControl1.BackColor = Color.FromArgb(235, 235, 235);
-            stationSettingsControl1.Dock = DockStyle.Fill;
-            stationSettingsControl1.Location = new Point(3, 41);
-            stationSettingsControl1.Name = "stationSettingsControl1";
-            stationSettingsControl1.AyarAdi = "İSTASYON ADI:";
-            stationSettingsControl1.Size = new Size(1148, 58);
-            stationSettingsControl1.TabIndex = 2;
+            StationSettingsControlStationName.AyarAdi = "İSTASYON ADI:";
+            StationSettingsControlStationName.AyarDegeri = "";
+            StationSettingsControlStationName.BackColor = Color.FromArgb(235, 235, 235);
+            StationSettingsControlStationName.Dock = DockStyle.Fill;
+            StationSettingsControlStationName.Location = new Point(3, 41);
+            StationSettingsControlStationName.Name = "StationSettingsControlStationName";
+            StationSettingsControlStationName.Size = new Size(1148, 58);
+            StationSettingsControlStationName.TabIndex = 2;
             // 
             // StationSettingsPage
             // 
@@ -134,6 +134,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "StationSettingsPage";
             Text = "StationSettingsPage";
+            Load += StationSettingsPage_Load;
             tableLayoutPanel1.ResumeLayout(false);
             TableLayoutPanelMain.ResumeLayout(false);
             ResumeLayout(false);
@@ -145,7 +146,7 @@
         private Button ButtonSave;
         private TableLayoutPanel TableLayoutPanelMain;
         private Components.TitleBarControl titleBarControl1;
-        private Components.SettingsBarControl stationSettingsControl1;
-        private Components.SettingsBarControl stationSettingsControl2;
+        private Components.SettingsBarControl StationSettingsControlStationName;
+        private Components.SettingsBarControl StationSettingsControlStationId;
     }
 }
