@@ -1,11 +1,12 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using System.Linq.Expressions;
 
 namespace Business.Abstract
 {
     public interface ICalibrationService
     {
-        IDataResult<List<Calibration>> GetAll();
+        IDataResult<List<Calibration>> GetAll(Expression<Func<Calibration, bool>> filter = null);
         IResult Add(Calibration calibration);
         IDataResult<List<Calibration>> GetByDateTime(DateTime startTime, DateTime endTime);
         IDataResult<List<Calibration>> GetPhCalibrations();

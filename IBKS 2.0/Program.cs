@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OfficeOpenXml;
 
 namespace IBKS_2._0
 {
@@ -19,6 +20,8 @@ namespace IBKS_2._0
         [STAThread]
         static void Main(string[] args)
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             var host = CreateHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())

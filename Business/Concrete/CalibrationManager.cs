@@ -6,6 +6,7 @@ using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using System.Linq.Expressions;
 
 namespace Business.Concrete
 {
@@ -30,9 +31,16 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CalibrationAdded);
         }
 
-        public IDataResult<List<Calibration>> GetAll()
+        public IDataResult<List<Calibration>> GetAll(Expression<Func<Calibration, bool>> filter = null)
         {
-            return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll());
+            var dataResult = _calibrationDal.GetAll(filter);
+
+            if (dataResult.Count > 0)
+            {
+                return new SuccessDataResult<List<Calibration>>();
+            }
+
+            return new ErrorDataResult<List<Calibration>>(Messages.DataNotFound);
         }
 
         [ValidationAspect(typeof(CalibrationValidator))]
@@ -50,12 +58,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Calibration>> GetIletkenlikCalibrations()
         {
-            return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(c=> c.Parameter == "Iletkenlik"));
+            return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(c => c.Parameter == "Iletkenlik"));
         }
 
         public IDataResult<List<Calibration>> GetPhCalibrations()
         {
-            return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(c=> c.Parameter == "Ph"));
+            return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(c => c.Parameter == "Ph"));
         }
 
         private IResult CheckIfDateTimeInCorrect(DateTime startTime, DateTime endTime)

@@ -293,6 +293,16 @@ namespace IBKS_2._0.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap microsoft_excel_2019_32px {
+            get {
+                object obj = ResourceManager.GetObject("microsoft_excel_2019_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap minimize_button_24px {
             get {
                 object obj = ResourceManager.GetObject("minimize_button_24px", resourceCulture);
@@ -306,6 +316,16 @@ namespace IBKS_2._0.Properties {
         internal static System.Drawing.Bitmap monitor_24px {
             get {
                 object obj = ResourceManager.GetObject("monitor_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap pdf_32px {
+            get {
+                object obj = ResourceManager.GetObject("pdf_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
