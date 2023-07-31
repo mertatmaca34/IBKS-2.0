@@ -43,7 +43,7 @@ namespace IBKS_2._0.Forms.Pages
             {
                 if (_loginTask.IsCompleted)
                 {
-                    MessageBox.Show(_loginTask.Result.objects.TicketId.ToString());
+                    MessageBox.Show(_loginTask.Result.objects.TicketId.ToString();
                     //MessageBox.Show(_loginTask.Result.message);
 
                     /*Guid? ticketId = _loginTask.Result.TicketId;
