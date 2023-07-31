@@ -9,14 +9,16 @@ namespace IBKS_2._0.Forms.Pages
         readonly ICalibrationLimitService _calibrationLimitManager;
         readonly IApiService _apiManager;
         readonly IStationService _stationManager;
+        readonly IPlcService _plcManager;
 
-        public SettingsPage(ICalibrationLimitService calibrationLimitManager, IApiService apiManager, IStationService stationManager)
+        public SettingsPage(ICalibrationLimitService calibrationLimitManager, IApiService apiManager, IStationService stationManager, IPlcService plcManager)
         {
             InitializeComponent();
 
             _apiManager = apiManager;
             _calibrationLimitManager = calibrationLimitManager;
             _stationManager = stationManager;
+            _plcManager = plcManager;
         }
 
         private void ButtonCalibrationSettings_Click(object sender, EventArgs e)
@@ -36,7 +38,7 @@ namespace IBKS_2._0.Forms.Pages
 
         private void ButtonPlcSettings_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new PlcSettingsPage());
+            PageChange.Change(PanelContent, this, new PlcSettingsPage(_plcManager));
         }
     }
 }
