@@ -3,7 +3,7 @@ using PLC.Sharp7.Utils;
 using Sharp7;
 using System.ComponentModel;
 
-namespace PLC.Sharp7
+namespace PLC.Sharp7.Services
 {
     public class Sharp7Service
     {

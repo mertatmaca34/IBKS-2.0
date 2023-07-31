@@ -1,6 +1,6 @@
-﻿using PLC.Sharp7;
+﻿using PLC.Sharp7.Services;
 
-namespace Business.Helpers
+namespace PLC.Sharp7.Helpers
 {
     public static class GetSystemStatus
     {

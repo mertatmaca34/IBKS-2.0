@@ -1,4 +1,4 @@
-﻿using PLC.Sharp7;
+﻿using PLC.Sharp7.Services;
 
 namespace PLC
 {

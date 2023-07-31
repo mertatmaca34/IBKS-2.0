@@ -1,5 +1,5 @@
-﻿using Business.Helpers;
-using PLC.Sharp7;
+﻿using PLC.Sharp7.Helpers;
+using PLC.Sharp7.Services;
 
 namespace IBKS_2._0.Utils
 {

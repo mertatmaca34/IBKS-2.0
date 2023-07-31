@@ -2,9 +2,8 @@
 using Business.Helpers;
 using Core.Utilities.Results;
 using Entities.Concrete;
-using PLC.Sharp7;
 
-namespace Business.Services
+namespace PLC.Sharp7.Services
 {
     public class CalibrationService
     {
@@ -14,7 +13,7 @@ namespace Business.Services
 
         CalibrationLimit _calibrationLimit;
 
-        List<double> _measurementValues = new List<double>();
+        List<double> _measurementValues = new();
 
         public CalibrationService(ICalibrationLimitService calibrationManager)
         {

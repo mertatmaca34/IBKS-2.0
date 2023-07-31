@@ -2,9 +2,9 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using Entities.Concrete;
-using PLC.Sharp7;
+using PLC.Sharp7.Services;
 
-namespace Business.Helpers
+namespace PLC.Sharp7.Helpers
 {
     public static class DataProcessingHelper
     {

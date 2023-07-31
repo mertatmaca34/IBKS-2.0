@@ -1,8 +1,8 @@
 ﻿using Business.Enums;
-using Business.Helpers;
 using IBKS_2._0.Properties;
 using IBKS_2._0.Utils;
-using PLC.Sharp7;
+using PLC.Sharp7.Helpers;
+using PLC.Sharp7.Services;
 using System.ComponentModel;
 
 namespace IBKS_2._0.Forms.Pages

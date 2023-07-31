@@ -1,6 +1,6 @@
-﻿using PLC.Sharp7;
+﻿using PLC.Sharp7.Services;
 
-namespace Business.Helpers
+namespace PLC.Sharp7.Helpers
 {
     public static class ActivePump
     {
@@ -10,7 +10,7 @@ namespace Business.Helpers
         {
             get
             {
-                if(_sharp7Service.S71200.DB41.Pompa1Hz > 0)
+                if (_sharp7Service.S71200.DB41.Pompa1Hz > 0)
                 {
                     return $"{_sharp7Service.S71200.DB41.Pompa1Hz} Hz";
                 }
@@ -28,7 +28,7 @@ namespace Business.Helpers
         {
             get
             {
-                if(_sharp7Service.S71200.DB41.Pompa1Hz > 0)
+                if (_sharp7Service.S71200.DB41.Pompa1Hz > 0)
                 {
                     return "POMPA 1";
                 }
