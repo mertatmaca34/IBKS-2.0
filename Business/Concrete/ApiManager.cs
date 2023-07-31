@@ -38,9 +38,15 @@ namespace Business.Concrete
 
         public IDataResult<Api> Get()
         {
-            return new SuccessDataResult<Api>(_apiDal.Get(s => s.Id == 1));
-        }
+            var data = _apiDal.Get(s => s.Id == 1);
 
+            if(data != null)
+            {
+                return new SuccessDataResult<Api>(data);
+            }
+
+            return new ErrorDataResult<Api>();
+        }
 
         public IResult Update(Api api)
         {

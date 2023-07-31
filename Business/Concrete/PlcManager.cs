@@ -3,6 +3,7 @@ using Business.Constants;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 
 namespace Business.Concrete
@@ -38,7 +39,14 @@ namespace Business.Concrete
 
         public IDataResult<Plc> Get()
         {
-            return new SuccessDataResult<Plc>(_plcDal.Get(s => s.Id == 1));
+            var data = _plcDal.Get(p => p.Id == 1);
+
+            if (data != null)
+            {
+                return new SuccessDataResult<Plc>(data);
+            }
+
+            return new ErrorDataResult<Plc>();
         }
 
 
