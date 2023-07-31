@@ -21,17 +21,13 @@ namespace IBKS_2._0.Forms.Pages
         readonly ISendDataService _sendDataManager;
         readonly ICalibrationService _calibrationManager;
 
-        Task<ResultStatus<LoginResult>> _loginTask;
         public HomePage(IStationService stationManager, /*IApiConnection apiConnection,*/ ISendDataService sendDataManager, ICalibrationService calibrationManager)
         {
             _stationManager = stationManager;
             //_apiConnection = apiConnection;
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
-
             //_apiConnection.Login("istanbul_pasakoy", "1q2w3e");
-
-            _loginTask = new LoginController().Login("istanbul_pasakoy", "1q2w3e");
 
             InitializeComponent();
         }
@@ -41,15 +37,6 @@ namespace IBKS_2._0.Forms.Pages
             var bgw = new BackgroundWorker();
             bgw.DoWork += delegate
             {
-                if (_loginTask.IsCompleted)
-                {
-                    MessageBox.Show(_loginTask.Result.objects.TicketId.ToString();
-                    //MessageBox.Show(_loginTask.Result.message);
-
-                    /*Guid? ticketId = _loginTask.Result.TicketId;
-                    MessageBox.Show(ticketId.ToString());*/
-                }
-                
                 AssignAnalogSensors();
                 AssignDigitalSensors();
                 AssignStatusBar();

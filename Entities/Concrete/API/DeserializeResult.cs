@@ -1,6 +1,6 @@
 ﻿namespace Entities.Concrete.API
 {
-    public class DeserializeResult
+    public class SendDataResult
     {
         public int Period { get; set; }
         public DateTime ReadTime { get; set; }

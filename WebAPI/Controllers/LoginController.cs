@@ -45,7 +45,11 @@ namespace WebAPI.Controllers
                 // API'den dönen cevabı alın
                 var responseContent = await response.Content.ReadAsStringAsync();
 
-                return JsonConvert.DeserializeObject<ResultStatus<LoginResult>>(responseContent);
+                var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<LoginResult>>(responseContent);
+
+                Constants.Constants.TicketId = desResponseContent.objects.TicketId;
+
+                return desResponseContent;
 
                 /*var result = JsonConvert.DeserializeObject<LoginResult>(desResponseContent.objects.ToString());
 

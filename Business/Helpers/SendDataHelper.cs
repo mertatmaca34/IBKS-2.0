@@ -2,7 +2,6 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using Entities.Concrete.API;
-using Newtonsoft.Json;
 using WebAPI.Controllers;
 
 namespace Business.Helpers
@@ -12,8 +11,8 @@ namespace Business.Helpers
         private static SendDataController sendDataController = new SendDataController();
 
         private static int LastMinute { get; set; }
-        
-        public static IDataResult<DeserializeResult> SendData(ISendDataService sendDataManager, IStationService stationManager)
+
+        public static IDataResult<SendDataResult> SendData(ISendDataService sendDataManager, IStationService stationManager)
         {
             if (LastMinute != DateTime.Now.Minute)
             {
@@ -21,22 +20,21 @@ namespace Business.Helpers
 
                 if (mergedDataRes.Success)
                 {
-                    //var apiRes = sendDataController.Post(mergedDataRes.Data);
+                    var apiRes = sendDataController.SendData(mergedDataRes.Data);
 
-                    /*if (apiRes.result)
-                    {*/
-                        /*string apiObject = apiRes.objects.ToString()!;
+                    if (apiRes.IsCompleted)
+                    {
+                        if (apiRes.IsCompletedSuccessfully)
+                        {
+                            sendDataManager.Add(mergedDataRes.Data);
 
-                        var deserializededObject = JsonConvert.DeserializeObject<DeserializeResult>(apiObject);*/
+                            LastMinute = DateTime.Now.Minute;
 
-                        sendDataManager.Add(mergedDataRes.Data);
+                            return new SuccessDataResult<SendDataResult>(apiRes.Result!);
+                        }
+                    }
 
-                        LastMinute = DateTime.Now.Minute;
-
-                        //return new SuccessDataResult<DeserializeResult>(deserializededObject!);
-                    /*}*/
-
-                    //return new ErrorDataResult<DeserializeResult>(apiRes.message);
+                    return new ErrorDataResult<SendDataResult>(apiRes.Exception.ToString());
                 }
 
                 return new ErrorDataResult<DeserializeResult>(mergedDataRes.Message);

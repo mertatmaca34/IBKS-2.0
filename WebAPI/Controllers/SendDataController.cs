@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using WebAPI.Enums;
 
 namespace WebAPI.Controllers
 {
@@ -11,12 +12,10 @@ namespace WebAPI.Controllers
     [ApiController]
     public class SendDataController : ControllerBase
     {
-        private Guid? TicketId { get; set; }
-
         private readonly HttpClient _httpClient;
         private const string ApiBaseUrl = "https://entegrationsais.csb.gov.tr";
 
-        Task<ResultStatus<LoginResult>> _loginTask;
+        readonly Task<ResultStatus<LoginResult>> _loginTask;
 
         public SendDataController()
         {
@@ -26,21 +25,22 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendData([FromBody] SendData jsonData)
+        public async Task<SendDataResult> SendData([FromBody] SendData data)
         {
             try
             {
-                _loginTask.Result.objects.TicketId.ToString();
-
                 // JSON verisini dönüştürme ve HTTP içeriği ayarlama
                 var content = new StringContent(
-                    JsonConvert.SerializeObject(jsonData),
+                    JsonConvert.SerializeObject(data),
                     Encoding.UTF8,
                     "application/json"
                 );
 
                 // API'ye POST isteği gönderme
-                var response = await _httpClient.PostAsync("/SendData", content);
+                _httpClient.BaseAddress = new Uri(ApiBaseUrl); // Set the base address
+                _httpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = Constants.Constants.TicketId.ToString()!}));
+
+                var response = await _httpClient.PostAsync(StationType.SAIS.ToString() + "/SendData", content);
 
                 // İsteğin başarı durumunu kontrol edin (isteğe göre yapılabilir)
                 response.EnsureSuccessStatusCode();
@@ -48,13 +48,16 @@ namespace WebAPI.Controllers
                 // API'den dönen cevabı alın
                 var responseContent = await response.Content.ReadAsStringAsync();
 
-                return Ok(responseContent);
+                var desResponseContent = JsonConvert.DeserializeObject<SendDataResult>(responseContent);
+
+                return desResponseContent;
+
             }
             catch (HttpRequestException ex)
             {
                 // İstisna durumları yönetme (isteğe göre yapılabilir)
                 // Hata durumunda nasıl bir davranış sergileyeceğinize karar verin
-                return BadRequest(ex.Message);
+                return new SendDataResult();
             }
         }
 
