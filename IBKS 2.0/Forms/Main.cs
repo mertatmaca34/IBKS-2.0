@@ -1,5 +1,4 @@
-﻿using API.Abstract;
-using Business.Abstract;
+﻿using Business.Abstract;
 using IBKS_2._0.Forms.Pages;
 using IBKS_2._0.Utils;
 
@@ -11,24 +10,26 @@ namespace IBKS_2._0.Forms
         readonly SimulationPage _simulationPage;
 
         readonly IStationService _stationManager;
-        readonly IApiConnection _apiConnection;
+        //readonly IApiConnection _apiConnection;
         readonly ISendDataService _sendDataManager;
         readonly ICalibrationService _calibrationManager;
         readonly ICalibrationLimitService _calibrationLimitManager;
+        readonly IApiService _apiManager;
 
-        public Main(IStationService stationManager, IApiConnection apiConnection, ISendDataService sendDataManager, ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager)
+        public Main(IStationService stationManager, /*IApiConnection apiConnection,*/ ISendDataService sendDataManager, ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager, IApiService apiManager)
         {
+            InitializeComponent();
+
+            _apiManager = apiManager;
             _stationManager = stationManager;
-            _apiConnection = apiConnection;
+            //_apiConnection = apiConnection;
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
             _calibrationLimitManager = calibrationLimitManager;
 
-            _homePage = new HomePage(_stationManager, _apiConnection, _sendDataManager, _calibrationManager);
+            _homePage = new HomePage(_stationManager, /*_apiConnection,*/ _sendDataManager, _calibrationManager);
 
             _simulationPage = new SimulationPage();
-
-            InitializeComponent();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -69,7 +70,7 @@ namespace IBKS_2._0.Forms
 
         private void ButtonSettingPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager));
+            PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager, _apiManager));
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
         }
 

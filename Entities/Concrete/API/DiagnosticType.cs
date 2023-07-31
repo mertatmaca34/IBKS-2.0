@@ -1,4 +1,4 @@
-﻿namespace API.Models
+﻿namespace Entities.Concrete.API
 {
     public class DiagnosticType
     {

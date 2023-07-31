@@ -1,17 +1,19 @@
-﻿using API.Abstract;
-using API.Models;
-using Business.Abstract;
+﻿using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
+using Entities.Concrete.API;
 using Newtonsoft.Json;
+using WebAPI.Controllers;
 
 namespace Business.Helpers
 {
     public static class SendDataHelper
     {
-        private static int LastMinute { get; set; }
+        private static SendDataController sendDataController = new SendDataController();
 
-        public static IDataResult<DeserializeResult> SendData(ISendDataService sendDataManager, IStationService stationManager, IApiConnection apiConnection)
+        private static int LastMinute { get; set; }
+        
+        public static IDataResult<DeserializeResult> SendData(ISendDataService sendDataManager, IStationService stationManager)
         {
             if (LastMinute != DateTime.Now.Minute)
             {
@@ -19,22 +21,22 @@ namespace Business.Helpers
 
                 if (mergedDataRes.Success)
                 {
-                    var apiRes = apiConnection.SendData(mergedDataRes.Data);
+                    //var apiRes = sendDataController.Post(mergedDataRes.Data);
 
-                    if (apiRes.result)
-                    {
-                        string apiObject = apiRes.objects.ToString()!;
+                    /*if (apiRes.result)
+                    {*/
+                        /*string apiObject = apiRes.objects.ToString()!;
 
-                        var deserializededObject = JsonConvert.DeserializeObject<DeserializeResult>(apiObject);
+                        var deserializededObject = JsonConvert.DeserializeObject<DeserializeResult>(apiObject);*/
 
                         sendDataManager.Add(mergedDataRes.Data);
 
                         LastMinute = DateTime.Now.Minute;
 
-                        return new SuccessDataResult<DeserializeResult>(deserializededObject!);
-                    }
+                        //return new SuccessDataResult<DeserializeResult>(deserializededObject!);
+                    /*}*/
 
-                    return new ErrorDataResult<DeserializeResult>(apiRes.message);
+                    //return new ErrorDataResult<DeserializeResult>(apiRes.message);
                 }
 
                 return new ErrorDataResult<DeserializeResult>(mergedDataRes.Message);

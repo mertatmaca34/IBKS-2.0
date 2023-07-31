@@ -1,4 +1,4 @@
-﻿namespace API.Enums
+﻿namespace WebAPI.Enums
 {
     public enum StationType
     {

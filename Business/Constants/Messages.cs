@@ -23,6 +23,9 @@
 
         public static string DataNotFound = "Veri Yok";
 
+        public static string DataSent = "Data başarıyla gönderildi";
+        public static string DataNotSent = "Data gönderilemedi";
+
         public static string DB41Added = "Data başarıyla eklendi";
         public static string DB41Updated = "Data başarıyla güncellendi";
         public static string DB41Deleted = "Data başarıyla silindi";

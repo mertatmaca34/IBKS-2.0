@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace API.Models
+﻿namespace Entities.Concrete.API
 {
     public class Diagnostic
     {

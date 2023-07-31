@@ -1,12 +1,14 @@
-﻿using API.Abstract;
-using API.Models;
-using Business.Abstract;
+﻿using Business.Abstract;
 using Business.Helpers;
 using Core.Utilities.Results;
+using Entities.Concrete;
+using Entities.Concrete.API;
 using IBKS_2._0.Utils;
+using Newtonsoft.Json;
 using PLC;
 using PLC.Sharp7;
 using System.ComponentModel;
+using WebAPI.Controllers;
 
 namespace IBKS_2._0.Forms.Pages
 {
@@ -15,18 +17,21 @@ namespace IBKS_2._0.Forms.Pages
         readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
         readonly IStationService _stationManager;
-        readonly IApiConnection _apiConnection;
+        //readonly IApiConnection _apiConnection;
         readonly ISendDataService _sendDataManager;
         readonly ICalibrationService _calibrationManager;
 
-        public HomePage(IStationService stationManager, IApiConnection apiConnection, ISendDataService sendDataManager, ICalibrationService calibrationManager)
+        Task<ResultStatus<LoginResult>> _loginTask;
+        public HomePage(IStationService stationManager, /*IApiConnection apiConnection,*/ ISendDataService sendDataManager, ICalibrationService calibrationManager)
         {
             _stationManager = stationManager;
-            _apiConnection = apiConnection;
+            //_apiConnection = apiConnection;
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
 
-            _apiConnection.Login("istanbul_pasakoy", "1q2w3e");
+            //_apiConnection.Login("istanbul_pasakoy", "1q2w3e");
+
+            _loginTask = new LoginController().Login("istanbul_pasakoy", "1q2w3e");
 
             InitializeComponent();
         }
@@ -36,13 +41,22 @@ namespace IBKS_2._0.Forms.Pages
             var bgw = new BackgroundWorker();
             bgw.DoWork += delegate
             {
+                if (_loginTask.IsCompleted)
+                {
+                    MessageBox.Show(_loginTask.Result.objects.TicketId.ToString());
+                    //MessageBox.Show(_loginTask.Result.message);
+
+                    /*Guid? ticketId = _loginTask.Result.TicketId;
+                    MessageBox.Show(ticketId.ToString());*/
+                }
+                
                 AssignAnalogSensors();
                 AssignDigitalSensors();
                 AssignStatusBar();
                 AssignAnalogSensorStatements();
                 AssignAverageOfLast60Minutes();
                 AssignSystemStatement();
-                AssignStationInfoControl(SendDataHelper.SendData(_sendDataManager, _stationManager, _apiConnection));
+                AssignStationInfoControl(SendDataHelper.SendData(_sendDataManager, _stationManager));
 
             }; bgw.RunWorkerAsync();
         }

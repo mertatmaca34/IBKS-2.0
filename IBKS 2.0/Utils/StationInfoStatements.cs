@@ -1,8 +1,8 @@
-﻿using API.Models;
-using Business.Abstract;
+﻿using Business.Abstract;
 using Business.Constants;
 using Business.Helpers;
 using Core.Utilities.Results;
+using Entities.Concrete.API;
 using IBKS_2._0.Components;
 
 namespace IBKS_2._0.Utils
