@@ -31,7 +31,7 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             TableLayoutPanelMain = new TableLayoutPanel();
             titleBarControl1 = new Components.TitleBarControl();
-            stationSettingsControl1 = new Components.SettingsBarControl();
+            PlcSettingsControlIp = new Components.SettingsBarControl();
             ButtonSave = new Button();
             tableLayoutPanel1.SuspendLayout();
             TableLayoutPanelMain.SuspendLayout();
@@ -56,7 +56,7 @@
             TableLayoutPanelMain.ColumnCount = 1;
             TableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             TableLayoutPanelMain.Controls.Add(titleBarControl1, 0, 0);
-            TableLayoutPanelMain.Controls.Add(stationSettingsControl1, 0, 1);
+            TableLayoutPanelMain.Controls.Add(PlcSettingsControlIp, 0, 1);
             TableLayoutPanelMain.Controls.Add(ButtonSave, 0, 2);
             TableLayoutPanelMain.Dock = DockStyle.Fill;
             TableLayoutPanelMain.Location = new Point(8, 8);
@@ -83,16 +83,16 @@
             titleBarControl1.TabIndex = 1;
             titleBarControl1.TitleBarText = "PLC AYARLARI";
             // 
-            // stationSettingsControl1
+            // PlcSettingsControlIp
             // 
-            stationSettingsControl1.AyarAdi = "IP:";
-            stationSettingsControl1.AyarDegeri = "";
-            stationSettingsControl1.BackColor = Color.FromArgb(235, 235, 235);
-            stationSettingsControl1.Dock = DockStyle.Fill;
-            stationSettingsControl1.Location = new Point(3, 41);
-            stationSettingsControl1.Name = "stationSettingsControl1";
-            stationSettingsControl1.Size = new Size(1148, 58);
-            stationSettingsControl1.TabIndex = 2;
+            PlcSettingsControlIp.AyarAdi = "IP:";
+            PlcSettingsControlIp.AyarDegeri = "";
+            PlcSettingsControlIp.BackColor = Color.FromArgb(235, 235, 235);
+            PlcSettingsControlIp.Dock = DockStyle.Fill;
+            PlcSettingsControlIp.Location = new Point(3, 41);
+            PlcSettingsControlIp.Name = "PlcSettingsControlIp";
+            PlcSettingsControlIp.Size = new Size(1148, 58);
+            PlcSettingsControlIp.TabIndex = 2;
             // 
             // ButtonSave
             // 
@@ -109,6 +109,7 @@
             ButtonSave.TabIndex = 3;
             ButtonSave.Text = "Kaydet";
             ButtonSave.UseVisualStyleBackColor = false;
+            ButtonSave.Click += ButtonSave_Click;
             // 
             // PlcSettingsPage
             // 
@@ -132,6 +133,6 @@
         private TableLayoutPanel TableLayoutPanelMain;
         private Button ButtonSave;
         private Components.TitleBarControl titleBarControl1;
-        private Components.SettingsBarControl stationSettingsControl1;
+        private Components.SettingsBarControl PlcSettingsControlIp;
     }
 }
