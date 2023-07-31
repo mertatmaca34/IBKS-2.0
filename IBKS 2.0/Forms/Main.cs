@@ -70,7 +70,7 @@ namespace IBKS_2._0.Forms
 
         private void ButtonSettingPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager, _apiManager));
+            PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager, _apiManager, _stationManager));
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
         }
 
