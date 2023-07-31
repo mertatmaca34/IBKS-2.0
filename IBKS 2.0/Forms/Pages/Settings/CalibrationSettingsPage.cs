@@ -11,9 +11,14 @@ namespace IBKS_2._0.Forms.Pages.Settings
 
         public CalibrationSettingsPage(ICalibrationLimitService calibrationLimitManager)
         {
-            _calibrationLimitManager = calibrationLimitManager;
-
             InitializeComponent();
+
+            _calibrationLimitManager = calibrationLimitManager;
+        }
+
+        private void CalibrationSettingsPage_Load(object sender, EventArgs e)
+        {
+            AssignComboBoxes(CalibrationSettingsBarAkm, CalibrationSettingsBarIletkenlik, CalibrationSettingsBarKoi, CalibrationSettingsBarPh);
         }
 
         private void ButtonSave_Click(object sender, EventArgs e)
@@ -42,6 +47,23 @@ namespace IBKS_2._0.Forms.Pages.Settings
             catch (Exception)
             {
                 MessageBox.Show(Messages.CalibrationLimitIncompleteInfo);
+            }
+        }
+
+        private void AssignComboBoxes(params CalibrationSettingsBar[] calibrationSettingBars)
+        {
+            foreach (var item in calibrationSettingBars)
+            {
+                var calibrationResult = _calibrationLimitManager.Get(c => c.Parameter == item.Parameter);
+
+                if (calibrationResult.Success)
+                {
+                    item.Parameter = calibrationResult.Data.Parameter;
+                    item.ZeroRef = calibrationResult.Data.ZeroRef.ToString();
+                    item.ZeroTime = calibrationResult.Data.ZeroTimeStamp.ToString();
+                    item.SpanRef = calibrationResult.Data.SpanRef.ToString();
+                    item.SpanTime = calibrationResult.Data.SpanTimeStamp.ToString();
+                }
             }
         }
     }

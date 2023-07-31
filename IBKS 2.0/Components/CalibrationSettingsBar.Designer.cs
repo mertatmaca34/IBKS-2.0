@@ -221,7 +221,7 @@
             ComboBoxSpanRef.Dock = DockStyle.Fill;
             ComboBoxSpanRef.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBoxSpanRef.FormattingEnabled = true;
-            ComboBoxSpanRef.Items.AddRange(new object[] { "4", "10", "1413" });
+            ComboBoxSpanRef.Items.AddRange(new object[] { "0", "4", "10", "1413" });
             ComboBoxSpanRef.Location = new Point(8, 28);
             ComboBoxSpanRef.Margin = new Padding(8);
             ComboBoxSpanRef.Name = "ComboBoxSpanRef";

@@ -31,10 +31,10 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             ButtonSave = new Button();
             TableLayoutPanelMain = new TableLayoutPanel();
-            calibrationSettingsBar4 = new Components.CalibrationSettingsBar();
-            calibrationSettingsBar3 = new Components.CalibrationSettingsBar();
-            calibrationSettingsBar2 = new Components.CalibrationSettingsBar();
-            calibrationSettingsBar1 = new Components.CalibrationSettingsBar();
+            CalibrationSettingsBarIletkenlik = new Components.CalibrationSettingsBar();
+            CalibrationSettingsBarPh = new Components.CalibrationSettingsBar();
+            CalibrationSettingsBarKoi = new Components.CalibrationSettingsBar();
+            CalibrationSettingsBarAkm = new Components.CalibrationSettingsBar();
             titleBarControl1 = new Components.TitleBarControl();
             tableLayoutPanel1.SuspendLayout();
             TableLayoutPanelMain.SuspendLayout();
@@ -76,10 +76,10 @@
             // 
             TableLayoutPanelMain.ColumnCount = 1;
             TableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            TableLayoutPanelMain.Controls.Add(calibrationSettingsBar4, 0, 4);
-            TableLayoutPanelMain.Controls.Add(calibrationSettingsBar3, 0, 3);
-            TableLayoutPanelMain.Controls.Add(calibrationSettingsBar2, 0, 2);
-            TableLayoutPanelMain.Controls.Add(calibrationSettingsBar1, 0, 1);
+            TableLayoutPanelMain.Controls.Add(CalibrationSettingsBarIletkenlik, 0, 4);
+            TableLayoutPanelMain.Controls.Add(CalibrationSettingsBarPh, 0, 3);
+            TableLayoutPanelMain.Controls.Add(CalibrationSettingsBarKoi, 0, 2);
+            TableLayoutPanelMain.Controls.Add(CalibrationSettingsBarAkm, 0, 1);
             TableLayoutPanelMain.Controls.Add(titleBarControl1, 0, 0);
             TableLayoutPanelMain.Dock = DockStyle.Fill;
             TableLayoutPanelMain.Location = new Point(8, 8);
@@ -95,69 +95,69 @@
             TableLayoutPanelMain.Size = new Size(1154, 294);
             TableLayoutPanelMain.TabIndex = 0;
             // 
-            // calibrationSettingsBar4
+            // CalibrationSettingsBarIletkenlik
             // 
-            calibrationSettingsBar4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            calibrationSettingsBar4.BackColor = Color.FromArgb(235, 235, 235);
-            calibrationSettingsBar4.Dock = DockStyle.Fill;
-            calibrationSettingsBar4.Location = new Point(3, 233);
-            calibrationSettingsBar4.Name = "calibrationSettingsBar4";
-            calibrationSettingsBar4.Padding = new Padding(1);
-            calibrationSettingsBar4.Parameter = "Iletkenlik";
-            calibrationSettingsBar4.Size = new Size(1148, 58);
-            calibrationSettingsBar4.SpanRef = "";
-            calibrationSettingsBar4.SpanTime = "";
-            calibrationSettingsBar4.TabIndex = 4;
-            calibrationSettingsBar4.ZeroRef = "";
-            calibrationSettingsBar4.ZeroTime = "";
+            CalibrationSettingsBarIletkenlik.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            CalibrationSettingsBarIletkenlik.BackColor = Color.FromArgb(235, 235, 235);
+            CalibrationSettingsBarIletkenlik.Dock = DockStyle.Fill;
+            CalibrationSettingsBarIletkenlik.Location = new Point(3, 233);
+            CalibrationSettingsBarIletkenlik.Name = "CalibrationSettingsBarIletkenlik";
+            CalibrationSettingsBarIletkenlik.Padding = new Padding(1);
+            CalibrationSettingsBarIletkenlik.Parameter = "Iletkenlik";
+            CalibrationSettingsBarIletkenlik.Size = new Size(1148, 58);
+            CalibrationSettingsBarIletkenlik.SpanRef = "";
+            CalibrationSettingsBarIletkenlik.SpanTime = "";
+            CalibrationSettingsBarIletkenlik.TabIndex = 4;
+            CalibrationSettingsBarIletkenlik.ZeroRef = "";
+            CalibrationSettingsBarIletkenlik.ZeroTime = "";
             // 
-            // calibrationSettingsBar3
+            // CalibrationSettingsBarPh
             // 
-            calibrationSettingsBar3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            calibrationSettingsBar3.BackColor = Color.FromArgb(235, 235, 235);
-            calibrationSettingsBar3.Dock = DockStyle.Fill;
-            calibrationSettingsBar3.Location = new Point(3, 169);
-            calibrationSettingsBar3.Name = "calibrationSettingsBar3";
-            calibrationSettingsBar3.Padding = new Padding(1);
-            calibrationSettingsBar3.Parameter = "pH";
-            calibrationSettingsBar3.Size = new Size(1148, 58);
-            calibrationSettingsBar3.SpanRef = "";
-            calibrationSettingsBar3.SpanTime = "";
-            calibrationSettingsBar3.TabIndex = 3;
-            calibrationSettingsBar3.ZeroRef = "";
-            calibrationSettingsBar3.ZeroTime = "";
+            CalibrationSettingsBarPh.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            CalibrationSettingsBarPh.BackColor = Color.FromArgb(235, 235, 235);
+            CalibrationSettingsBarPh.Dock = DockStyle.Fill;
+            CalibrationSettingsBarPh.Location = new Point(3, 169);
+            CalibrationSettingsBarPh.Name = "CalibrationSettingsBarPh";
+            CalibrationSettingsBarPh.Padding = new Padding(1);
+            CalibrationSettingsBarPh.Parameter = "pH";
+            CalibrationSettingsBarPh.Size = new Size(1148, 58);
+            CalibrationSettingsBarPh.SpanRef = "";
+            CalibrationSettingsBarPh.SpanTime = "";
+            CalibrationSettingsBarPh.TabIndex = 3;
+            CalibrationSettingsBarPh.ZeroRef = "";
+            CalibrationSettingsBarPh.ZeroTime = "";
             // 
-            // calibrationSettingsBar2
+            // CalibrationSettingsBarKoi
             // 
-            calibrationSettingsBar2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            calibrationSettingsBar2.BackColor = Color.FromArgb(235, 235, 235);
-            calibrationSettingsBar2.Dock = DockStyle.Fill;
-            calibrationSettingsBar2.Location = new Point(3, 105);
-            calibrationSettingsBar2.Name = "calibrationSettingsBar2";
-            calibrationSettingsBar2.Padding = new Padding(1);
-            calibrationSettingsBar2.Parameter = "KOi";
-            calibrationSettingsBar2.Size = new Size(1148, 58);
-            calibrationSettingsBar2.SpanRef = "";
-            calibrationSettingsBar2.SpanTime = "";
-            calibrationSettingsBar2.TabIndex = 2;
-            calibrationSettingsBar2.ZeroRef = "";
-            calibrationSettingsBar2.ZeroTime = "";
+            CalibrationSettingsBarKoi.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            CalibrationSettingsBarKoi.BackColor = Color.FromArgb(235, 235, 235);
+            CalibrationSettingsBarKoi.Dock = DockStyle.Fill;
+            CalibrationSettingsBarKoi.Location = new Point(3, 105);
+            CalibrationSettingsBarKoi.Name = "CalibrationSettingsBarKoi";
+            CalibrationSettingsBarKoi.Padding = new Padding(1);
+            CalibrationSettingsBarKoi.Parameter = "KOi";
+            CalibrationSettingsBarKoi.Size = new Size(1148, 58);
+            CalibrationSettingsBarKoi.SpanRef = "";
+            CalibrationSettingsBarKoi.SpanTime = "";
+            CalibrationSettingsBarKoi.TabIndex = 2;
+            CalibrationSettingsBarKoi.ZeroRef = "";
+            CalibrationSettingsBarKoi.ZeroTime = "";
             // 
-            // calibrationSettingsBar1
+            // CalibrationSettingsBarAkm
             // 
-            calibrationSettingsBar1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            calibrationSettingsBar1.BackColor = Color.FromArgb(235, 235, 235);
-            calibrationSettingsBar1.Dock = DockStyle.Fill;
-            calibrationSettingsBar1.Location = new Point(3, 41);
-            calibrationSettingsBar1.Name = "calibrationSettingsBar1";
-            calibrationSettingsBar1.Padding = new Padding(1);
-            calibrationSettingsBar1.Parameter = "AKM";
-            calibrationSettingsBar1.Size = new Size(1148, 58);
-            calibrationSettingsBar1.SpanRef = "";
-            calibrationSettingsBar1.SpanTime = "";
-            calibrationSettingsBar1.TabIndex = 0;
-            calibrationSettingsBar1.ZeroRef = "";
-            calibrationSettingsBar1.ZeroTime = "";
+            CalibrationSettingsBarAkm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            CalibrationSettingsBarAkm.BackColor = Color.FromArgb(235, 235, 235);
+            CalibrationSettingsBarAkm.Dock = DockStyle.Fill;
+            CalibrationSettingsBarAkm.Location = new Point(3, 41);
+            CalibrationSettingsBarAkm.Name = "CalibrationSettingsBarAkm";
+            CalibrationSettingsBarAkm.Padding = new Padding(1);
+            CalibrationSettingsBarAkm.Parameter = "AKM";
+            CalibrationSettingsBarAkm.Size = new Size(1148, 58);
+            CalibrationSettingsBarAkm.SpanRef = "";
+            CalibrationSettingsBarAkm.SpanTime = "";
+            CalibrationSettingsBarAkm.TabIndex = 0;
+            CalibrationSettingsBarAkm.ZeroRef = "";
+            CalibrationSettingsBarAkm.ZeroTime = "";
             // 
             // titleBarControl1
             // 
@@ -180,6 +180,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "CalibrationSettingsPage";
             Text = "CalibrationSettingsPage";
+            Load += CalibrationSettingsPage_Load;
             tableLayoutPanel1.ResumeLayout(false);
             TableLayoutPanelMain.ResumeLayout(false);
             ResumeLayout(false);
@@ -190,10 +191,10 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel TableLayoutPanelMain;
         private Components.TitleBarControl titleBarControl1;
-        private Components.CalibrationSettingsBar calibrationSettingsBar1;
-        private Components.CalibrationSettingsBar calibrationSettingsBar2;
-        private Components.CalibrationSettingsBar calibrationSettingsBar4;
-        private Components.CalibrationSettingsBar calibrationSettingsBar3;
+        private Components.CalibrationSettingsBar CalibrationSettingsBarAkm;
+        private Components.CalibrationSettingsBar CalibrationSettingsBarKoi;
+        private Components.CalibrationSettingsBar CalibrationSettingsBarIletkenlik;
+        private Components.CalibrationSettingsBar CalibrationSettingsBarPh;
         private Button ButtonSave;
     }
 }
