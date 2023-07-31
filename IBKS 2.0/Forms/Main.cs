@@ -8,6 +8,7 @@ namespace IBKS_2._0.Forms
     {
         readonly HomePage _homePage;
         readonly SimulationPage _simulationPage;
+        readonly ReportingPage _reportingPage;
 
         readonly IStationService _stationManager;
         readonly IApiService _apiManager;
@@ -29,8 +30,8 @@ namespace IBKS_2._0.Forms
             _calibrationLimitManager = calibrationLimitManager;
 
             _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager);
-
             _simulationPage = new SimulationPage();
+            _reportingPage = new ReportingPage(_sendDataManager,_calibrationManager);
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -65,7 +66,7 @@ namespace IBKS_2._0.Forms
 
         private void ButtonReportingPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new ReportingPage());
+            PageChange.Change(PanelContent, this, _reportingPage);
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonReportingPage);
         }
 

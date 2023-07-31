@@ -4,6 +4,7 @@ using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using System.Linq.Expressions;
 
 namespace Business.Concrete
 {
@@ -46,9 +47,9 @@ namespace Business.Concrete
             return new ErrorDataResult<SendData>(Messages.InvalidDelete);
         }
 
-        public IDataResult<List<SendData>> GetAll()
+        public IDataResult<List<SendData>> GetAll(Expression<Func<SendData, bool>> filter = null)
         {
-            return new SuccessDataResult<List<SendData>>(_sendDataDal.GetAll());
+            return new SuccessDataResult<List<SendData>>(_sendDataDal.GetAll(filter));
         }
 
         public IDataResult<List<SendData>> GetLast60Minutes()
