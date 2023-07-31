@@ -1,10 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Helpers;
 using Core.Utilities.Results;
-using Entities.Concrete;
 using Entities.Concrete.API;
 using IBKS_2._0.Utils;
-using Newtonsoft.Json;
 using PLC;
 using PLC.Sharp7;
 using System.ComponentModel;
@@ -17,22 +15,19 @@ namespace IBKS_2._0.Forms.Pages
         readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
         readonly IStationService _stationManager;
-        //readonly IApiConnection _apiConnection;
         readonly ISendDataService _sendDataManager;
         readonly ICalibrationService _calibrationManager;
 
-        public HomePage(IStationService stationManager, /*IApiConnection apiConnection,*/ ISendDataService sendDataManager, ICalibrationService calibrationManager)
+        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager)
         {
             _stationManager = stationManager;
-            //_apiConnection = apiConnection;
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
-            //_apiConnection.Login("istanbul_pasakoy", "1q2w3e");
 
             InitializeComponent();
         }
 
-        private void TimerPlcRead_Tick(object sender, EventArgs e)
+        private void TimerAssignUI_Tick(object sender, EventArgs e)
         {
             var bgw = new BackgroundWorker();
             bgw.DoWork += delegate
@@ -43,9 +38,29 @@ namespace IBKS_2._0.Forms.Pages
                 AssignAnalogSensorStatements();
                 AssignAverageOfLast60Minutes();
                 AssignSystemStatement();
-                AssignStationInfoControl(SendDataHelper.SendData(_sendDataManager, _stationManager));
+                SendDataAndAssignStatationInfoControl();
 
             }; bgw.RunWorkerAsync();
+        }
+
+        private void SendDataAndAssignStatationInfoControl()
+        {
+            if (SendDataHelper.IsItTime().Success)
+            {
+                var data = DataProcessingHelper.MergedSendData(_stationManager);
+
+                if (data.Success)
+                {
+                    var res = new SendDataController().SendData(data.Data);
+
+                    if (res.Result.Success)
+                    {
+                        _sendDataManager.Add(data.Data);
+
+                        AssignStationInfoControl(res.Result);
+                    }
+                }
+            }
         }
 
         private void AssignAnalogSensors()
@@ -111,13 +126,14 @@ namespace IBKS_2._0.Forms.Pages
             }
         }
 
-        private void AssignStationInfoControl(IDataResult<DeserializeResult> deserializedResult)
+        private void AssignStationInfoControl(IDataResult<SendDataResult> deserializedResult)
         {
             StationInfoStatements.AssignLastWashStatements(deserializedResult, _sendDataManager, StationInfoControl);
+            StationInfoStatements.AssignCalibrationImage(deserializedResult, StationInfoControl);
             StationInfoStatements.AssignLastWashWeekStatements(deserializedResult, _sendDataManager, StationInfoControl);
+
             StationInfoControl.PhCalibration = StationInfoStatements.AssignCalibrationStatements(_calibrationManager, "Ph");
             StationInfoControl.IletkenlikCalibration = StationInfoStatements.AssignCalibrationStatements(_calibrationManager, "Iletkenlik");
-            StationInfoStatements.AssignCalibrationImage(deserializedResult, StationInfoControl);
         }
 
         private void AssignSystemStatement()

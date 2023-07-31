@@ -2,7 +2,7 @@
 using Core.Utilities.Results;
 using Entities.Concrete;
 
-namespace IBKS_2._0.Utils
+namespace Business.Helpers
 {
     public static class ValueAvarages
     {

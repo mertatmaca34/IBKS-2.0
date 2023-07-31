@@ -8,8 +8,10 @@
         public static string InvalidDelete = "Silinecek veri veritabanında kayıtlı değil";
 
         //Custom
-        public static string ApiAdded = "Api bilgileri sisteme eklendi";
-        public static string ApiUpdated = "Api bilgileri güncellendi";
+        public static string ApiAdded = "API bilgileri sisteme eklendi";
+        public static string ApiUpdated = "API bilgileri güncellendi";
+        public static string ApiSendDataSuccces = "Tarihli veri başarıyla gönderildi";
+        public static string ApiSendDataFault = "Tarihli veri gönderilemedi";
 
         public static string CalibrationAdded = "Kalibrasyon kaydedildi";
         public static string CalibrationNotAdded = "Kalibrasyon kaydedilemedi";

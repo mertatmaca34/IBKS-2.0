@@ -53,7 +53,9 @@ namespace Business.Concrete
 
         public IDataResult<List<SendData>> GetLast60Minutes()
         {
-            return new SuccessDataResult<List<SendData>>(_sendDataDal.GetAll(d=> d.Readtime >= DateTime.Now.AddMinutes(-60)));
+            var data = _sendDataDal.GetAll(d => d.Readtime >= DateTime.Now.AddMinutes(-60));
+
+            return new SuccessDataResult<List<SendData>>(data);
         }
 
         public IDataResult<List<SendData>> GetLastWashTime()

@@ -53,7 +53,7 @@
             DigitalSensorBar = new Components.DigitalSensorBar();
             StationInfoControl = new Components.StationInfoControl();
             StatusBarControl = new Components.StatusBarControl();
-            TimerPlcRead = new System.Windows.Forms.Timer(components);
+            TimerAssignUI = new System.Windows.Forms.Timer(components);
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -439,11 +439,11 @@
             StatusBarControl.Size = new Size(1154, 30);
             StatusBarControl.TabIndex = 5;
             // 
-            // TimerPlcRead
+            // TimerAssignUI
             // 
-            TimerPlcRead.Enabled = true;
-            TimerPlcRead.Interval = 1000;
-            TimerPlcRead.Tick += TimerPlcRead_Tick;
+            TimerAssignUI.Enabled = true;
+            TimerAssignUI.Interval = 1000;
+            TimerAssignUI.Tick += TimerAssignUI_Tick;
             // 
             // HomePage
             // 
@@ -484,7 +484,7 @@
         private Components.ChannelControl ChannelCozunmusOksijen;
         private Components.ChannelControl ChannelAkm;
         private Components.StationInfoControl StationInfoControl;
-        private System.Windows.Forms.Timer TimerPlcRead;
+        private System.Windows.Forms.Timer TimerAssignUI;
         private Components.StatusBarControl StatusBarControl;
         private Components.DigitalSensorBar DigitalSensorBar;
     }

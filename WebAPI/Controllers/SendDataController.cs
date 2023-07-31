@@ -1,4 +1,6 @@
-﻿using Entities.Concrete;
+﻿using Business.Constants;
+using Core.Utilities.Results;
+using Entities.Concrete;
 using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -25,7 +27,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<SendDataResult> SendData([FromBody] SendData data)
+        public async Task<IDataResult<SendDataResult>> SendData([FromBody] SendData data)
         {
             try
             {
@@ -50,14 +52,14 @@ namespace WebAPI.Controllers
 
                 var desResponseContent = JsonConvert.DeserializeObject<SendDataResult>(responseContent);
 
-                return desResponseContent;
+                return new SuccessDataResult<SendDataResult>(desResponseContent,Messages.ApiSendDataSuccces);
 
             }
             catch (HttpRequestException ex)
             {
                 // İstisna durumları yönetme (isteğe göre yapılabilir)
                 // Hata durumunda nasıl bir davranış sergileyeceğinize karar verin
-                return new SendDataResult();
+                return new ErrorDataResult<SendDataResult>(null,Messages.ApiSendDataFault);
             }
         }
 

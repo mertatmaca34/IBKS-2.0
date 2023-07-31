@@ -6,7 +6,7 @@ namespace IBKS_2._0.Utils
 {
     public static class ImageAssigns
     {
-        public static Image AssignImage(DeserializeResult deserializedResult)
+        public static Image AssignImage(SendDataResult deserializedResult)
         {
             switch (deserializedResult.AKM_N_Status)
             {

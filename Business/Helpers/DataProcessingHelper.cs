@@ -12,7 +12,7 @@ namespace Business.Helpers
 
         public static IDataResult<SendData> MergedSendData(IStationService stationManager)
         {
-            if (stationManager.Get().Success)
+            if (stationManager.Get().Success && _sharp7Service.client?.Connected == true)
             {
                 var _status = GetSystemStatus.GetStatus();
 

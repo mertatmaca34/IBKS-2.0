@@ -9,7 +9,7 @@ namespace IBKS_2._0.Utils
 {
     public static class StationInfoStatements
     {
-        public static void AssignLastWashStatements(IDataResult<DeserializeResult> deserializedResult, ISendDataService sendDataManager, StationInfoControl stationInfoControl)
+        public static void AssignLastWashStatements(IDataResult<SendDataResult> deserializedResult, ISendDataService sendDataManager, StationInfoControl stationInfoControl)
         {
             var res = StationStatementHelper.GetLastWashTime(sendDataManager);
 
@@ -39,7 +39,7 @@ namespace IBKS_2._0.Utils
             }
         }
 
-        public static void AssignLastWashWeekStatements(IDataResult<DeserializeResult> deserializedResult, ISendDataService sendDataManager, StationInfoControl stationInfoControl)
+        public static void AssignLastWashWeekStatements(IDataResult<SendDataResult> deserializedResult, ISendDataService sendDataManager, StationInfoControl stationInfoControl)
         {
             var res = StationStatementHelper.GetLastWashWeekTime(sendDataManager);
 
@@ -107,7 +107,7 @@ namespace IBKS_2._0.Utils
             }
         }
 
-        public static void AssignCalibrationImage(IDataResult<DeserializeResult> deserializedResult, Control control)
+        public static void AssignCalibrationImage(IDataResult<SendDataResult> deserializedResult, Control control)
         {
             if (deserializedResult.Success)
             {

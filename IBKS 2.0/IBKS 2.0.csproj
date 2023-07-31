@@ -32,6 +32,7 @@
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
     <ProjectReference Include="..\PLC\PLC.csproj" />
+    <ProjectReference Include="..\WebAPI\WebAPI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
