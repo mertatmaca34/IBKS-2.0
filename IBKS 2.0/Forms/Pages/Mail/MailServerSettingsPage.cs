@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace IBKS_2._0.Forms.Pages.Mail
+{
+    public partial class MailServerSettingsPage : Form
+    {
+        public MailServerSettingsPage()
+        {
+            InitializeComponent();
+        }
+    }
+}

@@ -37,8 +37,6 @@ namespace IBKS_2._0.Forms.Pages
                     var data = _sendDataManager.GetAll(
                         d => d.Readtime > DateTimePickerFirstDate.Value && d.Readtime < DateTimePickerLastDate.Value).Data;
 
-                    CalculateMinMaxValues(data);
-
                     DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
                         : data.OrderByDescending(d => d.Readtime).ToList();
 
@@ -97,7 +95,6 @@ namespace IBKS_2._0.Forms.Pages
 
                         RemoveDataGridViewColumns(25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 3, 1, 0);
 
-
                         break;
 
                     case "CalibrationData":
@@ -107,27 +104,6 @@ namespace IBKS_2._0.Forms.Pages
                         break;
                 }
             }
-        }
-
-        private void CalculateMinMaxValues(List<SendData> sendDatas)
-        {
-            List<double> maxValues = new List<double>();
-            List<double> minValues = new List<double>();
-
-            double min = 0, max = 0;
-
-            foreach (var item in sendDatas)
-            {
-                max = Math.Max(max, item.AKM);
-            }
-
-            sendDatas.Add(new SendData
-            {
-                AKM = max
-            });
-            //MessageBox.Show(max.ToString());
-
-            //dataGridView.Rows[dataGridView.Rows.Count - 1].Cells.Add();
         }
 
         private void RemoveDataGridViewColumns(params int[] values)
