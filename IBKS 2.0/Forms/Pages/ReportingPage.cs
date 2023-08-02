@@ -118,13 +118,14 @@ namespace IBKS_2._0.Forms.Pages
 
             foreach (var item in sendDatas)
             {
-                Math.Max(max, item.AKM);
+                max = Math.Max(max, item.AKM);
             }
 
             sendDatas.Add(new SendData
             {
                 AKM = max
             });
+            //MessageBox.Show(max.ToString());
 
             //dataGridView.Rows[dataGridView.Rows.Count - 1].Cells.Add();
         }
