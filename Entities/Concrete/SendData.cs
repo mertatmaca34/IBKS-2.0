@@ -30,6 +30,6 @@ namespace Entities.Concrete
         public int KOi_Status { get; set; }
         public int pH_Status { get; set; }
         public int Sicaklik_Status { get; set; }
-        public int Iletkenlik_Status { get; set; }
+        public string Iletkenlik_Status { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace IBKS_2._0.Forms
 
             _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager);
             _simulationPage = new SimulationPage();
-            _reportingPage = new ReportingPage(_sendDataManager,_calibrationManager);
+            _reportingPage = new ReportingPage(_sendDataManager, _calibrationManager);
         }
 
         private void Main_Load(object sender, EventArgs e)

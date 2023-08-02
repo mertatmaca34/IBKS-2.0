@@ -7,8 +7,8 @@ namespace IBKS_2._0.Utils
     {
         readonly static Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
-        private readonly static Color _simGreen = Color.FromArgb(19,162,97);
-        private readonly static Color _simRed = Color.FromArgb(235,85,101);
+        private readonly static Color _simGreen = Color.FromArgb(19, 162, 97);
+        private readonly static Color _simRed = Color.FromArgb(235, 85, 101);
 
         public static Color FromBoolean(bool value)
         {
@@ -50,5 +50,48 @@ namespace IBKS_2._0.Utils
                  : GetSystemStatus.GetStatus() == 9 ? Color.White
                  : GetSystemStatus.GetStatus() == 0 ? Color.White
                  : Color.White;
+
+        public static void FromDataGridViewData(DataGridView dataGridView, int index)
+        {
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                DataGridViewCell statusCell = row.Cells[index];
+
+                string status = (string)statusCell.Value;
+
+                row.DefaultCellStyle.BackColor = status switch
+                {
+                    "1" => Color.White,
+                    "4" => SimRed(row),
+                    "9" => SimRed(row),
+                    "23" => SimGreen(row),
+                    "24" => SimGreen(row),
+                    _ => Color.White
+                };
+                    
+                string valueToAssign = status switch
+                {
+                    "1" => "Geçerli",
+                    "4" => "Geçersiz",
+                    "9" => "Kalibrasyon",
+                    "23" => "Yıkama",
+                    "24" => "H. Yıkama",
+                    _ => "Geçerli"
+                };
+
+                row.Cells[index].Value = valueToAssign;
+            }
+        }
+
+        private static Color SimGreen(DataGridViewRow row)
+        {
+            row.DefaultCellStyle.ForeColor = Color.White;
+            return Color.FromArgb(19, 162, 97);
+        }
+        private static Color SimRed(DataGridViewRow row)
+        {
+            row.DefaultCellStyle.ForeColor = Color.White;
+            return Color.FromArgb(237, 85, 101);
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace PLC.Sharp7.Helpers
                     HariciDebi2 = _sharp7Service.S71200.DB41.HariciDebi2,
                     HariciDebi2_Status = _status,
                     Iletkenlik = _sharp7Service.S71200.DB41.Iletkenlik,
-                    Iletkenlik_Status = _status,
+                    Iletkenlik_Status = _status.ToString(),
                     KOi = _sharp7Service.S71200.DB41.Koi,
                     KOi_Status = _status,
                     Period = 1,
