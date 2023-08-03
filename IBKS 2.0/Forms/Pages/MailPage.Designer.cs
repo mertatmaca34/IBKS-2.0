@@ -83,6 +83,7 @@
             ButtonEditMailStatements.Name = "ButtonEditMailStatements";
             ButtonEditMailStatements.Size = new Size(203, 52);
             ButtonEditMailStatements.Text = "MAİL DURUMU DÜZENLE";
+            ButtonEditMailStatements.Click += ButtonEditMailStatements_Click;
             // 
             // ButtonMailServerSettings
             // 
