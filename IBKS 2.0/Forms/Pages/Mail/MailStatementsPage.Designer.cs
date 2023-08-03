@@ -55,7 +55,7 @@
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 117F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.Size = new Size(1170, 621);
             tableLayoutPanel1.TabIndex = 0;
@@ -73,7 +73,7 @@
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(1154, 106);
+            tableLayoutPanel2.Size = new Size(1154, 89);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // titleBarControl1
@@ -98,7 +98,7 @@
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(1148, 62);
+            tableLayoutPanel3.Size = new Size(1148, 45);
             tableLayoutPanel3.TabIndex = 3;
             // 
             // tableLayoutPanel4
@@ -115,28 +115,28 @@
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(1146, 60);
+            tableLayoutPanel4.Size = new Size(1146, 43);
             tableLayoutPanel4.TabIndex = 0;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
-            label1.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(214, 19);
+            label1.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(229, 12);
             label1.Name = "label1";
-            label1.Size = new Size(144, 22);
+            label1.Size = new Size(115, 18);
             label1.TabIndex = 0;
             label1.Text = "Seçili Kullanıcı: ";
             // 
             // ComboBoxSelectedUser
             // 
             ComboBoxSelectedUser.Anchor = AnchorStyles.None;
-            ComboBoxSelectedUser.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            ComboBoxSelectedUser.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ComboBoxSelectedUser.FormattingEnabled = true;
-            ComboBoxSelectedUser.Location = new Point(702, 15);
+            ComboBoxSelectedUser.Location = new Point(702, 8);
             ComboBoxSelectedUser.Name = "ComboBoxSelectedUser";
-            ComboBoxSelectedUser.Size = new Size(314, 30);
+            ComboBoxSelectedUser.Size = new Size(314, 26);
             ComboBoxSelectedUser.TabIndex = 1;
             // 
             // tableLayoutPanel5
@@ -146,12 +146,12 @@
             tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel5.Controls.Add(DataGridViewMailStatements, 0, 0);
             tableLayoutPanel5.Dock = DockStyle.Fill;
-            tableLayoutPanel5.Location = new Point(11, 120);
+            tableLayoutPanel5.Location = new Point(11, 103);
             tableLayoutPanel5.Margin = new Padding(11, 3, 11, 11);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 1;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.Size = new Size(1148, 490);
+            tableLayoutPanel5.Size = new Size(1148, 507);
             tableLayoutPanel5.TabIndex = 1;
             // 
             // DataGridViewMailStatements
@@ -164,7 +164,7 @@
             DataGridViewMailStatements.Margin = new Padding(1);
             DataGridViewMailStatements.Name = "DataGridViewMailStatements";
             DataGridViewMailStatements.RowTemplate.Height = 25;
-            DataGridViewMailStatements.Size = new Size(1146, 488);
+            DataGridViewMailStatements.Size = new Size(1146, 505);
             DataGridViewMailStatements.TabIndex = 0;
             // 
             // MailStatementsPage

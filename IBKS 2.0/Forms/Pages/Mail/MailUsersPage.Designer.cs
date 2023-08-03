@@ -33,15 +33,16 @@
             titleBarControl2 = new Components.TitleBarControl();
             tableLayoutPanel5 = new TableLayoutPanel();
             tableLayoutPanel4 = new TableLayoutPanel();
-            ButtonSave = new Button();
             pictureBox1 = new PictureBox();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            TextBoxAd = new TextBox();
+            ButtonSave = new Button();
+            TextBoxPassword = new TextBox();
+            TextBoxEMail = new TextBox();
+            TextBoxSoyad = new TextBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             titleBarControl1 = new Components.TitleBarControl();
             tableLayoutPanel6 = new TableLayoutPanel();
-            dataGridView1 = new DataGridView();
+            DataGridViewUsers = new DataGridView();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
@@ -49,7 +50,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DataGridViewUsers).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -113,11 +114,12 @@
             tableLayoutPanel4.BackColor = Color.White;
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Controls.Add(ButtonSave, 0, 4);
             tableLayoutPanel4.Controls.Add(pictureBox1, 0, 0);
-            tableLayoutPanel4.Controls.Add(textBox1, 0, 1);
-            tableLayoutPanel4.Controls.Add(textBox2, 0, 2);
-            tableLayoutPanel4.Controls.Add(textBox3, 0, 3);
+            tableLayoutPanel4.Controls.Add(TextBoxAd, 0, 1);
+            tableLayoutPanel4.Controls.Add(ButtonSave, 0, 5);
+            tableLayoutPanel4.Controls.Add(TextBoxPassword, 0, 4);
+            tableLayoutPanel4.Controls.Add(TextBoxEMail, 0, 3);
+            tableLayoutPanel4.Controls.Add(TextBoxSoyad, 0, 2);
             tableLayoutPanel4.Dock = DockStyle.Fill;
             tableLayoutPanel4.Location = new Point(1, 1);
             tableLayoutPanel4.Margin = new Padding(1);
@@ -133,22 +135,6 @@
             tableLayoutPanel4.Size = new Size(561, 559);
             tableLayoutPanel4.TabIndex = 4;
             // 
-            // ButtonSave
-            // 
-            ButtonSave.Anchor = AnchorStyles.None;
-            ButtonSave.BackColor = Color.FromArgb(0, 131, 200);
-            ButtonSave.FlatAppearance.BorderColor = Color.FromArgb(235, 235, 235);
-            ButtonSave.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
-            ButtonSave.FlatAppearance.MouseOverBackColor = SystemColors.ButtonFace;
-            ButtonSave.ForeColor = Color.White;
-            ButtonSave.Location = new Point(135, 436);
-            ButtonSave.Margin = new Padding(8);
-            ButtonSave.Name = "ButtonSave";
-            ButtonSave.Size = new Size(291, 39);
-            ButtonSave.TabIndex = 4;
-            ButtonSave.Text = "Kaydet";
-            ButtonSave.UseVisualStyleBackColor = false;
-            // 
             // pictureBox1
             // 
             pictureBox1.Dock = DockStyle.Fill;
@@ -161,35 +147,63 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // textBox1
+            // TextBoxAd
             // 
-            textBox1.Anchor = AnchorStyles.None;
-            textBox1.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(137, 288);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Ad Soyad";
-            textBox1.Size = new Size(286, 29);
-            textBox1.TabIndex = 1;
+            TextBoxAd.Anchor = AnchorStyles.None;
+            TextBoxAd.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TextBoxAd.Location = new Point(137, 288);
+            TextBoxAd.Name = "TextBoxAd";
+            TextBoxAd.PlaceholderText = "Ad";
+            TextBoxAd.Size = new Size(286, 29);
+            TextBoxAd.TabIndex = 0;
             // 
-            // textBox2
+            // ButtonSave
             // 
-            textBox2.Anchor = AnchorStyles.None;
-            textBox2.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox2.Location = new Point(137, 338);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "Mail";
-            textBox2.Size = new Size(286, 29);
-            textBox2.TabIndex = 1;
+            ButtonSave.Anchor = AnchorStyles.None;
+            ButtonSave.BackColor = Color.FromArgb(0, 131, 200);
+            ButtonSave.FlatAppearance.BorderColor = Color.FromArgb(235, 235, 235);
+            ButtonSave.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
+            ButtonSave.FlatAppearance.MouseOverBackColor = SystemColors.ButtonFace;
+            ButtonSave.ForeColor = Color.White;
+            ButtonSave.Location = new Point(135, 497);
+            ButtonSave.Margin = new Padding(8);
+            ButtonSave.Name = "ButtonSave";
+            ButtonSave.Size = new Size(291, 39);
+            ButtonSave.TabIndex = 4;
+            ButtonSave.Text = "Kaydet";
+            ButtonSave.UseVisualStyleBackColor = false;
+            ButtonSave.Click += ButtonSave_Click;
             // 
-            // textBox3
+            // TextBoxPassword
             // 
-            textBox3.Anchor = AnchorStyles.None;
-            textBox3.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox3.Location = new Point(137, 388);
-            textBox3.Name = "textBox3";
-            textBox3.PlaceholderText = "Şifre";
-            textBox3.Size = new Size(286, 29);
-            textBox3.TabIndex = 1;
+            TextBoxPassword.Anchor = AnchorStyles.None;
+            TextBoxPassword.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TextBoxPassword.Location = new Point(137, 441);
+            TextBoxPassword.Name = "TextBoxPassword";
+            TextBoxPassword.PlaceholderText = "Şifre";
+            TextBoxPassword.Size = new Size(286, 29);
+            TextBoxPassword.TabIndex = 3;
+            TextBoxPassword.UseSystemPasswordChar = true;
+            // 
+            // TextBoxEMail
+            // 
+            TextBoxEMail.Anchor = AnchorStyles.None;
+            TextBoxEMail.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TextBoxEMail.Location = new Point(137, 388);
+            TextBoxEMail.Name = "TextBoxEMail";
+            TextBoxEMail.PlaceholderText = "Mail";
+            TextBoxEMail.Size = new Size(286, 29);
+            TextBoxEMail.TabIndex = 2;
+            // 
+            // TextBoxSoyad
+            // 
+            TextBoxSoyad.Anchor = AnchorStyles.None;
+            TextBoxSoyad.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TextBoxSoyad.Location = new Point(137, 338);
+            TextBoxSoyad.Name = "TextBoxSoyad";
+            TextBoxSoyad.PlaceholderText = "Soyad";
+            TextBoxSoyad.Size = new Size(286, 29);
+            TextBoxSoyad.TabIndex = 1;
             // 
             // tableLayoutPanel2
             // 
@@ -223,7 +237,7 @@
             tableLayoutPanel6.BackColor = Color.FromArgb(235, 235, 235);
             tableLayoutPanel6.ColumnCount = 1;
             tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel6.Controls.Add(dataGridView1, 0, 0);
+            tableLayoutPanel6.Controls.Add(DataGridViewUsers, 0, 0);
             tableLayoutPanel6.Dock = DockStyle.Fill;
             tableLayoutPanel6.Location = new Point(3, 41);
             tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -232,17 +246,18 @@
             tableLayoutPanel6.Size = new Size(563, 561);
             tableLayoutPanel6.TabIndex = 3;
             // 
-            // dataGridView1
+            // DataGridViewUsers
             // 
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 3);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(557, 555);
-            dataGridView1.TabIndex = 0;
+            DataGridViewUsers.BackgroundColor = Color.White;
+            DataGridViewUsers.BorderStyle = BorderStyle.None;
+            DataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DataGridViewUsers.Dock = DockStyle.Fill;
+            DataGridViewUsers.Location = new Point(1, 1);
+            DataGridViewUsers.Margin = new Padding(1);
+            DataGridViewUsers.Name = "DataGridViewUsers";
+            DataGridViewUsers.RowTemplate.Height = 25;
+            DataGridViewUsers.Size = new Size(561, 559);
+            DataGridViewUsers.TabIndex = 0;
             // 
             // MailUsersPage
             // 
@@ -254,6 +269,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "MailUsersPage";
             Text = "MailUsersPage";
+            Load += MailUsersPage_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel5.ResumeLayout(false);
@@ -262,7 +278,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DataGridViewUsers).EndInit();
             ResumeLayout(false);
         }
 
@@ -277,10 +293,11 @@
         private TableLayoutPanel tableLayoutPanel4;
         private Button ButtonSave;
         private PictureBox pictureBox1;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private TextBox TextBoxAd;
+        private TextBox TextBoxEMail;
+        private TextBox TextBoxPassword;
         private TableLayoutPanel tableLayoutPanel6;
-        private DataGridView dataGridView1;
+        private DataGridView DataGridViewUsers;
+        private TextBox TextBoxSoyad;
     }
 }

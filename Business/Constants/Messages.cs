@@ -59,6 +59,12 @@
         public static string SendDataUpdated = "Gönderilen data güncellendi";
         public static string SendDataAdded = "Gönderilen data başarıyla kaydedildi";
 
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string UserWrongPassword = "Kullanıcı adı veya şifre yanlış";
+        public static string UserAdded = "Kullanıcı başarıyla sisteme eklendi";
+        public static string UserSuccessfullyLogin = "Giriş başarılı";
+        public static string UserAlreadyExist  = "Kullanıcı sistemde zaten mevcut";
+
         public static string WashDataNotFound = "Sistemde yıkama verisi bulunamadı";
 
         public static string ProductNameInvalid = "Ürün ismi geçersiz";

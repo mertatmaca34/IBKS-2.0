@@ -273,6 +273,16 @@ namespace IBKS_2._0.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap iski_scada_otomasyon_logo {
+            get {
+                object obj = ResourceManager.GetObject("iski_scada_otomasyon_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap log_24px {
             get {
                 object obj = ResourceManager.GetObject("log_24px", resourceCulture);
