@@ -63,6 +63,7 @@
             ButtonMailStatements.Name = "ButtonMailStatements";
             ButtonMailStatements.Size = new Size(166, 52);
             ButtonMailStatements.Text = "MAİL DURUMLARI";
+            ButtonMailStatements.Click += ButtonMailStatements_Click;
             // 
             // ButtonMailUsers
             // 

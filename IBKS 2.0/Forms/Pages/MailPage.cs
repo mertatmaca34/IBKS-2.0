@@ -24,5 +24,10 @@ namespace IBKS_2._0.Forms.Pages
         {
             PageChange.Change(PanelContent, this, new MailUsersPage());
         }
+
+        private void ButtonMailStatements_Click(object sender, EventArgs e)
+        {
+            PageChange.Change(PanelContent, this, new MailStatementsPage());
+        }
     }
 }
