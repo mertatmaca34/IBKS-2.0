@@ -3,68 +3,93 @@ using Business.Constants;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
     public class MailServerManager : IMailServerService
     {
-        IMailServerDal _mailServerDal;
+        readonly IMailServerDal _mailServerDal;
+
         public MailServerManager(IMailServerDal mailServerDal)
         {
-           _mailServerDal = mailServerDal;
+            _mailServerDal = mailServerDal;
         }
+
         public IResult Add(MailServer mailServer)
         {
             IResult result = BusinessRules.Run(CheckMailServerExist(mailServer));
 
-            if (result != null)
+            if (result == null)
             {
-                _mailServerDal.Update(mailServer);
+                this.Update(mailServer);
+
                 return new SuccessResult(Messages.MailServerUpdated);
             }
+            else if (result != null)
+            {
+                _mailServerDal.Add(mailServer);
 
-            _mailServerDal.Add(mailServer);
+                return new SuccessResult(Messages.MailServerAdded);
+            }
 
-            return new SuccessResult(Messages.MailServerAdded);
+            return new ErrorResult(Messages.IncompleteInfo);
         }
 
         public IDataResult<MailServer> Get()
         {
-            return new SuccessDataResult<MailServer>(_mailServerDal.Get(m => m.Id == 1));
+            var data = _mailServerDal.Get(s => s.Id == 1);
+
+            if (data != null)
+            {
+                return new SuccessDataResult<MailServer>(data);
+            }
+
+            return new ErrorDataResult<MailServer>();
         }
 
         public IResult Update(MailServer mailServer)
         {
             IResult result = BusinessRules.Run(CheckMailServerExist(mailServer));
 
-            if (!result.Success)
+            if (result == null)
             {
-                _mailServerDal.Add(mailServer);
-                return new SuccessResult(Messages.MailServerAdded);
+                var existEntity = _mailServerDal.GetAll().Where(c => c.Id == 1).FirstOrDefault();
+
+                if (existEntity != null)
+                {
+                    mailServer.Id = existEntity.Id;
+
+                    _mailServerDal.Update(mailServer);
+
+                    return new SuccessResult(Messages.MailServerUpdated);
+                }
             }
 
-            _mailServerDal.Update(mailServer);
+            this.Add(mailServer);
 
             return new SuccessResult(Messages.MailServerUpdated);
         }
 
         private IResult CheckMailServerExist(MailServer mailServer)
         {
-            var result = _mailServerDal.GetAll(m => m == mailServer).Any();
-
-            if (result)
+            if (mailServer != null)
             {
-                return new ErrorResult(Messages.ItsAlreadyExist);
+                var data = _mailServerDal.GetAll();
+
+                var filteredData = data.Where(d => d.Id == 1).FirstOrDefault();
+
+                if (filteredData != null)
+                {
+                    return new SuccessResult();
+                }
+                else
+                {
+                    return new ErrorResult(Messages.DataNotFound);
+                }
             }
 
-            return new SuccessResult();
+            return new ErrorResult(Messages.IncompleteInfo);
         }
     }
 }

@@ -16,8 +16,11 @@ namespace IBKS_2._0.Forms
         readonly ICalibrationService _calibrationManager;
         readonly ICalibrationLimitService _calibrationLimitManager;
         readonly IPlcService _plcManager;
+        readonly IMailServerService _mailServerManager;
 
-        public Main(IStationService stationManager, IApiService apiManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager, IPlcService plcManager)
+        public Main(IStationService stationManager, IApiService apiManager, ISendDataService sendDataManager,
+            ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager,
+            IPlcService plcManager, IMailServerService mailServerManager)
         {
             InitializeComponent();
 
@@ -28,6 +31,7 @@ namespace IBKS_2._0.Forms
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
             _calibrationLimitManager = calibrationLimitManager;
+            _mailServerManager = mailServerManager;
 
             _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager);
             _simulationPage = new SimulationPage();
@@ -60,7 +64,7 @@ namespace IBKS_2._0.Forms
 
         private void ButtonMailPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new MailPage());
+            PageChange.Change(PanelContent, this, new MailPage(_mailServerManager));
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonMailPage);
         }
 

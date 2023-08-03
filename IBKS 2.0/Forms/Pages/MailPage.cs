@@ -1,18 +1,28 @@
-﻿using IBKS_2._0.Forms.Pages.Mail;
+﻿using Business.Abstract;
+using IBKS_2._0.Forms.Pages.Mail;
 using IBKS_2._0.Utils;
 
 namespace IBKS_2._0.Forms.Pages
 {
     public partial class MailPage : Form
     {
-        public MailPage()
+        readonly IMailServerService _mailServerManager;
+
+        public MailPage(IMailServerService mailServerManager)
         {
             InitializeComponent();
+
+            _mailServerManager = mailServerManager;
         }
 
         private void ButtonMailServerSettings_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new MailServerSettingsPage());
+            PageChange.Change(PanelContent, this, new MailServerSettingsPage(_mailServerManager));
+        }
+
+        private void ButtonMailUsers_Click(object sender, EventArgs e)
+        {
+            PageChange.Change(PanelContent, this, new MailUsersPage());
         }
     }
 }

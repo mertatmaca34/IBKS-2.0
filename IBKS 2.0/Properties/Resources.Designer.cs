@@ -323,6 +323,16 @@ namespace IBKS_2._0.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap male_user_256px {
+            get {
+                object obj = ResourceManager.GetObject("male_user_256px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap maximize_button_24px {
             get {
                 object obj = ResourceManager.GetObject("maximize_button_24px", resourceCulture);

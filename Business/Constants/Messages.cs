@@ -35,11 +35,13 @@
         public static string IncompleteInfo = "Lütfen bilgileri tam şekilde girin";
 
         public static string MailServerAdded = "Mail sunucu bilgileri başarıyla eklendi";
-        public static string MailServerUpdated = "Seçili mail sunucu bilgileri başarıyla güncellendi";
+        public static string MailServerUpdated = "Mail sunucu bilgileri başarıyla güncellendi";
 
         public static string MailStatementDeleted = "Seçili mail durumu başarıyla silindi";
         public static string MailStatementUpdated = "Seçili mail durumu başarıyla güncellendi";
         public static string MailStatementAdded = "Mail durumu başarıyla eklendi";
+
+        public static string MissData = "Lütfen eksik bilgileri doldurun";
 
         public static string PlcAdded = "PLC bilgileri başarıyla eklendi";
         public static string PlcUpdated = "PLC bilgileri başarıyla güncellendi";

@@ -35,6 +35,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CalibrationLimitManager>().As<ICalibrationLimitService>();
             builder.RegisterType<EfCalibrationLimitDal>().As<ICalibrationLimitDal>();
 
+            builder.RegisterType<MailServerManager>().As<IMailServerService>();
+            builder.RegisterType<EfMailServerDal>().As<IMailServerDal>();
+
             builder.RegisterType<PlcManager>().As<IPlcService>();
             builder.RegisterType<EfPlcDal>().As<IPlcDal>();
 

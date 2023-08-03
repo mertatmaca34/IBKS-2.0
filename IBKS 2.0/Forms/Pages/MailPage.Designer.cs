@@ -72,6 +72,7 @@
             ButtonMailUsers.Name = "ButtonMailUsers";
             ButtonMailUsers.Size = new Size(150, 52);
             ButtonMailUsers.Text = "KULLANICILAR";
+            ButtonMailUsers.Click += ButtonMailUsers_Click;
             // 
             // ButtonEditMailStatements
             // 
