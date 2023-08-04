@@ -18,10 +18,14 @@ namespace IBKS_2._0.Forms
         readonly IPlcService _plcManager;
         readonly IMailServerService _mailServerManager;
         readonly IAuthService _authManager;
-
+        readonly IUserService _userManager;
+        readonly IMailStatementService _mailStatementManager;
+        readonly IUserMailStatementService _userMailStatementManager;
+        
         public Main(IStationService stationManager, IApiService apiManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager,
-            IPlcService plcManager, IMailServerService mailServerManager, IAuthService authManager)
+            IPlcService plcManager, IMailServerService mailServerManager, IAuthService authManager, 
+            IUserService userManager, IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager)
         {
             InitializeComponent();
 
@@ -34,6 +38,9 @@ namespace IBKS_2._0.Forms
             _calibrationLimitManager = calibrationLimitManager;
             _mailServerManager = mailServerManager;
             _authManager = authManager;
+            _userManager = userManager;
+            _mailStatementManager = mailStatementManager;
+            _userMailStatementManager = userMailStatementManager;
 
             _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager);
             _simulationPage = new SimulationPage();
@@ -70,7 +77,7 @@ namespace IBKS_2._0.Forms
 
             if (res == true)
             {
-                PageChange.Change(PanelContent, this, new MailPage(_mailServerManager, _authManager));
+                PageChange.Change(PanelContent, this, new MailPage(_mailServerManager, _authManager, _userManager, _mailStatementManager, _userMailStatementManager));
                 ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonMailPage);
             }
         }
@@ -83,8 +90,13 @@ namespace IBKS_2._0.Forms
 
         private void ButtonSettingPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager, _apiManager, _stationManager, _plcManager));
-            ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
+            var res = LoginOps.Login(_authManager);
+
+            if (res == true)
+            {
+                PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager, _apiManager, _stationManager, _plcManager));
+                ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
+            }
         }
 
         private void Main_SizeChanged(object sender, EventArgs e)

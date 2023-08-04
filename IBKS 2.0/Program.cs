@@ -40,7 +40,6 @@ namespace IBKS_2._0
             {
                 builder.RegisterModule(new AutofacBusinessModule());
                 builder.RegisterModule(new AutofacViewModule());
-                //builder.RegisterModule(new AutofacApiModule());
             })
             .ConfigureServices((hostContext, services) =>
             {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             TableLayoutPanelLeftBar = new TableLayoutPanel();
             ButtonNightMode = new Button();
             ButtonSettingPage = new Button();
@@ -208,6 +209,7 @@
             ClientSize = new Size(1264, 681);
             Controls.Add(PanelContent);
             Controls.Add(TableLayoutPanelLeftBar);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(1280, 720);
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;

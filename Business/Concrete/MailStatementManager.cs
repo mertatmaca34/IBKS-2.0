@@ -3,6 +3,7 @@ using Business.Constants;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 
 namespace Business.Concrete
@@ -20,23 +21,27 @@ namespace Business.Concrete
         {
             IResult result = BusinessRules.Run(CheckMailStatementExist(mailStatement));
 
-            if (result != null)
+            if (result == null)
             {
-                _mailStatementDal.Update(mailStatement);
+                this.Update(mailStatement);
 
                 return new SuccessResult(Messages.MailStatementUpdated);
             }
+            else if (result != null)
+            {
+                _mailStatementDal.Add(mailStatement);
 
-            _mailStatementDal.Add(mailStatement);
+                return new SuccessResult(Messages.MailStatementAdded);
+            }
 
-            return new SuccessResult(Messages.MailStatementAdded);
+            return new ErrorResult(Messages.IncompleteInfo);
         }
 
         public IResult Delete(MailStatement mailStatement)
         {
             IResult result = BusinessRules.Run(CheckMailStatementExist(mailStatement));
 
-            if (result != null)
+            if (result == null)
             {
                 _mailStatementDal.Delete(mailStatement);
 
@@ -55,27 +60,43 @@ namespace Business.Concrete
         {
             IResult result = BusinessRules.Run(CheckMailStatementExist(mailStatement));
 
-            if (!result.Success)
+            if (result == null)
             {
-                _mailStatementDal.Add(mailStatement);
+                var existEntity = _mailStatementDal.GetAll().Where(c => c.StatementName == mailStatement.StatementName).FirstOrDefault();
 
-                return new SuccessResult(Messages.MailStatementAdded);
+                if (existEntity != null)
+                {
+                    mailStatement.Id = existEntity.Id;
+
+                    _mailStatementDal.Update(mailStatement);
+
+                    return new SuccessResult(Messages.MailStatementUpdated);
+                }
             }
 
-            _mailStatementDal.Update(mailStatement);
+            this.Add(mailStatement);
 
-            return new SuccessResult(Messages.MailStatementUpdated);
+            return new SuccessResult(Messages.MailStatementAdded);
         }
         private IResult CheckMailStatementExist(MailStatement mailStatement)
         {
-            var result = _mailStatementDal.GetAll(m => m == mailStatement).Any();
-
-            if (result)
+            if (mailStatement != null)
             {
-                return new ErrorResult(Messages.ItsAlreadyExist);
+                var data = _mailStatementDal.GetAll();
+
+                var filteredData = data.Where(d => d.StatementName == mailStatement.StatementName).FirstOrDefault();
+
+                if (filteredData != null)
+                {
+                    return new SuccessResult();
+                }
+                else
+                {
+                    return new ErrorResult(Messages.DataNotFound);
+                }
             }
 
-            return new SuccessResult();
+            return new ErrorResult(Messages.IncompleteInfo);
         }
     }
 }

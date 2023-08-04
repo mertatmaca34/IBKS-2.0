@@ -32,6 +32,12 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<StationManager>().As<IStationService>();
             builder.RegisterType<EfStationDal>().As<IStationDal>();
 
+            builder.RegisterType<MailStatementManager>().As<IMailStatementService>();
+            builder.RegisterType<EfMailStatementDal>().As<IMailStatementDal>();
+
+            builder.RegisterType<UserMailStatementManager>().As<IUserMailStatementService>();
+            builder.RegisterType<EfUserMailStatementDal>().As<IUserMailStatementDal>();
+
             builder.RegisterType<CalibrationLimitManager>().As<ICalibrationLimitService>();
             builder.RegisterType<EfCalibrationLimitDal>().As<ICalibrationLimitDal>();
 

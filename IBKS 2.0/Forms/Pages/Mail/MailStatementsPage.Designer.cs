@@ -37,6 +37,7 @@
             ComboBoxSelectedUser = new ComboBox();
             tableLayoutPanel5 = new TableLayoutPanel();
             DataGridViewMailStatements = new DataGridView();
+            ComboBoxSec = new DataGridViewCheckBoxColumn();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -132,6 +133,7 @@
             // ComboBoxSelectedUser
             // 
             ComboBoxSelectedUser.Anchor = AnchorStyles.None;
+            ComboBoxSelectedUser.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBoxSelectedUser.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ComboBoxSelectedUser.FormattingEnabled = true;
             ComboBoxSelectedUser.Location = new Point(702, 8);
@@ -156,16 +158,32 @@
             // 
             // DataGridViewMailStatements
             // 
+            DataGridViewMailStatements.AllowUserToAddRows = false;
+            DataGridViewMailStatements.AllowUserToDeleteRows = false;
+            DataGridViewMailStatements.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DataGridViewMailStatements.BackgroundColor = Color.White;
             DataGridViewMailStatements.BorderStyle = BorderStyle.None;
             DataGridViewMailStatements.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DataGridViewMailStatements.Columns.AddRange(new DataGridViewColumn[] { ComboBoxSec });
             DataGridViewMailStatements.Dock = DockStyle.Fill;
             DataGridViewMailStatements.Location = new Point(1, 1);
             DataGridViewMailStatements.Margin = new Padding(1);
+            DataGridViewMailStatements.MultiSelect = false;
             DataGridViewMailStatements.Name = "DataGridViewMailStatements";
+            DataGridViewMailStatements.ReadOnly = true;
+            DataGridViewMailStatements.RowHeadersVisible = false;
             DataGridViewMailStatements.RowTemplate.Height = 25;
+            DataGridViewMailStatements.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DataGridViewMailStatements.Size = new Size(1146, 505);
             DataGridViewMailStatements.TabIndex = 0;
+            DataGridViewMailStatements.CellContentClick += DataGridViewMailStatements_CellContentClick;
+            // 
+            // ComboBoxSec
+            // 
+            ComboBoxSec.FillWeight = 30F;
+            ComboBoxSec.HeaderText = "Seç";
+            ComboBoxSec.Name = "ComboBoxSec";
+            ComboBoxSec.ReadOnly = true;
             // 
             // MailStatementsPage
             // 
@@ -177,6 +195,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "MailStatementsPage";
             Text = "MailStatementsPage";
+            Load += MailStatementsPage_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
@@ -198,5 +217,6 @@
         private ComboBox ComboBoxSelectedUser;
         private TableLayoutPanel tableLayoutPanel5;
         private DataGridView DataGridViewMailStatements;
+        private DataGridViewCheckBoxColumn ComboBoxSec;
     }
 }

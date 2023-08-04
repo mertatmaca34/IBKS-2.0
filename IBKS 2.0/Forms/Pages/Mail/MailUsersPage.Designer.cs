@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel3 = new TableLayoutPanel();
             titleBarControl2 = new Components.TitleBarControl();
@@ -43,6 +44,8 @@
             titleBarControl1 = new Components.TitleBarControl();
             tableLayoutPanel6 = new TableLayoutPanel();
             DataGridViewUsers = new DataGridView();
+            ContextMenuStripUser = new ContextMenuStrip(components);
+            SilToolStripMenuItem = new ToolStripMenuItem();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
@@ -51,6 +54,7 @@
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DataGridViewUsers).BeginInit();
+            ContextMenuStripUser.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -184,6 +188,7 @@
             TextBoxPassword.Size = new Size(286, 29);
             TextBoxPassword.TabIndex = 3;
             TextBoxPassword.UseSystemPasswordChar = true;
+            TextBoxPassword.KeyDown += TextBoxPassword_KeyDown;
             // 
             // TextBoxEMail
             // 
@@ -248,16 +253,38 @@
             // 
             // DataGridViewUsers
             // 
+            DataGridViewUsers.AllowUserToAddRows = false;
+            DataGridViewUsers.AllowUserToDeleteRows = false;
+            DataGridViewUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DataGridViewUsers.BackgroundColor = Color.White;
             DataGridViewUsers.BorderStyle = BorderStyle.None;
             DataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DataGridViewUsers.ContextMenuStrip = ContextMenuStripUser;
             DataGridViewUsers.Dock = DockStyle.Fill;
             DataGridViewUsers.Location = new Point(1, 1);
             DataGridViewUsers.Margin = new Padding(1);
+            DataGridViewUsers.MultiSelect = false;
             DataGridViewUsers.Name = "DataGridViewUsers";
+            DataGridViewUsers.ReadOnly = true;
+            DataGridViewUsers.RowHeadersVisible = false;
             DataGridViewUsers.RowTemplate.Height = 25;
+            DataGridViewUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DataGridViewUsers.Size = new Size(561, 559);
             DataGridViewUsers.TabIndex = 0;
+            DataGridViewUsers.SelectionChanged += DataGridViewUsers_SelectionChanged;
+            // 
+            // ContextMenuStripUser
+            // 
+            ContextMenuStripUser.Items.AddRange(new ToolStripItem[] { SilToolStripMenuItem });
+            ContextMenuStripUser.Name = "ContextMenuStripUser";
+            ContextMenuStripUser.Size = new Size(87, 26);
+            // 
+            // SilToolStripMenuItem
+            // 
+            SilToolStripMenuItem.Name = "SilToolStripMenuItem";
+            SilToolStripMenuItem.Size = new Size(86, 22);
+            SilToolStripMenuItem.Text = "Sil";
+            SilToolStripMenuItem.Click += SilToolStripMenuItem_Click;
             // 
             // MailUsersPage
             // 
@@ -279,6 +306,7 @@
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DataGridViewUsers).EndInit();
+            ContextMenuStripUser.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -299,5 +327,7 @@
         private TableLayoutPanel tableLayoutPanel6;
         private DataGridView DataGridViewUsers;
         private TextBox TextBoxSoyad;
+        private ContextMenuStrip ContextMenuStripUser;
+        private ToolStripMenuItem SilToolStripMenuItem;
     }
 }

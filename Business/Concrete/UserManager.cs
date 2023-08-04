@@ -6,7 +6,7 @@ namespace Business.Concrete
 {
     public class UserManager : IUserService
     {
-        IUserDal _userDal;
+        readonly IUserDal _userDal;
 
         public UserManager(IUserDal userDal)
         {
@@ -26,6 +26,16 @@ namespace Business.Concrete
         public User GetByMail(string email)
         {
             return _userDal.Get(u => u.Email == email);
+        }
+
+        public List<User> GetAll()
+        {
+            return _userDal.GetAll();
+        }
+
+        public void Delete(User user)
+        {
+            _userDal.Delete(user);
         }
     }
 }

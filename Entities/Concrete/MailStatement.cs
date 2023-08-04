@@ -11,5 +11,6 @@ namespace Entities.Concrete
         public double? LowerLimit { get; set; }
         public double? UpperLimit { get; set; }
         public TimeSpan CoolDown { get; set; }
+        public string Content { get; set; }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             tableLayoutPanel4 = new TableLayoutPanel();
             pictureBox1 = new PictureBox();
             TextBoxEMail = new TextBox();
@@ -90,6 +91,7 @@
             TextBoxPassword.PlaceholderText = "Şifre";
             TextBoxPassword.Size = new Size(286, 29);
             TextBoxPassword.TabIndex = 1;
+            TextBoxPassword.KeyDown += TextBoxPassword_KeyDown;
             // 
             // ButtonLogin
             // 
@@ -115,9 +117,12 @@
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(800, 450);
             Controls.Add(tableLayoutPanel4);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximumSize = new Size(816, 489);
+            MinimumSize = new Size(816, 489);
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "LoginForm";
+            Text = "Giriş Yap";
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

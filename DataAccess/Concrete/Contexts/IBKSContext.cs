@@ -29,5 +29,6 @@ namespace DataAccess.Concrete.Contexts
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<CalibrationLimit> CalibrationLimits { get; set; }
+        public DbSet<UserMailStatement> UserMailStatements { get; set; }
     }
 }

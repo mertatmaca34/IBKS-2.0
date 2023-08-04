@@ -18,6 +18,18 @@ namespace IBKS_2._0.Forms
 
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
+            LoginEvent();
+        }
+
+        private void TextBoxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoginEvent();
+            }
+        }
+        private void LoginEvent()
+        {
             UserForLoginDto userForLoginDto = new UserForLoginDto
             {
                 Email = TextBoxEMail.Text,
