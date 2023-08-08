@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using PLC.Sharp7.Utils;
 using Sharp7;
@@ -11,7 +12,7 @@ namespace PLC.Sharp7.Services
     {
         private static Sharp7Service instance = null;
 
-        public S7Client client = new();
+        public S7Client? client = new S7Client();
 
         private readonly BackgroundWorker _worker = new();
 
@@ -21,8 +22,18 @@ namespace PLC.Sharp7.Services
 
         public TimeSpan ConnectionTime = new(0, 0, 0);
 
-        public Sharp7Service()
+        public static IPlcService _plcManager;
+
+        string _plcIP;
+
+        public Sharp7Service(IPlcService plcManager)
         {
+            client.ConnTimeout = 5000;
+
+            _plcManager = plcManager;
+
+            _plcIP = plcManager.Get().Data.IpAdress;
+
             _timer = new Timer(new TimerCallback(TimerTick), null, 1000, 1000);
 
             Connect();
@@ -49,15 +60,15 @@ namespace PLC.Sharp7.Services
         {
             get
             {
-                instance ??= new Sharp7Service();
+                instance ??= new Sharp7Service(new PlcManager(new EfPlcDal()));
 
                 return instance;
             }
         }
 
-        public int Connect(string plcIp)
+        public int? Connect()
         {
-            return client.ConnectTo(plcIp, 0, 1);
+            return client?.ConnectTo(_plcIP, 0, 1);
         }
 
         public void Disconnect()
@@ -81,7 +92,7 @@ namespace PLC.Sharp7.Services
             {
                 client = new S7Client();
 
-                int res = client.ConnectTo("10.33.2.253", 0, 1);
+                int res = client.ConnectTo(_plcIP, 0, 1);
 
                 if (res == 0)
                 {

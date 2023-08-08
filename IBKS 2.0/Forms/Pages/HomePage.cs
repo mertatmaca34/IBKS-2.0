@@ -19,17 +19,10 @@ namespace IBKS_2._0.Forms.Pages
         readonly ISendDataService _sendDataManager;
         readonly ICalibrationService _calibrationManager;
         readonly IApiService _apiManager;
-        readonly IPlcService _plcManager;
 
-        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, IApiService apiManager, IPlcService plcManager)
+        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, IApiService apiManager)
         {
             InitializeComponent();
-
-            _plcManager = plcManager;
-
-            string plcIp = _plcManager.Get().Data.IpAdress;
-
-            _sharp7Service.Connect(plcIp);
 
             _apiManager = apiManager;
             _stationManager = stationManager;
