@@ -56,9 +56,11 @@ namespace IBKS_2._0.Utils
             List<double> measValues = new List<double>();
 
             TitleBarControl labelTimeStamp = (TitleBarControl)controls.FirstOrDefault(c => c.Name == "TitleBarControlTimeRemain")!;
-
             Chart ChartCalibration = (Chart)controls.FirstOrDefault(c => c.Name == "ChartCalibration")!;
             TitleBarControl labelActiveCalibration = (TitleBarControl)controls.FirstOrDefault(c => c.Name == "TitleBarControlActiveCalibration")!;
+
+            ChartCalibration.Series["Kalibrasyon Değeri"].Points.Clear();
+            ChartCalibration.Series["Referans Değeri"].Points.Clear();
 
             switch (calibrationName)
             {
@@ -66,25 +68,25 @@ namespace IBKS_2._0.Utils
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Akm;
                     _calibration.ZeroRef = 0;
                     _calibration.Parameter = "AKM";
-                    labelActiveCalibration.Text = "Aktif Kalibrasyon: AKM";
+                    labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: AKM";
                     break;
                 case "KOi":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Koi;
                     _calibration.ZeroRef = 0;
                     _calibration.Parameter = "KOi";
-                    labelActiveCalibration.Text = "Aktif Kalibrasyon: KOi";
+                    labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: KOi";
                     break;
                 case "pH":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Ph;
                     _calibration.ZeroRef = 7;
                     _calibration.Parameter = "pH";
-                    labelActiveCalibration.Text = "Aktif Kalibrasyon: pH";
+                    labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: pH";
                     break;
                 case "Iletkenlik":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Iletkenlik;
                     _calibration.ZeroRef = 0;
                     _calibration.Parameter = "Iletkenlik";
-                    labelActiveCalibration.Text = "Aktif Kalibrasyon: İletkenlik";
+                    labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: İletkenlik";
                     break;
                 default:
                     _calibration.ZeroMeas = 0;
@@ -166,7 +168,7 @@ namespace IBKS_2._0.Utils
 
                         //TODO KALİBRASYONU GÖNDER
 
-                        labelActiveCalibration.Text = "Aktif Kalibrasyon: -";
+                        labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: -";
 
                         //Kalibrasyonu kaydet
                         _calibration.TimeStamp = DateTime.Now;
@@ -190,9 +192,9 @@ namespace IBKS_2._0.Utils
         {
             List<double> measValues = new List<double>();
 
-            Control labelTimeStamp = controls.FirstOrDefault(c => c.Name == "labelTimeRemain")!;
-            Control ChartCalibration = controls.FirstOrDefault(c => c.Name == "ChartCalibration")!;
-            Control labelActiveCalibration = controls.FirstOrDefault(c => c.Name == "labelActiveCalibration")!;
+            TitleBarControl labelTimeStamp = (TitleBarControl)controls.FirstOrDefault(c => c.Name == "TitleBarControlTimeRemain")!;
+            Chart ChartCalibration = (Chart)controls.FirstOrDefault(c => c.Name == "ChartCalibration")!;
+            TitleBarControl labelActiveCalibration = (TitleBarControl)controls.FirstOrDefault(c => c.Name == "TitleBarControlActiveCalibration")!;
 
             switch (calibrationName)
             {
@@ -200,25 +202,25 @@ namespace IBKS_2._0.Utils
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Akm;
                     _calibration.ZeroRef = 0;
                     _calibration.Parameter = "AKM";
-                    labelActiveCalibration.Text = "Aktif Kalibrasyon: AKM";
+                    labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: AKM";
                     break;
                 case "KOi":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Koi;
                     _calibration.ZeroRef = 0;
                     _calibration.Parameter = "KOi";
-                    labelActiveCalibration.Text = "Aktif Kalibrasyon: KOi";
+                    labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: KOi";
                     break;
                 case "pH":
                     _calibration.SpanMeas = sharp7Service.S71200.DB41.Ph;
                     _calibration.SpanRef = 4;
                     _calibration.Parameter = "pH";
-                    labelActiveCalibration.Text = "Aktif Kalibrasyon: pH";
+                    labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: pH";
                     break;
                 case "Iletkenlik":
                     _calibration.SpanMeas = sharp7Service.S71200.DB41.Iletkenlik;
                     _calibration.SpanRef = 1413;
                     _calibration.Parameter = "Iletkenlik";
-                    labelActiveCalibration.Text = "Aktif Kalibrasyon: İletkenlik";
+                    labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: İletkenlik";
                     break;
                 default:
                     _calibration.ZeroMeas = 0;
@@ -241,8 +243,8 @@ namespace IBKS_2._0.Utils
 
                     labelTimeStamp.Text = calibrationTime.ToString();
 
-                    ((Chart)ChartCalibration).Series["Kalibrasyon Değeri"].Points.AddXY(sharp7Service.S71200.DB4.SystemTime.ToString("hh:mm:ss"), _calibration.ZeroMeas);
-                    ((Chart)ChartCalibration).Series["Referans Değeri"].Points.AddXY(sharp7Service.S71200.DB4.SystemTime.ToString("hh:mm:ss"), _calibration.ZeroRef);
+                    ChartCalibration.Series["Kalibrasyon Değeri"].Points.AddXY(sharp7Service.S71200.DB4.SystemTime.ToString("hh:mm:ss"), _calibration.ZeroMeas);
+                    ChartCalibration.Series["Referans Değeri"].Points.AddXY(sharp7Service.S71200.DB4.SystemTime.ToString("hh:mm:ss"), _calibration.ZeroRef);
 
                     measValues.Add(_calibration.SpanMeas);
 
@@ -251,11 +253,11 @@ namespace IBKS_2._0.Utils
 
                     if (_calibration.SpanMeas >= _calibration.SpanRef / _tolerance && _calibration.SpanMeas <= _calibration.SpanRef * _tolerance)
                     {
-                        ((Chart)ChartCalibration).Series["Kalibrasyon Değeri"].Color = Color.Lime;
+                        ChartCalibration.Series["Kalibrasyon Değeri"].Color = Color.Lime;
                     }
                     else
                     {
-                        ((Chart)ChartCalibration).Series["Kalibrasyon Değeri"].Color = Color.Red;
+                        ChartCalibration.Series["Kalibrasyon Değeri"].Color = Color.Red;
                     }
                     calibrationTime--;
                 }
@@ -265,7 +267,7 @@ namespace IBKS_2._0.Utils
                     isCalibrationInProgress = false;
 
                     //Kalibrasyon geçerlilik kontrolü
-                    if (((Chart)ChartCalibration).Series["Kalibrasyon Değeri"].Color == Color.Lime)
+                    if (ChartCalibration.Series["Kalibrasyon Değeri"].Color == Color.Lime)
                     {
                         _calibration.IsItValid = true;
                     }
@@ -324,7 +326,7 @@ namespace IBKS_2._0.Utils
                          MessageBox.Show("Kalibrasyon başarıyla kaydedildi!");
                      }*/
 
-                    labelActiveCalibration.Text = "Aktif Kalibrasyon: -";
+                    labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: -";
 
                     //Kalibrasyonu kaydet
                     _calibration.TimeStamp = DateTime.Now;
@@ -336,8 +338,8 @@ namespace IBKS_2._0.Utils
                     //Label'lardaki değerleri resetle
                     AssignLabels(controls, "reset");
 
-                    ((Chart)ChartCalibration).Series["Kalibrasyon Değeri"].Points.Clear();
-                    ((Chart)ChartCalibration).Series["Referans Değeri"].Points.Clear();
+                    ChartCalibration.Series["Kalibrasyon Değeri"].Points.Clear();
+                    ChartCalibration.Series["Referans Değeri"].Points.Clear();
                     labelTimeStamp.Text = "Kalan Süre:";
                 }
             };

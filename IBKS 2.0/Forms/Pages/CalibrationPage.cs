@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using IBKS_2._0.Utils;
-using System;
 
 namespace IBKS_2._0.Forms.Pages
 {
@@ -65,9 +64,9 @@ namespace IBKS_2._0.Forms.Pages
         {
             var calibrationLimits = _calibrationLimitManager.Get(x => x.Parameter == "Akm");
 
-            if(calibrationLimits != null) 
+            if (calibrationLimits != null)
             {
-                _calibrationOps.StartZeroCalibration("Akm", calibrationLimits.Data.ZeroTimeStamp, _controls);
+                _calibrationOps.StartCalibration("Akm", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
             }
         }
     }
