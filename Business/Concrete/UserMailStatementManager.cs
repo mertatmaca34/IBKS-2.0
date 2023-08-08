@@ -4,6 +4,7 @@ using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using System.Linq.Expressions;
 
 namespace Business.Concrete
 {
@@ -47,7 +48,24 @@ namespace Business.Concrete
                 return new SuccessResult(Messages.UserMailStatementDeleted);
             }
 
+            if (userMailStatement.MailStatementId > 0 && userMailStatement.UserId == 0)
+            {
+                var data = _userMailStatementDal.GetAll(x => x.MailStatementId == userMailStatement.MailStatementId);
+
+                foreach (var item in data)
+                {
+                    _userMailStatementDal.Delete(item);
+                }
+
+                return new SuccessResult(Messages.UserMailStatementDeleted);
+            }
+
             return new ErrorDataResult<UserMailStatement>(Messages.InvalidDelete);
+        }
+
+        public IDataResult<List<UserMailStatement>> Get(Expression<Func<UserMailStatement, bool>> filter)
+        {
+            return new SuccessDataResult<List<UserMailStatement>>(_userMailStatementDal.GetAll(filter));
         }
 
         public IDataResult<List<UserMailStatement>> GetAll()
@@ -61,7 +79,7 @@ namespace Business.Concrete
 
             if (result == null)
             {
-                var existEntity = _userMailStatementDal.GetAll().Where(c => c.UserId == userMailStatement.UserId 
+                var existEntity = _userMailStatementDal.GetAll().Where(c => c.UserId == userMailStatement.UserId
                 && c.MailStatementId == userMailStatement.MailStatementId).FirstOrDefault();
 
                 if (existEntity != null)

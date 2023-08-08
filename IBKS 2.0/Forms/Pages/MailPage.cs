@@ -39,7 +39,7 @@ namespace IBKS_2._0.Forms.Pages
 
         private void ButtonEditMailStatements_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new MailStatementsEditPage(_mailStatementManager));
+            PageChange.Change(PanelContent, this, new MailStatementsEditPage(_mailStatementManager,_userMailStatementManager));
         }
     }
 }

@@ -502,19 +502,19 @@
             // 
             ContextMenuStripStatement.Items.AddRange(new ToolStripItem[] { DuzenleToolStipMenuItem, SilToolStripMenuItem });
             ContextMenuStripStatement.Name = "ContextMenuStripStatement";
-            ContextMenuStripStatement.Size = new Size(181, 70);
+            ContextMenuStripStatement.Size = new Size(117, 48);
             // 
             // DuzenleToolStipMenuItem
             // 
             DuzenleToolStipMenuItem.Name = "DuzenleToolStipMenuItem";
-            DuzenleToolStipMenuItem.Size = new Size(180, 22);
+            DuzenleToolStipMenuItem.Size = new Size(116, 22);
             DuzenleToolStipMenuItem.Text = "Düzenle";
             DuzenleToolStipMenuItem.Click += DuzenleToolStipMenuItem_Click;
             // 
             // SilToolStripMenuItem
             // 
             SilToolStripMenuItem.Name = "SilToolStripMenuItem";
-            SilToolStripMenuItem.Size = new Size(180, 22);
+            SilToolStripMenuItem.Size = new Size(116, 22);
             SilToolStripMenuItem.Text = "Sil";
             SilToolStripMenuItem.Click += SilToolStripMenuItem_Click;
             // 

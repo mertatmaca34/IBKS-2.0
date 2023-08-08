@@ -114,10 +114,10 @@
             // 
             LabelAvgOf60Min.Anchor = AnchorStyles.None;
             LabelAvgOf60Min.AutoSize = true;
-            LabelAvgOf60Min.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            LabelAvgOf60Min.Location = new Point(480, 15);
+            LabelAvgOf60Min.Font = new Font("Arial", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            LabelAvgOf60Min.Location = new Point(479, 14);
             LabelAvgOf60Min.Name = "LabelAvgOf60Min";
-            LabelAvgOf60Min.Size = new Size(11, 16);
+            LabelAvgOf60Min.Size = new Size(13, 17);
             LabelAvgOf60Min.TabIndex = 2;
             LabelAvgOf60Min.Text = "-";
             // 
@@ -125,10 +125,10 @@
             // 
             LabelInstantData.Anchor = AnchorStyles.None;
             LabelInstantData.AutoSize = true;
-            LabelInstantData.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            LabelInstantData.Location = new Point(287, 15);
+            LabelInstantData.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LabelInstantData.Location = new Point(286, 14);
             LabelInstantData.Name = "LabelInstantData";
-            LabelInstantData.Size = new Size(11, 16);
+            LabelInstantData.Size = new Size(13, 18);
             LabelInstantData.TabIndex = 2;
             LabelInstantData.Text = "-";
             // 

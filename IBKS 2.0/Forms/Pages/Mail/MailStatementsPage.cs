@@ -64,7 +64,9 @@ namespace IBKS_2._0.Forms.Pages.Mail
         {
             if (e.ColumnIndex == 0)
             {
-                bool statementComboBox = Convert.ToBoolean(DataGridViewMailStatements.Rows[e.RowIndex].Cells[0].EditedFormattedValue);
+                var cell = DataGridViewMailStatements.Rows[e.RowIndex].Cells[0];
+                bool statementComboBox = Convert.ToBoolean(cell.EditedFormattedValue);
+
                 var mailStatementId = DataGridViewMailStatements.Rows[e.RowIndex].Cells[1].Value;
                 var userId = _userManager.GetByMail(ComboBoxSelectedUser.Text);
 
@@ -76,19 +78,21 @@ namespace IBKS_2._0.Forms.Pages.Mail
                         UserId = userId.Id
                     };
 
+                    var existEntity = _userMailStatementManager.Get(u => u.UserId == userMailStatement.UserId && u.MailStatementId == userMailStatement.MailStatementId);
+
                     if (!statementComboBox)
                     {
                         var res = _userMailStatementManager.Add(userMailStatement);
 
-                        statementComboBox = true;
+                        cell.Value = true;
 
                         MessageBox.Show(res.Message);
                     }
                     else
                     {
-                        statementComboBox = false;
+                        cell.Value = false;
 
-                        var res = _userMailStatementManager.Delete(userMailStatement);
+                        var res = _userMailStatementManager.Delete(existEntity.Data[0]);
 
                         MessageBox.Show(res.Message);
                     }
@@ -96,6 +100,32 @@ namespace IBKS_2._0.Forms.Pages.Mail
                 else
                 {
                     MessageBox.Show(Messages.InvalidUser);
+                }
+            }
+        }
+
+        private void ComboBoxSelectedUser_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var user = _userManager.GetByMail(ComboBoxSelectedUser.Text);
+
+            if (user != null)
+            {
+                var userMailStatements = _userMailStatementManager.Get(x => x.UserId == user.Id);
+
+                for (int i = 0; i < DataGridViewMailStatements.Rows.Count; i++)
+                {
+                    var mailStatementId = Convert.ToInt16(DataGridViewMailStatements.Rows[i].Cells[1].Value);
+
+                    var isItOnTheTable = userMailStatements.Data.Find(x=> x.MailStatementId == mailStatementId);
+
+                    if (isItOnTheTable != null)
+                    {
+                        DataGridViewMailStatements.Rows[i].Cells[0].Value = true;
+                    }
+                    else
+                    {
+                        DataGridViewMailStatements.Rows[i].Cells[0].Value = false;
+                    }
                 }
             }
         }

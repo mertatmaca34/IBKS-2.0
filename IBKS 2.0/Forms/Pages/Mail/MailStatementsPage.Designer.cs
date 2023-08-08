@@ -140,6 +140,7 @@
             ComboBoxSelectedUser.Name = "ComboBoxSelectedUser";
             ComboBoxSelectedUser.Size = new Size(314, 26);
             ComboBoxSelectedUser.TabIndex = 1;
+            ComboBoxSelectedUser.SelectedIndexChanged += ComboBoxSelectedUser_SelectedIndexChanged;
             // 
             // tableLayoutPanel5
             // 

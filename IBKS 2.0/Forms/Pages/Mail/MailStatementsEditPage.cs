@@ -13,13 +13,15 @@ namespace IBKS_2._0.Forms.Pages.Mail
         TimeSpan _coolDown;
         string _parameter;
 
-        IMailStatementService _mailStatementManager;
+        readonly IMailStatementService _mailStatementManager;
+        readonly IUserMailStatementService _userMailStatementManager;
 
-        public MailStatementsEditPage(IMailStatementService mailStatementManager)
+        public MailStatementsEditPage(IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager)
         {
             InitializeComponent();
 
             _mailStatementManager = mailStatementManager;
+            _userMailStatementManager = userMailStatementManager;
         }
 
         private void ButtonSave_Click(object sender, EventArgs e)
@@ -73,6 +75,9 @@ namespace IBKS_2._0.Forms.Pages.Mail
             AssignParameterComboBoxItems();
 
             AssignDataGridView();
+
+            if (DataGridViewStatements.Rows.Count < 1)
+                SetDefaultStatements();
         }
 
         private void AssignDataGridView()
@@ -92,10 +97,11 @@ namespace IBKS_2._0.Forms.Pages.Mail
                 DataGridViewStatements.Columns[5].HeaderText = "Üst Limit";
                 DataGridViewStatements.Columns[6].HeaderText = "Soğuma Süresi";
                 DataGridViewStatements.Columns[7].HeaderText = "Mail İçeriği";
-
-                DataGridViewStatements.Refresh();
             }
+
+            DataGridViewStatements.Refresh();
         }
+
 
         private void AssignCooldownComboBoxItems()
         {
@@ -135,6 +141,7 @@ namespace IBKS_2._0.Forms.Pages.Mail
                 new ParameterItem { DisplayText = "Kabin Sıcaklık", RealValue = "KabinSicaklik"},
                 new ParameterItem { DisplayText = "Pompa 1 Hz", RealValue = "Pompa1Hz"},
                 new ParameterItem { DisplayText = "Pompa 2 Hz", RealValue = "Pompa2Hz"},
+                new ParameterItem { DisplayText = "Kapı", RealValue = "Kapi"},
                 new ParameterItem { DisplayText = "Günlük Yıkama", RealValue = "YikamaVarmi"},
                 new ParameterItem { DisplayText = "Haftalık Yıkama", RealValue = "HaftalikYikamaVarMi"},
                 new ParameterItem { DisplayText = "Mod Auto Mu", RealValue = "ModAutoMu"},
@@ -189,10 +196,14 @@ namespace IBKS_2._0.Forms.Pages.Mail
                 TextBoxMailSubject.Text = row.Cells[1].Value.ToString();
                 ComboBoxParameter.Text = row.Cells[2].Value.ToString();
                 ComboBoxStatement.Text = row.Cells[3].Value.ToString();
-                TextBoxLowerLimit.Text = row.Cells[4].Value.ToString();
-                TextBoxUpperLimit.Text = row.Cells[5].Value.ToString();
                 ComboBoxCoolDown.Text = row.Cells[6].Value.ToString();
                 TextBoxMailContent.Text = row.Cells[7].Value.ToString();
+
+                if (row.Cells[3].Value.ToString() == "Limit Aşımı")
+                {
+                    TextBoxLowerLimit.Text = row.Cells[4].Value.ToString();
+                    TextBoxUpperLimit.Text = row.Cells[5].Value.ToString();
+                }
             }
         }
 
@@ -201,6 +212,8 @@ namespace IBKS_2._0.Forms.Pages.Mail
             if (DataGridViewStatements.SelectedRows.Count > 0)
             {
                 var row = DataGridViewStatements.SelectedRows[0];
+
+                _userMailStatementManager.Delete(new UserMailStatement { MailStatementId = Convert.ToInt16(row.Cells[0].Value) });
 
                 MailStatement mailStatement = new MailStatement
                 {
@@ -220,6 +233,46 @@ namespace IBKS_2._0.Forms.Pages.Mail
 
                 AssignDataGridView();
             }
+        }
+
+        private void SetDefaultStatements()
+        {
+            TimeSpan timeSpan10Minute = new(0, 0, 900);
+
+            List<MailStatement> mailStatements = new()
+            {
+                new MailStatement { StatementName = "Akm Limit Aşımı", Parameter = "Akm", Statement = "Limit Aşımı", LowerLimit = 0, UpperLimit = 350, CoolDown = timeSpan10Minute, Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: " },
+                new MailStatement { StatementName = "Koi Limit Aşımı", Parameter = "Koi", Statement = "Limit Aşımı", LowerLimit = 0, UpperLimit = 400, CoolDown = timeSpan10Minute, Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: " },
+                new MailStatement { StatementName = "Çözünmüş Oksijen Limit Aşımı", Parameter = "CozunmusOksijen", Statement = "Limit Aşımı", LowerLimit = 0.5, UpperLimit = 100, CoolDown = timeSpan10Minute, Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: " },
+                new MailStatement { StatementName = "İletkenlik Limit Aşımı", Parameter = "Iletkenlik", Statement = "Limit Aşımı", LowerLimit = 0, UpperLimit = 9000, CoolDown = timeSpan10Minute, Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: " },
+                new MailStatement { StatementName = "Duman Alarmı", Parameter = "Duman", Statement = "Varsa", CoolDown = timeSpan10Minute, Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: " },
+                new MailStatement { StatementName = "Su Baskını Alarmı", Parameter = "SuBaskini", Statement = "Varsa", CoolDown = timeSpan10Minute, Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: " },
+                new MailStatement { StatementName = "Acil Stop Alarmı", Parameter = "AcilStop", Statement = "Varsa", CoolDown = timeSpan10Minute, Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: " },
+                new MailStatement { StatementName = "Pompa 1 Termik Alarmı", Parameter = "Pompa1Termik", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Pompa 2 Termik Alarmı", Parameter = "Pompa2Termik", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Temiz Su Pompası Termik Alarmı", Parameter = "TemizSuTermik", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Yıkama Tankı Alarmı", Parameter = "YikamaTanki", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Enerji Alarmı", Parameter = "Enerji", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Enerji Alarmı", Parameter = "Enerji", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Pompa 1 Çalışıyor Mu Alarmı", Parameter = "Pompa1CalisiyorMu", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Pompa 2 Çalışıyor Mu Alarmı", Parameter = "Pompa2CalisiyorMu", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Mod Auto Mu Alarmı", Parameter = "ModAutoMu", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Mod Bakım Mı Alarmı", Parameter = "ModBakimMi", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Mod Kalibrasyon Mu Alarmı", Parameter = "ModKalibrasyonMu", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Numune Tetik Akm Alarmı", Parameter = "AkmTetik", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Numune Tetik Koi Alarmı", Parameter = "KoiTetik", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Numune Tetik Ph Alarmı", Parameter = "PhTetik", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "},
+                new MailStatement { StatementName = "Veri Geçerliliği Alarmı", Parameter = "Veri Geçerliliği", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: "}
+            };
+
+            foreach (var item in mailStatements)
+            {
+                _mailStatementManager.Add(item);
+            }
+
+            DataGridViewStatements.DataSource = mailStatements;
+
+            DataGridViewStatements.Refresh();
         }
     }
 }

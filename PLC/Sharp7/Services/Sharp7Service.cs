@@ -1,4 +1,6 @@
-﻿using Entities.Concrete;
+﻿using Business.Abstract;
+using Business.Concrete;
+using Entities.Concrete;
 using PLC.Sharp7.Utils;
 using Sharp7;
 using System.ComponentModel;
@@ -53,9 +55,9 @@ namespace PLC.Sharp7.Services
             }
         }
 
-        public int Connect()
+        public int Connect(string plcIp)
         {
-            return client.ConnectTo("10.33.2.253", 0, 1);
+            return client.ConnectTo(plcIp, 0, 1);
         }
 
         public void Disconnect()
