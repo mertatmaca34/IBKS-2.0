@@ -30,11 +30,11 @@ namespace IBKS_2._0.Forms.Pages
         /// </summary>
         private void InitializeComponent()
         {
-            ChartArea chartArea1 = new ChartArea();
-            Legend legend1 = new Legend();
-            Series series1 = new Series();
-            Series series2 = new Series();
-            Title title1 = new Title();
+            ChartArea chartArea2 = new ChartArea();
+            Legend legend2 = new Legend();
+            Series series3 = new Series();
+            Series series4 = new Series();
+            Title title2 = new Title();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel23 = new TableLayoutPanel();
@@ -83,7 +83,7 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel5 = new TableLayoutPanel();
             label1 = new Label();
             label2 = new Label();
-            button1 = new Button();
+            ButtonAkmZero = new Button();
             panel2 = new Panel();
             panel3 = new Panel();
             tableLayoutPanel6 = new TableLayoutPanel();
@@ -91,14 +91,14 @@ namespace IBKS_2._0.Forms.Pages
             LabelAkmLastCalibration = new Label();
             titleBarControl1 = new Components.TitleBarControl();
             tableLayoutPanel27 = new TableLayoutPanel();
-            titleBarControl2 = new Components.TitleBarControl();
-            calibrationStatusBarControl1 = new Components.CalibrationStatusBarZeroControl();
-            calibrationStatusBarSpanControl1 = new Components.CalibrationStatusBarSpanControl();
+            TitleBarControlActiveCalibration = new Components.TitleBarControl();
+            CalibrationStatusBarZero = new Components.CalibrationStatusBarZeroControl();
+            CalibrationStatusBarSpan = new Components.CalibrationStatusBarSpanControl();
             tableLayoutPanel28 = new TableLayoutPanel();
-            titleBarControl4 = new Components.TitleBarControl();
+            TitleBarControlTimeRemain = new Components.TitleBarControl();
             titleBarControl3 = new Components.TitleBarControl();
             tableLayoutPanel29 = new TableLayoutPanel();
-            chart1 = new Chart();
+            ChartCalibration = new Chart();
             tableLayoutPanel7 = new TableLayoutPanel();
             tableLayoutPanel8 = new TableLayoutPanel();
             panel4 = new Panel();
@@ -144,7 +144,7 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel27.SuspendLayout();
             tableLayoutPanel28.SuspendLayout();
             tableLayoutPanel29.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ChartCalibration).BeginInit();
             tableLayoutPanel8.SuspendLayout();
             tableLayoutPanel9.SuspendLayout();
             tableLayoutPanel10.SuspendLayout();
@@ -754,7 +754,7 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
             tableLayoutPanel4.Controls.Add(panel1, 0, 0);
             tableLayoutPanel4.Controls.Add(tableLayoutPanel5, 1, 0);
-            tableLayoutPanel4.Controls.Add(button1, 5, 0);
+            tableLayoutPanel4.Controls.Add(ButtonAkmZero, 5, 0);
             tableLayoutPanel4.Controls.Add(panel2, 2, 0);
             tableLayoutPanel4.Controls.Add(panel3, 4, 0);
             tableLayoutPanel4.Controls.Add(tableLayoutPanel6, 3, 0);
@@ -814,19 +814,20 @@ namespace IBKS_2._0.Forms.Pages
             label2.TabIndex = 2;
             label2.Text = "AKM";
             // 
-            // button1
+            // ButtonAkmZero
             // 
-            button1.BackColor = Color.FromArgb(0, 131, 200);
-            button1.Dock = DockStyle.Fill;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(395, 15);
-            button1.Margin = new Padding(15);
-            button1.Name = "button1";
-            button1.Size = new Size(151, 29);
-            button1.TabIndex = 4;
-            button1.Text = "ZERO";
-            button1.UseVisualStyleBackColor = false;
+            ButtonAkmZero.BackColor = Color.FromArgb(0, 131, 200);
+            ButtonAkmZero.Dock = DockStyle.Fill;
+            ButtonAkmZero.FlatAppearance.BorderSize = 0;
+            ButtonAkmZero.ForeColor = Color.White;
+            ButtonAkmZero.Location = new Point(395, 15);
+            ButtonAkmZero.Margin = new Padding(15);
+            ButtonAkmZero.Name = "ButtonAkmZero";
+            ButtonAkmZero.Size = new Size(151, 29);
+            ButtonAkmZero.TabIndex = 4;
+            ButtonAkmZero.Text = "ZERO";
+            ButtonAkmZero.UseVisualStyleBackColor = false;
+            ButtonAkmZero.Click += ButtonAkmZero_Click;
             // 
             // panel2
             // 
@@ -898,9 +899,9 @@ namespace IBKS_2._0.Forms.Pages
             // 
             tableLayoutPanel27.ColumnCount = 1;
             tableLayoutPanel27.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel27.Controls.Add(titleBarControl2, 0, 0);
-            tableLayoutPanel27.Controls.Add(calibrationStatusBarControl1, 0, 1);
-            tableLayoutPanel27.Controls.Add(calibrationStatusBarSpanControl1, 0, 2);
+            tableLayoutPanel27.Controls.Add(TitleBarControlActiveCalibration, 0, 0);
+            tableLayoutPanel27.Controls.Add(CalibrationStatusBarZero, 0, 1);
+            tableLayoutPanel27.Controls.Add(CalibrationStatusBarSpan, 0, 2);
             tableLayoutPanel27.Dock = DockStyle.Fill;
             tableLayoutPanel27.Location = new Point(593, 8);
             tableLayoutPanel27.Margin = new Padding(8);
@@ -913,43 +914,43 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel27.Size = new Size(569, 306);
             tableLayoutPanel27.TabIndex = 1;
             // 
-            // titleBarControl2
+            // TitleBarControlActiveCalibration
             // 
-            titleBarControl2.BackColor = Color.FromArgb(235, 235, 235);
-            titleBarControl2.Location = new Point(3, 3);
-            titleBarControl2.Name = "titleBarControl2";
-            titleBarControl2.Padding = new Padding(1);
-            titleBarControl2.Size = new Size(563, 32);
-            titleBarControl2.TabIndex = 0;
-            titleBarControl2.TitleBarText = "Aktif Kalibrasyon: -";
+            TitleBarControlActiveCalibration.BackColor = Color.FromArgb(235, 235, 235);
+            TitleBarControlActiveCalibration.Location = new Point(3, 3);
+            TitleBarControlActiveCalibration.Name = "TitleBarControlActiveCalibration";
+            TitleBarControlActiveCalibration.Padding = new Padding(1);
+            TitleBarControlActiveCalibration.Size = new Size(563, 32);
+            TitleBarControlActiveCalibration.TabIndex = 0;
+            TitleBarControlActiveCalibration.TitleBarText = "Aktif Kalibrasyon: -";
             // 
-            // calibrationStatusBarControl1
+            // CalibrationStatusBarZero
             // 
-            calibrationStatusBarControl1.BackColor = Color.FromArgb(235, 235, 235);
-            calibrationStatusBarControl1.Dock = DockStyle.Fill;
-            calibrationStatusBarControl1.Location = new Point(3, 41);
-            calibrationStatusBarControl1.Name = "calibrationStatusBarControl1";
-            calibrationStatusBarControl1.Padding = new Padding(1);
-            calibrationStatusBarControl1.Size = new Size(563, 44);
-            calibrationStatusBarControl1.TabIndex = 1;
-            calibrationStatusBarControl1.ZeroDiff = "-";
-            calibrationStatusBarControl1.ZeroMeas = "-";
-            calibrationStatusBarControl1.ZeroRef = "-";
-            calibrationStatusBarControl1.ZeroStd = "-";
+            CalibrationStatusBarZero.BackColor = Color.FromArgb(235, 235, 235);
+            CalibrationStatusBarZero.Dock = DockStyle.Fill;
+            CalibrationStatusBarZero.Location = new Point(3, 41);
+            CalibrationStatusBarZero.Name = "CalibrationStatusBarZero";
+            CalibrationStatusBarZero.Padding = new Padding(1);
+            CalibrationStatusBarZero.Size = new Size(563, 44);
+            CalibrationStatusBarZero.TabIndex = 1;
+            CalibrationStatusBarZero.ZeroDiff = "-";
+            CalibrationStatusBarZero.ZeroMeas = "-";
+            CalibrationStatusBarZero.ZeroRef = "-";
+            CalibrationStatusBarZero.ZeroStd = "-";
             // 
-            // calibrationStatusBarSpanControl1
+            // CalibrationStatusBarSpan
             // 
-            calibrationStatusBarSpanControl1.BackColor = Color.FromArgb(235, 235, 235);
-            calibrationStatusBarSpanControl1.Dock = DockStyle.Fill;
-            calibrationStatusBarSpanControl1.Location = new Point(3, 91);
-            calibrationStatusBarSpanControl1.Name = "calibrationStatusBarSpanControl1";
-            calibrationStatusBarSpanControl1.Padding = new Padding(1);
-            calibrationStatusBarSpanControl1.Size = new Size(563, 44);
-            calibrationStatusBarSpanControl1.SpanDiff = "-";
-            calibrationStatusBarSpanControl1.SpanMeas = "-";
-            calibrationStatusBarSpanControl1.SpanRef = "-";
-            calibrationStatusBarSpanControl1.SpanStd = "-";
-            calibrationStatusBarSpanControl1.TabIndex = 2;
+            CalibrationStatusBarSpan.BackColor = Color.FromArgb(235, 235, 235);
+            CalibrationStatusBarSpan.Dock = DockStyle.Fill;
+            CalibrationStatusBarSpan.Location = new Point(3, 91);
+            CalibrationStatusBarSpan.Name = "CalibrationStatusBarSpan";
+            CalibrationStatusBarSpan.Padding = new Padding(1);
+            CalibrationStatusBarSpan.Size = new Size(563, 44);
+            CalibrationStatusBarSpan.SpanDiff = "-";
+            CalibrationStatusBarSpan.SpanMeas = "-";
+            CalibrationStatusBarSpan.SpanRef = "-";
+            CalibrationStatusBarSpan.SpanStd = "-";
+            CalibrationStatusBarSpan.TabIndex = 2;
             // 
             // tableLayoutPanel28
             // 
@@ -957,7 +958,7 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel1.SetColumnSpan(tableLayoutPanel28, 2);
             tableLayoutPanel28.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel28.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 182F));
-            tableLayoutPanel28.Controls.Add(titleBarControl4, 1, 0);
+            tableLayoutPanel28.Controls.Add(TitleBarControlTimeRemain, 1, 0);
             tableLayoutPanel28.Controls.Add(titleBarControl3, 0, 0);
             tableLayoutPanel28.Dock = DockStyle.Fill;
             tableLayoutPanel28.Location = new Point(8, 322);
@@ -968,17 +969,17 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel28.Size = new Size(1154, 32);
             tableLayoutPanel28.TabIndex = 2;
             // 
-            // titleBarControl4
+            // TitleBarControlTimeRemain
             // 
-            titleBarControl4.BackColor = Color.FromArgb(235, 235, 235);
-            titleBarControl4.Dock = DockStyle.Fill;
-            titleBarControl4.Location = new Point(980, 0);
-            titleBarControl4.Margin = new Padding(8, 0, 0, 0);
-            titleBarControl4.Name = "titleBarControl4";
-            titleBarControl4.Padding = new Padding(1);
-            titleBarControl4.Size = new Size(174, 32);
-            titleBarControl4.TabIndex = 1;
-            titleBarControl4.TitleBarText = "Kalan Süre: -";
+            TitleBarControlTimeRemain.BackColor = Color.FromArgb(235, 235, 235);
+            TitleBarControlTimeRemain.Dock = DockStyle.Fill;
+            TitleBarControlTimeRemain.Location = new Point(980, 0);
+            TitleBarControlTimeRemain.Margin = new Padding(8, 0, 0, 0);
+            TitleBarControlTimeRemain.Name = "TitleBarControlTimeRemain";
+            TitleBarControlTimeRemain.Padding = new Padding(1);
+            TitleBarControlTimeRemain.Size = new Size(174, 32);
+            TitleBarControlTimeRemain.TabIndex = 1;
+            TitleBarControlTimeRemain.TitleBarText = "Kalan Süre: -";
             // 
             // titleBarControl3
             // 
@@ -998,7 +999,7 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel29.ColumnCount = 1;
             tableLayoutPanel1.SetColumnSpan(tableLayoutPanel29, 2);
             tableLayoutPanel29.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel29.Controls.Add(chart1, 0, 0);
+            tableLayoutPanel29.Controls.Add(ChartCalibration, 0, 0);
             tableLayoutPanel29.Dock = DockStyle.Fill;
             tableLayoutPanel29.Location = new Point(8, 362);
             tableLayoutPanel29.Margin = new Padding(8);
@@ -1008,76 +1009,75 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel29.Size = new Size(1154, 307);
             tableLayoutPanel29.TabIndex = 55;
             // 
-            // chart1
+            // ChartCalibration
             // 
-            chartArea1.Area3DStyle.LightStyle = LightStyle.Realistic;
-            chartArea1.AxisX.InterlacedColor = Color.White;
-            chartArea1.AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
-            chartArea1.AxisX.LineWidth = 3;
-            chartArea1.AxisX.MajorGrid.LineColor = Color.Silver;
-            chartArea1.AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
-            chartArea1.AxisX.ScaleBreakStyle.LineDashStyle = ChartDashStyle.DashDot;
-            chartArea1.AxisX.ScaleBreakStyle.LineWidth = 10;
-            chartArea1.AxisX.ScaleBreakStyle.MaxNumberOfBreaks = 1;
-            chartArea1.AxisY.IsStartedFromZero = false;
-            chartArea1.AxisY.MajorGrid.Interval = 0D;
-            chartArea1.AxisY.MajorGrid.IntervalOffset = 0D;
-            chartArea1.AxisY.MajorGrid.IntervalOffsetType = DateTimeIntervalType.Auto;
-            chartArea1.AxisY.MajorGrid.IntervalType = DateTimeIntervalType.Auto;
-            chartArea1.AxisY.MajorGrid.LineColor = Color.Silver;
-            chartArea1.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
-            chartArea1.AxisY.ScaleBreakStyle.BreakLineStyle = BreakLineStyle.Wave;
-            chartArea1.AxisY.ScaleBreakStyle.CollapsibleSpaceThreshold = 10;
-            chartArea1.AxisY.ScaleBreakStyle.MaxNumberOfBreaks = 1;
-            chartArea1.AxisY.ScaleBreakStyle.Spacing = 5D;
-            chartArea1.AxisY2.Maximum = 10D;
-            chartArea1.AxisY2.Minimum = 5D;
-            chartArea1.AxisY2.ScaleBreakStyle.BreakLineStyle = BreakLineStyle.Wave;
-            chartArea1.AxisY2.ScaleBreakStyle.CollapsibleSpaceThreshold = 10;
-            chartArea1.AxisY2.ScaleBreakStyle.Spacing = 1D;
-            chartArea1.AxisY2.ScaleBreakStyle.StartFromZero = StartFromZero.Yes;
-            chartArea1.BackColor = Color.White;
-            chartArea1.InnerPlotPosition.Auto = false;
-            chartArea1.InnerPlotPosition.Height = 88.59933F;
-            chartArea1.InnerPlotPosition.Width = 94.71543F;
-            chartArea1.InnerPlotPosition.X = 5F;
-            chartArea1.InnerPlotPosition.Y = 2F;
-            chartArea1.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea1);
-            chart1.Dock = DockStyle.Fill;
-            legend1.BackColor = Color.WhiteSmoke;
-            legend1.ItemColumnSpacing = 0;
-            legend1.Name = "Legend1";
-            chart1.Legends.Add(legend1);
-            chart1.Location = new Point(1, 1);
-            chart1.Margin = new Padding(1);
-            chart1.Name = "chart1";
-            series1.BorderWidth = 2;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = SeriesChartType.Spline;
-            series1.Color = Color.Lime;
-            series1.CustomProperties = "LabelStyle=Center";
-            series1.Legend = "Legend1";
-            series1.MarkerSize = 8;
-            series1.MarkerStyle = MarkerStyle.Circle;
-            series1.Name = "Kalibrasyon Değeri";
-            series1.XValueType = ChartValueType.Time;
-            series1.YValueType = ChartValueType.Double;
-            series2.BorderWidth = 2;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = SeriesChartType.Spline;
-            series2.Color = Color.Blue;
-            series2.Legend = "Legend1";
-            series2.Name = "Referans Değeri";
-            series2.XValueType = ChartValueType.Time;
-            series2.YValueType = ChartValueType.Double;
-            chart1.Series.Add(series1);
-            chart1.Series.Add(series2);
-            chart1.Size = new Size(1152, 305);
-            chart1.TabIndex = 54;
-            chart1.Text = "chart1";
-            title1.Name = "Kalibrasyon Grafiği";
-            chart1.Titles.Add(title1);
+            chartArea2.Area3DStyle.LightStyle = LightStyle.Realistic;
+            chartArea2.AxisX.InterlacedColor = Color.White;
+            chartArea2.AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
+            chartArea2.AxisX.LineWidth = 3;
+            chartArea2.AxisX.MajorGrid.LineColor = Color.Silver;
+            chartArea2.AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
+            chartArea2.AxisX.ScaleBreakStyle.LineDashStyle = ChartDashStyle.DashDot;
+            chartArea2.AxisX.ScaleBreakStyle.LineWidth = 10;
+            chartArea2.AxisX.ScaleBreakStyle.MaxNumberOfBreaks = 1;
+            chartArea2.AxisY.IsStartedFromZero = false;
+            chartArea2.AxisY.MajorGrid.Interval = 0D;
+            chartArea2.AxisY.MajorGrid.IntervalOffset = 0D;
+            chartArea2.AxisY.MajorGrid.IntervalOffsetType = DateTimeIntervalType.Auto;
+            chartArea2.AxisY.MajorGrid.IntervalType = DateTimeIntervalType.Auto;
+            chartArea2.AxisY.MajorGrid.LineColor = Color.Silver;
+            chartArea2.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
+            chartArea2.AxisY.ScaleBreakStyle.BreakLineStyle = BreakLineStyle.Wave;
+            chartArea2.AxisY.ScaleBreakStyle.CollapsibleSpaceThreshold = 10;
+            chartArea2.AxisY.ScaleBreakStyle.MaxNumberOfBreaks = 1;
+            chartArea2.AxisY.ScaleBreakStyle.Spacing = 5D;
+            chartArea2.AxisY2.Maximum = 10D;
+            chartArea2.AxisY2.Minimum = 5D;
+            chartArea2.AxisY2.ScaleBreakStyle.BreakLineStyle = BreakLineStyle.Wave;
+            chartArea2.AxisY2.ScaleBreakStyle.CollapsibleSpaceThreshold = 10;
+            chartArea2.AxisY2.ScaleBreakStyle.Spacing = 1D;
+            chartArea2.AxisY2.ScaleBreakStyle.StartFromZero = StartFromZero.Yes;
+            chartArea2.BackColor = Color.White;
+            chartArea2.InnerPlotPosition.Auto = false;
+            chartArea2.InnerPlotPosition.Height = 88.59933F;
+            chartArea2.InnerPlotPosition.Width = 94.71543F;
+            chartArea2.InnerPlotPosition.X = 5F;
+            chartArea2.InnerPlotPosition.Y = 2F;
+            chartArea2.Name = "ChartArea1";
+            ChartCalibration.ChartAreas.Add(chartArea2);
+            ChartCalibration.Dock = DockStyle.Fill;
+            legend2.BackColor = Color.WhiteSmoke;
+            legend2.ItemColumnSpacing = 0;
+            legend2.Name = "Legend1";
+            ChartCalibration.Legends.Add(legend2);
+            ChartCalibration.Location = new Point(1, 1);
+            ChartCalibration.Margin = new Padding(1);
+            ChartCalibration.Name = "ChartCalibration";
+            series3.BorderWidth = 2;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = SeriesChartType.Spline;
+            series3.Color = Color.Lime;
+            series3.CustomProperties = "LabelStyle=Center";
+            series3.Legend = "Legend1";
+            series3.MarkerSize = 8;
+            series3.MarkerStyle = MarkerStyle.Circle;
+            series3.Name = "Kalibrasyon Değeri";
+            series3.XValueType = ChartValueType.Time;
+            series3.YValueType = ChartValueType.Double;
+            series4.BorderWidth = 2;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = SeriesChartType.Spline;
+            series4.Color = Color.Blue;
+            series4.Legend = "Legend1";
+            series4.Name = "Referans Değeri";
+            series4.XValueType = ChartValueType.Time;
+            series4.YValueType = ChartValueType.Double;
+            ChartCalibration.Series.Add(series3);
+            ChartCalibration.Series.Add(series4);
+            ChartCalibration.Size = new Size(1152, 305);
+            ChartCalibration.TabIndex = 54;
+            title2.Name = "Kalibrasyon Grafiği";
+            ChartCalibration.Titles.Add(title2);
             // 
             // tableLayoutPanel7
             // 
@@ -1429,7 +1429,7 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel27.ResumeLayout(false);
             tableLayoutPanel28.ResumeLayout(false);
             tableLayoutPanel29.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ChartCalibration).EndInit();
             tableLayoutPanel8.ResumeLayout(false);
             tableLayoutPanel9.ResumeLayout(false);
             tableLayoutPanel9.PerformLayout();
@@ -1454,7 +1454,7 @@ namespace IBKS_2._0.Forms.Pages
         private TableLayoutPanel tableLayoutPanel5;
         private Label label1;
         private Label label2;
-        private Button button1;
+        private Button ButtonAkmZero;
         private Panel panel2;
         private Panel panel3;
         private TableLayoutPanel tableLayoutPanel6;
@@ -1525,13 +1525,13 @@ namespace IBKS_2._0.Forms.Pages
         private Label label11;
         private Label label12;
         private TableLayoutPanel tableLayoutPanel27;
-        private Components.TitleBarControl titleBarControl2;
-        private Components.CalibrationStatusBarZeroControl calibrationStatusBarControl1;
-        private Components.CalibrationStatusBarSpanControl calibrationStatusBarSpanControl1;
+        private Components.TitleBarControl TitleBarControlActiveCalibration;
+        private Components.CalibrationStatusBarZeroControl CalibrationStatusBarZero;
+        private Components.CalibrationStatusBarSpanControl CalibrationStatusBarSpan;
         private TableLayoutPanel tableLayoutPanel28;
         private Components.TitleBarControl titleBarControl3;
-        private Components.TitleBarControl titleBarControl4;
-        private Chart chart1;
+        private Components.TitleBarControl TitleBarControlTimeRemain;
+        private Chart ChartCalibration;
         private TableLayoutPanel tableLayoutPanel29;
     }
 }

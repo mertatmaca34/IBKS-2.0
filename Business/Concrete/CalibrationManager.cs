@@ -31,6 +31,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CalibrationAdded);
         }
 
+
         public IDataResult<List<Calibration>> GetAll(Expression<Func<Calibration, bool>> filter = null)
         {
             var dataResult = _calibrationDal.GetAll(filter);
@@ -59,6 +60,16 @@ namespace Business.Concrete
         public IDataResult<List<Calibration>> GetIletkenlikCalibrations()
         {
             return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(c => c.Parameter == "Iletkenlik"));
+        }
+
+        public IDataResult<List<Calibration>> GetAkmCalibrations()
+        {
+            return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(c => c.Parameter == "Akm"));
+        }
+
+        public IDataResult<List<Calibration>> GetKoiCalibrations()
+        {
+            return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(c => c.Parameter == "Koi"));
         }
 
         public IDataResult<List<Calibration>> GetPhCalibrations()

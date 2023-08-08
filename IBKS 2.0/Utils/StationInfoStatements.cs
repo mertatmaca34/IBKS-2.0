@@ -101,6 +101,36 @@ namespace IBKS_2._0.Utils
                     return $"     {resIletkenlik.Message}";
                 }
             }
+            else if (parameter == "Akm")
+            {
+                var resAkm = StationStatementHelper.GetLastAkmCalibration(calibrationManager);
+
+                if (resAkm.Success && resAkm.Data != null)
+                {
+                    string lastCalibrationIletkenlik = $"     {resAkm.Data.TimeStamp:g}";
+
+                    return lastCalibrationIletkenlik;
+                }
+                else
+                {
+                    return $"     {resAkm.Message}";
+                }
+            }
+            else if (parameter == "Koi")
+            {
+                var resKoi = StationStatementHelper.GetLastKoiCalibration(calibrationManager);
+
+                if (resKoi.Success && resKoi.Data != null)
+                {
+                    string lastCalibrationIletkenlik = $"     {resKoi.Data.TimeStamp:g}";
+
+                    return lastCalibrationIletkenlik;
+                }
+                else
+                {
+                    return $"     {resKoi.Message}";
+                }
+            }
             else
             {
                 return $"     {Messages.DataNotFound}";

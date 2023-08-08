@@ -66,5 +66,33 @@ namespace Business.Helpers
                 return new ErrorDataResult<Calibration>(Messages.DataNotFound);
             }
         }
+
+        public static IDataResult<Calibration> GetLastAkmCalibration(ICalibrationService calibrationManager)
+        {
+            var res = calibrationManager.GetAkmCalibrations();
+
+            if (res.Success && res.Data.Count > 0)
+            {
+                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).LastOrDefault());
+            }
+            else
+            {
+                return new ErrorDataResult<Calibration>(Messages.DataNotFound);
+            }
+        }
+
+        public static IDataResult<Calibration> GetLastKoiCalibration(ICalibrationService calibrationManager)
+        {
+            var res = calibrationManager.GetKoiCalibrations();
+
+            if (res.Success && res.Data.Count > 0)
+            {
+                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).LastOrDefault());
+            }
+            else
+            {
+                return new ErrorDataResult<Calibration>(Messages.DataNotFound);
+            }
+        }
     }
 }

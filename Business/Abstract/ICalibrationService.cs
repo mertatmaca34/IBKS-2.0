@@ -11,5 +11,7 @@ namespace Business.Abstract
         IDataResult<List<Calibration>> GetByDateTime(DateTime startTime, DateTime endTime);
         IDataResult<List<Calibration>> GetPhCalibrations();
         IDataResult<List<Calibration>> GetIletkenlikCalibrations();
+        IDataResult<List<Calibration>> GetAkmCalibrations();
+        IDataResult<List<Calibration>> GetKoiCalibrations();
     }
 }

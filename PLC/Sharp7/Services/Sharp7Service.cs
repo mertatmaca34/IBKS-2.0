@@ -22,7 +22,7 @@ namespace PLC.Sharp7.Services
 
         public TimeSpan ConnectionTime = new(0, 0, 0);
 
-        public static IPlcService _plcManager;
+        public static IPlcService? _plcManager;
 
         string _plcIP;
 
