@@ -154,9 +154,10 @@ namespace IBKS_2._0.Utils
 
                     if (calibrationName == "Akm" || calibrationName == "Koi")
                     {
-                        _calibration.TimeStamp = sharp7Service.S71200.DB4.SystemTime;
+                        _calibration.TimeStamp = DateTime.Now;
 
                         //TODO API BAĞLAN 
+                        _calibration.ResultFactor = 1;
 
                         SendCalibration data = new SendCalibration
                         {

@@ -62,8 +62,8 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet(Name = "GetSendData")]
-        public IEnumerable<SendData> Get()
+        [HttpGet(Name = "SendCalibration")]
+        public IEnumerable<SendCalibration> Get()
         {
             return null;
         }

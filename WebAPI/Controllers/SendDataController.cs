@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
 
         private readonly HttpClient _httpClient;
 
-        private string _apiBaseUrl;
+        private readonly string? _apiBaseUrl;
 
         readonly ILogin _login;
 
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
 
             var loginInfo = _apiManager.Get();
 
-            _ = new LoginController().Login(loginInfo.Data.UserName, loginInfo.Data.Password);
+            _login.Login(loginInfo.Data.UserName, loginInfo.Data.Password);
         }
 
         [HttpPost]
@@ -42,6 +42,13 @@ namespace WebAPI.Controllers
         {
             try
             {
+                if (Constants.Constants.TicketId == null)
+                {
+                    var loginInfo = _apiManager.Get();
+
+                    _login.Login(loginInfo.Data.UserName, loginInfo.Data.Password);
+                }
+
                 var content = new StringContent(
                     JsonConvert.SerializeObject(data),
                     Encoding.UTF8,
@@ -67,7 +74,7 @@ namespace WebAPI.Controllers
             }
             catch (HttpRequestException ex)
             {
-                return new ErrorDataResult<SendDataResult>(null, Messages.ApiSendDataFault);
+                 return new ErrorDataResult<SendDataResult>(null, Messages.ApiSendDataFault);
             }
         }
 
