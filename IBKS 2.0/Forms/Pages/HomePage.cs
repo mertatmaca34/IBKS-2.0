@@ -7,6 +7,7 @@ using PLC;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
 using System.ComponentModel;
+using WebAPI.Abstract;
 using WebAPI.Controllers;
 
 namespace IBKS_2._0.Forms.Pages
@@ -19,8 +20,9 @@ namespace IBKS_2._0.Forms.Pages
         readonly ISendDataService _sendDataManager;
         readonly ICalibrationService _calibrationManager;
         readonly IApiService _apiManager;
+        readonly ILogin _login;
 
-        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, IApiService apiManager)
+        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, IApiService apiManager, ILogin login)
         {
             InitializeComponent();
 
@@ -28,6 +30,7 @@ namespace IBKS_2._0.Forms.Pages
             _stationManager = stationManager;
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
+            _login = login;
         }
 
         private void TimerAssignUI_Tick(object sender, EventArgs e)
@@ -54,7 +57,7 @@ namespace IBKS_2._0.Forms.Pages
             {
                 if (SendDataHelper.IsItTime().Success)
                 {
-                    var res = new SendDataController(_apiManager).SendData(data.Data);
+                    var res = new SendDataController(_apiManager,_login).SendData(data.Data);
 
                     if (res.Result.Success)
                     {

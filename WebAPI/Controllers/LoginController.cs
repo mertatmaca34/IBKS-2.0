@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
+using WebAPI.Abstract;
 using WebAPI.Utils;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class LoginController : ControllerBase, ILogin
     {
         private readonly HttpClient _httpClient;
         private const string ApiBaseUrl = "https://entegrationsais.csb.gov.tr";
@@ -48,7 +49,7 @@ namespace WebAPI.Controllers
                 var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<LoginResult>>(responseContent);
 
                 Constants.Constants.TicketId = desResponseContent.objects.TicketId;
-
+                 
                 return desResponseContent;
 
                 /*var result = JsonConvert.DeserializeObject<LoginResult>(desResponseContent.objects.ToString());

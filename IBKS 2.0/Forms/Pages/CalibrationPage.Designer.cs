@@ -43,7 +43,7 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel25 = new TableLayoutPanel();
             label21 = new Label();
             label22 = new Label();
-            button6 = new Button();
+            ButtonKoiZero = new Button();
             panel19 = new Panel();
             panel20 = new Panel();
             tableLayoutPanel26 = new TableLayoutPanel();
@@ -51,12 +51,12 @@ namespace IBKS_2._0.Forms.Pages
             LabelKoiLastCalibration = new Label();
             tableLayoutPanel19 = new TableLayoutPanel();
             tableLayoutPanel20 = new TableLayoutPanel();
-            button7 = new Button();
+            ButtonIletkenlikSpan = new Button();
             panel14 = new Panel();
             tableLayoutPanel21 = new TableLayoutPanel();
             label17 = new Label();
             label18 = new Label();
-            button8 = new Button();
+            ButtonIletkenlikZero = new Button();
             panel15 = new Panel();
             panel17 = new Panel();
             tableLayoutPanel22 = new TableLayoutPanel();
@@ -65,12 +65,12 @@ namespace IBKS_2._0.Forms.Pages
             panel18 = new Panel();
             tableLayoutPanel15 = new TableLayoutPanel();
             tableLayoutPanel16 = new TableLayoutPanel();
-            button4 = new Button();
+            ButtonPhSpann = new Button();
             panel10 = new Panel();
             tableLayoutPanel17 = new TableLayoutPanel();
             label13 = new Label();
             label14 = new Label();
-            button5 = new Button();
+            ButtonPhZero = new Button();
             panel11 = new Panel();
             panel12 = new Panel();
             tableLayoutPanel18 = new TableLayoutPanel();
@@ -221,7 +221,7 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel24.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
             tableLayoutPanel24.Controls.Add(panel16, 0, 0);
             tableLayoutPanel24.Controls.Add(tableLayoutPanel25, 1, 0);
-            tableLayoutPanel24.Controls.Add(button6, 5, 0);
+            tableLayoutPanel24.Controls.Add(ButtonKoiZero, 5, 0);
             tableLayoutPanel24.Controls.Add(panel19, 2, 0);
             tableLayoutPanel24.Controls.Add(panel20, 4, 0);
             tableLayoutPanel24.Controls.Add(tableLayoutPanel26, 3, 0);
@@ -275,25 +275,26 @@ namespace IBKS_2._0.Forms.Pages
             label22.Anchor = AnchorStyles.Bottom;
             label22.AutoSize = true;
             label22.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label22.Location = new Point(67, 8);
+            label22.Location = new Point(69, 8);
             label22.Name = "label22";
-            label22.Size = new Size(35, 18);
+            label22.Size = new Size(32, 18);
             label22.TabIndex = 2;
-            label22.Text = "KOi";
+            label22.Text = "Koi";
             // 
-            // button6
+            // ButtonKoiZero
             // 
-            button6.BackColor = Color.FromArgb(0, 131, 200);
-            button6.Dock = DockStyle.Fill;
-            button6.FlatAppearance.BorderSize = 0;
-            button6.ForeColor = Color.White;
-            button6.Location = new Point(395, 15);
-            button6.Margin = new Padding(15);
-            button6.Name = "button6";
-            button6.Size = new Size(151, 29);
-            button6.TabIndex = 4;
-            button6.Text = "ZERO";
-            button6.UseVisualStyleBackColor = false;
+            ButtonKoiZero.BackColor = Color.FromArgb(0, 131, 200);
+            ButtonKoiZero.Dock = DockStyle.Fill;
+            ButtonKoiZero.FlatAppearance.BorderSize = 0;
+            ButtonKoiZero.ForeColor = Color.White;
+            ButtonKoiZero.Location = new Point(395, 15);
+            ButtonKoiZero.Margin = new Padding(15);
+            ButtonKoiZero.Name = "ButtonKoiZero";
+            ButtonKoiZero.Size = new Size(151, 29);
+            ButtonKoiZero.TabIndex = 4;
+            ButtonKoiZero.Text = "ZERO";
+            ButtonKoiZero.UseVisualStyleBackColor = false;
+            ButtonKoiZero.Click += ButtonKoiZero_Click;
             // 
             // panel19
             // 
@@ -377,10 +378,10 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel20.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 85F));
             tableLayoutPanel20.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
             tableLayoutPanel20.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 85F));
-            tableLayoutPanel20.Controls.Add(button7, 7, 0);
+            tableLayoutPanel20.Controls.Add(ButtonIletkenlikSpan, 7, 0);
             tableLayoutPanel20.Controls.Add(panel14, 0, 0);
             tableLayoutPanel20.Controls.Add(tableLayoutPanel21, 1, 0);
-            tableLayoutPanel20.Controls.Add(button8, 5, 0);
+            tableLayoutPanel20.Controls.Add(ButtonIletkenlikZero, 5, 0);
             tableLayoutPanel20.Controls.Add(panel15, 2, 0);
             tableLayoutPanel20.Controls.Add(panel17, 4, 0);
             tableLayoutPanel20.Controls.Add(tableLayoutPanel22, 3, 0);
@@ -399,19 +400,20 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel20.Size = new Size(561, 59);
             tableLayoutPanel20.TabIndex = 0;
             // 
-            // button7
+            // ButtonIletkenlikSpan
             // 
-            button7.BackColor = Color.FromArgb(0, 131, 200);
-            button7.Dock = DockStyle.Fill;
-            button7.FlatAppearance.BorderSize = 0;
-            button7.ForeColor = Color.White;
-            button7.Location = new Point(485, 15);
-            button7.Margin = new Padding(10, 15, 15, 15);
-            button7.Name = "button7";
-            button7.Size = new Size(61, 29);
-            button7.TabIndex = 5;
-            button7.Text = "SPAN";
-            button7.UseVisualStyleBackColor = false;
+            ButtonIletkenlikSpan.BackColor = Color.FromArgb(0, 131, 200);
+            ButtonIletkenlikSpan.Dock = DockStyle.Fill;
+            ButtonIletkenlikSpan.FlatAppearance.BorderSize = 0;
+            ButtonIletkenlikSpan.ForeColor = Color.White;
+            ButtonIletkenlikSpan.Location = new Point(485, 15);
+            ButtonIletkenlikSpan.Margin = new Padding(10, 15, 15, 15);
+            ButtonIletkenlikSpan.Name = "ButtonIletkenlikSpan";
+            ButtonIletkenlikSpan.Size = new Size(61, 29);
+            ButtonIletkenlikSpan.TabIndex = 5;
+            ButtonIletkenlikSpan.Text = "SPAN";
+            ButtonIletkenlikSpan.UseVisualStyleBackColor = false;
+            ButtonIletkenlikSpan.Click += ButtonIletkenlikSpan_Click;
             // 
             // panel14
             // 
@@ -460,19 +462,20 @@ namespace IBKS_2._0.Forms.Pages
             label18.TabIndex = 2;
             label18.Text = "İletkenlik";
             // 
-            // button8
+            // ButtonIletkenlikZero
             // 
-            button8.BackColor = Color.FromArgb(0, 131, 200);
-            button8.Dock = DockStyle.Fill;
-            button8.FlatAppearance.BorderSize = 0;
-            button8.ForeColor = Color.White;
-            button8.Location = new Point(395, 15);
-            button8.Margin = new Padding(15, 15, 10, 15);
-            button8.Name = "button8";
-            button8.Size = new Size(60, 29);
-            button8.TabIndex = 4;
-            button8.Text = "ZERO";
-            button8.UseVisualStyleBackColor = false;
+            ButtonIletkenlikZero.BackColor = Color.FromArgb(0, 131, 200);
+            ButtonIletkenlikZero.Dock = DockStyle.Fill;
+            ButtonIletkenlikZero.FlatAppearance.BorderSize = 0;
+            ButtonIletkenlikZero.ForeColor = Color.White;
+            ButtonIletkenlikZero.Location = new Point(395, 15);
+            ButtonIletkenlikZero.Margin = new Padding(15, 15, 10, 15);
+            ButtonIletkenlikZero.Name = "ButtonIletkenlikZero";
+            ButtonIletkenlikZero.Size = new Size(60, 29);
+            ButtonIletkenlikZero.TabIndex = 4;
+            ButtonIletkenlikZero.Text = "ZERO";
+            ButtonIletkenlikZero.UseVisualStyleBackColor = false;
+            ButtonIletkenlikZero.Click += ButtonIletkenlikZero_Click;
             // 
             // panel15
             // 
@@ -565,10 +568,10 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel16.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 85F));
             tableLayoutPanel16.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
             tableLayoutPanel16.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 85F));
-            tableLayoutPanel16.Controls.Add(button4, 7, 0);
+            tableLayoutPanel16.Controls.Add(ButtonPhSpann, 7, 0);
             tableLayoutPanel16.Controls.Add(panel10, 0, 0);
             tableLayoutPanel16.Controls.Add(tableLayoutPanel17, 1, 0);
-            tableLayoutPanel16.Controls.Add(button5, 5, 0);
+            tableLayoutPanel16.Controls.Add(ButtonPhZero, 5, 0);
             tableLayoutPanel16.Controls.Add(panel11, 2, 0);
             tableLayoutPanel16.Controls.Add(panel12, 4, 0);
             tableLayoutPanel16.Controls.Add(tableLayoutPanel18, 3, 0);
@@ -587,19 +590,20 @@ namespace IBKS_2._0.Forms.Pages
             tableLayoutPanel16.Size = new Size(561, 59);
             tableLayoutPanel16.TabIndex = 0;
             // 
-            // button4
+            // ButtonPhSpann
             // 
-            button4.BackColor = Color.FromArgb(0, 131, 200);
-            button4.Dock = DockStyle.Fill;
-            button4.FlatAppearance.BorderSize = 0;
-            button4.ForeColor = Color.White;
-            button4.Location = new Point(485, 15);
-            button4.Margin = new Padding(10, 15, 15, 15);
-            button4.Name = "button4";
-            button4.Size = new Size(61, 29);
-            button4.TabIndex = 5;
-            button4.Text = "SPAN";
-            button4.UseVisualStyleBackColor = false;
+            ButtonPhSpann.BackColor = Color.FromArgb(0, 131, 200);
+            ButtonPhSpann.Dock = DockStyle.Fill;
+            ButtonPhSpann.FlatAppearance.BorderSize = 0;
+            ButtonPhSpann.ForeColor = Color.White;
+            ButtonPhSpann.Location = new Point(485, 15);
+            ButtonPhSpann.Margin = new Padding(10, 15, 15, 15);
+            ButtonPhSpann.Name = "ButtonPhSpann";
+            ButtonPhSpann.Size = new Size(61, 29);
+            ButtonPhSpann.TabIndex = 5;
+            ButtonPhSpann.Text = "SPAN";
+            ButtonPhSpann.UseVisualStyleBackColor = false;
+            ButtonPhSpann.Click += ButtonPhSpann_Click;
             // 
             // panel10
             // 
@@ -644,23 +648,24 @@ namespace IBKS_2._0.Forms.Pages
             label14.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label14.Location = new Point(71, 8);
             label14.Name = "label14";
-            label14.Size = new Size(28, 18);
+            label14.Size = new Size(27, 18);
             label14.TabIndex = 2;
-            label14.Text = "pH";
+            label14.Text = "Ph";
             // 
-            // button5
+            // ButtonPhZero
             // 
-            button5.BackColor = Color.FromArgb(0, 131, 200);
-            button5.Dock = DockStyle.Fill;
-            button5.FlatAppearance.BorderSize = 0;
-            button5.ForeColor = Color.White;
-            button5.Location = new Point(395, 15);
-            button5.Margin = new Padding(15, 15, 10, 15);
-            button5.Name = "button5";
-            button5.Size = new Size(60, 29);
-            button5.TabIndex = 4;
-            button5.Text = "ZERO";
-            button5.UseVisualStyleBackColor = false;
+            ButtonPhZero.BackColor = Color.FromArgb(0, 131, 200);
+            ButtonPhZero.Dock = DockStyle.Fill;
+            ButtonPhZero.FlatAppearance.BorderSize = 0;
+            ButtonPhZero.ForeColor = Color.White;
+            ButtonPhZero.Location = new Point(395, 15);
+            ButtonPhZero.Margin = new Padding(15, 15, 10, 15);
+            ButtonPhZero.Name = "ButtonPhZero";
+            ButtonPhZero.Size = new Size(60, 29);
+            ButtonPhZero.TabIndex = 4;
+            ButtonPhZero.Text = "ZERO";
+            ButtonPhZero.UseVisualStyleBackColor = false;
+            ButtonPhZero.Click += ButtonPhZero_Click;
             // 
             // panel11
             // 
@@ -808,11 +813,11 @@ namespace IBKS_2._0.Forms.Pages
             label2.Anchor = AnchorStyles.Bottom;
             label2.AutoSize = true;
             label2.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(64, 8);
+            label2.Location = new Point(66, 8);
             label2.Name = "label2";
-            label2.Size = new Size(41, 18);
+            label2.Size = new Size(37, 18);
             label2.TabIndex = 2;
-            label2.Text = "AKM";
+            label2.Text = "Akm";
             // 
             // ButtonAkmZero
             // 
@@ -1478,7 +1483,7 @@ namespace IBKS_2._0.Forms.Pages
         private TableLayoutPanel tableLayoutPanel25;
         private Label label21;
         private Label label22;
-        private Button button6;
+        private Button ButtonKoiZero;
         private Panel panel19;
         private Panel panel20;
         private TableLayoutPanel tableLayoutPanel26;
@@ -1486,12 +1491,12 @@ namespace IBKS_2._0.Forms.Pages
         private Label LabelKoiLastCalibration;
         private TableLayoutPanel tableLayoutPanel19;
         private TableLayoutPanel tableLayoutPanel20;
-        private Button button7;
+        private Button ButtonIletkenlikSpan;
         private Panel panel14;
         private TableLayoutPanel tableLayoutPanel21;
         private Label label17;
         private Label label18;
-        private Button button8;
+        private Button ButtonIletkenlikZero;
         private Panel panel15;
         private Panel panel17;
         private TableLayoutPanel tableLayoutPanel22;
@@ -1500,12 +1505,12 @@ namespace IBKS_2._0.Forms.Pages
         private Panel panel18;
         private TableLayoutPanel tableLayoutPanel15;
         private TableLayoutPanel tableLayoutPanel16;
-        private Button button4;
+        private Button ButtonPhSpann;
         private Panel panel10;
         private TableLayoutPanel tableLayoutPanel17;
         private Label label13;
         private Label label14;
-        private Button button5;
+        private Button ButtonPhZero;
         private Panel panel11;
         private Panel panel12;
         private TableLayoutPanel tableLayoutPanel18;

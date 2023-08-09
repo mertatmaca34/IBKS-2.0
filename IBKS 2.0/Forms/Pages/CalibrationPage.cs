@@ -8,22 +8,24 @@ namespace IBKS_2._0.Forms.Pages
         readonly ICalibrationService _calibrationManager;
         readonly ICalibrationLimitService _calibrationLimitManager;
         readonly IStationService _stationManager;
+        readonly IApiService _apiManager;
 
         CalibrationOps _calibrationOps;
 
         List<Control> _controls;
 
-        public CalibrationPage(ICalibrationService calibrationManager, IStationService stationManager, ICalibrationLimitService calibrationLimitManager)
+        public CalibrationPage(ICalibrationService calibrationManager, IStationService stationManager, ICalibrationLimitService calibrationLimitManager, IApiService apiManager)
         {
             _calibrationManager = calibrationManager;
             _stationManager = stationManager;
             _calibrationLimitManager = calibrationLimitManager;
 
-            _calibrationOps = new CalibrationOps(_stationManager, _calibrationManager);
-
             _controls = new List<Control>();
 
             InitializeComponent();
+            _apiManager = apiManager;
+
+            _calibrationOps = new CalibrationOps(_stationManager, _calibrationManager, _apiManager);
         }
 
         private void CalibrationPage_Load(object sender, EventArgs e)
@@ -67,6 +69,56 @@ namespace IBKS_2._0.Forms.Pages
             if (calibrationLimits != null)
             {
                 _calibrationOps.StartCalibration("Akm", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
+            }
+        }
+
+        private void ButtonKoiZero_Click(object sender, EventArgs e)
+        {
+            var calibrationLimits = _calibrationLimitManager.Get(x => x.Parameter == "Koi");
+
+            if (calibrationLimits != null)
+            {
+                _calibrationOps.StartCalibration("Koi", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
+            }
+        }
+
+        private void ButtonPhZero_Click(object sender, EventArgs e)
+        {
+            var calibrationLimits = _calibrationLimitManager.Get(x => x.Parameter == "Ph");
+
+            if (calibrationLimits != null)
+            {
+                _calibrationOps.StartCalibration("Ph", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
+            }
+        }
+
+        private void ButtonPhSpann_Click(object sender, EventArgs e)
+        {
+            var calibrationLimits = _calibrationLimitManager.Get(x => x.Parameter == "Ph");
+
+            if (calibrationLimits != null)
+            {
+                _calibrationOps.StartCalibration("Ph", "Span", calibrationLimits.Data.ZeroTimeStamp, _controls);
+            }
+        }
+
+        private void ButtonIletkenlikZero_Click(object sender, EventArgs e)
+        {
+            var calibrationLimits = _calibrationLimitManager.Get(x => x.Parameter == "Iletkenlik");
+
+            if (calibrationLimits != null)
+            {
+                _calibrationOps.StartCalibration("Iletkenlik", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
+            }
+        }
+
+        private void ButtonIletkenlikSpan_Click(object sender, EventArgs e)
+        {
+            var calibrationLimits = _calibrationLimitManager.Get(x => x.Parameter == "Iletkenlik");
+
+            if (calibrationLimits != null)
+            {
+                _calibrationOps.StartCalibration("Iletkenlik", "Span", calibrationLimits.Data.ZeroTimeStamp, _controls);
             }
         }
     }

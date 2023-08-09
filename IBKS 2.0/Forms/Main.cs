@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using IBKS_2._0.Forms.Pages;
 using IBKS_2._0.Utils;
+using WebAPI.Abstract;
 
 namespace IBKS_2._0.Forms
 {
@@ -21,11 +22,12 @@ namespace IBKS_2._0.Forms
         readonly IUserService _userManager;
         readonly IMailStatementService _mailStatementManager;
         readonly IUserMailStatementService _userMailStatementManager;
-        
+        readonly ILogin _login;
+
         public Main(IStationService stationManager, IApiService apiManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager,
-            IPlcService plcManager, IMailServerService mailServerManager, IAuthService authManager, 
-            IUserService userManager, IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager)
+            IPlcService plcManager, IMailServerService mailServerManager, IAuthService authManager,
+            IUserService userManager, IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager, ILogin login)
         {
             InitializeComponent();
 
@@ -41,8 +43,9 @@ namespace IBKS_2._0.Forms
             _userManager = userManager;
             _mailStatementManager = mailStatementManager;
             _userMailStatementManager = userMailStatementManager;
+            _login = login;
 
-            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager);
+            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager, _login);
             _simulationPage = new SimulationPage();
             _reportingPage = new ReportingPage(_sendDataManager, _calibrationManager);
         }
@@ -67,7 +70,7 @@ namespace IBKS_2._0.Forms
 
         private void ButtonCalibrationPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new CalibrationPage(_calibrationManager,_stationManager,_calibrationLimitManager));
+            PageChange.Change(PanelContent, this, new CalibrationPage(_calibrationManager, _stationManager, _calibrationLimitManager, _apiManager));
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonCalibrationPage);
         }
 
@@ -77,8 +80,8 @@ namespace IBKS_2._0.Forms
 
             if (res == true)
             {*/
-                PageChange.Change(PanelContent, this, new MailPage(_mailServerManager, _authManager, _userManager, _mailStatementManager, _userMailStatementManager));
-                ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonMailPage);
+            PageChange.Change(PanelContent, this, new MailPage(_mailServerManager, _authManager, _userManager, _mailStatementManager, _userMailStatementManager));
+            ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonMailPage);
             //}
         }
 
@@ -94,8 +97,8 @@ namespace IBKS_2._0.Forms
 
             if (res == true)
             {*/
-                PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager, _apiManager, _stationManager, _plcManager));
-                ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
+            PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager, _apiManager, _stationManager, _plcManager));
+            ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
             //}
         }
 

@@ -6,7 +6,6 @@ using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
-using WebAPI.Abstract;
 using WebAPI.Enums;
 using WebAPI.Utils;
 
@@ -14,7 +13,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SendDataController : ControllerBase
+    public class SendCalibrationController : ControllerBase
     {
         readonly IApiService _apiManager;
 
@@ -22,23 +21,15 @@ namespace WebAPI.Controllers
 
         private string _apiBaseUrl;
 
-        readonly ILogin _login;
-
-        public SendDataController(IApiService apiManager, ILogin login)
+        public SendCalibrationController(IApiService apiManager)
         {
             _apiManager = apiManager;
 
             _httpClient = new HttpClient();
-
-            _login = login;
-
-            var loginInfo = _apiManager.Get();
-
-            _ = new LoginController().Login(loginInfo.Data.UserName, loginInfo.Data.Password);
         }
 
         [HttpPost]
-        public async Task<IDataResult<SendDataResult>> SendData([FromBody] SendData data)
+        public async Task<IDataResult<ResultStatus>> SendCalibration([FromBody] SendCalibration data)
         {
             try
             {
@@ -52,22 +43,22 @@ namespace WebAPI.Controllers
 
                 if (resAssign.Success)
                 {
-                    var response = await _httpClient.PostAsync(StationType.SAIS.ToString() + "/SendData", content);
+                    var response = await _httpClient.PostAsync(StationType.SAIS.ToString() + "/SendCalibration", content);
 
                     response.EnsureSuccessStatusCode();
 
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    var desResponseContent = JsonConvert.DeserializeObject<SendDataResult>(responseContent)!;
+                    var desResponseContent = JsonConvert.DeserializeObject<ResultStatus>(responseContent)!;
 
-                    return new SuccessDataResult<SendDataResult>(desResponseContent, Messages.ApiSendDataSuccces);
+                    return new SuccessDataResult<ResultStatus>(desResponseContent, Messages.ApiSendDataSuccces);
                 }
 
-                return new ErrorDataResult<SendDataResult>(null, Messages.ApiSendDataFault);
+                return new ErrorDataResult<ResultStatus>(null, Messages.ApiSendDataFault);
             }
             catch (HttpRequestException ex)
             {
-                return new ErrorDataResult<SendDataResult>(null, Messages.ApiSendDataFault);
+                return new ErrorDataResult<ResultStatus>(null, Messages.ApiSendDataFault);
             }
         }
 
