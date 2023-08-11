@@ -1,5 +1,4 @@
-﻿using Business.Abstract;
-using Business.Constants;
+﻿using Business.Constants;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.Concrete.API;
@@ -8,7 +7,6 @@ using Newtonsoft.Json;
 using System.Text;
 using WebAPI.Abstract;
 using WebAPI.Enums;
-using WebAPI.Utils;
 
 namespace WebAPI.Controllers
 {
@@ -51,14 +49,14 @@ namespace WebAPI.Controllers
                     return new ErrorDataResult<SendDataResult>(null, Messages.ApiLoginFailed);
                 }
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 return new ErrorDataResult<SendDataResult>(null, Messages.ApiSendDataFault);
             }
         }
 
         [HttpGet(Name = "GetSendData")]
-        public IEnumerable<SendData> Get()
+        public IEnumerable<SendData>? Get()
         {
             return null;
         }

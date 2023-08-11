@@ -51,14 +51,14 @@ namespace WebAPI.Controllers
                 }
 
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 return new ErrorDataResult<ResultStatus>(null, Messages.CalibrationNotSent);
             }
         }
 
         [HttpGet(Name = "SendCalibration")]
-        public IEnumerable<SendCalibration> Get()
+        public IEnumerable<SendCalibration>? Get()
         {
             return null;
         }

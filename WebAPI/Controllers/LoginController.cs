@@ -46,18 +46,18 @@ namespace WebAPI.Controllers
                 // API'den dönen cevabı alın
                 var responseContent = await response.Content.ReadAsStringAsync();
 
-                var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<LoginResult>>(responseContent);
+                var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<LoginResult>?>(responseContent);
 
-                Constants.Constants.TicketId = desResponseContent.objects.TicketId;
+                Constants.Constants.TicketId = desResponseContent?.objects.TicketId;
                  
-                return desResponseContent;
+                return desResponseContent!;
 
                 /*var result = JsonConvert.DeserializeObject<LoginResult>(desResponseContent.objects.ToString());
 
                 var ticketId = result.TicketId.ToString();*/
 
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 // İstisna durumları yönetme (isteğe göre yapılabilir)
                 // Hata durumunda nasıl bir davranış sergileyeceğinize karar verin

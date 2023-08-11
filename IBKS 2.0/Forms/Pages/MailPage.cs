@@ -34,12 +34,12 @@ namespace IBKS_2._0.Forms.Pages
 
         private void ButtonMailStatements_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new MailStatementsPage(_userManager,_mailStatementManager, _userMailStatementManager));
+            PageChange.Change(PanelContent, this, new MailStatementsPage(_userManager, _mailStatementManager, _userMailStatementManager));
         }
 
         private void ButtonEditMailStatements_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new MailStatementsEditPage(_mailStatementManager,_userMailStatementManager));
+            PageChange.Change(PanelContent, this, new MailStatementsEditPage(_mailStatementManager, _userMailStatementManager));
         }
     }
 }

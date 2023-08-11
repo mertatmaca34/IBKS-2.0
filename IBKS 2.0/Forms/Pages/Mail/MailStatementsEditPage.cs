@@ -7,11 +7,11 @@ namespace IBKS_2._0.Forms.Pages.Mail
 {
     public partial class MailStatementsEditPage : Form
     {
-        List<CooldownItem> _comboBoxCooldownItems;
-        List<ParameterItem> _comboBoxParameterItems;
+        List<CooldownItem>? _comboBoxCooldownItems;
+        List<ParameterItem>? _comboBoxParameterItems;
 
         TimeSpan _coolDown;
-        string _parameter;
+        string? _parameter;
 
         readonly IMailStatementService _mailStatementManager;
         readonly IUserMailStatementService _userMailStatementManager;
@@ -28,9 +28,9 @@ namespace IBKS_2._0.Forms.Pages.Mail
         {
             try
             {
-                MailStatement mailStatement = new MailStatement
+                MailStatement mailStatement = new()
                 {
-                    Parameter = ComboBoxParameter.Text,
+                    Parameter = _parameter!,
                     Statement = ComboBoxStatement.Text,
                     StatementName = TextBoxMailSubject.Text,
                     CoolDown = _coolDown,
@@ -172,7 +172,7 @@ namespace IBKS_2._0.Forms.Pages.Mail
         private void ComboBoxCoolDown_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = ComboBoxCoolDown.SelectedIndex;
-            if (selectedIndex >= 0 && selectedIndex < _comboBoxCooldownItems.Count)
+            if (selectedIndex >= 0 && selectedIndex < _comboBoxCooldownItems?.Count)
             {
                 _coolDown = _comboBoxCooldownItems[selectedIndex].RealValue;
             }
@@ -181,7 +181,7 @@ namespace IBKS_2._0.Forms.Pages.Mail
         private void ComboBoxParameter_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = ComboBoxParameter.SelectedIndex;
-            if (selectedIndex >= 0 && selectedIndex < _comboBoxParameterItems.Count)
+            if (selectedIndex >= 0 && selectedIndex < _comboBoxParameterItems?.Count)
             {
                 _parameter = _comboBoxParameterItems[selectedIndex].RealValue;
             }
@@ -215,16 +215,16 @@ namespace IBKS_2._0.Forms.Pages.Mail
 
                 _userMailStatementManager.Delete(new UserMailStatement { MailStatementId = Convert.ToInt16(row.Cells[0].Value) });
 
-                MailStatement mailStatement = new MailStatement
+                MailStatement mailStatement = new()
                 {
                     Id = Convert.ToInt16(row.Cells[0].Value),
-                    StatementName = row.Cells[1].Value.ToString(),
-                    Parameter = row.Cells[2].Value.ToString(),
-                    Statement = row.Cells[3].Value.ToString(),
+                    StatementName = row.Cells[1].Value.ToString()!,
+                    Parameter = row.Cells[2].Value.ToString()!,
+                    Statement = row.Cells[3].Value.ToString()!,
                     LowerLimit = Convert.ToInt16(row.Cells[4].Value),
                     UpperLimit = Convert.ToInt16(row.Cells[5].Value),
                     CoolDown = (TimeSpan)row.Cells[6].Value,
-                    Content = row.Cells[7].Value.ToString(),
+                    Content = row.Cells[7].Value.ToString()!,
                 };
 
                 var res = _mailStatementManager.Delete(mailStatement);
@@ -237,9 +237,9 @@ namespace IBKS_2._0.Forms.Pages.Mail
 
         private void SetDefaultStatements()
         {
-            TimeSpan timeSpan10Minute = new(0, 0, 900);
+            TimeSpan timeSpan10Minute = new(0, 0, 600);
 
-            List<MailStatement> mailStatements = new()
+            List<MailStatement>? mailStatements = new()
             {
                 new MailStatement { StatementName = "Akm Limit Aşımı", Parameter = "Akm", Statement = "Limit Aşımı", LowerLimit = 0, UpperLimit = 350, CoolDown = timeSpan10Minute, Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: " },
                 new MailStatement { StatementName = "Koi Limit Aşımı", Parameter = "Koi", Statement = "Limit Aşımı", LowerLimit = 0, UpperLimit = 400, CoolDown = timeSpan10Minute, Content = "AKM'de anlık olarak limit değer aşıldı. Anlık Değer: " },
