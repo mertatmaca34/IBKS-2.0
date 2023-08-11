@@ -21,8 +21,9 @@ namespace IBKS_2._0.Forms.Pages
         readonly ICalibrationService _calibrationManager;
         readonly IApiService _apiManager;
         readonly ILogin _login;
+        readonly ISendDataController _sendDataController;
 
-        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, IApiService apiManager, ILogin login)
+        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, IApiService apiManager, ILogin login, ISendDataController sendDataController)
         {
             InitializeComponent();
 
@@ -31,6 +32,7 @@ namespace IBKS_2._0.Forms.Pages
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
             _login = login;
+            _sendDataController = sendDataController;
         }
 
         private void TimerAssignUI_Tick(object sender, EventArgs e)
@@ -49,7 +51,7 @@ namespace IBKS_2._0.Forms.Pages
             }; bgw.RunWorkerAsync();
         }
 
-        private void SendDataAndAssignStatationInfoControl()
+        private async void SendDataAndAssignStatationInfoControl()
         {
             var data = DataProcessingHelper.MergedSendData(_stationManager);
 
@@ -57,17 +59,15 @@ namespace IBKS_2._0.Forms.Pages
             {
                 if (SendDataHelper.IsItTime().Success)
                 {
-                    var res = new SendDataController(_apiManager,_login).SendData(data.Data);
+                    var res = await _sendDataController.SendData(data.Data);
 
-                    if (res.Result.Success)
-                    {
-                        _sendDataManager.Add(data.Data);
+                    _sendDataManager.Add(data.Data);
 
-                        AssignStationInfoControl(res.Result);
-                    }
+                    AssignStationInfoControl(res);
                 }
             }
         }
+
 
         private void AssignAnalogSensors()
         {

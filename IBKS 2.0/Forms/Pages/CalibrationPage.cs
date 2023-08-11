@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using IBKS_2._0.Utils;
+using WebAPI.Abstract;
 
 namespace IBKS_2._0.Forms.Pages
 {
@@ -9,23 +10,24 @@ namespace IBKS_2._0.Forms.Pages
         readonly ICalibrationLimitService _calibrationLimitManager;
         readonly IStationService _stationManager;
         readonly IApiService _apiManager;
+        readonly ISendCalibrationController _sendCalibrationController;
 
         CalibrationOps _calibrationOps;
 
         List<Control> _controls;
 
-        public CalibrationPage(ICalibrationService calibrationManager, IStationService stationManager, ICalibrationLimitService calibrationLimitManager, IApiService apiManager)
+        public CalibrationPage(ICalibrationService calibrationManager, IStationService stationManager, ICalibrationLimitService calibrationLimitManager, IApiService apiManager, ISendCalibrationController sendCalibrationController)
         {
             _calibrationManager = calibrationManager;
             _stationManager = stationManager;
             _calibrationLimitManager = calibrationLimitManager;
-
+            _sendCalibrationController = sendCalibrationController;
             _controls = new List<Control>();
 
             InitializeComponent();
             _apiManager = apiManager;
 
-            _calibrationOps = new CalibrationOps(_stationManager, _calibrationManager, _apiManager);
+            _calibrationOps = new CalibrationOps(_stationManager, _calibrationManager, _apiManager, _sendCalibrationController);
         }
 
         private void CalibrationPage_Load(object sender, EventArgs e)

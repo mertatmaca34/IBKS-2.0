@@ -14,27 +14,13 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SendDataController : ControllerBase
+    public class SendDataController : ControllerBase, ISendDataController
     {
-        readonly IApiService _apiManager;
+        readonly IHttpClientAssign _httpClientAssign;
 
-        private readonly HttpClient _httpClient;
-
-        private readonly string? _apiBaseUrl;
-
-        readonly ILogin _login;
-
-        public SendDataController(IApiService apiManager, ILogin login)
+        public SendDataController(IHttpClientAssign httpClientAssign)
         {
-            _apiManager = apiManager;
-
-            _httpClient = new HttpClient();
-
-            _login = login;
-
-            var loginInfo = _apiManager.Get();
-
-            _login.Login(loginInfo.Data.UserName, loginInfo.Data.Password);
+            _httpClientAssign = httpClientAssign;
         }
 
         [HttpPost]
@@ -42,24 +28,15 @@ namespace WebAPI.Controllers
         {
             try
             {
-                if (Constants.Constants.TicketId == null)
+                if (Constants.Constants.TicketId != null)
                 {
-                    var loginInfo = _apiManager.Get();
+                    var content = new StringContent(
+                        JsonConvert.SerializeObject(data),
+                        Encoding.UTF8,
+                        "application/json"
+                    );
 
-                    _login.Login(loginInfo.Data.UserName, loginInfo.Data.Password);
-                }
-
-                var content = new StringContent(
-                    JsonConvert.SerializeObject(data),
-                    Encoding.UTF8,
-                    "application/json"
-                );
-
-                var resAssign = Assigns.AssignHttpClient(_apiManager, _apiBaseUrl, _httpClient);
-
-                if (resAssign.Success)
-                {
-                    var response = await _httpClient.PostAsync(StationType.SAIS.ToString() + "/SendData", content);
+                    var response = await Constants.Constants.HttpClient.PostAsync(StationType.SAIS.ToString() + "/SendData", content);
 
                     response.EnsureSuccessStatusCode();
 
@@ -69,12 +46,14 @@ namespace WebAPI.Controllers
 
                     return new SuccessDataResult<SendDataResult>(desResponseContent, Messages.ApiSendDataSuccces);
                 }
-
-                return new ErrorDataResult<SendDataResult>(null, Messages.ApiSendDataFault);
+                else
+                {
+                    return new ErrorDataResult<SendDataResult>(null, Messages.ApiLoginFailed);
+                }
             }
             catch (HttpRequestException ex)
             {
-                 return new ErrorDataResult<SendDataResult>(null, Messages.ApiSendDataFault);
+                return new ErrorDataResult<SendDataResult>(null, Messages.ApiSendDataFault);
             }
         }
 

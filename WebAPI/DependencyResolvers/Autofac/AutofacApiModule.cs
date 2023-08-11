@@ -2,9 +2,9 @@
 using Autofac.Extras.DynamicProxy;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
-using Microsoft.AspNetCore.Mvc;
 using WebAPI.Abstract;
 using WebAPI.Controllers;
+using WebAPI.Utils;
 
 namespace Business.DependencyResolvers.Autofac
 {
@@ -13,6 +13,9 @@ namespace Business.DependencyResolvers.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<LoginController>().As<ILogin>().SingleInstance();
+            builder.RegisterType<SendDataController>().As<ISendDataController>().SingleInstance();
+            builder.RegisterType<SendCalibrationController>().As<ISendCalibrationController>().SingleInstance();
+            builder.RegisterType<HttpClientAssign>().As<IHttpClientAssign>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

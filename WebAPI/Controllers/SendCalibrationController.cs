@@ -1,31 +1,23 @@
-﻿using Business.Abstract;
-using Business.Constants;
+﻿using Business.Constants;
 using Core.Utilities.Results;
-using Entities.Concrete;
 using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
+using WebAPI.Abstract;
 using WebAPI.Enums;
-using WebAPI.Utils;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SendCalibrationController : ControllerBase
+    public class SendCalibrationController : ControllerBase, ISendCalibrationController
     {
-        readonly IApiService _apiManager;
+        IHttpClientAssign _httpClientAssign;
 
-        private readonly HttpClient _httpClient;
-
-        private string _apiBaseUrl;
-
-        public SendCalibrationController(IApiService apiManager)
+        public SendCalibrationController(IHttpClientAssign httpClientAssign)
         {
-            _apiManager = apiManager;
-
-            _httpClient = new HttpClient();
+            _httpClientAssign = httpClientAssign;
         }
 
         [HttpPost]
@@ -33,17 +25,17 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var content = new StringContent(
-                    JsonConvert.SerializeObject(data),
-                    Encoding.UTF8,
-                    "application/json"
-                );
+                _httpClientAssign.AssignHttpClient();
 
-                var resAssign = Assigns.AssignHttpClient(_apiManager, _apiBaseUrl, _httpClient);
-
-                if (resAssign.Success)
+                if (Constants.Constants.TicketId != null)
                 {
-                    var response = await _httpClient.PostAsync(StationType.SAIS.ToString() + "/SendCalibration", content);
+                    var content = new StringContent(
+                        JsonConvert.SerializeObject(data),
+                        Encoding.UTF8,
+                        "application/json"
+                    );
+
+                    var response = await Constants.Constants.HttpClient.PostAsync(StationType.SAIS.ToString() + "/SendCalibration", content);
 
                     response.EnsureSuccessStatusCode();
 
@@ -51,14 +43,17 @@ namespace WebAPI.Controllers
 
                     var desResponseContent = JsonConvert.DeserializeObject<ResultStatus>(responseContent)!;
 
-                    return new SuccessDataResult<ResultStatus>(desResponseContent, Messages.ApiSendDataSuccces);
+                    return new SuccessDataResult<ResultStatus>(desResponseContent, Messages.CalibrationSent);
+                }
+                else
+                {
+                    return new ErrorDataResult<ResultStatus>(null, Messages.ApiLoginFailed);
                 }
 
-                return new ErrorDataResult<ResultStatus>(null, Messages.ApiSendDataFault);
             }
             catch (HttpRequestException ex)
             {
-                return new ErrorDataResult<ResultStatus>(null, Messages.ApiSendDataFault);
+                return new ErrorDataResult<ResultStatus>(null, Messages.CalibrationNotSent);
             }
         }
 

@@ -23,16 +23,18 @@ namespace IBKS_2._0.Forms
         readonly IMailStatementService _mailStatementManager;
         readonly IUserMailStatementService _userMailStatementManager;
         readonly ILogin _login;
+        readonly ISendCalibrationController _sendCalibrationController;
+        readonly ISendDataController _sendDataController;
 
         public Main(IStationService stationManager, IApiService apiManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager,
             IPlcService plcManager, IMailServerService mailServerManager, IAuthService authManager,
-            IUserService userManager, IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager, ILogin login)
+            IUserService userManager, IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager,
+            ILogin login, ISendDataController sendDataController, ISendCalibrationController sendCalibrationController)
         {
             InitializeComponent();
 
             _apiManager = apiManager;
-
             _stationManager = stationManager;
             _plcManager = plcManager;
             _sendDataManager = sendDataManager;
@@ -44,8 +46,10 @@ namespace IBKS_2._0.Forms
             _mailStatementManager = mailStatementManager;
             _userMailStatementManager = userMailStatementManager;
             _login = login;
+            _sendDataController = sendDataController;
+            _sendCalibrationController = sendCalibrationController;
 
-            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager, _login);
+            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager, _login, _sendDataController);
             _simulationPage = new SimulationPage();
             _reportingPage = new ReportingPage(_sendDataManager, _calibrationManager);
         }
@@ -70,7 +74,7 @@ namespace IBKS_2._0.Forms
 
         private void ButtonCalibrationPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new CalibrationPage(_calibrationManager, _stationManager, _calibrationLimitManager, _apiManager));
+            PageChange.Change(PanelContent, this, new CalibrationPage(_calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, _sendCalibrationController));
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonCalibrationPage);
         }
 

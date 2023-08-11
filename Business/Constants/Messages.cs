@@ -12,10 +12,13 @@
         public static string ApiUpdated = "API bilgileri güncellendi";
         public static string ApiSendDataSuccces = "Tarihli veri başarıyla gönderildi";
         public static string ApiSendDataFault = "Tarihli veri gönderilemedi";
+        public static string ApiLoginFailed = "Henüz API'ye giriş yapılmamış";
 
         public static string CalibrationAdded = "Kalibrasyon kaydedildi";
         public static string CalibrationNotAdded = "Kalibrasyon kaydedilemedi";
         public static string CalibrationNotFound = "Silinecek kalibrasyon bulunamadı";
+        public static string CalibrationSent = "Kalibrasyon başarıyla gönderildi";
+        public static string CalibrationNotSent = "Kalibrasyon gönderilemedi";
 
         public static string CalibrationLimitAdded = "Kalibrasyon limit bilgileri sisteme eklendi";
         public static string CalibrationLimitUpdated = "Kalibrasyon limit bilgileri güncellendi";
