@@ -3,14 +3,15 @@ using Business.Constants;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using System.Linq.Expressions;
 
 namespace Business.Concrete
 {
     public class SampleManager : ISampleService
     {
-        ISampleDal _sampleDal;
+        readonly ISampleDal _sampleDal;
+
         public SampleManager(ISampleDal sampleDal)
         {
             _sampleDal = sampleDal;
@@ -32,14 +33,14 @@ namespace Business.Concrete
             return new SuccessResult(Messages.SampleAdded);
         }
 
-        public IDataResult<List<Sample>> GetAll()
+        public IDataResult<List<Sample>> GetAll(Expression<Func<Sample, bool>> filter = null)
         {
-            return new SuccessDataResult<List<Sample>>(_sampleDal.GetAll());
+            return new SuccessDataResult<List<Sample>>(_sampleDal.GetAll(filter));
         }
 
         private IResult CheckSampleExist(Sample sample)
         {
-            var result = _sampleDal.GetAll(s => s == sample).Any();
+            var result = _sampleDal.GetAll(m => m == sample).FirstOrDefault();
 
             if (result)
             {
