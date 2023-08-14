@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
     public class GetPowerOffTimesController : ControllerBase
     {
         [HttpGet(Name = "GetPowerOffTimes")]
-        public ActionResult<ResultStatus> Get(Guid StationId, DateTime startDate, DateTime endDate)
+        public ActionResult<ResultStatus> GetPowerOffTimes(Guid StationId, DateTime startDate, DateTime endDate)
         {
             return new ResultStatus
             {

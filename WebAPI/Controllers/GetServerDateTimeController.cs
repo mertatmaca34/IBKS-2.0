@@ -11,7 +11,7 @@ namespace WebAPI.Controllers
         readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
         [HttpGet(Name = "GetServerDateTime")]
-        public ActionResult<ResultStatus> Get()
+        public ActionResult<ResultStatus> GetServerDateTime()
         {
             return new ResultStatus
             {

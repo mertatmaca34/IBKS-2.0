@@ -12,7 +12,7 @@ namespace WebAPI.Controllers
     public class StartSampleController : ControllerBase
     {
         readonly ISampleService _sampleManager;
-        Sharp7Service _sharp7Service = Sharp7Service.Instance;
+        readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
         public StartSampleController(ISampleService sampleManager)
         {

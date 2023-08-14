@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
     public class GetStationInformationController : ControllerBase
     {
         [HttpGet(Name = "GetStationInformation")]
-        public ActionResult<ResultStatus> Get(Guid StationId)
+        public ActionResult<ResultStatus> GetStationInformation(Guid StationId)
         {
             return new ResultStatus
             {

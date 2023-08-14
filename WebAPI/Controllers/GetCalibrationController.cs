@@ -15,8 +15,8 @@ namespace WebAPI.Controllers
             _calibrationManager = calibrationManager;
         }
 
-        [HttpGet(Name = "GetData")]
-        public ActionResult<ResultStatus> Get(Guid StationId, DateTime startDate, DateTime endDate)
+        [HttpGet(Name = "GetCalibration")]
+        public ActionResult<ResultStatus> GetCalibration(Guid StationId, DateTime startDate, DateTime endDate)
         {
             return new ResultStatus
             {

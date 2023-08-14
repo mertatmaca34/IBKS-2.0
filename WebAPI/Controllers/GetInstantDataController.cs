@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet(Name = "GetInstantData")]
-        public ActionResult<ResultStatus> Get(Guid StationId)
+        public ActionResult<ResultStatus> GetInstantData(Guid StationId)
         {
             return new ResultStatus
             {

@@ -14,8 +14,8 @@ namespace WebAPI.Controllers
             _sendDataManager = sendDataManager;
         }
 
-        [HttpGet(Name = "GetData")]
-        public ActionResult<ResultStatus> Get(Guid StationId)
+        [HttpGet(Name = "GetLastData")]
+        public ActionResult<ResultStatus> GetLastData(Guid StationId)
         {
             return new ResultStatus
             {

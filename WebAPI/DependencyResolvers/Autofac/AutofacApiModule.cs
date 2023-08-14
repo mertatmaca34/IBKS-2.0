@@ -15,6 +15,16 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<LoginController>().As<ILogin>().SingleInstance();
             builder.RegisterType<SendDataController>().As<ISendDataController>().SingleInstance();
             builder.RegisterType<SendCalibrationController>().As<ISendCalibrationController>().SingleInstance();
+
+            builder.RegisterType<GetCalibrationController>().AsSelf();
+            builder.RegisterType<GetChannelInformationController>().AsSelf();
+            builder.RegisterType<GetDataController>().AsSelf();
+            builder.RegisterType<GetLogController>().AsSelf();
+            builder.RegisterType<GetPowerOffTimesController>().AsSelf();
+            builder.RegisterType<GetServerDateTimeController>().AsSelf();
+            builder.RegisterType<StartSampleController>().AsSelf();
+            builder.RegisterType<GetLastDataController>().AsSelf();
+
             builder.RegisterType<HttpClientAssign>().As<IHttpClientAssign>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

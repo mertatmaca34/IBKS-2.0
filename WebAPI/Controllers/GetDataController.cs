@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet(Name = "GetData")]
-        public ActionResult<ResultStatus> Get(Guid StationId, DateTime startDate, DateTime endDate, int Period)
+        public ActionResult<ResultStatus> GetData(Guid StationId, DateTime startDate, DateTime endDate, int Period)
         {
             return new ResultStatus
             {

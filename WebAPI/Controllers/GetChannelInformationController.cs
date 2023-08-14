@@ -8,8 +8,8 @@ namespace WebAPI.Controllers
     [ApiController]
     public class GetChannelInformationController : ControllerBase
     {
-        [HttpGet(Name = "GetData")]
-        public ActionResult<ResultStatus> Get(Guid StationId)
+        [HttpGet(Name = "GetChannelInformation")]
+        public ActionResult<ResultStatus> GetChannelInformation(Guid StationId)
         {
             return new ResultStatus
             {

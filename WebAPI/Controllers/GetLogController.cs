@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
     public class GetLogController : ControllerBase
     {
         [HttpGet(Name = "GetLog")]
-        public ActionResult<ResultStatus> Get(Guid StationId, DateTime startDate, DateTime endDate)
+        public ActionResult<ResultStatus> GetLog(Guid StationId, DateTime startDate, DateTime endDate)
         {
             return new ResultStatus
             {
