@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using IBKS_2._0.Forms.Pages;
 using IBKS_2._0.Utils;
+using Notifications.Services.Abstract;
 using WebAPI.Abstract;
 
 namespace IBKS_2._0.Forms
@@ -25,12 +26,14 @@ namespace IBKS_2._0.Forms
         readonly ILogin _login;
         readonly ISendCalibrationController _sendCalibrationController;
         readonly ISendDataController _sendDataController;
+        readonly ICheckStatements _checkStatements;
 
         public Main(IStationService stationManager, IApiService apiManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager,
             IPlcService plcManager, IMailServerService mailServerManager, IAuthService authManager,
             IUserService userManager, IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager,
-            ILogin login, ISendDataController sendDataController, ISendCalibrationController sendCalibrationController)
+            ILogin login, ISendDataController sendDataController, ISendCalibrationController sendCalibrationController,
+            ICheckStatements checkStatements)
         {
             InitializeComponent();
 
@@ -48,8 +51,9 @@ namespace IBKS_2._0.Forms
             _login = login;
             _sendDataController = sendDataController;
             _sendCalibrationController = sendCalibrationController;
+            _checkStatements = checkStatements;
 
-            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager, _login, _sendDataController);
+            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager, _login, _sendDataController, _checkStatements);
             _simulationPage = new SimulationPage();
             _reportingPage = new ReportingPage(_sendDataManager, _calibrationManager);
         }

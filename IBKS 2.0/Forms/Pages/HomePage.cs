@@ -3,6 +3,7 @@ using Business.Helpers;
 using Core.Utilities.Results;
 using Entities.Concrete.API;
 using IBKS_2._0.Utils;
+using Notifications.Services.Abstract;
 using PLC;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
@@ -22,8 +23,9 @@ namespace IBKS_2._0.Forms.Pages
         readonly IApiService _apiManager;
         readonly ILogin _login;
         readonly ISendDataController _sendDataController;
+        readonly ICheckStatements _checkStatements;
 
-        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, IApiService apiManager, ILogin login, ISendDataController sendDataController)
+        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, IApiService apiManager, ILogin login, ISendDataController sendDataController, ICheckStatements checkStatements)
         {
             InitializeComponent();
 
@@ -33,6 +35,7 @@ namespace IBKS_2._0.Forms.Pages
             _calibrationManager = calibrationManager;
             _login = login;
             _sendDataController = sendDataController;
+            _checkStatements = checkStatements;
         }
 
         private void TimerAssignUI_Tick(object sender, EventArgs e)
@@ -47,6 +50,7 @@ namespace IBKS_2._0.Forms.Pages
                 AssignAverageOfLast60Minutes();
                 AssignSystemStatement();
                 SendDataAndAssignStatationInfoControl();
+                _checkStatements.Check();
 
             }; bgw.RunWorkerAsync();
         }
