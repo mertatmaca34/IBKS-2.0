@@ -3,14 +3,14 @@ using Business.Constants;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using System.Linq.Expressions;
 
 namespace Business.Concrete
 {
     public class MailStatementManager : IMailStatementService
     {
-        IMailStatementDal _mailStatementDal;
+        readonly IMailStatementDal _mailStatementDal;
 
         public MailStatementManager(IMailStatementDal mailStatementDal)
         {
@@ -97,6 +97,11 @@ namespace Business.Concrete
             }
 
             return new ErrorResult(Messages.IncompleteInfo);
+        }
+
+        IDataResult<MailStatement> IMailStatementService.Get(Expression<Func<MailStatement, bool>> filter)
+        {
+            return new SuccessDataResult<MailStatement>(_mailStatementDal.Get(filter));
         }
     }
 }

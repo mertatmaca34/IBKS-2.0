@@ -12,9 +12,9 @@ namespace IBKS_2._0.Forms.Pages
         readonly IApiService _apiManager;
         readonly ISendCalibrationController _sendCalibrationController;
 
-        CalibrationOps _calibrationOps;
+        readonly CalibrationOps _calibrationOps;
 
-        List<Control> _controls;
+        readonly List<Control> _controls;
 
         public CalibrationPage(ICalibrationService calibrationManager, IStationService stationManager, ICalibrationLimitService calibrationLimitManager, IApiService apiManager, ISendCalibrationController sendCalibrationController)
         {
