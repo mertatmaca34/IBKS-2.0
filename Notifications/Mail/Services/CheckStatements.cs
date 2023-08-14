@@ -29,9 +29,8 @@ namespace Notifications.Mail.Services
             _userMailStatementManager = userMailStatementManager;
             _mailStatementManager = mailStatementManager;
 
-
             mailStatements = new ConcurrentBag<MailStatement>(_mailStatementManager.GetAll().Data);
-            userMailStatements = (List<UserMailStatement>)_userMailStatementManager.GetAll();
+            userMailStatements = _userMailStatementManager.GetAll().Data.ToList();
 
             foreach (var item in mailStatements)
             {
@@ -60,18 +59,18 @@ namespace Notifications.Mail.Services
                             if (array[i].CoolDown == new TimeSpan(0, 0, 0))
                             {
                                 //Seçili mail durumunun kullanıcı durumlarında tanımlı olup olmadığının karşılaştırılma döngüsü
-                                for (int ii = 0; ii < mailStatements.Count; ii++) //foreach (var userMailStatements in userMailStatementsDTOs)
+                                for (int ii = 0; ii < userMailStatements.Count; ii++) //foreach (var userMailStatements in userMailStatementsDTOs)
                                 {
                                     //Seçili mail durumu kullanıcı durumunda tanımlı mı?
                                     if (array[i].Id == userMailStatements[ii].MailStatementId)
                                     {
                                         //Tanımlı ise ilgili kullanıcının bilgilerini getir
-                                        var user = _userManager.Get(x => x.Id == userMailStatements[ii].UserId);
+                                        var user = _userManager.Get(x => x.Id == userMailStatements[ii].UserId).Data;
 
                                         //Eğer mail durumu varsa (şartlar sağlanıyorsa) mail durumunun içeriğini oluştur ve gönder
                                         if (MailBodyGenerate(array[i]) != "-1")
                                         {
-                                            IsMailSent = _sendMail.MailSend(user.Data.Email, array[i].StatementName, MailBodyGenerate(array[i]));
+                                            IsMailSent = _sendMail.MailSend(user.Email, array[i].StatementName, MailBodyGenerate(array[i]));
                                         }
                                         else
                                         {
