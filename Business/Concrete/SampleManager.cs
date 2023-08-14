@@ -40,7 +40,7 @@ namespace Business.Concrete
 
         private IResult CheckSampleExist(Sample sample)
         {
-            var result = _sampleDal.GetAll(m => m == sample).FirstOrDefault();
+            var result = _sampleDal.GetAll(m => m == sample).Any();
 
             if (result)
             {

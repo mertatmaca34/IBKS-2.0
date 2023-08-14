@@ -105,6 +105,36 @@ namespace PLC.Sharp7.Services
             }
         }
 
+        public void StartSample()
+        {
+            byte[] bytes = new byte[30];
+
+            // EBWrite ile veri okunur
+            int result = client!.EBRead(0, 30, bytes);
+            if (result == 0)
+            {
+                // Veri okuma başarılı
+
+                // Belirli bitin değerini ayarla
+                S7.SetBitAt(bytes, 28, 7, true);
+
+                // Veriyi yaz
+                result = client.EBWrite(0, 30, bytes);
+                if (result == 0)
+                {
+                    // Yazma işlemi başarılı
+                }
+                else
+                {
+                    // Yazma işlemi başarısız
+                }
+            }
+            else
+            {
+                // Veri okuma başarısız
+            }
+        }
+
         public void ReadDB41()
         {
             if (!_worker.IsBusy && client != null & client?.Connected == true)
