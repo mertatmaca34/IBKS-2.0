@@ -1,12 +1,11 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
-using Notifications.Mail.Abstract;
-using Notifications.Services.Abstract;
+using IBKS_2._0.Services.Mail.Abstract;
 using PLC.Sharp7.Services;
 using System.Collections.Concurrent;
 using System.ComponentModel;
 
-namespace Notifications.Mail.Services
+namespace IBKS_2._0.Services.Mail.Services
 {
     public class CheckStatements : ICheckStatements
     {

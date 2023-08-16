@@ -5,9 +5,7 @@ using IBKS_2._0.DependencyResolvers.Autofac;
 using IBKS_2._0.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Notifications.DependencyResolvers.Autofac;
 using OfficeOpenXml;
-using System.Diagnostics;
 
 namespace IBKS_2._0
 {
@@ -46,7 +44,6 @@ namespace IBKS_2._0
                 builder.RegisterModule(new AutofacBusinessModule());
                 builder.RegisterModule(new AutofacApiModule());
                 builder.RegisterModule(new AutofacViewModule());
-                builder.RegisterModule(new AutofacNotificationsModule());
             })
             .ConfigureServices((hostContext, services) =>
             {

@@ -13,8 +13,8 @@ namespace WebAPI
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(builder =>
     {
-        builder.RegisterModule(new AutofacBusinessModule());
-        builder.RegisterModule(new AutofacApiModule());
+        //builder.RegisterModule(new AutofacBusinessModule());
+        //builder.RegisterModule(new AutofacApiModule());
     });
             // Add services to the container.
 

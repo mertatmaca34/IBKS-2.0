@@ -46,7 +46,7 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<PlcManager>().As<IPlcService>();
             builder.RegisterType<EfPlcDal>().As<IPlcDal>();
-            
+
             builder.RegisterType<SampleManager>().As<ISampleService>().SingleInstance();
             builder.RegisterType<EfSampleDal>().As<ISampleDal>().SingleInstance();
 

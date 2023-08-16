@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using IBKS_2._0.Forms.Pages;
+using IBKS_2._0.Services.Mail.Abstract;
 using IBKS_2._0.Utils;
-using Notifications.Services.Abstract;
 using WebAPI.Abstract;
 
 namespace IBKS_2._0.Forms

@@ -2,8 +2,8 @@
 using Business.Helpers;
 using Core.Utilities.Results;
 using Entities.Concrete.API;
+using IBKS_2._0.Services.Mail.Abstract;
 using IBKS_2._0.Utils;
-using Notifications.Services.Abstract;
 using PLC;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
