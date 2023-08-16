@@ -5,6 +5,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System.Linq.Expressions;
 
@@ -34,14 +35,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Calibration>> GetAll(Expression<Func<Calibration, bool>> filter = null)
         {
-            var dataResult = _calibrationDal.GetAll(filter);
-
-            if (dataResult.Count > 0)
-            {
-                return new SuccessDataResult<List<Calibration>>();
-            }
-
-            return new ErrorDataResult<List<Calibration>>(Messages.DataNotFound);
+            return new SuccessDataResult<List<Calibration>>(_calibrationDal.GetAll(filter));
         }
 
         [ValidationAspect(typeof(CalibrationValidator))]

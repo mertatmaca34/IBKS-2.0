@@ -6,15 +6,15 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GetLastDataController : ControllerBase
+    public class GetLastDataDateController : ControllerBase
     {
         readonly ISendDataService _sendDataManager;
-        public GetLastDataController(ISendDataService sendDataManager)
+        public GetLastDataDateController(ISendDataService sendDataManager)
         {
             _sendDataManager = sendDataManager;
         }
 
-        [HttpGet(Name = "GetLastData")]
+        [HttpGet(Name = "GetLastDataDate")]
         public ActionResult<ResultStatus> GetLastData(Guid StationId)
         {
             return new ResultStatus

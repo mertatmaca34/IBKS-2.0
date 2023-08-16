@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Notifications.DependencyResolvers.Autofac;
 using OfficeOpenXml;
+using System.Diagnostics;
 
 namespace IBKS_2._0
 {
@@ -30,6 +31,12 @@ namespace IBKS_2._0
 
                 Application.Run(services.GetRequiredService<Main>());
             }
+        }
+        public static void ConfigureContainer(ContainerBuilder builder)
+        {
+            // Autofac modülleri burada kaydedilir.
+            builder.RegisterModule(new AutofacApiModule());
+            // Diðer modüller de burada kaydedilebilir.
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)

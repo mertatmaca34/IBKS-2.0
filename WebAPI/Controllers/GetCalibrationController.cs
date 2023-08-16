@@ -18,11 +18,13 @@ namespace WebAPI.Controllers
         [HttpGet(Name = "GetCalibration")]
         public ActionResult<ResultStatus> GetCalibration(Guid StationId, DateTime startDate, DateTime endDate)
         {
+            var calibrations = _calibrationManager.GetAll(x => x.TimeStamp >= startDate && x.TimeStamp <= endDate).Data.ToList();
+
             return new ResultStatus
             {
                 result = true,
                 message = "null",
-                objects = _calibrationManager.GetAll(x => x.TimeStamp >= startDate && x.TimeStamp <= endDate).Data.ToList()!
+                objects = calibrations
             };
         }
     }

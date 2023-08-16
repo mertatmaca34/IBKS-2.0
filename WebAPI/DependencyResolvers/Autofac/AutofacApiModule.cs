@@ -23,7 +23,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<GetPowerOffTimesController>().AsSelf();
             builder.RegisterType<GetServerDateTimeController>().AsSelf();
             builder.RegisterType<StartSampleController>().AsSelf();
-            builder.RegisterType<GetLastDataController>().AsSelf();
+            builder.RegisterType<GetLastDataDateController>().AsSelf();
 
             builder.RegisterType<HttpClientAssign>().As<IHttpClientAssign>().SingleInstance();
 
