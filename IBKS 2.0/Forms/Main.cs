@@ -11,6 +11,7 @@ namespace IBKS_2._0.Forms
         readonly HomePage _homePage;
         readonly SimulationPage _simulationPage;
         readonly ReportingPage _reportingPage;
+        readonly CalibrationPage _calibrationPage;
 
         readonly IStationService _stationManager;
         readonly IApiService _apiManager;
@@ -56,6 +57,7 @@ namespace IBKS_2._0.Forms
             _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager, _login, _sendDataController, _checkStatements);
             _simulationPage = new SimulationPage();
             _reportingPage = new ReportingPage(_sendDataManager, _calibrationManager);
+            _calibrationPage = new CalibrationPage(_calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, _sendCalibrationController);
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -78,7 +80,7 @@ namespace IBKS_2._0.Forms
 
         private void ButtonCalibrationPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, new CalibrationPage(_calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, _sendCalibrationController));
+            PageChange.Change(PanelContent, this, _calibrationPage);
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonCalibrationPage);
         }
 

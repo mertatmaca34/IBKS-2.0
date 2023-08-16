@@ -23,26 +23,34 @@ namespace IBKS_2._0.Services.Mail.Services
                 var backgroundWorker = new BackgroundWorker();
                 backgroundWorker.DoWork += delegate
                 {
-                    SmtpClient smtpClient = new SmtpClient
+                    try
                     {
-                        EnableSsl = settings.UseSSL,
-                        Port = Convert.ToInt16(settings.Port),
-                        Host = settings.Host,
-                        DeliveryMethod = SmtpDeliveryMethod.Network,
-                        UseDefaultCredentials = settings.UseDefaultCredentials,
-                        Credentials = new NetworkCredential(settings.UserName, settings.Password)
-                    };
-                    MailMessage mailMessage = new()
+                        SmtpClient smtpClient = new SmtpClient
+                        {
+                            EnableSsl = settings.UseSSL,
+                            Port = Convert.ToInt16(settings.Port),
+                            Host = settings.Host,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            UseDefaultCredentials = settings.UseDefaultCredentials,
+                            Credentials = new NetworkCredential(settings.UserName, settings.Password)
+                        };
+                        MailMessage mailMessage = new()
+                        {
+                            From = new MailAddress(settings.UserName),
+                            Subject = subject,
+                            Body = body,
+                            IsBodyHtml = true
+                        };
+
+                        mailMessage.To.Add(mailName);
+
+                        smtpClient.Send(mailMessage);
+                    }
+                    catch (Exception)
                     {
-                        From = new MailAddress(settings.UserName),
-                        Subject = subject,
-                        Body = body,
-                        IsBodyHtml = true
-                    };
-
-                    mailMessage.To.Add(mailName);
-
-                    smtpClient.Send(mailMessage);
+                        //TODO
+                    }
+                    
                 };
                 backgroundWorker.RunWorkerAsync();
 

@@ -78,19 +78,19 @@ namespace IBKS_2._0.Utils
 
             switch (calibrationName)
             {
-                case "Akm":
+                case "AKM":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Akm;
                     _calibration.ZeroRef = 0;
                     _calibration.Parameter = "Akm";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: Akm";
                     break;
-                case "Koi":
+                case "KOi":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Koi;
                     _calibration.ZeroRef = 0;
                     _calibration.Parameter = "Koi";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: Koi";
                     break;
-                case "Ph":
+                case "pH":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Ph;
                     _calibration.ZeroRef = 7;
                     _calibration.Parameter = "pH";
@@ -156,7 +156,7 @@ namespace IBKS_2._0.Utils
                         _calibration.IsItValid = false;
                     }
 
-                    if (calibrationName == "Akm" || calibrationName == "Koi")
+                    if (calibrationName == "AKM" || calibrationName == "KOi")
                     {
                         _calibration.TimeStamp = DateTime.Now;
 
@@ -213,13 +213,13 @@ namespace IBKS_2._0.Utils
 
             switch (calibrationName)
             {
-                case "Akm":
+                case "AKM":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Akm;
                     _calibration.ZeroRef = 0;
                     _calibration.Parameter = "Akm";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: Akm";
                     break;
-                case "Koi":
+                case "KOi":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Koi;
                     _calibration.ZeroRef = 0;
                     _calibration.Parameter = "Koi";
@@ -228,7 +228,7 @@ namespace IBKS_2._0.Utils
                 case "pH":
                     _calibration.SpanMeas = sharp7Service.S71200.DB41.Ph;
                     _calibration.SpanRef = 4;
-                    _calibration.Parameter = "pH";
+                    _calibration.Parameter = "Ph";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: pH";
                     break;
                 case "Iletkenlik":
@@ -294,64 +294,45 @@ namespace IBKS_2._0.Utils
                     _calibration.TimeStamp = sharp7Service.S71200.DB4.SystemTime;
 
                     //TODO APIYE BAĞLAN
-                    SendCalibration data = new SendCalibration
+                    if (calibrationName == "pH" || calibrationName == "Iletkenlik")
                     {
-                        CalibrationDate = _calibration.TimeStamp,
-                        Stationid = stationInfo.StationId,
-                        DBColumnName = calibrationName,
-                        ZeroRef = _calibration.ZeroRef,
-                        ZeroMeas = _calibration.ZeroMeas,
-                        ZeroDiff = _calibration.ZeroDiff,
-                        ZeroSTD = _calibration.ZeroStd,
-                        SpanRef = _calibration.SpanRef,
-                        SpanMeas = _calibration.SpanMeas,
-                        SpanDiff = _calibration.SpanDiff,
-                        SpanSTD = _calibration.SpanStd,
-                        ResultFactor = _calibration.ResultFactor,
-                        ResultZero = _calibration.IsItValid,
-                        ResultSpan = _calibration.IsItValid,
-                    };
-                    //TODO APIYE GONDER
+                        _calibration.TimeStamp = DateTime.Now;
 
-                    //TODO API SONUCLARINI KAYDET
-                    /* if (res.result == false)
-                     {
-                         LogDTO log = new LogDTO
-                         {
-                             TimeStamp = DateTime.Now,
-                             EventType = "Hata",
-                             Source = "Kalibrasyon",
-                             Message = res.message
-                         };
-                         logService.Add(log);
+                        //TODO API BAĞLAN 
+                        _calibration.ResultFactor = 1;
 
-                         MessageBox.Show("Kalibrasyon kaydedilemedi!");
-                     }
-                     else
-                     {
-                         LogDTO log = new LogDTO
-                         {
-                             TimeStamp = DateTime.Now,
-                             EventType = "Bilgi",
-                             Source = "Kalibrasyon",
-                             Message = res.message
-                         };
-                         logService.Add(log);
+                        SendCalibration data = new SendCalibration
+                        {
+                            CalibrationDate = _calibration.TimeStamp,
+                            Stationid = stationInfo.StationId,
+                            DBColumnName = calibrationName,
+                            ZeroRef = _calibration.ZeroRef,
+                            ZeroMeas = _calibration.ZeroMeas,
+                            ZeroDiff = _calibration.ZeroDiff,
+                            ZeroSTD = _calibration.ZeroStd,
+                            SpanRef = _calibration.SpanRef,
+                            SpanMeas = _calibration.SpanMeas,
+                            SpanDiff = _calibration.SpanDiff,
+                            SpanSTD = _calibration.SpanStd,
+                            ResultFactor = _calibration.ResultFactor,
+                            ResultZero = _calibration.IsItValid,
+                            ResultSpan = _calibration.IsItValid,
+                        };
 
-                         MessageBox.Show("Kalibrasyon başarıyla kaydedildi!");
-                     }*/
+                        //TODO KALİBRASYONU GÖNDER
+                        labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: -";
+                        SendCalibration(data);
 
-                    labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: -";
+                        //Kalibrasyonu kaydet
+                        _calibration.TimeStamp = DateTime.Now;
+                        _calibrationManager.Add(_calibration);
 
-                    //Kalibrasyonu kaydet
-                    _calibration.TimeStamp = DateTime.Now;
-                    _calibrationManager.Add(_calibration);
+                        //Nesneyi resetle
+                        _calibration = new Calibration();
 
-                    //Nesneyi resetle
-                    _calibration = new Calibration();
-
-                    //Label'lardaki değerleri resetle
-                    AssignLabels(controls, "reset");
+                        //Label'lardaki değerleri resetle
+                        AssignLabels(controls, "reset");
+                    }
 
                     ChartCalibration.Series["Kalibrasyon Değeri"].Points.Clear();
                     ChartCalibration.Series["Referans Değeri"].Points.Clear();

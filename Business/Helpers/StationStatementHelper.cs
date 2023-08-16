@@ -45,7 +45,7 @@ namespace Business.Helpers
 
             if (res.Success && res.Data.Count > 0)
             {
-                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).LastOrDefault());
+                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).FirstOrDefault());
             }
             else
             {
@@ -59,7 +59,7 @@ namespace Business.Helpers
 
             if (res.Success && res.Data.Count > 0)
             {
-                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).LastOrDefault());
+                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).FirstOrDefault());
             }
             else
             {
@@ -73,7 +73,7 @@ namespace Business.Helpers
 
             if (res.Success && res.Data.Count > 0)
             {
-                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).LastOrDefault());
+                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).FirstOrDefault());
             }
             else
             {
@@ -87,7 +87,7 @@ namespace Business.Helpers
 
             if (res.Success && res.Data.Count > 0)
             {
-                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).LastOrDefault());
+                return new SuccessDataResult<Calibration>(res.Data.OrderByDescending(c => c.TimeStamp).FirstOrDefault());
             }
             else
             {

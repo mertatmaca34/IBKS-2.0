@@ -70,7 +70,7 @@ namespace IBKS_2._0.Forms.Pages
 
             if (calibrationLimits != null)
             {
-                _calibrationOps.StartCalibration("Akm", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
+                _calibrationOps.StartCalibration("AKM", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
             }
         }
 
@@ -80,7 +80,7 @@ namespace IBKS_2._0.Forms.Pages
 
             if (calibrationLimits != null)
             {
-                _calibrationOps.StartCalibration("Koi", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
+                _calibrationOps.StartCalibration("KOi", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
             }
         }
 
@@ -90,7 +90,7 @@ namespace IBKS_2._0.Forms.Pages
 
             if (calibrationLimits != null)
             {
-                _calibrationOps.StartCalibration("Ph", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
+                _calibrationOps.StartCalibration("pH", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
             }
         }
 
@@ -100,7 +100,7 @@ namespace IBKS_2._0.Forms.Pages
 
             if (calibrationLimits != null)
             {
-                _calibrationOps.StartCalibration("Ph", "Span", calibrationLimits.Data.ZeroTimeStamp, _controls);
+                _calibrationOps.StartCalibration("pH", "Span", calibrationLimits.Data.ZeroTimeStamp, _controls);
             }
         }
 
