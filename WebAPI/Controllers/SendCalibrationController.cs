@@ -9,8 +9,8 @@ using WebAPI.Enums;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class SendCalibrationController : ControllerBase, ISendCalibrationController
     {
         IHttpClientAssign _httpClientAssign;

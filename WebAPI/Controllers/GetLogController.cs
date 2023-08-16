@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class GetLogController : ControllerBase
     {
         [HttpGet(Name = "GetLog")]

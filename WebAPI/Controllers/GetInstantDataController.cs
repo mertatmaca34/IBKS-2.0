@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class GetInstantDataController : ControllerBase
     {
         readonly ISendDataService _sendDataManager;

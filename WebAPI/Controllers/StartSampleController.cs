@@ -6,8 +6,8 @@ using PLC.Sharp7.Services;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class StartSampleController : ControllerBase
     {
         readonly ISampleService _sampleManager;

@@ -7,8 +7,8 @@ using WebAPI.Utils;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class LoginController : ControllerBase, ILogin
     {
         private readonly HttpClient _httpClient;

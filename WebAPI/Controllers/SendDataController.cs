@@ -10,8 +10,8 @@ using WebAPI.Enums;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class SendDataController : ControllerBase, ISendDataController
     {
         readonly IHttpClientAssign _httpClientAssign;
