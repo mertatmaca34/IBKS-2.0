@@ -61,7 +61,6 @@ namespace IBKS_2._0.Forms
             _reportingPage = new ReportingPage(_sendDataManager, _calibrationManager);
             _calibrationPage = new CalibrationPage(_calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, _sendCalibrationController);
         }
-
         private void Main_Load(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, _homePage);
@@ -88,13 +87,13 @@ namespace IBKS_2._0.Forms
 
         private void ButtonMailPage_Click(object sender, EventArgs e)
         {
-            /*var res = LoginOps.Login(_authManager);
+            var res = LoginOps.Login(_authManager);
 
             if (res == true)
-            {*/
-            PageChange.Change(PanelContent, this, new MailPage(_mailServerManager, _authManager, _userManager, _mailStatementManager, _userMailStatementManager));
-            ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonMailPage);
-            //}
+            {
+                PageChange.Change(PanelContent, this, new MailPage(_mailServerManager, _authManager, _userManager, _mailStatementManager, _userMailStatementManager));
+                ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonMailPage);
+            }
         }
 
         private void ButtonReportingPage_Click(object sender, EventArgs e)
@@ -105,13 +104,13 @@ namespace IBKS_2._0.Forms
 
         private void ButtonSettingPage_Click(object sender, EventArgs e)
         {
-            /*var res = LoginOps.Login(_authManager);
+            var res = LoginOps.Login(_authManager);
 
             if (res == true)
-            {*/
-            PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager, _apiManager, _stationManager, _plcManager));
-            ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
-            //}
+            {
+                PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager, _apiManager, _stationManager, _plcManager));
+                ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
+            }
         }
 
         private void Main_SizeChanged(object sender, EventArgs e)
