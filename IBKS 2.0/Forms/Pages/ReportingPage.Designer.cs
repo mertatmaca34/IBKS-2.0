@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             tableLayoutPanel1 = new TableLayoutPanel();
             titleBarControl1 = new Components.TitleBarControl();
             tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel3 = new TableLayoutPanel();
             GroupBoxReportTypes = new GroupBox();
             RadioButtonLogData = new RadioButton();
+            RadioButtonSampleData = new RadioButton();
             RadioButtonCalibrationData = new RadioButton();
             RadioButtonInstantData = new RadioButton();
             groupBox3 = new GroupBox();
@@ -60,7 +61,6 @@
             tableLayoutPanel6 = new TableLayoutPanel();
             ButtonSaveAsExcel = new Button();
             ButtonSaveAsPdf = new Button();
-            RadioButtonSampleData = new RadioButton();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -173,6 +173,17 @@
             RadioButtonLogData.TabStop = true;
             RadioButtonLogData.Text = "Kayıt";
             RadioButtonLogData.UseVisualStyleBackColor = true;
+            // 
+            // RadioButtonSampleData
+            // 
+            RadioButtonSampleData.AutoSize = true;
+            RadioButtonSampleData.Location = new Point(88, 47);
+            RadioButtonSampleData.Name = "RadioButtonSampleData";
+            RadioButtonSampleData.Size = new Size(72, 19);
+            RadioButtonSampleData.TabIndex = 2;
+            RadioButtonSampleData.TabStop = true;
+            RadioButtonSampleData.Text = "Numune";
+            RadioButtonSampleData.UseVisualStyleBackColor = true;
             // 
             // RadioButtonCalibrationData
             // 
@@ -402,23 +413,22 @@
             DataGridViewDatas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DataGridViewDatas.BackgroundColor = Color.White;
             DataGridViewDatas.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(0, 131, 200);
-            dataGridViewCellStyle3.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            DataGridViewDatas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(0, 131, 200);
+            dataGridViewCellStyle1.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            DataGridViewDatas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             DataGridViewDatas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DataGridViewDatas.Dock = DockStyle.Fill;
             DataGridViewDatas.Location = new Point(1, 1);
             DataGridViewDatas.Margin = new Padding(1);
-            DataGridViewDatas.MultiSelect = false;
             DataGridViewDatas.Name = "DataGridViewDatas";
             DataGridViewDatas.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            DataGridViewDatas.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DataGridViewDatas.RowsDefaultCellStyle = dataGridViewCellStyle2;
             DataGridViewDatas.RowTemplate.Height = 25;
             DataGridViewDatas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DataGridViewDatas.Size = new Size(926, 575);
@@ -479,17 +489,6 @@
             ButtonSaveAsPdf.TabIndex = 1;
             ButtonSaveAsPdf.UseVisualStyleBackColor = true;
             ButtonSaveAsPdf.Click += ButtonSaveAsPdf_Click;
-            // 
-            // RadioButtonSampleData
-            // 
-            RadioButtonSampleData.AutoSize = true;
-            RadioButtonSampleData.Location = new Point(88, 47);
-            RadioButtonSampleData.Name = "RadioButtonSampleData";
-            RadioButtonSampleData.Size = new Size(72, 19);
-            RadioButtonSampleData.TabIndex = 2;
-            RadioButtonSampleData.TabStop = true;
-            RadioButtonSampleData.Text = "Numune";
-            RadioButtonSampleData.UseVisualStyleBackColor = true;
             // 
             // ReportingPage
             // 

@@ -8,23 +8,30 @@ namespace IBKS_2._0.Utils.DataExtractions.EPPlus
         {
             using (var package = new ExcelPackage(new FileInfo(filePath)))
             {
-                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
-
-                for (int col = 0; col < dataGridView.Columns.Count; col++)
+                try
                 {
-                    worksheet.Cells[1, col + 1].Value = dataGridView.Columns[col].HeaderText;
-                }
+                    var worksheet = package.Workbook.Worksheets.Add("Sheet1");
 
-                // Verileri ekleyin
-                for (int row = 0; row < dataGridView.Rows.Count; row++)
-                {
                     for (int col = 0; col < dataGridView.Columns.Count; col++)
                     {
-                        worksheet.Cells[row + 2, col + 1].Value = dataGridView.Rows[row].Cells[col].Value.ToString();
+                        worksheet.Cells[1, col + 1].Value = dataGridView.Columns[col].HeaderText;
                     }
-                }
 
-                package.Save();
+                    // Verileri ekleyin
+                    for (int row = 0; row < dataGridView.Rows.Count; row++)
+                    {
+                        for (int col = 0; col < dataGridView.Columns.Count; col++)
+                        {
+                            worksheet.Cells[row + 2, col + 1].Value = dataGridView.Rows[row].Cells[col].Value.ToString();
+                        }
+                    }
+
+                    package.Save();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
     }

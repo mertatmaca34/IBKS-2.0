@@ -23,6 +23,8 @@ namespace IBKS_2._0.Forms.Pages
 
             _today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
             _tomorrow = _today.AddDays(1);
+
+            //DataGridViewDatas.AutoGenerateColumns = false;
         }
 
         private void ButtonGenerate_Click(object sender, EventArgs e)
@@ -90,6 +92,7 @@ namespace IBKS_2._0.Forms.Pages
                         DataGridViewDatas.Columns[13].HeaderText = "Sıcaklık";
                         DataGridViewDatas.Columns[14].HeaderText = "İletkenlik";
                         DataGridViewDatas.Columns[26].HeaderText = "Durum";
+                        DataGridViewDatas.Columns[27].HeaderText = "API";
 
                         ColorExtensions.FromDataGridViewData(DataGridViewDatas, 26);
 
@@ -153,6 +156,7 @@ namespace IBKS_2._0.Forms.Pages
             using SaveFileDialog fileDialog = new();
 
             fileDialog.Filter = "Excel Files|*.xlsx";
+            fileDialog.FileName = DateTime.Now.ToString("d");
             fileDialog.Title = "Excel olarak kaydet";
 
             var res = fileDialog.ShowDialog();
