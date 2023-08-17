@@ -57,6 +57,8 @@
             // 
             // ButtonMailStatements
             // 
+            ButtonMailStatements.Checked = true;
+            ButtonMailStatements.CheckState = CheckState.Indeterminate;
             ButtonMailStatements.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point);
             ButtonMailStatements.Image = Properties.Resources.mail_statements_48px;
             ButtonMailStatements.ImageScaling = ToolStripItemImageScaling.None;

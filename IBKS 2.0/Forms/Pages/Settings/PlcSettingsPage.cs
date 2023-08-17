@@ -1,12 +1,15 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Entities.Concrete;
+using PLC.Sharp7.Services;
 
 namespace IBKS_2._0.Forms.Pages.Settings
 {
     public partial class PlcSettingsPage : Form
     {
         readonly IPlcService _plcManager;
+
+        Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
         public PlcSettingsPage(IPlcService plcManager)
         {
@@ -37,6 +40,8 @@ namespace IBKS_2._0.Forms.Pages.Settings
                 var res = _plcManager.Add(plc);
 
                 MessageBox.Show(res.Message);
+                
+                _sharp7Service.AssignPlcIp();
             }
             catch (Exception)
             {

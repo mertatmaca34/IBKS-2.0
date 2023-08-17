@@ -62,7 +62,7 @@ namespace IBKS_2._0.Forms.Pages.Mail
 
         private void DataGridViewMailStatements_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == 0 && e.RowIndex >= 0)
             {
                 var cell = DataGridViewMailStatements.Rows[e.RowIndex].Cells[0];
                 bool statementComboBox = Convert.ToBoolean(cell.EditedFormattedValue);

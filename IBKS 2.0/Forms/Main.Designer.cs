@@ -84,6 +84,7 @@
             ButtonNightMode.Text = "Gece Modu";
             ButtonNightMode.TextAlign = ContentAlignment.BottomCenter;
             ButtonNightMode.UseVisualStyleBackColor = true;
+            ButtonNightMode.Click += ButtonNightMode_Click;
             // 
             // ButtonSettingPage
             // 
@@ -177,6 +178,7 @@
             // 
             // ButtonHomePage
             // 
+            ButtonHomePage.BackColor = Color.FromArgb(230, 230, 230);
             ButtonHomePage.Dock = DockStyle.Fill;
             ButtonHomePage.FlatAppearance.BorderSize = 0;
             ButtonHomePage.FlatAppearance.MouseOverBackColor = Color.FromArgb(230, 230, 230);
@@ -191,7 +193,7 @@
             ButtonHomePage.TabIndex = 1;
             ButtonHomePage.Text = "Anasayfa";
             ButtonHomePage.TextAlign = ContentAlignment.BottomCenter;
-            ButtonHomePage.UseVisualStyleBackColor = true;
+            ButtonHomePage.UseVisualStyleBackColor = false;
             ButtonHomePage.Click += ButtonHomePage_Click;
             // 
             // PanelContent

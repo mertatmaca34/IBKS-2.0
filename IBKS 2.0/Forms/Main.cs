@@ -28,13 +28,14 @@ namespace IBKS_2._0.Forms
         readonly ISendCalibrationController _sendCalibrationController;
         readonly ISendDataController _sendDataController;
         readonly ICheckStatements _checkStatements;
+        readonly IGetMissingDatesController _getMissingDatesController;
 
         public Main(IStationService stationManager, IApiService apiManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager,
             IPlcService plcManager, IMailServerService mailServerManager, IAuthService authManager,
             IUserService userManager, IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager,
             ILogin login, ISendDataController sendDataController, ISendCalibrationController sendCalibrationController,
-            ICheckStatements checkStatements)
+            ICheckStatements checkStatements, IGetMissingDatesController getMissingDatesController)
         {
             InitializeComponent();
 
@@ -53,8 +54,9 @@ namespace IBKS_2._0.Forms
             _sendDataController = sendDataController;
             _sendCalibrationController = sendCalibrationController;
             _checkStatements = checkStatements;
+            _getMissingDatesController = getMissingDatesController;
 
-            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager, _login, _sendDataController, _checkStatements);
+            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager, _login, _sendDataController, _checkStatements, _getMissingDatesController);
             _simulationPage = new SimulationPage();
             _reportingPage = new ReportingPage(_sendDataManager, _calibrationManager);
             _calibrationPage = new CalibrationPage(_calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, _sendCalibrationController);
@@ -118,6 +120,11 @@ namespace IBKS_2._0.Forms
             {
                 activeForm.Size = PanelContent.Size;
             }
+        }
+
+        private void ButtonNightMode_Click(object sender, EventArgs e)
+        {
+            ColorExtensions.ChangeTheme(this.Controls);
         }
     }
 }

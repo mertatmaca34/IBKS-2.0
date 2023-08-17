@@ -1,12 +1,10 @@
 ﻿using Business.Abstract;
-using Business.Concrete;
 using Entities.Concrete;
 using Entities.Concrete.API;
 using IBKS_2._0.Components;
 using PLC.Sharp7.Services;
 using System.Windows.Forms.DataVisualization.Charting;
 using WebAPI.Abstract;
-using WebAPI.Controllers;
 using Timer = System.Windows.Forms.Timer;
 
 namespace IBKS_2._0.Utils
@@ -34,7 +32,12 @@ namespace IBKS_2._0.Utils
             _apiManager = apiManager;
             _sendCalibrationController = sendCalibrationController;
 
-            stationInfo.StationId = _stationManager.Get().Data.StationId;
+            var stationData = stationManager.Get();
+
+            if (stationData.Data != null)
+            {
+                stationInfo.StationId = _stationManager.Get().Data.StationId;
+            }
         }
 
         private async void SendCalibration(SendCalibration data)

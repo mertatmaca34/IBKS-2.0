@@ -6,6 +6,7 @@ using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
+using DataAccess.Concrete.Contexts;
 using DataAccess.Concrete.EntityFramework;
 
 namespace Business.DependencyResolvers.Autofac
@@ -14,6 +15,8 @@ namespace Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<IBKSContext>().AsSelf();
+
             builder.RegisterType<ApiManager>().As<IApiService>().SingleInstance();
             builder.RegisterType<EfApiDal>().As<IApiDal>().SingleInstance();
 

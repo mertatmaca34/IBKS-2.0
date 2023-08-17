@@ -14,6 +14,7 @@ namespace Business.DependencyResolvers.Autofac
         {
             builder.RegisterType<LoginController>().As<ILogin>().SingleInstance();
             builder.RegisterType<SendDataController>().As<ISendDataController>().SingleInstance();
+            builder.RegisterType<GetMissingDatesController>().As<IGetMissingDatesController>().SingleInstance();
             builder.RegisterType<SendCalibrationController>().As<ISendCalibrationController>().SingleInstance();
 
             builder.RegisterType<GetCalibrationController>().AsSelf();

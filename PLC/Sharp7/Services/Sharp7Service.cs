@@ -24,7 +24,7 @@ namespace PLC.Sharp7.Services
 
         public static IPlcService? _plcManager;
 
-        string _plcIP;
+        string _plcIP = "";
 
         public Sharp7Service(IPlcService plcManager)
         {
@@ -32,11 +32,25 @@ namespace PLC.Sharp7.Services
 
             _plcManager = plcManager;
 
-            _plcIP = plcManager.Get().Data.IpAdress;
+            AssignPlcIp();
 
             _timer = new Timer(new TimerCallback(TimerTick), null, 1000, 1000);
 
             Connect();
+        }
+
+        public void AssignPlcIp()
+        {
+            var plcData = _plcManager!.Get();
+
+            if (plcData.Data != null)
+            {
+                _plcIP = _plcManager.Get().Data.IpAdress;
+            }
+            else
+            {
+                _plcIP = "";
+            }
         }
 
         private void TimerTick(object? state)

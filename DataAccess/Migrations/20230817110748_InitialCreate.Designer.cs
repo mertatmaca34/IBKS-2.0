@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(IBKSContext))]
-    [Migration("20230804064425_MailStatementModel")]
-    partial class MailStatementModel
+    [Migration("20230817110748_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -627,6 +627,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSent")
+                        .HasColumnType("bit");
+
                     b.Property<double>("KOi")
                         .HasColumnType("float");
 
@@ -681,6 +684,25 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Stations");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.UserMailStatement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MailStatementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserMailStatements");
                 });
 #pragma warning restore 612, 618
         }

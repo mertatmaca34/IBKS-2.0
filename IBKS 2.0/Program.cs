@@ -1,6 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
+using DataAccess.Concrete.Contexts;
 using IBKS_2._0.DependencyResolvers.Autofac;
 using IBKS_2._0.Forms;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,12 @@ namespace IBKS_2._0
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+
+                var context = scope.ServiceProvider.GetRequiredService<IBKSContext>();
+
+                //context.Database.Migrate();
+
+                context.Database.EnsureCreated();
 
                 Application.EnableVisualStyles();
 

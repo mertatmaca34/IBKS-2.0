@@ -23,9 +23,13 @@ namespace IBKS_2._0.Forms.Pages
         readonly IApiService _apiManager;
         readonly ILogin _login;
         readonly ISendDataController _sendDataController;
+        readonly IGetMissingDatesController _getMissingDatesController;
         readonly ICheckStatements _checkStatements;
 
-        public HomePage(IStationService stationManager, ISendDataService sendDataManager, ICalibrationService calibrationManager, IApiService apiManager, ILogin login, ISendDataController sendDataController, ICheckStatements checkStatements)
+        public HomePage(IStationService stationManager, ISendDataService sendDataManager, 
+            ICalibrationService calibrationManager, IApiService apiManager, ILogin login, 
+            ISendDataController sendDataController, ICheckStatements checkStatements,
+            IGetMissingDatesController getMissingDatesController)
         {
             InitializeComponent();
 
@@ -36,6 +40,7 @@ namespace IBKS_2._0.Forms.Pages
             _login = login;
             _sendDataController = sendDataController;
             _checkStatements = checkStatements;
+            _getMissingDatesController = getMissingDatesController;
         }
 
         private void TimerAssignUI_Tick(object sender, EventArgs e)
@@ -64,6 +69,15 @@ namespace IBKS_2._0.Forms.Pages
                 if (SendDataHelper.IsItTime().Success)
                 {
                     var res = await _sendDataController.SendData(data.Data);
+
+                    if(res.Success)
+                    {
+                        data.Data.IsSent = true;
+                    }
+                    else
+                    {
+                        data.Data.IsSent = false;
+                    }
 
                     _sendDataManager.Add(data.Data);
 
@@ -152,6 +166,30 @@ namespace IBKS_2._0.Forms.Pages
             DigitalSensorBar.SystemStatementDescriptionTextColor = ColorExtensions.FromStatusText();
             DigitalSensorBar.SystemStatementTitleTextColor = ColorExtensions.FromStatusText();
             DigitalSensorBar.SystemStatementText = TextExtensions.FromStatus();
+        }
+
+        private async void TimerGetMissingDates_Tick(object sender, EventArgs e)
+        {
+            var missedDatas = _sendDataManager.GetAll(x => x.IsSent == false);
+
+            if(missedDatas.Data.Count > 0 )
+            {
+                foreach (var item in missedDatas.Data)
+                {
+                    var res = await _sendDataController.SendData(item);
+
+                    if (res.Success)
+                    {
+                        item.IsSent = true;
+                    }
+                    else
+                    {
+                        item.IsSent = false;
+                    }
+
+                    _sendDataManager.Add(item);
+                }
+            }
         }
     }
 }

@@ -21,16 +21,20 @@ namespace Business.Concrete
         {
             IResult result = BusinessRules.Run(CheckSendDataExist(sendData));
 
-            if (result != null)
+            if (result == null)
             {
-                _sendDataDal.Update(sendData);
+                this.Update(sendData);
 
                 return new SuccessResult(Messages.SendDataUpdated);
             }
+            else if (result != null)
+            {
+                _sendDataDal.Add(sendData);
 
-            _sendDataDal.Add(sendData);
+                return new SuccessResult(Messages.SendDataAdded);
+            }
 
-            return new SuccessResult(Messages.SendDataAdded);
+            return new ErrorResult(Messages.IncompleteInfo);
         }
 
         public IResult Delete(SendData sendData)
@@ -73,28 +77,35 @@ namespace Business.Concrete
         {
             IResult result = BusinessRules.Run(CheckSendDataExist(sendData));
 
-            if (!result.Success)
+            if (result == null)
             {
-                _sendDataDal.Add(sendData);
+                _sendDataDal.Update(sendData);
 
-                return new SuccessResult(Messages.SendDataAdded);
+                return new SuccessResult(Messages.SendDataUpdated);
             }
 
-            _sendDataDal.Update(sendData);
+            this.Add(sendData);
 
-            return new SuccessResult(Messages.SendDataUpdated);
+            return new SuccessResult(Messages.SendDataAdded);
         }
 
         private IResult CheckSendDataExist(SendData sendData)
         {
-            var result = _sendDataDal.GetAll(m => m == sendData).Any();
-
-            if (result)
+            if (sendData != null)
             {
-                return new ErrorResult(Messages.ItsAlreadyExist);
+                var filteredData = _sendDataDal.GetAll(d => d.Id == sendData.Id).FirstOrDefault();
+
+                if (filteredData != null)
+                {
+                    return new SuccessResult();
+                }
+                else
+                {
+                    return new ErrorResult(Messages.DataNotFound);
+                }
             }
 
-            return new SuccessResult();
+            return new ErrorResult(Messages.IncompleteInfo);
         }
     }
 }

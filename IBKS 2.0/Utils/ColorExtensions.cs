@@ -1,4 +1,5 @@
-﻿using PLC.Sharp7.Helpers;
+﻿using Business.Constants;
+using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
 
 namespace IBKS_2._0.Utils
@@ -68,7 +69,7 @@ namespace IBKS_2._0.Utils
                     "24" => SimGreen(row),
                     _ => Color.White
                 };
-                    
+
                 string valueToAssign = status switch
                 {
                     "1" => "Geçerli",
@@ -92,6 +93,28 @@ namespace IBKS_2._0.Utils
         {
             row.DefaultCellStyle.ForeColor = Color.White;
             return Color.FromArgb(237, 85, 101);
+        }
+        public static void ChangeTheme(Control.ControlCollection container)
+        {
+            foreach (Control component in container)
+            {
+                if (component is Panel)
+                {
+                    ChangeTheme(component.Controls);
+                    component.BackColor = ColorScheme.PanelBgDark;
+                    component.ForeColor = ColorScheme.PanelFgDark;
+                }
+                else if (component is Button)
+                {
+                    component.BackColor = ColorScheme.ButtonBgDark;
+                    component.ForeColor = ColorScheme.ButtonFgDark;
+                }
+                else if (component is TextBox)
+                {
+                    //component.BackColor = ColorScheme.TextBoxBG;
+                    //component.ForeColor = ColorScheme.TextBoxFG;
+                }
+            }
         }
     }
 }

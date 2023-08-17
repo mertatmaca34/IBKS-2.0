@@ -56,7 +56,7 @@ namespace IBKS_2._0.Forms.Pages.Settings
             {
                 var calibrationResult = _calibrationLimitManager.Get(c => c.Parameter == item.Parameter);
 
-                if (calibrationResult.Success)
+                if (calibrationResult.Data != null)
                 {
                     item.Parameter = calibrationResult.Data.Parameter;
                     item.ZeroRef = calibrationResult.Data.ZeroRef.ToString();

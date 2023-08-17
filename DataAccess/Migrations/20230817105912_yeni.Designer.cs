@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(IBKSContext))]
-    [Migration("20230713070701_mert")]
-    partial class mert
+    [Migration("20230817105912_yeni")]
+    partial class yeni
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,42 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OperationClaims");
+                });
+
+            modelBuilder.Entity("Core.Entities.Concrete.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.UserOperationClaim", b =>
@@ -134,6 +170,35 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Calibrations");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.CalibrationLimit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Parameter")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SpanRef")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpanTimeStamp")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZeroRef")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZeroTimeStamp")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CalibrationLimits");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Channel", b =>
@@ -395,8 +460,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Port")
-                        .HasColumnType("int");
+                    b.Property<string>("Port")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("UseDefaultCredentials")
                         .HasColumnType("bit");
@@ -420,6 +486,10 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<TimeSpan>("CoolDown")
                         .HasColumnType("time");
@@ -553,8 +623,12 @@ namespace DataAccess.Migrations
                     b.Property<double>("Iletkenlik")
                         .HasColumnType("float");
 
-                    b.Property<int>("Iletkenlik_Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Iletkenlik_Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsSent")
+                        .HasColumnType("bit");
 
                     b.Property<double>("KOi")
                         .HasColumnType("float");
@@ -610,6 +684,25 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Stations");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.UserMailStatement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MailStatementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserMailStatements");
                 });
 #pragma warning restore 612, 618
         }

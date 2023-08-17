@@ -12,7 +12,7 @@ namespace PLC.Sharp7.Helpers
 
         public static IDataResult<SendData> MergedSendData(IStationService stationManager)
         {
-            if (stationManager.Get().Success && _sharp7Service.client?.Connected == true)
+            if (stationManager.Get().Data != null && _sharp7Service.client?.Connected == true)
             {
                 var _status = GetSystemStatus.GetStatus();
 

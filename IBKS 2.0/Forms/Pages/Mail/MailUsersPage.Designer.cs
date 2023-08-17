@@ -35,17 +35,21 @@
             tableLayoutPanel5 = new TableLayoutPanel();
             tableLayoutPanel4 = new TableLayoutPanel();
             pictureBox1 = new PictureBox();
-            TextBoxAd = new TextBox();
             ButtonSave = new Button();
-            TextBoxPassword = new TextBox();
-            TextBoxEMail = new TextBox();
-            TextBoxSoyad = new TextBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             titleBarControl1 = new Components.TitleBarControl();
             tableLayoutPanel6 = new TableLayoutPanel();
             DataGridViewUsers = new DataGridView();
             ContextMenuStripUser = new ContextMenuStrip(components);
             SilToolStripMenuItem = new ToolStripMenuItem();
+            tableLayoutPanel7 = new TableLayoutPanel();
+            TextBoxAd = new TextBox();
+            tableLayoutPanel8 = new TableLayoutPanel();
+            TextBoxSoyad = new TextBox();
+            tableLayoutPanel9 = new TableLayoutPanel();
+            TextBoxEMail = new TextBox();
+            tableLayoutPanel10 = new TableLayoutPanel();
+            TextBoxPassword = new TextBox();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
@@ -55,6 +59,10 @@
             tableLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DataGridViewUsers).BeginInit();
             ContextMenuStripUser.SuspendLayout();
+            tableLayoutPanel7.SuspendLayout();
+            tableLayoutPanel8.SuspendLayout();
+            tableLayoutPanel9.SuspendLayout();
+            tableLayoutPanel10.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -118,12 +126,12 @@
             tableLayoutPanel4.BackColor = Color.White;
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Controls.Add(tableLayoutPanel10, 0, 4);
+            tableLayoutPanel4.Controls.Add(tableLayoutPanel9, 0, 3);
+            tableLayoutPanel4.Controls.Add(tableLayoutPanel8, 0, 2);
             tableLayoutPanel4.Controls.Add(pictureBox1, 0, 0);
-            tableLayoutPanel4.Controls.Add(TextBoxAd, 0, 1);
             tableLayoutPanel4.Controls.Add(ButtonSave, 0, 5);
-            tableLayoutPanel4.Controls.Add(TextBoxPassword, 0, 4);
-            tableLayoutPanel4.Controls.Add(TextBoxEMail, 0, 3);
-            tableLayoutPanel4.Controls.Add(TextBoxSoyad, 0, 2);
+            tableLayoutPanel4.Controls.Add(tableLayoutPanel7, 0, 1);
             tableLayoutPanel4.Dock = DockStyle.Fill;
             tableLayoutPanel4.Location = new Point(1, 1);
             tableLayoutPanel4.Margin = new Padding(1);
@@ -151,16 +159,6 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // TextBoxAd
-            // 
-            TextBoxAd.Anchor = AnchorStyles.None;
-            TextBoxAd.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TextBoxAd.Location = new Point(137, 288);
-            TextBoxAd.Name = "TextBoxAd";
-            TextBoxAd.PlaceholderText = "Ad";
-            TextBoxAd.Size = new Size(286, 29);
-            TextBoxAd.TabIndex = 0;
-            // 
             // ButtonSave
             // 
             ButtonSave.Anchor = AnchorStyles.None;
@@ -177,38 +175,6 @@
             ButtonSave.Text = "Kaydet";
             ButtonSave.UseVisualStyleBackColor = false;
             ButtonSave.Click += ButtonSave_Click;
-            // 
-            // TextBoxPassword
-            // 
-            TextBoxPassword.Anchor = AnchorStyles.None;
-            TextBoxPassword.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TextBoxPassword.Location = new Point(137, 441);
-            TextBoxPassword.Name = "TextBoxPassword";
-            TextBoxPassword.PlaceholderText = "Şifre";
-            TextBoxPassword.Size = new Size(286, 29);
-            TextBoxPassword.TabIndex = 3;
-            TextBoxPassword.UseSystemPasswordChar = true;
-            TextBoxPassword.KeyDown += TextBoxPassword_KeyDown;
-            // 
-            // TextBoxEMail
-            // 
-            TextBoxEMail.Anchor = AnchorStyles.None;
-            TextBoxEMail.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TextBoxEMail.Location = new Point(137, 388);
-            TextBoxEMail.Name = "TextBoxEMail";
-            TextBoxEMail.PlaceholderText = "Mail";
-            TextBoxEMail.Size = new Size(286, 29);
-            TextBoxEMail.TabIndex = 2;
-            // 
-            // TextBoxSoyad
-            // 
-            TextBoxSoyad.Anchor = AnchorStyles.None;
-            TextBoxSoyad.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TextBoxSoyad.Location = new Point(137, 338);
-            TextBoxSoyad.Name = "TextBoxSoyad";
-            TextBoxSoyad.PlaceholderText = "Soyad";
-            TextBoxSoyad.Size = new Size(286, 29);
-            TextBoxSoyad.TabIndex = 1;
             // 
             // tableLayoutPanel2
             // 
@@ -286,6 +252,110 @@
             SilToolStripMenuItem.Text = "Sil";
             SilToolStripMenuItem.Click += SilToolStripMenuItem_Click;
             // 
+            // tableLayoutPanel7
+            // 
+            tableLayoutPanel7.Anchor = AnchorStyles.None;
+            tableLayoutPanel7.BackColor = Color.WhiteSmoke;
+            tableLayoutPanel7.ColumnCount = 1;
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel7.Controls.Add(TextBoxAd, 0, 0);
+            tableLayoutPanel7.Location = new Point(131, 286);
+            tableLayoutPanel7.Name = "tableLayoutPanel7";
+            tableLayoutPanel7.RowCount = 1;
+            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel7.Size = new Size(298, 34);
+            tableLayoutPanel7.TabIndex = 5;
+            // 
+            // TextBoxAd
+            // 
+            TextBoxAd.Anchor = AnchorStyles.None;
+            TextBoxAd.BackColor = Color.WhiteSmoke;
+            TextBoxAd.BorderStyle = BorderStyle.None;
+            TextBoxAd.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TextBoxAd.Location = new Point(6, 6);
+            TextBoxAd.Name = "TextBoxAd";
+            TextBoxAd.PlaceholderText = "Ad";
+            TextBoxAd.Size = new Size(286, 22);
+            TextBoxAd.TabIndex = 1;
+            // 
+            // tableLayoutPanel8
+            // 
+            tableLayoutPanel8.Anchor = AnchorStyles.None;
+            tableLayoutPanel8.BackColor = Color.WhiteSmoke;
+            tableLayoutPanel8.ColumnCount = 1;
+            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel8.Controls.Add(TextBoxSoyad, 0, 0);
+            tableLayoutPanel8.Location = new Point(131, 336);
+            tableLayoutPanel8.Name = "tableLayoutPanel8";
+            tableLayoutPanel8.RowCount = 1;
+            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel8.Size = new Size(298, 34);
+            tableLayoutPanel8.TabIndex = 6;
+            // 
+            // TextBoxSoyad
+            // 
+            TextBoxSoyad.Anchor = AnchorStyles.None;
+            TextBoxSoyad.BackColor = Color.WhiteSmoke;
+            TextBoxSoyad.BorderStyle = BorderStyle.None;
+            TextBoxSoyad.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TextBoxSoyad.Location = new Point(6, 6);
+            TextBoxSoyad.Name = "TextBoxSoyad";
+            TextBoxSoyad.PlaceholderText = "Soyad";
+            TextBoxSoyad.Size = new Size(286, 22);
+            TextBoxSoyad.TabIndex = 1;
+            // 
+            // tableLayoutPanel9
+            // 
+            tableLayoutPanel9.Anchor = AnchorStyles.None;
+            tableLayoutPanel9.BackColor = Color.WhiteSmoke;
+            tableLayoutPanel9.ColumnCount = 1;
+            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel9.Controls.Add(TextBoxEMail, 0, 0);
+            tableLayoutPanel9.Location = new Point(131, 386);
+            tableLayoutPanel9.Name = "tableLayoutPanel9";
+            tableLayoutPanel9.RowCount = 1;
+            tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel9.Size = new Size(298, 34);
+            tableLayoutPanel9.TabIndex = 7;
+            // 
+            // TextBoxEMail
+            // 
+            TextBoxEMail.Anchor = AnchorStyles.None;
+            TextBoxEMail.BackColor = Color.WhiteSmoke;
+            TextBoxEMail.BorderStyle = BorderStyle.None;
+            TextBoxEMail.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TextBoxEMail.Location = new Point(6, 6);
+            TextBoxEMail.Name = "TextBoxEMail";
+            TextBoxEMail.PlaceholderText = "Mail";
+            TextBoxEMail.Size = new Size(286, 22);
+            TextBoxEMail.TabIndex = 1;
+            // 
+            // tableLayoutPanel10
+            // 
+            tableLayoutPanel10.Anchor = AnchorStyles.None;
+            tableLayoutPanel10.BackColor = Color.WhiteSmoke;
+            tableLayoutPanel10.ColumnCount = 1;
+            tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel10.Controls.Add(TextBoxPassword, 0, 0);
+            tableLayoutPanel10.Location = new Point(131, 438);
+            tableLayoutPanel10.Name = "tableLayoutPanel10";
+            tableLayoutPanel10.RowCount = 1;
+            tableLayoutPanel10.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel10.Size = new Size(298, 34);
+            tableLayoutPanel10.TabIndex = 8;
+            // 
+            // TextBoxPassword
+            // 
+            TextBoxPassword.Anchor = AnchorStyles.None;
+            TextBoxPassword.BackColor = Color.WhiteSmoke;
+            TextBoxPassword.BorderStyle = BorderStyle.None;
+            TextBoxPassword.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TextBoxPassword.Location = new Point(6, 6);
+            TextBoxPassword.Name = "TextBoxPassword";
+            TextBoxPassword.PlaceholderText = "Şifre";
+            TextBoxPassword.Size = new Size(286, 22);
+            TextBoxPassword.TabIndex = 1;
+            // 
             // MailUsersPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -301,12 +371,19 @@
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel5.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
-            tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DataGridViewUsers).EndInit();
             ContextMenuStripUser.ResumeLayout(false);
+            tableLayoutPanel7.ResumeLayout(false);
+            tableLayoutPanel7.PerformLayout();
+            tableLayoutPanel8.ResumeLayout(false);
+            tableLayoutPanel8.PerformLayout();
+            tableLayoutPanel9.ResumeLayout(false);
+            tableLayoutPanel9.PerformLayout();
+            tableLayoutPanel10.ResumeLayout(false);
+            tableLayoutPanel10.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -321,13 +398,17 @@
         private TableLayoutPanel tableLayoutPanel4;
         private Button ButtonSave;
         private PictureBox pictureBox1;
-        private TextBox TextBoxAd;
-        private TextBox TextBoxEMail;
-        private TextBox TextBoxPassword;
         private TableLayoutPanel tableLayoutPanel6;
         private DataGridView DataGridViewUsers;
-        private TextBox TextBoxSoyad;
         private ContextMenuStrip ContextMenuStripUser;
         private ToolStripMenuItem SilToolStripMenuItem;
+        private TableLayoutPanel tableLayoutPanel7;
+        private TextBox TextBoxAd;
+        private TableLayoutPanel tableLayoutPanel8;
+        private TextBox TextBoxSoyad;
+        private TableLayoutPanel tableLayoutPanel9;
+        private TextBox TextBoxEMail;
+        private TableLayoutPanel tableLayoutPanel10;
+        private TextBox TextBoxPassword;
     }
 }

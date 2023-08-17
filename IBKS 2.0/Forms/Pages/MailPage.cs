@@ -11,6 +11,9 @@ namespace IBKS_2._0.Forms.Pages
         readonly IUserService _userManager;
         readonly IMailStatementService _mailStatementManager;
         readonly IUserMailStatementService _userMailStatementManager;
+
+        private ToolStripMenuItem? _selectedMenuItem;
+
         public MailPage(IMailServerService mailServerManager, IAuthService authManager, IUserService userManager, IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager)
         {
             InitializeComponent();
@@ -20,6 +23,8 @@ namespace IBKS_2._0.Forms.Pages
             _userManager = userManager;
             _mailStatementManager = mailStatementManager;
             _userMailStatementManager = userMailStatementManager;
+
+            InitializeMenuItems();
         }
 
         private void ButtonMailServerSettings_Click(object sender, EventArgs e)
@@ -40,6 +45,28 @@ namespace IBKS_2._0.Forms.Pages
         private void ButtonEditMailStatements_Click(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, new MailStatementsEditPage(_mailStatementManager, _userMailStatementManager));
+        }
+
+        private void InitializeMenuItems()
+        {
+            foreach (ToolStripMenuItem item in menuStrip1.Items)
+            {
+                item.Click += MenuItem_Click!;
+            }
+        }
+
+        private void MenuItem_Click(object sender, EventArgs e)
+        {
+            Color hoverBlue = Color.FromArgb(179, 215, 243);
+
+            if (_selectedMenuItem != null)
+            {
+                _selectedMenuItem.BackColor = Color.White;
+            }
+
+            _selectedMenuItem = (ToolStripMenuItem)sender;
+            _selectedMenuItem.BackColor = hoverBlue;
+            _selectedMenuItem.ForeColor = Color.Black;
         }
     }
 }

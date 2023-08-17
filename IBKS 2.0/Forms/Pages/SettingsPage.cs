@@ -11,6 +11,8 @@ namespace IBKS_2._0.Forms.Pages
         readonly IStationService _stationManager;
         readonly IPlcService _plcManager;
 
+        private ToolStripMenuItem? _selectedMenuItem;
+
         public SettingsPage(ICalibrationLimitService calibrationLimitManager, IApiService apiManager, IStationService stationManager, IPlcService plcManager)
         {
             InitializeComponent();
@@ -19,6 +21,8 @@ namespace IBKS_2._0.Forms.Pages
             _calibrationLimitManager = calibrationLimitManager;
             _stationManager = stationManager;
             _plcManager = plcManager;
+
+            InitializeMenuItems();
         }
 
         private void ButtonCalibrationSettings_Click(object sender, EventArgs e)
@@ -39,6 +43,28 @@ namespace IBKS_2._0.Forms.Pages
         private void ButtonPlcSettings_Click(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, new PlcSettingsPage(_plcManager));
+        }
+
+        private void InitializeMenuItems()
+        {
+            foreach (ToolStripMenuItem item in menuStrip1.Items)
+            {
+                item.Click += MenuItem_Click!;
+            }
+        }
+
+        private void MenuItem_Click(object sender, EventArgs e)
+        {
+            Color hoverBlue = Color.FromArgb(179, 215, 243);
+
+            if (_selectedMenuItem != null)
+            {
+                _selectedMenuItem.BackColor = Color.White;
+            }
+
+            _selectedMenuItem = (ToolStripMenuItem)sender;
+            _selectedMenuItem.BackColor = hoverBlue;
+            _selectedMenuItem.ForeColor = Color.Black;
         }
     }
 }

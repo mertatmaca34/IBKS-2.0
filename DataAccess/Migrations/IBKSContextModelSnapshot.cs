@@ -624,6 +624,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSent")
+                        .HasColumnType("bit");
+
                     b.Property<double>("KOi")
                         .HasColumnType("float");
 

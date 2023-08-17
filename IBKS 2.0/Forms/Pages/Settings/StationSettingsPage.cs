@@ -1,5 +1,4 @@
 ﻿using Business.Abstract;
-using Business.Constants;
 using Entities.Concrete;
 
 namespace IBKS_2._0.Forms.Pages.Settings
@@ -19,7 +18,7 @@ namespace IBKS_2._0.Forms.Pages.Settings
         {
             var result = _stationManager.Get();
 
-            if (result.Success)
+            if (result.Data != null)
             {
                 StationSettingsControlStationName.AyarDegeri = result.Data.StationName;
                 StationSettingsControlStationId.AyarDegeri = result.Data.StationId.ToString();
@@ -28,22 +27,15 @@ namespace IBKS_2._0.Forms.Pages.Settings
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            try
+            Station station = new()
             {
-                Station station = new()
-                {
-                    StationId = new Guid(StationSettingsControlStationName.AyarDegeri),
-                    StationName = StationSettingsControlStationId.AyarDegeri,
-                };
+                StationId = new Guid(StationSettingsControlStationId.AyarDegeri),
+                StationName = StationSettingsControlStationName.AyarDegeri,
+            };
 
-                var res = _stationManager.Add(station);
+            var res = _stationManager.Add(station);
 
-                MessageBox.Show(res.Message);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Messages.CalibrationLimitIncompleteInfo);
-            }
+            MessageBox.Show(res.Message);
         }
     }
 }

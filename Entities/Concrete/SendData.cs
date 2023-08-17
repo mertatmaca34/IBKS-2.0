@@ -31,5 +31,6 @@ namespace Entities.Concrete
         public int pH_Status { get; set; }
         public int Sicaklik_Status { get; set; }
         public string Iletkenlik_Status { get; set; }
+        public bool? IsSent { get; set; }
     }
 }

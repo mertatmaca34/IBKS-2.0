@@ -54,6 +54,7 @@
             StationInfoControl = new Components.StationInfoControl();
             StatusBarControl = new Components.StatusBarControl();
             TimerAssignUI = new System.Windows.Forms.Timer(components);
+            TimerGetMissingDates = new System.Windows.Forms.Timer(components);
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -445,6 +446,12 @@
             TimerAssignUI.Interval = 1000;
             TimerAssignUI.Tick += TimerAssignUI_Tick;
             // 
+            // TimerGetMissingDates
+            // 
+            TimerGetMissingDates.Enabled = true;
+            TimerGetMissingDates.Interval = 5000;
+            TimerGetMissingDates.Tick += TimerGetMissingDates_Tick;
+            // 
             // HomePage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -487,5 +494,6 @@
         private System.Windows.Forms.Timer TimerAssignUI;
         private Components.StatusBarControl StatusBarControl;
         private Components.DigitalSensorBar DigitalSensorBar;
+        private System.Windows.Forms.Timer TimerGetMissingDates;
     }
 }
