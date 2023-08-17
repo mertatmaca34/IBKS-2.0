@@ -21,53 +21,65 @@ namespace IBKS_2._0.Utils
         {
             foreach (var item in tableLayoutPanel.Controls)
             {
-                if (item is Button)
+                if (item is Button _button)
                 {
-                    if (((Button)item)!.Name != button.Name)
+                    if (_button!.Name != button.Name)
                     {
-                        switch (((Button)item)!.Name)
+                        switch (_button!.Name)
                         {
                             case "ButtonHomePage":
-                                ((Button)item).Image = _homePage;
+                                _button.Image = _homePage;
+                                _button.BackColor = Color.White;
                                 break;
                             case "ButtonSimulationPage":
-                                ((Button)item).Image = _simulationPage;
+                                _button.Image = _simulationPage;
+                                _button.BackColor = Color.White;
                                 break;
                             case "ButtonCalibrationPage":
-                                ((Button)item).Image = _calibrationPage;
+                                _button.Image = _calibrationPage;
+                                _button.BackColor = Color.White;
                                 break;
                             case "ButtonMailPage":
-                                ((Button)item).Image = _mailPage;
+                                _button.Image = _mailPage;
+                                _button.BackColor = Color.White;
                                 break;
                             case "ButtonReportingPage":
-                                ((Button)item).Image = _reportingPage;
+                                _button.Image = _reportingPage;
+                                _button.BackColor = Color.White;
                                 break;
                             case "ButtonSettingPage":
-                                ((Button)item).Image = _settingsPage;
+                                _button.Image = _settingsPage;
+                                _button.BackColor = Color.White;
                                 break;
                         }
                     }
                     else
                     {
-                        switch (((Button)item)!.Name)
+                        switch (_button!.Name)
                         {
                             case "ButtonHomePage":
-                                ((Button)item).Image = _homePageFilled;
+                                _button.Image = _homePageFilled;
+                                _button.BackColor = Color.FromArgb(230, 230, 230);
                                 break;
                             case "ButtonSimulationPage":
-                                ((Button)item).Image = _simulationPageFilled;
+                                _button.Image = _simulationPageFilled;
+                                _button.BackColor = Color.FromArgb(230, 230, 230);
                                 break;
                             case "ButtonCalibrationPage":
-                                ((Button)item).Image = _calibrationPageFilled;
+                                _button.Image = _calibrationPageFilled;
+                                _button.BackColor = Color.FromArgb(230, 230, 230);
                                 break;
                             case "ButtonMailPage":
-                                ((Button)item).Image = _mailPageFilled;
+                                _button.Image = _mailPageFilled;
+                                _button.BackColor = Color.FromArgb(230, 230, 230);
                                 break;
                             case "ButtonReportingPage":
-                                ((Button)item).Image = _reportingPageFilled;
+                                _button.Image = _reportingPageFilled;
+                                _button.BackColor = Color.FromArgb(230, 230, 230);
                                 break;
                             case "ButtonSettingPage":
-                                ((Button)item).Image = _settingsPageFilled;
+                                _button.Image = _settingsPageFilled;
+                                _button.BackColor = Color.FromArgb(230, 230, 230);
                                 break;
                         }
                     }

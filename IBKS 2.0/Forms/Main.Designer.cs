@@ -179,6 +179,7 @@
             // 
             ButtonHomePage.Dock = DockStyle.Fill;
             ButtonHomePage.FlatAppearance.BorderSize = 0;
+            ButtonHomePage.FlatAppearance.MouseOverBackColor = Color.FromArgb(230, 230, 230);
             ButtonHomePage.FlatStyle = FlatStyle.Flat;
             ButtonHomePage.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             ButtonHomePage.ForeColor = Color.DimGray;
