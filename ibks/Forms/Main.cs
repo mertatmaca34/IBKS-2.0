@@ -132,15 +132,20 @@ namespace ibks.Forms
 
         private void AddSystemAdminToSystem()
         {
-            UserForRegisterDto systemAdmin = new UserForRegisterDto
-            {
-                Email = "mertatmaca34@gmail.com",
-                FirstName = "Mert",
-                LastName = "Atmaca",
-                Password = "atmaca123"
-            };
+            var isSystemAdminExist = _userManager.GetByMail("iskiadmin");
 
-            _authManager.Register(systemAdmin, systemAdmin.Password);
+            if (isSystemAdminExist == null)
+            {
+                UserForRegisterDto systemAdmin = new()
+                {
+                    Email = "iskiadmin",
+                    FirstName = "Mert",
+                    LastName = "Atmaca",
+                    Password = "1q2w3e"
+                };
+
+                _authManager.Register(systemAdmin, systemAdmin.Password);
+            }
         }
     }
 }

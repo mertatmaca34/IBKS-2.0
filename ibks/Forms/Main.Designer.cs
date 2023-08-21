@@ -71,6 +71,7 @@
             // ButtonNightMode
             // 
             ButtonNightMode.Dock = DockStyle.Fill;
+            ButtonNightMode.Enabled = false;
             ButtonNightMode.FlatAppearance.BorderSize = 0;
             ButtonNightMode.FlatStyle = FlatStyle.Flat;
             ButtonNightMode.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
