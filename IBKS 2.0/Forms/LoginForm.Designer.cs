@@ -91,6 +91,7 @@
             TextBoxPassword.PlaceholderText = "Şifre";
             TextBoxPassword.Size = new Size(286, 29);
             TextBoxPassword.TabIndex = 1;
+            TextBoxPassword.UseSystemPasswordChar = true;
             TextBoxPassword.KeyDown += TextBoxPassword_KeyDown;
             // 
             // ButtonLogin

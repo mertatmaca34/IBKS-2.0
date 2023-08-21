@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Core.Entities.Concrete;
+using Entities.DTOs;
 using IBKS_2._0.Forms.Pages;
 using IBKS_2._0.Services.Mail.Abstract;
 using IBKS_2._0.Utils;
@@ -61,10 +63,12 @@ namespace IBKS_2._0.Forms
             _reportingPage = new ReportingPage(_sendDataManager, _calibrationManager);
             _calibrationPage = new CalibrationPage(_calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, _sendCalibrationController);
         }
+
         private void Main_Load(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, _homePage);
             RoundedCorners.MakeRounded(ButtonHomePage, ButtonSimulationPage, ButtonCalibrationPage, ButtonMailPage, ButtonReportingPage, ButtonSettingPage, ButtonNightMode);
+            AddSystemAdminToSystem();
         }
 
         private void ButtonHomePage_Click(object sender, EventArgs e)
@@ -124,6 +128,19 @@ namespace IBKS_2._0.Forms
         private void ButtonNightMode_Click(object sender, EventArgs e)
         {
             ColorExtensions.ChangeTheme(this.Controls);
+        }
+
+        private void AddSystemAdminToSystem()
+        {
+            UserForRegisterDto systemAdmin = new UserForRegisterDto
+            {
+                Email = "mertatmaca34@gmail.com",
+                FirstName = "Mert",
+                LastName = "Atmaca",
+                Password = "atmaca123"
+            };
+
+            _authManager.Register(systemAdmin, systemAdmin.Password);
         }
     }
 }
