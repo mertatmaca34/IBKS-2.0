@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms.DataVisualization.Charting;
 
-namespace IBKS_2._0.Forms.Pages
+namespace ibks.Forms.Pages
 {
     partial class CalibrationPage
     {

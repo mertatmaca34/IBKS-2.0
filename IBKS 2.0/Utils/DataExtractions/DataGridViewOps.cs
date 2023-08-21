@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBKS_2._0.Utils.DataExtractions
+namespace ibks.Utils.DataExtractions
 {
     /*public class DataGridViewOps
     {

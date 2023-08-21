@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IBKS_2._0.Properties {
+namespace ibks.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

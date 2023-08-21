@@ -1,8 +1,8 @@
 ﻿using Business.Abstract;
-using IBKS_2._0.Forms.Pages.Settings;
-using IBKS_2._0.Utils;
+using ibks.Forms.Pages.Settings;
+using ibks.Utils;
 
-namespace IBKS_2._0.Forms.Pages
+namespace ibks.Forms.Pages
 {
     public partial class SettingsPage : Form
     {

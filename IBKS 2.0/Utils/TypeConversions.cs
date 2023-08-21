@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Reflection;
 
-namespace IBKS_2._0.Utils
+namespace ibks.Utils
 {
     public static class TypeConversions
     {

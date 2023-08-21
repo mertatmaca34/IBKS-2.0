@@ -1,6 +1,6 @@
 ﻿using OfficeOpenXml;
 
-namespace IBKS_2._0.Utils.DataExtractions.EPPlus
+namespace ibks.Utils.DataExtractions.EPPlus
 {
     public static class DataToExcel
     {

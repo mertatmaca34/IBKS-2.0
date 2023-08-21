@@ -1,11 +1,11 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
-using IBKS_2._0.Services.Mail.Abstract;
+using ibks.Services.Mail.Abstract;
 using PLC.Sharp7.Services;
 using System.Collections.Concurrent;
 using System.ComponentModel;
 
-namespace IBKS_2._0.Services.Mail.Services
+namespace ibks.Services.Mail.Services
 {
     public class CheckStatements : ICheckStatements
     {

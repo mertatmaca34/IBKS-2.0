@@ -1,11 +1,11 @@
 ﻿using Business.Enums;
-using IBKS_2._0.Properties;
-using IBKS_2._0.Utils;
+using ibks.Properties;
+using ibks.Utils;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
 using System.ComponentModel;
 
-namespace IBKS_2._0.Forms.Pages
+namespace ibks.Forms.Pages
 {
     public partial class SimulationPage : Form
     {

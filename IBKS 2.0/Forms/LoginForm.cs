@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Entities.DTOs;
 
-namespace IBKS_2._0.Forms
+namespace ibks.Forms
 {
     public partial class LoginForm : Form
     {

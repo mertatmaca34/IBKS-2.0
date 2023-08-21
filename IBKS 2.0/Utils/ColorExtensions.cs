@@ -2,7 +2,7 @@
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
 
-namespace IBKS_2._0.Utils
+namespace ibks.Utils
 {
     public static class ColorExtensions
     {

@@ -1,13 +1,13 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
 using Entities.Concrete.API;
-using IBKS_2._0.Components;
+using ibks.Components;
 using PLC.Sharp7.Services;
 using System.Windows.Forms.DataVisualization.Charting;
 using WebAPI.Abstract;
 using Timer = System.Windows.Forms.Timer;
 
-namespace IBKS_2._0.Utils
+namespace ibks.Utils
 {
     public class CalibrationOps
     {

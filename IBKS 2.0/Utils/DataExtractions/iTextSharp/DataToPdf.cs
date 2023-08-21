@@ -1,7 +1,7 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 
-namespace IBKS_2._0.Utils.DataExtractions.iTextSharp
+namespace ibks.Utils.DataExtractions.iTextSharp
 {
     public static class DataToPdf
     {

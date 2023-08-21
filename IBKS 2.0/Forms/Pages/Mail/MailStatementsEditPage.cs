@@ -3,7 +3,7 @@ using Business.Constants;
 using Business.Helpers.Mail;
 using Entities.Concrete;
 
-namespace IBKS_2._0.Forms.Pages.Mail
+namespace ibks.Forms.Pages.Mail
 {
     public partial class MailStatementsEditPage : Form
     {

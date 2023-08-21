@@ -1,11 +1,11 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
-using IBKS_2._0.Services.Mail.Abstract;
+using ibks.Services.Mail.Abstract;
 using System.ComponentModel;
 using System.Net;
 using System.Net.Mail;
 
-namespace IBKS_2._0.Services.Mail.Services
+namespace ibks.Services.Mail.Services
 {
     public class SendMail : ISendMail
     {

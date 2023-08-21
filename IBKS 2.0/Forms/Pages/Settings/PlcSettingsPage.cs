@@ -3,7 +3,7 @@ using Business.Constants;
 using Entities.Concrete;
 using PLC.Sharp7.Services;
 
-namespace IBKS_2._0.Forms.Pages.Settings
+namespace ibks.Forms.Pages.Settings
 {
     public partial class PlcSettingsPage : Form
     {

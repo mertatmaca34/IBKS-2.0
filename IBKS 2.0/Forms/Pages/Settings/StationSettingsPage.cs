@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
 
-namespace IBKS_2._0.Forms.Pages.Settings
+namespace ibks.Forms.Pages.Settings
 {
     public partial class StationSettingsPage : Form
     {

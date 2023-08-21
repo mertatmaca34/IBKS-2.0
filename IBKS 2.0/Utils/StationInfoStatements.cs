@@ -3,9 +3,9 @@ using Business.Constants;
 using Business.Helpers;
 using Core.Utilities.Results;
 using Entities.Concrete.API;
-using IBKS_2._0.Components;
+using ibks.Components;
 
-namespace IBKS_2._0.Utils
+namespace ibks.Utils
 {
     public static class StationInfoStatements
     {

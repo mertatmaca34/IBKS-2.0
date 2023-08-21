@@ -1,4 +1,4 @@
-﻿namespace IBKS_2._0.Forms
+﻿namespace ibks.Forms
 {
     partial class Main
     {

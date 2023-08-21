@@ -1,12 +1,12 @@
 ﻿using Business.Abstract;
 using Core.Entities.Concrete;
 using Entities.DTOs;
-using IBKS_2._0.Forms.Pages;
-using IBKS_2._0.Services.Mail.Abstract;
-using IBKS_2._0.Utils;
+using ibks.Forms.Pages;
+using ibks.Services.Mail.Abstract;
+using ibks.Utils;
 using WebAPI.Abstract;
 
-namespace IBKS_2._0.Forms
+namespace ibks.Forms
 {
     public partial class Main : Form
     {

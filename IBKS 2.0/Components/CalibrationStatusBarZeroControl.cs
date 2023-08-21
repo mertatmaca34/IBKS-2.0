@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace IBKS_2._0.Components
+namespace ibks.Components
 {
     public partial class CalibrationStatusBarZeroControl : UserControl
     {

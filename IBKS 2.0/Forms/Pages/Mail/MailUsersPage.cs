@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Entities.DTOs;
 
-namespace IBKS_2._0.Forms.Pages.Mail
+namespace ibks.Forms.Pages.Mail
 {
     public partial class MailUsersPage : Form
     {

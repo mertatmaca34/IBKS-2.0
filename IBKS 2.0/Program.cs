@@ -2,13 +2,13 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
 using DataAccess.Concrete.Contexts;
-using IBKS_2._0.DependencyResolvers.Autofac;
-using IBKS_2._0.Forms;
+using ibks.DependencyResolvers.Autofac;
+using ibks.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OfficeOpenXml;
 
-namespace IBKS_2._0
+namespace ibks
 {
     public static class Program
     {

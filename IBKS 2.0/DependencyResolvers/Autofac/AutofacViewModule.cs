@@ -2,12 +2,12 @@
 using Autofac.Extras.DynamicProxy;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
-using IBKS_2._0.Forms;
-using IBKS_2._0.Forms.Pages;
-using IBKS_2._0.Services.Mail.Abstract;
-using IBKS_2._0.Services.Mail.Services;
+using ibks.Forms;
+using ibks.Forms.Pages;
+using ibks.Services.Mail.Abstract;
+using ibks.Services.Mail.Services;
 
-namespace IBKS_2._0.DependencyResolvers.Autofac
+namespace ibks.DependencyResolvers.Autofac
 {
     public class AutofacViewModule : Module
     {

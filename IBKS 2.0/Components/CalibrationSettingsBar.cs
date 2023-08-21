@@ -1,7 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace IBKS_2._0.Components
+namespace ibks.Components
 {
     public partial class CalibrationSettingsBar : UserControl
     {

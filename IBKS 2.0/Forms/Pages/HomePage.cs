@@ -2,8 +2,8 @@
 using Business.Helpers;
 using Core.Utilities.Results;
 using Entities.Concrete.API;
-using IBKS_2._0.Services.Mail.Abstract;
-using IBKS_2._0.Utils;
+using ibks.Services.Mail.Abstract;
+using ibks.Utils;
 using PLC;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
@@ -11,7 +11,7 @@ using System.ComponentModel;
 using WebAPI.Abstract;
 using WebAPI.Controllers;
 
-namespace IBKS_2._0.Forms.Pages
+namespace ibks.Forms.Pages
 {
     public partial class HomePage : Form
     {

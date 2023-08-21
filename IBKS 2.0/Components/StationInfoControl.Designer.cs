@@ -1,4 +1,4 @@
-﻿namespace IBKS_2._0.Components
+﻿namespace ibks.Components
 {
     partial class StationInfoControl
     {

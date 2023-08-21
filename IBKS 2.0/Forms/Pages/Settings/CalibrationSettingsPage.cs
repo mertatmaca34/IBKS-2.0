@@ -1,9 +1,9 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Entities.Concrete;
-using IBKS_2._0.Components;
+using ibks.Components;
 
-namespace IBKS_2._0.Forms.Pages.Settings
+namespace ibks.Forms.Pages.Settings
 {
     public partial class CalibrationSettingsPage : Form
     {

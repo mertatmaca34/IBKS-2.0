@@ -1,10 +1,10 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
-using IBKS_2._0.Utils;
-using IBKS_2._0.Utils.DataExtractions.EPPlus;
-using IBKS_2._0.Utils.DataExtractions.iTextSharp;
+using ibks.Utils;
+using ibks.Utils.DataExtractions.EPPlus;
+using ibks.Utils.DataExtractions.iTextSharp;
 
-namespace IBKS_2._0.Forms.Pages
+namespace ibks.Forms.Pages
 {
     public partial class ReportingPage : Form
     {

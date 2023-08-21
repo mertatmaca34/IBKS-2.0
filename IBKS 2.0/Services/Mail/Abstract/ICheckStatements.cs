@@ -1,6 +1,6 @@
 ﻿using Entities.Concrete;
 
-namespace IBKS_2._0.Services.Mail.Abstract
+namespace ibks.Services.Mail.Abstract
 {
     public interface ICheckStatements
     {

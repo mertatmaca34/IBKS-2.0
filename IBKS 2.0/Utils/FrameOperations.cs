@@ -1,6 +1,6 @@
 ﻿using Business.Enums;
 
-namespace IBKS_2._0.Utils
+namespace ibks.Utils
 {
     public static class FrameOperations
     {

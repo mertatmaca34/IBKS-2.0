@@ -3,11 +3,11 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <RootNamespace>IBKS_2._0</RootNamespace>
+    <RootNamespace>ibks</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <StartupObject>IBKS_2._0.Program</StartupObject>
+    <StartupObject>ibks.Program</StartupObject>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <AssemblyVersion>0.0.0.1</AssemblyVersion>
     <FileVersion>0.0.0.1</FileVersion>
