@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Concrete;
 using IBKS_2._0.Services.Mail.Abstract;
 using System.ComponentModel;
 using System.Net;
@@ -9,10 +10,12 @@ namespace IBKS_2._0.Services.Mail.Services
     public class SendMail : ISendMail
     {
         readonly IMailServerService _mailServerService;
+        readonly IStationService _stationManager;
 
-        public SendMail(IMailServerService mailServerService)
+        public SendMail(IMailServerService mailServerService, IStationService stationManager)
         {
             _mailServerService = mailServerService;
+            _stationManager = stationManager;
         }
         public bool MailSend(string mailName, string subject, string body)
         {
@@ -34,10 +37,13 @@ namespace IBKS_2._0.Services.Mail.Services
                             UseDefaultCredentials = settings.UseDefaultCredentials,
                             Credentials = new NetworkCredential(settings.UserName, settings.Password)
                         };
+
+                        var stationName = _stationManager.Get().Data.StationName;
+
                         MailMessage mailMessage = new()
                         {
                             From = new MailAddress(settings.UserName),
-                            Subject = subject,
+                            Subject = $"{stationName} - {subject}",
                             Body = body,
                             IsBodyHtml = true
                         };
