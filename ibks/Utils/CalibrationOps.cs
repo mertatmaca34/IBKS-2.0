@@ -348,23 +348,23 @@ namespace ibks.Utils
         {
             switch (calibrationName)
             {
-                case "Akm":
+                case "AKM":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Akm;
                     break;
-                case "Koi":
+                case "KOi":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Koi;
                     break;
-                case "Ph":
-                    if (calibrationType == "Zero")
-                        _calibration.ZeroMeas = sharp7Service.S71200.DB41.Ph;
-                    else
-                        _calibration.SpanMeas = sharp7Service.S71200.DB41.Ph;
+                case "pH" when calibrationType == "Zero":
+                    _calibration.ZeroMeas = sharp7Service.S71200.DB41.Ph;
+                    break;
+                case "pH":
+                    _calibration.SpanMeas = sharp7Service.S71200.DB41.Ph;
+                    break;
+                case "Iletkenlik" when calibrationType == "Zero":
+                    _calibration.ZeroMeas = sharp7Service.S71200.DB41.Iletkenlik;
                     break;
                 case "Iletkenlik":
-                    if (calibrationType == "Zero")
-                        _calibration.ZeroMeas = sharp7Service.S71200.DB41.Iletkenlik;
-                    else
-                        _calibration.SpanMeas = sharp7Service.S71200.DB41.Iletkenlik;
+                    _calibration.SpanMeas = sharp7Service.S71200.DB41.Iletkenlik;
                     break;
                 default:
                     _calibration.ZeroMeas = 0;
@@ -372,6 +372,7 @@ namespace ibks.Utils
                     break;
             }
         }
+
         public void CalculateCalibrationParameters(List<double> measValues, string calibrationType)
         {
             if (calibrationType == "Zero")

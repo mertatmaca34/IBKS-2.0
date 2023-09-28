@@ -83,6 +83,16 @@ namespace ibks.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
+        internal static System.Drawing.Bitmap azimuth_24px1 {
+            get {
+                object obj = ResourceManager.GetObject("azimuth_24px1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
         internal static System.Drawing.Bitmap azimuth_48px {
             get {
                 object obj = ResourceManager.GetObject("azimuth_48px", resourceCulture);
@@ -96,6 +106,16 @@ namespace ibks.Properties {
         internal static System.Drawing.Bitmap black_and_white_24px {
             get {
                 object obj = ResourceManager.GetObject("black_and_white_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static System.Drawing.Bitmap black_and_white_24px1 {
+            get {
+                object obj = ResourceManager.GetObject("black_and_white_24px1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

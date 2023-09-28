@@ -7,6 +7,7 @@ namespace WebAPI.Utils
 {
     public class HttpClientAssign : IHttpClientAssign
     {
+        public static HttpClientAssign Instance;
         public HttpClient? HttpClient { get; }
 
         readonly IApiService _apiManager;
@@ -14,6 +15,8 @@ namespace WebAPI.Utils
 
         public HttpClientAssign(IApiService apiManager, ILogin login)
         {
+            Instance = this;
+
             _apiManager = apiManager;
             _login = login;
 
@@ -22,6 +25,9 @@ namespace WebAPI.Utils
 
         public async Task Assign()
         {
+            Constants.Constants.HttpClient = null;
+            Constants.Constants.HttpClient = new HttpClient();
+
             var apiData = _apiManager.Get();
 
             if (apiData.Success)
@@ -51,7 +57,7 @@ namespace WebAPI.Utils
 
         public void AssignHttpClient()
         {
-            
+
         }
     }
 }

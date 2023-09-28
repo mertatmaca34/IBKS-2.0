@@ -8,7 +8,7 @@ namespace DataAccess.Concrete.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=DataAccess.Contexts.IBKSContext;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=IBKSContext;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
 
         public DbSet<Api> Apis { get; set; }

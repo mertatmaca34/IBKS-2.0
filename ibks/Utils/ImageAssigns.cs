@@ -6,8 +6,10 @@ namespace ibks.Utils
 {
     public static class ImageAssigns
     {
-        public static Image AssignImage(SendDataResult deserializedResult)
+        public static Image AssignImage(SendDataResult? deserializedResult)
         {
+            deserializedResult = deserializedResult ?? new SendDataResult() { AKM_N_Status = 4 };
+
             switch (deserializedResult.AKM_N_Status)
             {
                 case (int)StationStatements.Gecerli:

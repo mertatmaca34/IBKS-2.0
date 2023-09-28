@@ -6,12 +6,12 @@ namespace Business.Helpers
     {
         private static int LastMinute = 0;
 
-        public static IResult IsItTime()
+        public static IResult IsItTime(DateTime dateTime)
         {
-            if (LastMinute == DateTime.Now.Minute)
+            if (LastMinute == dateTime.Minute)
                 return new ErrorResult();
 
-            LastMinute = DateTime.Now.Minute;
+            LastMinute = dateTime.Minute;
             return new SuccessResult();
         }
     }

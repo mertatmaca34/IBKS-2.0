@@ -9,7 +9,7 @@ namespace ibks.Utils
 {
     public static class StationInfoStatements
     {
-        public static void AssignLastWashStatements(IDataResult<SendDataResult> deserializedResult, ISendDataService sendDataManager, StationInfoControl stationInfoControl)
+        public static void AssignLastWashStatements(IDataResult<ResultStatus<SendDataResult>> deserializedResult, ISendDataService sendDataManager, StationInfoControl stationInfoControl)
         {
             var res = StationStatementHelper.GetLastWashTime(sendDataManager);
 
@@ -26,20 +26,20 @@ namespace ibks.Utils
 
             if (deserializedResult.Success)
             {
-                stationInfoControl.LastWashAkmImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashCozunmusOksijenImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashDesarjDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashIletkenlikImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashKoiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashPhImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashSicaklikImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashHariciDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashHariciDebi2Image = ImageAssigns.AssignImage(deserializedResult.Data);
+                stationInfoControl.LastWashAkmImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashCozunmusOksijenImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashDebiImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashDesarjDebiImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashIletkenlikImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashKoiImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashPhImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashSicaklikImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashHariciDebiImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashHariciDebi2Image = ImageAssigns.AssignImage(deserializedResult.Data.objects);
             }
         }
 
-        public static void AssignLastWashWeekStatements(IDataResult<SendDataResult> deserializedResult, ISendDataService sendDataManager, StationInfoControl stationInfoControl)
+        public static void AssignLastWashWeekStatements(IDataResult<ResultStatus<SendDataResult>> deserializedResult, ISendDataService sendDataManager, StationInfoControl stationInfoControl)
         {
             var res = StationStatementHelper.GetLastWashWeekTime(sendDataManager);
 
@@ -56,16 +56,16 @@ namespace ibks.Utils
 
             if (deserializedResult.Success)
             {
-                stationInfoControl.LastWashWeekAkmImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashWeekCozunmusOksijenImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashWeekDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashWeekDesarjDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashWeekIletkenlikImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashWeekKoiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashWeekPhImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashWeekSicaklikImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashWeekHariciDebiImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                stationInfoControl.LastWashWeekHariciDebi2Image = ImageAssigns.AssignImage(deserializedResult.Data);
+                stationInfoControl.LastWashWeekAkmImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashWeekCozunmusOksijenImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashWeekDebiImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashWeekDesarjDebiImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashWeekIletkenlikImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashWeekKoiImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashWeekPhImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashWeekSicaklikImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashWeekHariciDebiImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                stationInfoControl.LastWashWeekHariciDebi2Image = ImageAssigns.AssignImage(deserializedResult.Data.objects);
             }
         }
 
@@ -137,18 +137,18 @@ namespace ibks.Utils
             }
         }
 
-        public static void AssignCalibrationImage(IDataResult<SendDataResult> deserializedResult, Control control)
+        public static void AssignCalibrationImage(IDataResult<ResultStatus<SendDataResult>> deserializedResult, Control control)
         {
             if (deserializedResult.Success)
             {
                 if (control is StationInfoControl)
                 {
-                    ((StationInfoControl)control).PhCalibrationImage = ImageAssigns.AssignImage(deserializedResult.Data);
-                    ((StationInfoControl)control).IletkenlikCalibrationImage = ImageAssigns.AssignImage(deserializedResult.Data);
+                    ((StationInfoControl)control).PhCalibrationImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
+                    ((StationInfoControl)control).IletkenlikCalibrationImage = ImageAssigns.AssignImage(deserializedResult.Data.objects);
                 }
                 else
                 {
-                    ((Label)control).Image = ImageAssigns.AssignImage(deserializedResult.Data);
+                    ((Label)control).Image = ImageAssigns.AssignImage(deserializedResult.Data.objects);
                 }
             }
         }

@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ibks", "ibks\ibks.csproj", "{0DB62D2C-508F-42BB-9E7E-E696E22C191B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ibksWeb", "ibksWeb\ibksWeb.csproj", "{3F52DA4E-91EC-40DF-B674-10FD3940E257}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{0DB62D2C-508F-42BB-9E7E-E696E22C191B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DB62D2C-508F-42BB-9E7E-E696E22C191B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DB62D2C-508F-42BB-9E7E-E696E22C191B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F52DA4E-91EC-40DF-B674-10FD3940E257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F52DA4E-91EC-40DF-B674-10FD3940E257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F52DA4E-91EC-40DF-B674-10FD3940E257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F52DA4E-91EC-40DF-B674-10FD3940E257}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

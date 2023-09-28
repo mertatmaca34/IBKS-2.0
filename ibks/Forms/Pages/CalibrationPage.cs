@@ -100,7 +100,7 @@ namespace ibks.Forms.Pages
 
             if (calibrationLimits != null)
             {
-                _calibrationOps.StartCalibration("pH", "Span", calibrationLimits.Data.ZeroTimeStamp, _controls);
+                _calibrationOps.StartCalibration("pH", "Span", calibrationLimits.Data.SpanTimeStamp, _controls);
             }
         }
 
@@ -120,7 +120,7 @@ namespace ibks.Forms.Pages
 
             if (calibrationLimits != null)
             {
-                _calibrationOps.StartCalibration("Iletkenlik", "Span", calibrationLimits.Data.ZeroTimeStamp, _controls);
+                _calibrationOps.StartCalibration("Iletkenlik", "Span", calibrationLimits.Data.SpanTimeStamp, _controls);
             }
         }
     }

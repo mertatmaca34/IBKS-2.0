@@ -1,4 +1,5 @@
 ﻿using Business.Constants;
+using Core.Utilities;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.Concrete.API;
@@ -7,6 +8,7 @@ using Newtonsoft.Json;
 using System.Text;
 using WebAPI.Abstract;
 using WebAPI.Enums;
+using WebAPI.Utils;
 
 namespace WebAPI.Controllers
 {
@@ -22,7 +24,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IDataResult<SendDataResult>> SendData([FromBody] SendData data)
+        public async Task<IDataResult<ResultStatus<SendDataResult>>> SendData([FromBody] SendData data)
         {
             try
             {
@@ -40,18 +42,26 @@ namespace WebAPI.Controllers
 
                     var responseContent = await response.Content.ReadAsStringAsync();
 
-                    var desResponseContent = JsonConvert.DeserializeObject<SendDataResult>(responseContent)!;
+                    var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<SendDataResult>>(responseContent)!;
 
-                    return new SuccessDataResult<SendDataResult>(desResponseContent, Messages.ApiSendDataSuccces);
+                    return new SuccessDataResult<ResultStatus<SendDataResult>>(desResponseContent, Messages.ApiSendDataSuccces);
                 }
                 else
                 {
-                    return new ErrorDataResult<SendDataResult>(null, Messages.ApiLoginFailed);
+                    return new ErrorDataResult<ResultStatus<SendDataResult>>(null, Messages.ApiLoginFailed);
                 }
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException ex)
             {
-                return new ErrorDataResult<SendDataResult>(null, Messages.ApiSendDataFault);
+                await HttpClientAssign.Instance!.Assign();
+
+                return new ErrorDataResult<ResultStatus<SendDataResult>>(null, Messages.ApiSendDataFault);
+            }
+            catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
+            {
+                await HttpClientAssign.Instance!.Assign();
+
+                return new ErrorDataResult<ResultStatus<SendDataResult>>(null, Messages.ApiSendDataFault);
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using Entities.Concrete.API;
+﻿using Business.Abstract;
+using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -11,12 +12,20 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class LoginController : ControllerBase, ILogin
     {
+        private readonly IApiService _apiManager;
         private readonly HttpClient _httpClient;
-        private const string ApiBaseUrl = "https://entegrationsais.csb.gov.tr";
 
-        public LoginController()
+        public LoginController(IApiService apiManager)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri(ApiBaseUrl) };
+            _apiManager = apiManager;
+
+            if (_apiManager.Get().Success)
+            {
+                string apiBaseUrl = _apiManager.Get().Data.ApiAdress;
+
+                _httpClient = new HttpClient { BaseAddress = new Uri(apiBaseUrl) };
+                _httpClient.Timeout = TimeSpan.FromSeconds(15);
+            }
         }
 
         [HttpPost]
@@ -49,7 +58,7 @@ namespace WebAPI.Controllers
                 var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<LoginResult>?>(responseContent);
 
                 Constants.Constants.TicketId = desResponseContent?.objects.TicketId;
-                 
+
                 return desResponseContent!;
 
                 /*var result = JsonConvert.DeserializeObject<LoginResult>(desResponseContent.objects.ToString());

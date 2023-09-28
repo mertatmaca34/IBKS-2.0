@@ -15,28 +15,38 @@ namespace ibks
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
+        /// 
+        static Mutex mutex = new Mutex(true, "{8D9DFE3E-799B-4F97-BF2D-59DE63F5F087}");
+
         [STAThread]
         static void Main(string[] args)
         {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
-            var host = CreateHostBuilder(args).Build();
-
-            using (var scope = host.Services.CreateScope())
+            if (mutex.WaitOne(TimeSpan.Zero, true))
             {
-                var services = scope.ServiceProvider;
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-                var context = scope.ServiceProvider.GetRequiredService<IBKSContext>();
+                var host = CreateHostBuilder(args).Build();
 
-                //context.Database.Migrate();
+                using (var scope = host.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
 
-                context.Database.EnsureCreated();
+                    var context = scope.ServiceProvider.GetRequiredService<IBKSContext>();
 
-                Application.EnableVisualStyles();
+                    //context.Database.Migrate();
 
-                Application.Run(services.GetRequiredService<Main>());
+                    context.Database.EnsureCreated();
+
+                    Application.EnableVisualStyles();
+
+                    Application.Run(services.GetRequiredService<Main>());
+                }
             }
-        }
+            else
+            {
+                MessageBox.Show("Uygulama zaten çalýþýyor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+}
         public static void ConfigureContainer(ContainerBuilder builder)
         {
             // Autofac modülleri burada kaydedilir.

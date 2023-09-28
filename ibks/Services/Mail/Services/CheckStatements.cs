@@ -2,7 +2,6 @@
 using Entities.Concrete;
 using ibks.Services.Mail.Abstract;
 using PLC.Sharp7.Services;
-using System.Collections.Concurrent;
 using System.ComponentModel;
 
 namespace ibks.Services.Mail.Services
@@ -17,9 +16,14 @@ namespace ibks.Services.Mail.Services
         readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
         readonly List<UserMailStatement> userMailStatements;
-        public ConcurrentBag<MailStatement> mailStatements;
+
+        public List<MailStatement> defaultMailStatements;
+        public List<MailStatement> mailStatements;
 
         public bool IsMailSent = false;
+        BackgroundWorker _checkStatementsWorker;
+
+        string bilgi = "";
 
         public CheckStatements(IUserService userManager, IUserMailStatementService userMailStatementManager, IMailStatementService mailStatementManager, ISendMail sendMail)
         {
@@ -28,8 +32,12 @@ namespace ibks.Services.Mail.Services
             _userMailStatementManager = userMailStatementManager;
             _mailStatementManager = mailStatementManager;
 
-            mailStatements = new ConcurrentBag<MailStatement>(_mailStatementManager.GetAll().Data);
+            defaultMailStatements = new List<MailStatement>(_mailStatementManager.GetAll().Data);
+            mailStatements = new List<MailStatement>(_mailStatementManager.GetAll().Data);
+
             userMailStatements = _userMailStatementManager.GetAll().Data.ToList();
+
+            _checkStatementsWorker = new BackgroundWorker();
 
             foreach (var item in mailStatements)
             {
@@ -37,74 +45,108 @@ namespace ibks.Services.Mail.Services
             }
         }
 
-        public void Check()
+        public string Check()
         {
-            var bgw = new BackgroundWorker();
-            bgw.DoWork += delegate
+            if (!_checkStatementsWorker.IsBusy)
             {
                 CoolDownCountdown();
 
-                //MemoryByte'lar PLC'den geldi mi?
-                if (_sharp7Service.S71200.MBTags != null)
+                _checkStatementsWorker.DoWork += delegate
                 {
-                    //Tesis Otomatik Modda mı?
-                    if (_sharp7Service.S71200.MBTags.ModAutoMu == true)
+                    //MemoryByte'lar PLC'den geldi mi?
+                    if (_sharp7Service.S71200.MBTags != null)
                     {
-                        //Mail Durumları döngüsü
-                        for (int i = 0; i < mailStatements.Count; i++) //foreach (var mailStatementDTO in mailStatementDTOs)
+                        //Tesis Otomatik Modda mı?
+                        if (_sharp7Service.S71200.MBTags.ModAutoMu == true)
                         {
-                            var array = mailStatements.OrderBy(x => x.Id).ToArray();
-                            //Seçili mail durumunun soğuma süresi 0 mı?
-                            if (array[i].CoolDown == new TimeSpan(0, 0, 0))
+                            //Mail Durumları döngüsü
+                            for (int i = 0; i < mailStatements.Count; i++) //foreach (var mailStatementDTO in mailStatementDTOs)
                             {
-                                //Seçili mail durumunun kullanıcı durumlarında tanımlı olup olmadığının karşılaştırılma döngüsü
-                                for (int ii = 0; ii < userMailStatements.Count; ii++) //foreach (var userMailStatements in userMailStatementsDTOs)
+                                var array = mailStatements.OrderBy(x => x.Id).ToArray();
+                                //Seçili mail durumunun soğuma süresi 0 mı?
+                                if (array[i].CoolDown == new TimeSpan(0, 0, 0))
                                 {
-                                    //Seçili mail durumu kullanıcı durumunda tanımlı mı?
-                                    if (array[i].Id == userMailStatements[ii].MailStatementId)
+                                    //Seçili mail durumunun kullanıcı durumlarında tanımlı olup olmadığının karşılaştırılma döngüsü
+                                    for (int ii = 0; ii < userMailStatements.Count; ii++) //foreach (var userMailStatements in userMailStatementsDTOs)
                                     {
-                                        //Tanımlı ise ilgili kullanıcının bilgilerini getir
-                                        var user = _userManager.Get(x => x.Id == userMailStatements[ii].UserId).Data;
+                                        //Seçili mail durumu kullanıcı durumunda tanımlı mı?
+                                        if (array[i].Id == userMailStatements[ii].MailStatementId)
+                                        {
+                                            //Tanımlı ise ilgili kullanıcının bilgilerini getir
+                                            var user = _userManager.Get(x => x.Id == userMailStatements[ii].UserId).Data;
 
-                                        //Eğer mail durumu varsa (şartlar sağlanıyorsa) mail durumunun içeriğini oluştur ve gönder
-                                        if (MailBodyGenerate(array[i]) != "-1")
-                                        {
-                                            IsMailSent = _sendMail.MailSend(user.Email, array[i].StatementName, MailBodyGenerate(array[i]));
-                                        }
-                                        else
-                                        {
-                                            IsMailSent = false;
+                                            //Eğer mail durumu varsa (şartlar sağlanıyorsa) mail durumunun içeriğini oluştur ve gönder
+                                            if (MailBodyGenerate(array[i]) != "-1")
+                                            {
+                                                //IsMailSent = _sendMail.MailSend(user.Email, array[i].StatementName, MailBodyGenerate(array[i]));
+                                                RefreshCooldowns(array[i].Id);
+
+                                                bilgi = array[i].CoolDown.ToString();
+                                            }
+                                            else
+                                            {
+                                                IsMailSent = false;
+                                            }
                                         }
                                     }
-                                }
 
-                                //İşlemi bitmiş olan mail durumu eğer varsa ve gönderildiyse bekleme süresini tekrar ata
-                                if (IsMailSent == true)
-                                {
-                                    RefreshCooldowns(array[i].Id);
-                                    //MessageBox.Show("ismail sent true oluyo");
+                                    //İşlemi bitmiş olan mail durumu eğer varsa ve gönderildiyse bekleme süresini tekrar ata
+                                    /*if (IsMailSent == true)
+                                    {
+                                        RefreshCooldowns(array[i].Id);
+                                        //MessageBox.Show("ismail sent true oluyo");
+                                    }*/
                                 }
                             }
                         }
                     }
-                }
-            };
-            bgw.RunWorkerAsync();
+                };
+                _checkStatementsWorker.RunWorkerAsync();
+            }
+
+            return bilgi;
         }
 
         public void CoolDownCountdown()
         {
+            //var array = mailStatements.OrderBy(x => x.Id).ToArray();
+
+            foreach (var item in mailStatements)
+            {
+                if (item.CoolDown > new TimeSpan(0, 0, 0))
+                    item.CoolDown = item.CoolDown.Add(new TimeSpan(0, 0, -1));
+            }
+            /*for (int i = 0; i < mailStatements.Count; i++)
+            {
+                if (array[i].CoolDown > new TimeSpan(0, 0, 0))
+                {
+                    array[i].CoolDown = array[i].CoolDown.Add(new TimeSpan(0, 0, -1));
+                }
+            }*/
+        }
+
+        public void RefreshCooldowns(int? indeks = null)
+        {
             var bgw = new BackgroundWorker();
             bgw.DoWork += delegate
             {
-                var array = mailStatements.OrderBy(x => x.Id).ToArray();
-
-                for (int i = 0; i < mailStatements.Count; i++)
+                if (indeks != null)
                 {
-                    if (array[i].CoolDown > new TimeSpan(0, 0, 0))
-                    {
-                        array[i].CoolDown = array[i].CoolDown.Add(new TimeSpan(0, 0, -1));
-                    }
+                    var cd = defaultMailStatements.FirstOrDefault(x => x.Id == indeks).CoolDown;
+
+                    mailStatements.FirstOrDefault(x => x.Id == indeks).CoolDown = cd;
+
+                    //var array = mailStatements.OrderBy(x => x.Id).ToArray();
+
+                    //array[(int)indeks].CoolDown = new TimeSpan(defaultCooldown.CoolDown.Hours, defaultCooldown.CoolDown.Minutes, defaultCooldown.CoolDown.Seconds);
+
+                    //mailStatements = null;
+
+                    //mailStatements = new List<MailStatement>(array);
+                }
+                else
+                {
+                    mailStatements = new List<MailStatement>(_mailStatementManager.GetAll().Data);
                 }
             };
             bgw.RunWorkerAsync();
@@ -130,6 +172,7 @@ namespace ibks.Services.Mail.Services
             }
 
             object tagsDTO = null;
+
             if (_sharp7Service.S71200.MBTags.GetType().GetProperty(mailStatement.Parameter) != null)
             {
                 tagsDTO = _sharp7Service.S71200.MBTags;
@@ -152,24 +195,6 @@ namespace ibks.Services.Mail.Services
             }
 
             return "-1";
-        }
-
-        public void RefreshCooldowns(int? indeks = null)
-        {
-            if (indeks != null)
-            {
-                var resetedCooldowns = _mailStatementManager.Get(x => x.Id == 23).Data;
-
-                var array = mailStatements.OrderBy(x => x.Id).ToArray();
-
-                array[(int)indeks].CoolDown = new TimeSpan(resetedCooldowns.CoolDown.Hours, resetedCooldowns.CoolDown.Minutes, resetedCooldowns.CoolDown.Seconds);
-
-                mailStatements = new ConcurrentBag<MailStatement>(array);
-            }
-            else
-            {
-                mailStatements = new ConcurrentBag<MailStatement>(_mailStatementManager.GetAll().Data);
-            }
         }
     }
 }

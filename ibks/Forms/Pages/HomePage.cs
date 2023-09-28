@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Helpers;
+using Core.Utilities;
 using Core.Utilities.Results;
 using Entities.Concrete.API;
 using ibks.Services.Mail.Abstract;
@@ -25,6 +26,9 @@ namespace ibks.Forms.Pages
         readonly ISendDataController _sendDataController;
         readonly IGetMissingDatesController _getMissingDatesController;
         readonly ICheckStatements _checkStatements;
+
+
+        string bilgi = "boş";
 
         public HomePage(IStationService stationManager, ISendDataService sendDataManager, 
             ICalibrationService calibrationManager, IApiService apiManager, ILogin login, 
@@ -55,9 +59,11 @@ namespace ibks.Forms.Pages
                 AssignAverageOfLast60Minutes();
                 AssignSystemStatement();
                 SendDataAndAssignStatationInfoControl();
-                _checkStatements.Check();
+                bilgi = _checkStatements.Check();
 
+                ChannelCozunmusOksijen.InstantData = bilgi;
             }; bgw.RunWorkerAsync();
+
         }
 
         private async void SendDataAndAssignStatationInfoControl()
@@ -66,10 +72,10 @@ namespace ibks.Forms.Pages
 
             if (data.Success)
             {
-                if (SendDataHelper.IsItTime().Success)
+                if (SendDataHelper.IsItTime(data.Data.Readtime).Success)
                 {
                     var res = await _sendDataController.SendData(data.Data);
-
+                    
                     if(res.Success)
                     {
                         data.Data.IsSent = true;
@@ -90,7 +96,7 @@ namespace ibks.Forms.Pages
         private void AssignAnalogSensors()
         {
             ChannelAkm.InstantData = _sharp7Service.S71200.DB41.Akm + " mg/l";
-            ChannelCozunmusOksijen.InstantData = _sharp7Service.S71200.DB41.CozunmusOksijen + " mg/l";
+            //ChannelCozunmusOksijen.InstantData = _sharp7Service.S71200.DB41.CozunmusOksijen + " mg/l";
             ChannelSicaklik.InstantData = _sharp7Service.S71200.DB41.KabinSicaklik + "°C";
             ChannelPh.InstantData = _sharp7Service.S71200.DB41.Ph.ToString();
             ChannelIletkenlik.InstantData = _sharp7Service.S71200.DB41.Iletkenlik + " mS/cm";
@@ -150,7 +156,7 @@ namespace ibks.Forms.Pages
             }
         }
 
-        private void AssignStationInfoControl(IDataResult<SendDataResult> deserializedResult)
+        private void AssignStationInfoControl(IDataResult<ResultStatus<SendDataResult>> deserializedResult)
         {
             StationInfoStatements.AssignLastWashStatements(deserializedResult, _sendDataManager, StationInfoControl);
             StationInfoStatements.AssignCalibrationImage(deserializedResult, StationInfoControl);

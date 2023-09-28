@@ -7,7 +7,7 @@ namespace WebAPI.Abstract
 {
     public interface ISendDataController
     {
-        public Task<IDataResult<SendDataResult>> SendData([FromBody] SendData data);
+        public Task<IDataResult<ResultStatus<SendDataResult>>> SendData([FromBody] SendData data);
 
     }
 }
