@@ -8,8 +8,6 @@ namespace Business.ValidationRules.FluentValidation
         public CalibrationValidator()
         {
             RuleFor(c => c.ResultFactor).GreaterThanOrEqualTo(0).WithMessage("Result Factor değeri geçersiz");
-
-            
         }
     }
 }

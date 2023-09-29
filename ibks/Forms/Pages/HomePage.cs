@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Helpers;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities;
 using Core.Utilities.Results;
 using Entities.Concrete.API;
@@ -91,7 +93,6 @@ namespace ibks.Forms.Pages
                 }
             }
         }
-
 
         private void AssignAnalogSensors()
         {
