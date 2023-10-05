@@ -1,8 +1,5 @@
 ﻿using Business.Abstract;
 using Business.Helpers;
-using Business.ValidationRules.FluentValidation;
-using Core.Aspects.Autofac.Validation;
-using Core.Utilities;
 using Core.Utilities.Results;
 using Entities.Concrete.API;
 using ibks.Services.Mail.Abstract;
@@ -12,7 +9,6 @@ using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
 using System.ComponentModel;
 using WebAPI.Abstract;
-using WebAPI.Controllers;
 
 namespace ibks.Forms.Pages
 {
@@ -29,11 +25,8 @@ namespace ibks.Forms.Pages
         readonly IGetMissingDatesController _getMissingDatesController;
         readonly ICheckStatements _checkStatements;
 
-
-        string bilgi = "boş";
-
-        public HomePage(IStationService stationManager, ISendDataService sendDataManager, 
-            ICalibrationService calibrationManager, IApiService apiManager, ILogin login, 
+        public HomePage(IStationService stationManager, ISendDataService sendDataManager,
+            ICalibrationService calibrationManager, IApiService apiManager, ILogin login,
             ISendDataController sendDataController, ICheckStatements checkStatements,
             IGetMissingDatesController getMissingDatesController)
         {
@@ -61,9 +54,7 @@ namespace ibks.Forms.Pages
                 AssignAverageOfLast60Minutes();
                 AssignSystemStatement();
                 SendDataAndAssignStatationInfoControl();
-                bilgi = _checkStatements.Check();
-
-                ChannelCozunmusOksijen.InstantData = bilgi;
+                _checkStatements.Check();
             }; bgw.RunWorkerAsync();
 
         }
@@ -77,8 +68,8 @@ namespace ibks.Forms.Pages
                 if (SendDataHelper.IsItTime(data.Data.Readtime).Success)
                 {
                     var res = await _sendDataController.SendData(data.Data);
-                    
-                    if(res.Success)
+
+                    if (res.Success)
                     {
                         data.Data.IsSent = true;
                     }
@@ -97,7 +88,7 @@ namespace ibks.Forms.Pages
         private void AssignAnalogSensors()
         {
             ChannelAkm.InstantData = _sharp7Service.S71200.DB41.Akm + " mg/l";
-            //ChannelCozunmusOksijen.InstantData = _sharp7Service.S71200.DB41.CozunmusOksijen + " mg/l";
+            ChannelCozunmusOksijen.InstantData = _sharp7Service.S71200.DB41.CozunmusOksijen + " mg/l";
             ChannelSicaklik.InstantData = _sharp7Service.S71200.DB41.KabinSicaklik + "°C";
             ChannelPh.InstantData = _sharp7Service.S71200.DB41.Ph.ToString();
             ChannelIletkenlik.InstantData = _sharp7Service.S71200.DB41.Iletkenlik + " mS/cm";
@@ -179,7 +170,7 @@ namespace ibks.Forms.Pages
         {
             var missedDatas = _sendDataManager.GetAll(x => x.IsSent == false);
 
-            if(missedDatas.Data.Count > 0 )
+            if (missedDatas.Data.Count > 0)
             {
                 foreach (var item in missedDatas.Data)
                 {

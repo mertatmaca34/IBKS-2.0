@@ -23,8 +23,6 @@ namespace ibks.Services.Mail.Services
         public bool IsMailSent = false;
         BackgroundWorker _checkStatementsWorker;
 
-        string bilgi = "";
-
         public CheckStatements(IUserService userManager, IUserMailStatementService userMailStatementManager, IMailStatementService mailStatementManager, ISendMail sendMail)
         {
             _sendMail = sendMail;
@@ -45,57 +43,44 @@ namespace ibks.Services.Mail.Services
             }
         }
 
-        public string Check()
+        public void Check()
         {
             if (!_checkStatementsWorker.IsBusy)
             {
                 CoolDownCountdown();
 
-                _checkStatementsWorker.DoWork += delegate
+                _checkStatementsWorker.DoWork += async delegate
                 {
                     //MemoryByte'lar PLC'den geldi mi?
-                    if (_sharp7Service.S71200.MBTags != null)
+                    if (_sharp7Service.S71200.MBTags != null && _sharp7Service.S71200.MBTags.ModAutoMu == true)
                     {
-                        //Tesis Otomatik Modda mı?
-                        if (_sharp7Service.S71200.MBTags.ModAutoMu == true)
+                        //Mail Durumları döngüsü
+                        for (int i = 0; i < mailStatements.Count; i++)
                         {
-                            //Mail Durumları döngüsü
-                            for (int i = 0; i < mailStatements.Count; i++) //foreach (var mailStatementDTO in mailStatementDTOs)
+                            //Seçili mail durumunun soğuma süresi 0 mı?
+                            if (mailStatements[i].CoolDown == new TimeSpan(0, 0, 0))
                             {
-                                var array = mailStatements.OrderBy(x => x.Id).ToArray();
-                                //Seçili mail durumunun soğuma süresi 0 mı?
-                                if (array[i].CoolDown == new TimeSpan(0, 0, 0))
+                                //Seçili mail durumunun kullanıcı durumlarında tanımlı olup olmadığının karşılaştırılma döngüsü
+                                for (int ii = 0; ii < userMailStatements.Count; ii++) //foreach (var userMailStatements in userMailStatementsDTOs)
                                 {
-                                    //Seçili mail durumunun kullanıcı durumlarında tanımlı olup olmadığının karşılaştırılma döngüsü
-                                    for (int ii = 0; ii < userMailStatements.Count; ii++) //foreach (var userMailStatements in userMailStatementsDTOs)
+                                    //Seçili mail durumu kullanıcı durumunda tanımlı mı?
+                                    if (mailStatements[i].Id == userMailStatements[ii].MailStatementId)
                                     {
-                                        //Seçili mail durumu kullanıcı durumunda tanımlı mı?
-                                        if (array[i].Id == userMailStatements[ii].MailStatementId)
+                                        //Tanımlı ise ilgili kullanıcının bilgilerini getir
+                                        var user = _userManager.Get(x => x.Id == userMailStatements[ii].UserId).Data;
+
+                                        //Eğer mail durumu varsa (şartlar sağlanıyorsa) mail durumunun içeriğini oluştur ve gönder
+                                        if (MailBodyGenerate(mailStatements[i]) != "-1")
                                         {
-                                            //Tanımlı ise ilgili kullanıcının bilgilerini getir
-                                            var user = _userManager.Get(x => x.Id == userMailStatements[ii].UserId).Data;
+                                            //var res = await _sendMail.MailSend(user.Email, mailStatements[i].StatementName, MailBodyGenerate(mailStatements[i]));
 
-                                            //Eğer mail durumu varsa (şartlar sağlanıyorsa) mail durumunun içeriğini oluştur ve gönder
-                                            if (MailBodyGenerate(array[i]) != "-1")
-                                            {
-                                                //IsMailSent = _sendMail.MailSend(user.Email, array[i].StatementName, MailBodyGenerate(array[i]));
-                                                RefreshCooldowns(array[i].Id);
-
-                                                bilgi = array[i].CoolDown.ToString();
-                                            }
-                                            else
-                                            {
-                                                IsMailSent = false;
-                                            }
+                                            RefreshCooldowns(mailStatements[i].Id);
+                                        }
+                                        else
+                                        {
+                                            //TODO
                                         }
                                     }
-
-                                    //İşlemi bitmiş olan mail durumu eğer varsa ve gönderildiyse bekleme süresini tekrar ata
-                                    /*if (IsMailSent == true)
-                                    {
-                                        RefreshCooldowns(array[i].Id);
-                                        //MessageBox.Show("ismail sent true oluyo");
-                                    }*/
                                 }
                             }
                         }
@@ -103,8 +88,6 @@ namespace ibks.Services.Mail.Services
                 };
                 _checkStatementsWorker.RunWorkerAsync();
             }
-
-            return bilgi;
         }
 
         public void CoolDownCountdown()
