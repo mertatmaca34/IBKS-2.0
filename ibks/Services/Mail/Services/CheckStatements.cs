@@ -21,7 +21,6 @@ namespace ibks.Services.Mail.Services
         public List<MailStatement> mailStatements;
 
         public bool IsMailSent = false;
-        BackgroundWorker _checkStatementsWorker;
 
         public CheckStatements(IUserService userManager, IUserMailStatementService userMailStatementManager, IMailStatementService mailStatementManager, ISendMail sendMail)
         {
@@ -35,21 +34,50 @@ namespace ibks.Services.Mail.Services
 
             userMailStatements = _userMailStatementManager.GetAll().Data.ToList();
 
-            _checkStatementsWorker = new BackgroundWorker();
-
             foreach (var item in mailStatements)
             {
                 item.CoolDown = new TimeSpan(0, 0, 5);
             }
         }
 
-        public void Check()
+        public async Task Check()
+        {
+            CoolDownCountdown();
+
+            if (_sharp7Service.S71200.MBTags != null && _sharp7Service.S71200.MBTags.ModAutoMu == true)
+            {
+                foreach (var mailStatement in mailStatements)
+                {
+                    if (mailStatement.CoolDown == new TimeSpan(0, 0, 0))
+                    {
+                        foreach (var userMailStatement in userMailStatements)
+                        {
+                            if (userMailStatement.MailStatementId == mailStatement.Id)
+                            {
+                                var user = _userManager.Get(x => x.Id == userMailStatement.UserId).Data;
+
+                                string mailBody = MailBodyGenerate(mailStatement);
+
+                                if (mailBody != "-1")
+                                {
+                                    mailStatement.CoolDown = defaultMailStatements.Where(x => x.Id == mailStatement.Id).FirstOrDefault()!.CoolDown;
+
+                                    var res = await _sendMail.MailSend(user.Email, mailStatement.StatementName, mailBody);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /*public void Check()
         {
             if (!_checkStatementsWorker.IsBusy)
             {
                 CoolDownCountdown();
 
-                _checkStatementsWorker.DoWork += async delegate
+                _checkStatementsWorker.DoWork += delegate
                 {
                     //MemoryByte'lar PLC'den geldi mi?
                     if (_sharp7Service.S71200.MBTags != null && _sharp7Service.S71200.MBTags.ModAutoMu == true)
@@ -68,12 +96,12 @@ namespace ibks.Services.Mail.Services
                                     {
                                         //Tanımlı ise ilgili kullanıcının bilgilerini getir
                                         var user = _userManager.Get(x => x.Id == userMailStatements[ii].UserId).Data;
-
+                                        
                                         //Eğer mail durumu varsa (şartlar sağlanıyorsa) mail durumunun içeriğini oluştur ve gönder
                                         if (MailBodyGenerate(mailStatements[i]) != "-1")
                                         {
                                             //var res = await _sendMail.MailSend(user.Email, mailStatements[i].StatementName, MailBodyGenerate(mailStatements[i]));
-
+                                        
                                             RefreshCooldowns(mailStatements[i].Id);
                                         }
                                         else
@@ -88,51 +116,15 @@ namespace ibks.Services.Mail.Services
                 };
                 _checkStatementsWorker.RunWorkerAsync();
             }
-        }
+        }*/
 
         public void CoolDownCountdown()
         {
-            //var array = mailStatements.OrderBy(x => x.Id).ToArray();
-
             foreach (var item in mailStatements)
             {
                 if (item.CoolDown > new TimeSpan(0, 0, 0))
                     item.CoolDown = item.CoolDown.Add(new TimeSpan(0, 0, -1));
             }
-            /*for (int i = 0; i < mailStatements.Count; i++)
-            {
-                if (array[i].CoolDown > new TimeSpan(0, 0, 0))
-                {
-                    array[i].CoolDown = array[i].CoolDown.Add(new TimeSpan(0, 0, -1));
-                }
-            }*/
-        }
-
-        public void RefreshCooldowns(int? indeks = null)
-        {
-            var bgw = new BackgroundWorker();
-            bgw.DoWork += delegate
-            {
-                if (indeks != null)
-                {
-                    var cd = defaultMailStatements.FirstOrDefault(x => x.Id == indeks).CoolDown;
-
-                    mailStatements.FirstOrDefault(x => x.Id == indeks).CoolDown = cd;
-
-                    //var array = mailStatements.OrderBy(x => x.Id).ToArray();
-
-                    //array[(int)indeks].CoolDown = new TimeSpan(defaultCooldown.CoolDown.Hours, defaultCooldown.CoolDown.Minutes, defaultCooldown.CoolDown.Seconds);
-
-                    //mailStatements = null;
-
-                    //mailStatements = new List<MailStatement>(array);
-                }
-                else
-                {
-                    mailStatements = new List<MailStatement>(_mailStatementManager.GetAll().Data);
-                }
-            };
-            bgw.RunWorkerAsync();
         }
 
         public string MailBodyGenerate(MailStatement mailStatement)

@@ -15,6 +15,7 @@ namespace ibks.Services.Mail.Services
             _mailServerService = mailServerService;
             _stationManager = stationManager;
         }
+
         public async Task<bool> MailSend(string mailName, string subject, string body)
         {
             var settings = _mailServerService.Get().Data;
