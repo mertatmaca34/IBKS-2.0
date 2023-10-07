@@ -75,18 +75,25 @@ namespace ibks.Forms
         {
             PageChange.Change(PanelContent, this, _homePage);
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonHomePage);
+
+            SetWindowState(FormWindowState.Maximized);
         }
 
         private void ButtonSimulationPage_Click(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, _simulationPage);
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSimulationPage);
+
+            this.WindowState = FormWindowState.Normal;
+            this.Size = new System.Drawing.Size(1280, 720);
         }
 
         private void ButtonCalibrationPage_Click(object sender, EventArgs e)
         {
             PageChange.Change(PanelContent, this, _calibrationPage);
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonCalibrationPage);
+
+            SetWindowState(FormWindowState.Maximized);
         }
 
         private void ButtonMailPage_Click(object sender, EventArgs e)
@@ -97,6 +104,8 @@ namespace ibks.Forms
             {
                 PageChange.Change(PanelContent, this, new MailPage(_mailServerManager, _authManager, _userManager, _mailStatementManager, _userMailStatementManager));
                 ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonMailPage);
+
+                SetWindowState(FormWindowState.Maximized);
             }
         }
 
@@ -104,6 +113,8 @@ namespace ibks.Forms
         {
             PageChange.Change(PanelContent, this, _reportingPage);
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonReportingPage);
+
+            SetWindowState(FormWindowState.Maximized);
         }
 
         private void ButtonSettingPage_Click(object sender, EventArgs e)
@@ -114,6 +125,8 @@ namespace ibks.Forms
             {
                 PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager, _apiManager, _stationManager, _plcManager));
                 ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
+
+                SetWindowState(FormWindowState.Maximized);
             }
         }
 
@@ -146,6 +159,11 @@ namespace ibks.Forms
 
                 _authManager.Register(systemAdmin, systemAdmin.Password);
             }
+        }
+
+        private void SetWindowState(FormWindowState formWindowState)
+        {
+            this.WindowState = formWindowState;
         }
     }
 }

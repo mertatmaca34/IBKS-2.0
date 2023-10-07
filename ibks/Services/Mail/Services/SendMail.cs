@@ -22,7 +22,7 @@ namespace ibks.Services.Mail.Services
 
             if (settings != null)
             {
-                SmtpClient smtpClient = new SmtpClient
+                SmtpClient smtpClient = new()
                 {
                     EnableSsl = settings.UseSSL,
                     Port = Convert.ToInt16(settings.Port),

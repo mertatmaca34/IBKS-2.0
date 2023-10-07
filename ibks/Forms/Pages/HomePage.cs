@@ -42,7 +42,7 @@ namespace ibks.Forms.Pages
             _getMissingDatesController = getMissingDatesController;
         }
 
-        private void TimerAssignUI_Tick(object sender, EventArgs e)
+        private async void TimerAssignUI_Tick(object sender, EventArgs e)
         {
             var bgw = new BackgroundWorker();
             bgw.DoWork += delegate
@@ -54,9 +54,9 @@ namespace ibks.Forms.Pages
                 AssignAverageOfLast60Minutes();
                 AssignSystemStatement();
                 SendDataAndAssignStatationInfoControl();
-                _checkStatements.Check();
             }; bgw.RunWorkerAsync();
 
+            await _checkStatements.Check();
         }
 
         private async void SendDataAndAssignStatationInfoControl()

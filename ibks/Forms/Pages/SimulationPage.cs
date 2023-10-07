@@ -151,5 +151,9 @@ namespace ibks.Forms.Pages
                 FrameOperations.ChangePanelFrame(PanelWaterTank, _waterTankFull);
             }
         }
+
+        private void SimulationPage_SizeChanged(object sender, EventArgs e)
+        {
+        }
     }
 }
