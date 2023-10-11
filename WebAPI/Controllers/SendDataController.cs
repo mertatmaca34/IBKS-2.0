@@ -49,18 +49,17 @@ namespace WebAPI.Controllers
                 else
                 {
                     return new ErrorDataResult<ResultStatus<SendDataResult>>(null, Messages.ApiLoginFailed);
-
                 }
             }
             catch (HttpRequestException ex)
             {
-                //await HttpClientAssign.Instance!.Assign();
+                await HttpClientAssign.Instance!.Assign();
 
                 return new ErrorDataResult<ResultStatus<SendDataResult>>(null, Messages.ApiSendDataFault);
             }
             catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
             {
-                //await HttpClientAssign.Instance!.Assign();
+                await HttpClientAssign.Instance!.Assign();
 
                 return new ErrorDataResult<ResultStatus<SendDataResult>>(null, Messages.ApiSendDataFault);
             }

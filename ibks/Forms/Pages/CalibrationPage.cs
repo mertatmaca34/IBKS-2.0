@@ -27,7 +27,7 @@ namespace ibks.Forms.Pages
             InitializeComponent();
             _apiManager = apiManager;
 
-            _calibrationOps = new CalibrationOps(_stationManager, _calibrationManager, _apiManager, _sendCalibrationController);
+            _calibrationOps = new CalibrationOps(_stationManager, _calibrationManager, _sendCalibrationController, _calibrationLimitManager);
         }
 
         private void CalibrationPage_Load(object sender, EventArgs e)

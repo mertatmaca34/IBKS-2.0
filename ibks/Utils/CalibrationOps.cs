@@ -20,17 +20,17 @@ namespace ibks.Utils
 
         readonly IStationService _stationManager;
         readonly ICalibrationService _calibrationManager;
-        readonly IApiService _apiManager;
         readonly ISendCalibrationController _sendCalibrationController;
+        readonly ICalibrationLimitService _calibrationLimitManager;
 
         Station stationInfo = new Station();
 
-        public CalibrationOps(IStationService stationManager, ICalibrationService calibrationManager, IApiService apiManager, ISendCalibrationController sendCalibrationController)
+        public CalibrationOps(IStationService stationManager, ICalibrationService calibrationManager, ISendCalibrationController sendCalibrationController, ICalibrationLimitService calibrationLimitManager)
         {
             _stationManager = stationManager;
             _calibrationManager = calibrationManager;
-            _apiManager = apiManager;
             _sendCalibrationController = sendCalibrationController;
+            _calibrationLimitManager = calibrationLimitManager;
 
             var stationData = stationManager.Get();
 
@@ -83,25 +83,25 @@ namespace ibks.Utils
             {
                 case "AKM":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Akm;
-                    _calibration.ZeroRef = 0;
+                    _calibration.ZeroRef = _calibrationLimitManager.Get(x=> x.Parameter == "AKM").Data.ZeroRef;
                     _calibration.Parameter = "Akm";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: Akm";
                     break;
                 case "KOi":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Koi;
-                    _calibration.ZeroRef = 0;
+                    _calibration.ZeroRef = _calibrationLimitManager.Get(x => x.Parameter == "KOi").Data.ZeroRef;
                     _calibration.Parameter = "Koi";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: Koi";
                     break;
                 case "pH":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Ph;
-                    _calibration.ZeroRef = 7;
+                    _calibration.ZeroRef = _calibrationLimitManager.Get(x => x.Parameter == "pH").Data.ZeroRef;
                     _calibration.Parameter = "pH";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: pH";
                     break;
                 case "Iletkenlik":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Iletkenlik;
-                    _calibration.ZeroRef = 0;
+                    _calibration.ZeroRef = _calibrationLimitManager.Get(x => x.Parameter == "Iletkenlik").Data.ZeroRef;
                     _calibration.Parameter = "Iletkenlik";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: İletkenlik";
                     break;
@@ -230,13 +230,13 @@ namespace ibks.Utils
                     break;
                 case "pH":
                     _calibration.SpanMeas = sharp7Service.S71200.DB41.Ph;
-                    _calibration.SpanRef = 10;
+                    _calibration.SpanRef = _calibrationLimitManager.Get(x => x.Parameter == "pH").Data.SpanRef;
                     _calibration.Parameter = "Ph";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: pH";
                     break;
                 case "Iletkenlik":
                     _calibration.SpanMeas = sharp7Service.S71200.DB41.Iletkenlik;
-                    _calibration.SpanRef = 1413;
+                    _calibration.SpanRef = _calibrationLimitManager.Get(x => x.Parameter == "Iletkenlik").Data.SpanRef;
                     _calibration.Parameter = "Iletkenlik";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: İletkenlik";
                     break;
