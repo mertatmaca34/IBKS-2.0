@@ -47,12 +47,6 @@ namespace ibks
                 MessageBox.Show("Uygulama zaten çalýþýyor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 }
-        public static void ConfigureContainer(ContainerBuilder builder)
-        {
-            // Autofac modülleri burada kaydedilir.
-            builder.RegisterModule(new AutofacApiModule());
-            // Diðer modüller de burada kaydedilebilir.
-        }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
             .UseServiceProviderFactory(new AutofacServiceProviderFactory())

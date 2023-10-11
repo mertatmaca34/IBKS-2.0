@@ -84,8 +84,7 @@ namespace ibks.Forms
             PageChange.Change(PanelContent, this, _simulationPage);
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSimulationPage);
 
-            this.WindowState = FormWindowState.Normal;
-            this.Size = new System.Drawing.Size(1280, 720);
+            SetWindowState(FormWindowState.Normal);
         }
 
         private void ButtonCalibrationPage_Click(object sender, EventArgs e)

@@ -155,6 +155,7 @@
             TableLayoutPanelSystemStatement.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             TableLayoutPanelSystemStatement.Controls.Add(LabelSystemStatementTitle, 0, 0);
             TableLayoutPanelSystemStatement.Controls.Add(LabelSystemStatementDescription, 0, 1);
+            TableLayoutPanelSystemStatement.Dock = DockStyle.Fill;
             TableLayoutPanelSystemStatement.Location = new Point(399, 5);
             TableLayoutPanelSystemStatement.Margin = new Padding(5);
             TableLayoutPanelSystemStatement.Name = "TableLayoutPanelSystemStatement";

@@ -364,7 +364,6 @@
             DigitalSensorBar.PanelSplit1Visible = false;
             DigitalSensorBar.PanelSplit2Visible = false;
             DigitalSensorBar.Size = new Size(568, 45);
-            DigitalSensorBar.SystemStatementColor = Color.White;
             DigitalSensorBar.SystemStatementDescriptionTextColor = Color.White;
             DigitalSensorBar.SystemStatementText = "-";
             DigitalSensorBar.SystemStatementTitleTextColor = Color.White;

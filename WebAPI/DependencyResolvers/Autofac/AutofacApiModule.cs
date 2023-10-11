@@ -18,6 +18,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<SendCalibrationController>().As<ISendCalibrationController>().SingleInstance();
 
             builder.RegisterType<GetCalibrationController>().AsSelf();
+            builder.RegisterType<DenemeController>().AsSelf();
             builder.RegisterType<GetChannelInformationController>().AsSelf();
             builder.RegisterType<GetDataController>().AsSelf();
             builder.RegisterType<GetLogController>().AsSelf();

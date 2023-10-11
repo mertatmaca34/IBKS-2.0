@@ -2,6 +2,7 @@
 using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http;
 using System.Text;
 using WebAPI.Abstract;
 using WebAPI.Utils;
@@ -46,9 +47,10 @@ namespace WebAPI.Controllers
                     "application/json"
                 );
 
+                _httpClient.Timeout.Add(TimeSpan.FromSeconds(15));
                 // API'ye POST isteği gönderme
                 var response = await _httpClient.PostAsync("/security/login", content);
-
+                
                 // İsteğin başarı durumunu kontrol edin (isteğe göre yapılabilir)
                 response.EnsureSuccessStatusCode();
 

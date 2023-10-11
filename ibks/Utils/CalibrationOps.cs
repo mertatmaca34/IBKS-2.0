@@ -230,7 +230,7 @@ namespace ibks.Utils
                     break;
                 case "pH":
                     _calibration.SpanMeas = sharp7Service.S71200.DB41.Ph;
-                    _calibration.SpanRef = 4;
+                    _calibration.SpanRef = 10;
                     _calibration.Parameter = "Ph";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: pH";
                     break;

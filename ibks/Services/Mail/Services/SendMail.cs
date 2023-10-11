@@ -44,7 +44,7 @@ namespace ibks.Services.Mail.Services
 
                 mailMessage.To.Add(mailName);
 
-                await smtpClient.SendMailAsync(mailMessage);
+                //await smtpClient.SendMailAsync(mailMessage);
 
                 return true;
             }
