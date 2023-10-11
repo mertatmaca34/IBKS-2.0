@@ -31,13 +31,14 @@ namespace ibks.Forms
         readonly ISendDataController _sendDataController;
         readonly ICheckStatements _checkStatements;
         readonly IGetMissingDatesController _getMissingDatesController;
+        readonly ISampleService _sampleManager;
 
         public Main(IStationService stationManager, IApiService apiManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager,
             IPlcService plcManager, IMailServerService mailServerManager, IAuthService authManager,
             IUserService userManager, IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager,
             ILogin login, ISendDataController sendDataController, ISendCalibrationController sendCalibrationController,
-            ICheckStatements checkStatements, IGetMissingDatesController getMissingDatesController)
+            ICheckStatements checkStatements, IGetMissingDatesController getMissingDatesController, ISampleService sampleManager)
         {
             InitializeComponent();
 
@@ -57,10 +58,11 @@ namespace ibks.Forms
             _sendCalibrationController = sendCalibrationController;
             _checkStatements = checkStatements;
             _getMissingDatesController = getMissingDatesController;
+            _sampleManager = sampleManager;
 
             _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager, _login, _sendDataController, _checkStatements, _getMissingDatesController);
             _simulationPage = new SimulationPage();
-            _reportingPage = new ReportingPage(_sendDataManager, _calibrationManager);
+            _reportingPage = new ReportingPage(_sendDataManager, _calibrationManager, _sampleManager);
             _calibrationPage = new CalibrationPage(_calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, _sendCalibrationController);
         }
 

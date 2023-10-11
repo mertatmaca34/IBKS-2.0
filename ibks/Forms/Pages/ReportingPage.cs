@@ -10,16 +10,18 @@ namespace ibks.Forms.Pages
     {
         readonly ISendDataService _sendDataManager;
         readonly ICalibrationService _calibrationManager;
+        readonly ISampleService _sampleManager;
 
         readonly DateTime _today;
         readonly DateTime _tomorrow;
 
-        public ReportingPage(ISendDataService sendDataManager, ICalibrationService calibrationManager)
+        public ReportingPage(ISendDataService sendDataManager, ICalibrationService calibrationManager, ISampleService sampleManager)
         {
             InitializeComponent();
 
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
+            _sampleManager = sampleManager;
 
             _today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
             _tomorrow = _today.AddDays(1);
@@ -53,6 +55,16 @@ namespace ibks.Forms.Pages
                         : data.OrderByDescending(d => d.TimeStamp).ToList();
 
                     DataGridViewCustomization("CalibrationData");
+                }
+                else if (checkedRadioButton == RadioButtonSampleData)
+                {
+                    var data = _sampleManager.GetAll(
+                        d => d.DateTime > DateTimePickerFirstDate.Value && d.DateTime < DateTimePickerLastDate.Value).Data;
+
+                    DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
+                        : data.OrderByDescending(d => d.DateTime).ToList();
+
+                    DataGridViewCustomization("SampleData");
                 }
                 else
                 {
@@ -101,6 +113,20 @@ namespace ibks.Forms.Pages
                         break;
 
                     case "CalibrationData":
+                        break;
+
+                    case "SampleData":
+
+                        DataGridViewDatas.Columns[0].Visible = false;
+                        DataGridViewDatas.Columns[2].Visible = false;
+                        DataGridViewDatas.Columns[4].Visible= false;
+                        DataGridViewDatas.Columns[5].Visible= false;
+
+                        DataGridViewDatas.Columns[1].HeaderText = "Numune Tarihi";
+                        DataGridViewDatas.Columns[3].HeaderText= "Numune Türü";
+
+                        RemoveDataGridViewColumns(0);
+
                         break;
 
                     default:

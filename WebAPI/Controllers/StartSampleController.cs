@@ -11,18 +11,20 @@ namespace WebAPI.Controllers
     public class StartSampleController : ControllerBase
     {
         readonly ISampleService _sampleManager;
+        readonly IPlcService _plcManager;
 
-        readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
-
-        public StartSampleController(ISampleService sampleManager)
+        public StartSampleController(ISampleService sampleManager, IPlcService plcManager)
         {
             _sampleManager = sampleManager;
+            _plcManager = plcManager;
         }
 
         [HttpGet(Name = "StartSample")]
         public ActionResult<ResultStatus> Get(Guid StationId, string Code)
         {
-            _sharp7Service.StartSample();
+            Sharp7Service sharp7Service = new Sharp7Service(_plcManager);
+
+            sharp7Service.StartSample();
 
             Sample sample = new()
             {
@@ -35,6 +37,8 @@ namespace WebAPI.Controllers
             };
 
             _sampleManager.Add(sample);
+
+            sharp7Service.Disconnect();
 
             return new ResultStatus
             {
