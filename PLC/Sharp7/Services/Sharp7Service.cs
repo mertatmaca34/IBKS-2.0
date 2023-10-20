@@ -67,7 +67,6 @@ namespace PLC.Sharp7.Services
 
                 Reconnect();
             }
-
         }
 
         public static Sharp7Service Instance

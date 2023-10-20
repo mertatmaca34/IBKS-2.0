@@ -17,11 +17,14 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<GetMissingDatesController>().As<IGetMissingDatesController>().SingleInstance();
             builder.RegisterType<SendCalibrationController>().As<ISendCalibrationController>().SingleInstance();
 
+            builder.RegisterType<SendCalibrationController>().As<ISendCalibrationController>().SingleInstance();
+
             builder.RegisterType<GetCalibrationController>().AsSelf();
             builder.RegisterType<DenemeController>().AsSelf();
             builder.RegisterType<GetChannelInformationController>().AsSelf();
             builder.RegisterType<GetDataController>().AsSelf();
             builder.RegisterType<GetLogController>().AsSelf();
+            builder.RegisterType<GetPowerOffTimesController>().AsSelf();
             builder.RegisterType<GetPowerOffTimesController>().AsSelf();
             builder.RegisterType<GetServerDateTimeController>().AsSelf();
             builder.RegisterType<StartSampleController>().AsSelf();

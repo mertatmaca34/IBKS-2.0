@@ -10,16 +10,14 @@ namespace WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-    .ConfigureContainer<ContainerBuilder>(builder =>
-    {
-        builder.RegisterModule(new AutofacBusinessModule());
-        builder.RegisterModule(new AutofacApiModule());
-    });
+            // Autofac configurations
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterModule(new AutofacBusinessModule());
+            containerBuilder.RegisterModule(new AutofacApiModule());
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
             // Add services to the container.
-
             builder.Services.AddControllers();
-
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -33,11 +31,9 @@ namespace WebAPI
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.MapControllers();
-
             app.Run();
         }
     }
