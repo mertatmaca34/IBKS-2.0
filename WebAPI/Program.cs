@@ -1,6 +1,9 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
+using Microsoft.AspNetCore.Authentication;
+using WebAPI.Authrozation;
+using WebAPI.Middleware;
 
 namespace WebAPI
 {
@@ -14,6 +17,10 @@ namespace WebAPI
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule(new AutofacBusinessModule());
             containerBuilder.RegisterModule(new AutofacApiModule());
+
+            builder.Services.AddAuthentication("BasicAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
             // Add services to the container.
@@ -29,7 +36,7 @@ namespace WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseMiddleware<BasicAuthMiddleware>();
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();

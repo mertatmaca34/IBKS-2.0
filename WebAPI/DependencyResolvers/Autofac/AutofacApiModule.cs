@@ -30,6 +30,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<StartSampleController>().AsSelf();
             builder.RegisterType<GetLastDataDateController>().AsSelf();
 
+
             builder.RegisterType<HttpClientAssign>().As<IHttpClientAssign>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

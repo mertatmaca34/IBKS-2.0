@@ -1,6 +1,7 @@
 ﻿using Business.Constants;
 using Core.Utilities.Results;
 using Entities.Concrete.API;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -11,6 +12,7 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class GetMissingDatesController : ControllerBase, IGetMissingDatesController
     {
         readonly IHttpClientAssign _httpClientAssign;

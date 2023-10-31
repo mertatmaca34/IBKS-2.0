@@ -4,9 +4,11 @@ using Business.DependencyResolvers.Autofac;
 using DataAccess.Concrete.Contexts;
 using ibks.DependencyResolvers.Autofac;
 using ibks.Forms;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OfficeOpenXml;
+using WebAPI.Authrozation;
 
 namespace ibks
 {

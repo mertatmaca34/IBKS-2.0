@@ -1,10 +1,12 @@
 ﻿using Entities.Concrete.API;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class GetPowerOffTimesController : ControllerBase
     {
         [HttpGet(Name = "GetPowerOffTimes")]
