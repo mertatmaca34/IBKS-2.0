@@ -46,6 +46,8 @@ namespace WebAPI.Controllers
                 }
                 else
                 {
+                    await _httpClientAssign.Assign();
+
                     return new ErrorDataResult<ResultStatus<SendDataResult>>(null, Messages.ApiLoginFailed);
                 }
             }

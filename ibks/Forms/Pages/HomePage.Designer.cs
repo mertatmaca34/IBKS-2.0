@@ -364,6 +364,7 @@
             DigitalSensorBar.PanelSplit1Visible = false;
             DigitalSensorBar.PanelSplit2Visible = false;
             DigitalSensorBar.Size = new Size(568, 45);
+            DigitalSensorBar.SystemStatementColor = Color.White;
             DigitalSensorBar.SystemStatementDescriptionTextColor = Color.White;
             DigitalSensorBar.SystemStatementText = "-";
             DigitalSensorBar.SystemStatementTitleTextColor = Color.White;
@@ -447,7 +448,6 @@
             // 
             // TimerGetMissingDates
             // 
-            TimerGetMissingDates.Enabled = true;
             TimerGetMissingDates.Interval = 5000;
             TimerGetMissingDates.Tick += TimerGetMissingDates_Tick;
             // 
