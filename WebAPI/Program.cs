@@ -1,9 +1,14 @@
 using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
+using Business.Abstract;
+using Business.Concrete;
 using Business.DependencyResolvers.Autofac;
+using DataAccess.Abstract;
+using DataAccess.Concrete.Contexts;
+using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication;
 using WebAPI.Authrozation;
-using WebAPI.Middleware;
 
 namespace WebAPI
 {
@@ -13,10 +18,7 @@ namespace WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Autofac configurations
-            var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule(new AutofacBusinessModule());
-            containerBuilder.RegisterModule(new AutofacApiModule());
+            var host = CreateHostBuilder(args).Build();
 
             builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
@@ -27,6 +29,12 @@ namespace WebAPI
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<ISampleService, SampleManager>();
+            builder.Services.AddScoped<ISampleDal, EfSampleDal>();
+            builder.Services.AddScoped<IPlcService, PlcManager>();
+            builder.Services.AddScoped<IPlcDal, EfPlcDal>();
+            builder.Services.AddScoped<ISendDataService, SendDataManager>();
+            builder.Services.AddScoped<ISendDataDal, EfSendDataDal>();
 
             var app = builder.Build();
 
@@ -36,12 +44,24 @@ namespace WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseMiddleware<BasicAuthMiddleware>();
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
             app.Run();
         }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+            .ConfigureContainer<ContainerBuilder>(builder =>
+            {
+                builder.RegisterModule(new AutofacBusinessModule());
+                builder.RegisterModule(new AutofacApiModule());
+            })
+            .ConfigureServices((hostContext, services) =>
+            {
+                //services.AddDbContext<IBKSContext>(options=> options.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=DataAccess.Contexts.IBKSContext;Trusted_Connection=True;MultipleActiveResultSets=true"));
+            });
     }
 }

@@ -7,25 +7,18 @@ namespace WebAPI.Utils
 {
     public class HttpClientAssign : IHttpClientAssign
     {
-        public static HttpClientAssign Instance;
-        public HttpClient? HttpClient { get; }
-
-        readonly IApiService _apiManager;
-        readonly ILogin _login;
+        private readonly IApiService _apiManager;
+        private readonly ILogin _login;
 
         public HttpClientAssign(IApiService apiManager, ILogin login)
         {
-            Instance = this;
-
             _apiManager = apiManager;
             _login = login;
-
-            Assign().Wait();
+            Assign().Wait(); // Burada async-await kullanımı uygun değil
         }
 
         public async Task Assign()
         {
-            Constants.Constants.HttpClient = null;
             Constants.Constants.HttpClient = new HttpClient();
 
             var apiData = _apiManager.Get();
@@ -34,7 +27,7 @@ namespace WebAPI.Utils
             {
                 var apiBaseUrl = apiData.Data.ApiAdress;
 
-                if (Constants.Constants.TicketId == null || Constants.Constants.TicketId.ToString() == "")
+                if (string.IsNullOrEmpty(Constants.Constants.TicketId.ToString()))
                 {
                     Constants.Constants.HttpClient.BaseAddress = new Uri(apiBaseUrl);
 
@@ -42,14 +35,14 @@ namespace WebAPI.Utils
 
                     await _login.Login(loginInfo.UserName, loginInfo.Password);
 
-                    Constants.Constants.HttpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = Constants.Constants.TicketId.ToString()! }));
+                    Constants.Constants.HttpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = Constants.Constants.TicketId.ToString() }));
                 }
                 else
                 {
-                    if (HttpClient?.DefaultRequestHeaders == null)
+                    if (Constants.Constants.HttpClient.DefaultRequestHeaders != null)
                     {
                         Constants.Constants.HttpClient.BaseAddress = new Uri(apiBaseUrl);
-                        Constants.Constants.HttpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = Constants.Constants.TicketId.ToString()! }));
+                        Constants.Constants.HttpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = Constants.Constants.TicketId.ToString() }));
                     }
                 }
             }
@@ -57,7 +50,7 @@ namespace WebAPI.Utils
 
         public void AssignHttpClient()
         {
-
+            // AssignHttpClient metodu için implementasyon
         }
     }
 }

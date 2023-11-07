@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
             {
                 result = true,
                 message = "null",
-                objects = _sendDataManager.GetAll(x => x.Stationid == StationId && x.Readtime >= startDate && x.Readtime <= endDate).Data.ToList()!
+                objects = _sendDataManager.GetAll(x => x.Stationid == StationId && x.Readtime >= startDate && x.Readtime <= endDate).Data!
             };
         }
     }

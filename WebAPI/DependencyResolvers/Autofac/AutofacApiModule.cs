@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
+using Business.Abstract;
+using Business.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
 using WebAPI.Abstract;
@@ -30,6 +32,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<StartSampleController>().AsSelf();
             builder.RegisterType<GetLastDataDateController>().AsSelf();
 
+            builder.RegisterType<SendDataManager>().As<ISendDataService>().SingleInstance();
+            builder.RegisterType<SampleManager>().As<ISampleService>().SingleInstance();
+            builder.RegisterType<PlcManager>().As<IPlcService>().SingleInstance();
 
             builder.RegisterType<HttpClientAssign>().As<IHttpClientAssign>().SingleInstance();
 

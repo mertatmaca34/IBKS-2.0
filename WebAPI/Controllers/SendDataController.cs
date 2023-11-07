@@ -1,5 +1,4 @@
 ﻿using Business.Constants;
-using Core.Utilities;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.Concrete.API;
@@ -8,7 +7,6 @@ using Newtonsoft.Json;
 using System.Text;
 using WebAPI.Abstract;
 using WebAPI.Enums;
-using WebAPI.Utils;
 
 namespace WebAPI.Controllers
 {
@@ -53,13 +51,13 @@ namespace WebAPI.Controllers
             }
             catch (HttpRequestException ex)
             {
-                await HttpClientAssign.Instance!.Assign();
+                await _httpClientAssign.Assign();
 
                 return new ErrorDataResult<ResultStatus<SendDataResult>>(null, Messages.ApiSendDataFault);
             }
             catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
             {
-                await HttpClientAssign.Instance!.Assign();
+                await _httpClientAssign.Assign();
 
                 return new ErrorDataResult<ResultStatus<SendDataResult>>(null, Messages.ApiSendDataFault);
             }
