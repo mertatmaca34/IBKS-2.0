@@ -35,6 +35,8 @@ namespace WebAPI
             builder.Services.AddScoped<IPlcDal, EfPlcDal>();
             builder.Services.AddScoped<ISendDataService, SendDataManager>();
             builder.Services.AddScoped<ISendDataDal, EfSendDataDal>();
+            builder.Services.AddScoped<ICalibrationDal, EfCalibrationDal>();
+            builder.Services.AddScoped<ICalibrationService, CalibrationManager>();
 
             var app = builder.Build();
 

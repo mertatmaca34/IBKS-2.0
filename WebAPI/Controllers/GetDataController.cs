@@ -2,6 +2,7 @@
 using Entities.Concrete.API;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace WebAPI.Controllers
 {
@@ -19,11 +20,13 @@ namespace WebAPI.Controllers
         [HttpGet(Name = "GetData")]
         public ActionResult<ResultStatus> GetData(Guid StationId, DateTime startDate, DateTime endDate, int Period)
         {
+            var data = _sendDataManager.GetAll(x => x.Stationid == StationId && x.Readtime >= startDate && x.Readtime <= endDate).Data!;
+
             return new ResultStatus
             {
                 result = true,
                 message = "null",
-                objects = _sendDataManager.GetAll(x => x.Stationid == StationId && x.Readtime >= startDate && x.Readtime <= endDate).Data!
+                objects = data
             };
         }
     }

@@ -19,6 +19,8 @@ namespace WebAPI.Controllers
         [HttpGet(Name = "GetInstantData")]
         public ActionResult<ResultStatus> GetInstantData(Guid StationId)
         {
+            var data = _sendDataManager.GetAll(x => x.Stationid == StationId).Data.LastOrDefault()!;
+
             return new ResultStatus
             {
                 result = true,
