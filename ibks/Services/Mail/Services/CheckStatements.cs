@@ -2,7 +2,6 @@
 using Entities.Concrete;
 using ibks.Services.Mail.Abstract;
 using PLC.Sharp7.Services;
-using System.ComponentModel;
 
 namespace ibks.Services.Mail.Services
 {
@@ -20,7 +19,7 @@ namespace ibks.Services.Mail.Services
         public List<MailStatement> defaultMailStatements;
         public List<MailStatement> mailStatements;
 
-        public bool IsMailSent = false;
+        private readonly Dictionary<int, DateTime> lastSentTimes = new Dictionary<int, DateTime>();
 
         public CheckStatements(IUserService userManager, IUserMailStatementService userMailStatementManager, IMailStatementService mailStatementManager, ISendMail sendMail)
         {
@@ -33,22 +32,15 @@ namespace ibks.Services.Mail.Services
             mailStatements = new List<MailStatement>(_mailStatementManager.GetAll().Data);
 
             userMailStatements = _userMailStatementManager.GetAll().Data.ToList();
-
-            foreach (var item in mailStatements)
-            {
-                item.CoolDown = new TimeSpan(0, 0, 5);
-            }
         }
 
         public async Task Check()
         {
-            CoolDownCountdown();
-
             if (_sharp7Service.S71200.MBTags != null && _sharp7Service.S71200.MBTags.ModAutoMu == true)
             {
                 foreach (var mailStatement in mailStatements)
                 {
-                    if (mailStatement.CoolDown == new TimeSpan(0, 0, 0))
+                    if (CanSendMail(mailStatement.Id))
                     {
                         foreach (var userMailStatement in userMailStatements)
                         {
@@ -60,7 +52,8 @@ namespace ibks.Services.Mail.Services
 
                                 if (mailBody != "-1")
                                 {
-                                    mailStatement.CoolDown = defaultMailStatements.Where(x => x.Id == mailStatement.Id).FirstOrDefault()!.CoolDown;
+                                    mailStatement.CoolDown = defaultMailStatements.FirstOrDefault(x => x.Id == mailStatement.Id)?.CoolDown ?? TimeSpan.Zero;
+                                    lastSentTimes[mailStatement.Id] = DateTime.Now;
 
                                     var res = await _sendMail.MailSend(user.Email, mailStatement.StatementName, mailBody);
                                 }
@@ -71,14 +64,20 @@ namespace ibks.Services.Mail.Services
             }
         }
 
-        public void CoolDownCountdown()
+        private bool CanSendMail(int mailStatementId)
         {
-            foreach (var item in mailStatements)
+            if (!lastSentTimes.ContainsKey(mailStatementId))
             {
-                if (item.CoolDown > new TimeSpan(0, 0, 0))
-                    item.CoolDown = item.CoolDown.Add(new TimeSpan(0, 0, -1));
+                lastSentTimes.Add(mailStatementId, DateTime.MinValue);
+                return true;
             }
+
+            var lastSentTime = lastSentTimes[mailStatementId];
+            var cooldownTime = defaultMailStatements.FirstOrDefault(x => x.Id == mailStatementId)?.CoolDown ?? TimeSpan.Zero;
+
+            return DateTime.Now - lastSentTime > cooldownTime;
         }
+
 
         public string MailBodyGenerate(MailStatement mailStatement)
         {
