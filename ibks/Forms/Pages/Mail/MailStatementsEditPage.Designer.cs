@@ -256,6 +256,7 @@
             // ComboBoxStatement
             // 
             ComboBoxStatement.Anchor = AnchorStyles.None;
+            ComboBoxStatement.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBoxStatement.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ComboBoxStatement.FormattingEnabled = true;
             ComboBoxStatement.Items.AddRange(new object[] { "Limit Aşımı", "Varsa", "Yoksa" });
@@ -297,6 +298,7 @@
             // ComboBoxParameter
             // 
             ComboBoxParameter.Anchor = AnchorStyles.None;
+            ComboBoxParameter.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBoxParameter.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ComboBoxParameter.FormattingEnabled = true;
             ComboBoxParameter.Items.AddRange(new object[] { "Tesis Debi", "Tesis Günlük Debi", "Deşarj Debi", "Harici Debi", "Harici Debi 2", "Numune Hız", "Numune Debi", "pH", "İletkenlik", "Çözünmüş Oksijen", "Numune Sıcaklık", "Koi", "Akm", "Kabin Nem", "Kabin Sıcaklık", "Pompa 1 Hz", "Pompa 2 Hz", "Ups Kapasite", "Ups Yük", "Günlük Yıkama", "Haftalık Yıkama", "Kapı", "Duman", "Su Baskını", "Acil Stop", "Pompa 1 Termik", "Pompa 2 Termik", "Temiz Su Pompası Termik", "Yıkama Tankı", "Enerji", "Pompa 1 Çalışıyor Mu", "Pompa 2 Çalışıyor Mu", "Mod Auto Mu", "Mod Bakım Mı", "Mod Kalibrasyon Mu", "Numune Tetik Akm", "Numune Tetik Koi", "Numune Tetik Ph", "Veri Geçerliliği" });
@@ -389,6 +391,7 @@
             // ComboBoxCoolDown
             // 
             ComboBoxCoolDown.Anchor = AnchorStyles.None;
+            ComboBoxCoolDown.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBoxCoolDown.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ComboBoxCoolDown.FormattingEnabled = true;
             ComboBoxCoolDown.Location = new Point(312, 11);
@@ -481,6 +484,7 @@
             // 
             DataGridViewStatements.AllowUserToAddRows = false;
             DataGridViewStatements.AllowUserToDeleteRows = false;
+            DataGridViewStatements.AllowUserToResizeRows = false;
             DataGridViewStatements.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DataGridViewStatements.BackgroundColor = Color.White;
             DataGridViewStatements.BorderStyle = BorderStyle.None;

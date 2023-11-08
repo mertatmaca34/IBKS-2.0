@@ -1,5 +1,4 @@
 ﻿using Business.Abstract;
-using Business.Constants;
 using Business.Helpers.Mail;
 using Entities.Concrete;
 
@@ -7,8 +6,8 @@ namespace ibks.Forms.Pages.Mail
 {
     public partial class MailStatementsEditPage : Form
     {
-        List<CooldownItem>? _comboBoxCooldownItems;
-        List<ParameterItem>? _comboBoxParameterItems;
+        List<CooldownItem> _comboBoxCooldownItems;
+        List<ParameterItem> _comboBoxParameterItems;
 
         TimeSpan _coolDown;
         string? _parameter;
@@ -26,39 +25,32 @@ namespace ibks.Forms.Pages.Mail
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            try
+            MailStatement mailStatement = new()
             {
-                MailStatement mailStatement = new()
-                {
-                    Parameter = _parameter!,
-                    Statement = ComboBoxStatement.Text,
-                    StatementName = TextBoxMailSubject.Text,
-                    CoolDown = _coolDown,
-                    Content = TextBoxMailContent.Text,
-                };
+                Parameter = _parameter!,
+                Statement = ComboBoxStatement.Text,
+                StatementName = TextBoxMailSubject.Text,
+                CoolDown = _coolDown,
+                Content = TextBoxMailContent.Text,
+            };
 
-                if (TableLayoutPanelLimits.Enabled)
-                {
-                    mailStatement.LowerLimit = Convert.ToDouble(TextBoxLowerLimit.Text);
-                    mailStatement.UpperLimit = Convert.ToDouble(TextBoxUpperLimit.Text);
-
-                    var res = _mailStatementManager.Add(mailStatement);
-
-                    MessageBox.Show(res.Message);
-                }
-                else
-                {
-                    var res = _mailStatementManager.Add(mailStatement);
-
-                    MessageBox.Show(res.Message);
-                }
-
-                AssignDataGridView();
-            }
-            catch (Exception)
+            if (TableLayoutPanelLimits.Enabled)
             {
-                MessageBox.Show(Messages.MailStatementCantBeAdded);
+                mailStatement.LowerLimit = Convert.ToDouble(TextBoxLowerLimit.Text);
+                mailStatement.UpperLimit = Convert.ToDouble(TextBoxUpperLimit.Text);
+
+                var res = _mailStatementManager.Add(mailStatement);
+
+                MessageBox.Show(res.Message);
             }
+            else
+            {
+                var res = _mailStatementManager.Add(mailStatement);
+
+                MessageBox.Show(res.Message);
+            }
+
+            AssignDataGridView();
         }
 
         private void ComboBoxStatement_SelectedIndexChanged(object sender, EventArgs e)
@@ -150,13 +142,12 @@ namespace ibks.Forms.Pages.Mail
                 new ParameterItem { DisplayText = "Numune Tetik Akm", RealValue = "AkmTetik"},
                 new ParameterItem { DisplayText = "Numune Tetik Koi", RealValue = "KoiTetik"},
                 new ParameterItem { DisplayText = "Numune Tetik Ph", RealValue = "PhTetik"},
-                new ParameterItem { DisplayText = "Kapı", RealValue = "Kapi"},
                 new ParameterItem { DisplayText = "Duman", RealValue = "Duman"},
                 new ParameterItem { DisplayText = "Su Baskını", RealValue = "SuBaskini"},
                 new ParameterItem { DisplayText = "Acil Stop", RealValue = "AcilStop"},
                 new ParameterItem { DisplayText = "Pompa 1 Termik", RealValue = "Pompa1Termik"},
-                new ParameterItem { DisplayText = "Pompa 2 Termik", RealValue = "Pompa2Termil"},
-                new ParameterItem { DisplayText = "Temiz Su Pompası Termik", RealValue = "TemizSuTermil"},
+                new ParameterItem { DisplayText = "Pompa 2 Termik", RealValue = "Pompa2Termik"},
+                new ParameterItem { DisplayText = "Temiz Su Pompası Termik", RealValue = "TemizSuTermik"},
                 new ParameterItem { DisplayText = "Yıkama Tankı", RealValue = "YikamaTanki"},
                 new ParameterItem { DisplayText = "Enerji", RealValue = "Enerji"},
                 new ParameterItem { DisplayText = "Pompa 1 Çalışıyor Mu", RealValue = "Pompa1CalisiyorMu"},
@@ -180,11 +171,7 @@ namespace ibks.Forms.Pages.Mail
 
         private void ComboBoxParameter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selectedIndex = ComboBoxParameter.SelectedIndex;
-            if (selectedIndex >= 0 && selectedIndex < _comboBoxParameterItems?.Count)
-            {
-                _parameter = _comboBoxParameterItems[selectedIndex].RealValue;
-            }
+            _parameter = _comboBoxParameterItems!.Where(x => x.DisplayText == ComboBoxParameter.Text).FirstOrDefault()!.RealValue;
         }
 
         private void DuzenleToolStipMenuItem_Click(object sender, EventArgs e)
@@ -194,15 +181,20 @@ namespace ibks.Forms.Pages.Mail
                 var row = DataGridViewStatements.SelectedRows[0];
 
                 TextBoxMailSubject.Text = row.Cells[1].Value.ToString();
-                ComboBoxParameter.Text = row.Cells[2].Value.ToString();
+                ComboBoxParameter.Text = _comboBoxParameterItems.Where(x => x.RealValue == row.Cells[2].Value.ToString()).FirstOrDefault()!.DisplayText;
                 ComboBoxStatement.Text = row.Cells[3].Value.ToString();
-                ComboBoxCoolDown.Text = row.Cells[6].Value.ToString();
+                ComboBoxCoolDown.Text = _comboBoxCooldownItems.Where(x => x.RealValue == (TimeSpan)row.Cells[6].Value).FirstOrDefault()!.DisplayText;
                 TextBoxMailContent.Text = row.Cells[7].Value.ToString();
 
                 if (row.Cells[3].Value.ToString() == "Limit Aşımı")
                 {
                     TextBoxLowerLimit.Text = row.Cells[4].Value.ToString();
                     TextBoxUpperLimit.Text = row.Cells[5].Value.ToString();
+                }
+                else
+                {
+                    TextBoxLowerLimit.Text = "Alt Limit";
+                    TextBoxUpperLimit.Text = "Üst Limit";
                 }
             }
         }
