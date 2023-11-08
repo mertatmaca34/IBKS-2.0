@@ -1,11 +1,17 @@
 ﻿using Core.Entities.Concrete;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace DataAccess.Concrete.Contexts
 {
     public class IBKSContext : DbContext
     {
+        //public IBKSContext(DbContextOptions<IBKSContext> optionsBuilder):base(optionsBuilder)
+        //{
+
+        //}
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=IBKSContext;Trusted_Connection=True;MultipleActiveResultSets=true");

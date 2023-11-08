@@ -448,7 +448,8 @@
             // 
             // TimerGetMissingDates
             // 
-            TimerGetMissingDates.Interval = 5000;
+            TimerGetMissingDates.Enabled = true;
+            TimerGetMissingDates.Interval = 1200000;
             TimerGetMissingDates.Tick += TimerGetMissingDates_Tick;
             // 
             // HomePage

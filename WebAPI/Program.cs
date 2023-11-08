@@ -8,7 +8,9 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.Contexts;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
 using WebAPI.Authrozation;
+using WebAPI.Middlewares;
 
 namespace WebAPI
 {
@@ -38,15 +40,20 @@ namespace WebAPI
             builder.Services.AddScoped<ICalibrationDal, EfCalibrationDal>();
             builder.Services.AddScoped<ICalibrationService, CalibrationManager>();
 
+            //builder.Services.AddDbContext<IBKSContext>(p =>
+            //{
+            //    var conn = builder.Configuration.GetConnectionString("SqlServer");
+            //    p.UseSqlServer(conn);
+            //});
+
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
             app.UseHttpsRedirection();
+            app.UseMiddleware<BasicAuthMiddleware>();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
