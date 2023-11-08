@@ -40,11 +40,11 @@ namespace ibks.Forms.Pages.Settings
 
                 var res = _apiManager.Add(api);
 
-                MessageBox.Show(res.Message);
+                MessageBox.Show(res.Message, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception)
             {
-                MessageBox.Show(Messages.CalibrationLimitIncompleteInfo);
+                MessageBox.Show(Messages.IncompleteInfo, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

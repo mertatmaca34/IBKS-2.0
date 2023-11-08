@@ -39,13 +39,13 @@ namespace ibks.Forms.Pages.Settings
 
                 var res = _plcManager.Add(plc);
 
-                MessageBox.Show(res.Message);
+                MessageBox.Show(res.Message, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
                 _sharp7Service.AssignPlcIp();
             }
             catch (Exception)
             {
-                MessageBox.Show(Messages.CalibrationLimitIncompleteInfo);
+                MessageBox.Show(Messages.CalibrationLimitIncompleteInfo, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

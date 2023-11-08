@@ -35,7 +35,7 @@ namespace ibks.Forms.Pages.Settings
 
             var res = _stationManager.Add(station);
 
-            MessageBox.Show(res.Message);
+            MessageBox.Show(res.Message, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
