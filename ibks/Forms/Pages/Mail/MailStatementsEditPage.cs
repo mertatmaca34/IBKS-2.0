@@ -152,6 +152,7 @@ namespace ibks.Forms.Pages.Mail
                 new ParameterItem { DisplayText = "Enerji", RealValue = "Enerji"},
                 new ParameterItem { DisplayText = "Pompa 1 Çalışıyor Mu", RealValue = "Pompa1CalisiyorMu"},
                 new ParameterItem { DisplayText = "Pompa 2 Çalışıyor Mu", RealValue = "Pompa2CalisiyorMu"},
+                new ParameterItem { DisplayText = "Veri Geçerliliği", RealValue = "VeriGecerliligi"},
             };
 
             foreach (var item in _comboBoxParameterItems)
@@ -253,7 +254,7 @@ namespace ibks.Forms.Pages.Mail
                 new MailStatement { StatementName = "Numune Tetik Akm Alarmı", Parameter = "AkmTetik", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "Akm'den numune alınıyor"},
                 new MailStatement { StatementName = "Numune Tetik Koi Alarmı", Parameter = "KoiTetik", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "Koi'den numune alınıyor"},
                 new MailStatement { StatementName = "Numune Tetik Ph Alarmı", Parameter = "PhTetik", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "Ph'dan numune alınıyor"},
-                new MailStatement { StatementName = "Veri Geçerliliği Alarmı", Parameter = "Veri Geçerliliği", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "Veri geçerliliği: "}
+                new MailStatement { StatementName = "Veri Geçerliliği Alarmı", Parameter = "VeriGecerliligi", Statement = "Varsa", CoolDown = timeSpan10Minute , Content = "Veri Geçersiz - "}
             };
 
             foreach (var item in mailStatements)

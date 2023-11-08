@@ -161,6 +161,7 @@
             // 
             DataGridViewMailStatements.AllowUserToAddRows = false;
             DataGridViewMailStatements.AllowUserToDeleteRows = false;
+            DataGridViewMailStatements.AllowUserToResizeRows = false;
             DataGridViewMailStatements.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DataGridViewMailStatements.BackgroundColor = Color.White;
             DataGridViewMailStatements.BorderStyle = BorderStyle.None;

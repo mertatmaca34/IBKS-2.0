@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
 using ibks.Services.Mail.Abstract;
+using ibks.Utils;
 using PLC.Sharp7.Services;
 
 namespace ibks.Services.Mail.Services
@@ -81,6 +82,25 @@ namespace ibks.Services.Mail.Services
 
         public string MailBodyGenerate(MailStatement mailStatement)
         {
+            if (mailStatement.Parameter == "VeriGecerliligi")
+            {
+                if (DateTime.Now - StaticInstantData.ReadTime < new TimeSpan(0, 2, 0, 0))
+                {
+                    string message = StaticInstantData.AKM_N_Status switch
+                    {
+                        200 => mailStatement.Content + $" Eksik veya Geçersiz Yıkama bilgisi.",
+                        201 => mailStatement.Content + $" Eksik veya Geçersiz Haftalık Yıkama bilgisi.",
+                        202 => mailStatement.Content + $" Eksik veya Geçersiz Aylık Kalibrasyon bilgisi.",
+                        203 => mailStatement.Content + $" Geçersiz Akış Hızı değeri.",
+                        204 => mailStatement.Content + $" Geçersiz Debi Değeri.",
+                        205 => mailStatement.Content + $" Ard ardına tekrar eden mükerrer veri.",
+                        206 => mailStatement.Content + $" Uygun olmayan birim ile ölçüm yapılamaz.",
+                        _ => "-1",
+                    };
+                    return message;
+                }
+            }
+
             if (mailStatement.Statement == "Limit Aşımı")
             {
                 var propertyInfo = _sharp7Service.S71200.DB41.GetType().GetProperty(mailStatement.Parameter);
@@ -95,7 +115,8 @@ namespace ibks.Services.Mail.Services
                     return "-1";
                 }
 
-                return $"{mailStatement.Parameter} Limit Aşımı! Değer belirlenen aralıklarda değil: {mailStatement.LowerLimit} - {mailStatement.UpperLimit}\n Değer: {value}";
+                return mailStatement.Content;
+
             }
 
             object tagsDTO = null;
@@ -118,9 +139,10 @@ namespace ibks.Services.Mail.Services
             var value2 = Convert.ToBoolean(propertyInfo2.GetValue(tagsDTO));
             if (mailStatement.Statement == "Varsa" && value2 || mailStatement.Statement == "Yoksa" && !value2)
             {
-                return $"{mailStatement.Parameter} {mailStatement.Statement.Remove(mailStatement.Statement.Length - 2)}!";
+                return mailStatement.Content;
             }
 
+            
             return "-1";
         }
     }

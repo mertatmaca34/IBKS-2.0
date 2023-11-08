@@ -86,7 +86,7 @@ namespace ibks.Forms.Pages.Mail
 
                         cell.Value = true;
 
-                        MessageBox.Show(res.Message);
+                        MessageBox.Show(res.Message, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -94,12 +94,12 @@ namespace ibks.Forms.Pages.Mail
 
                         var res = _userMailStatementManager.Delete(existEntity.Data[0]);
 
-                        MessageBox.Show(res.Message);
+                        MessageBox.Show(res.Message, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
                 {
-                    MessageBox.Show(Messages.InvalidUser);
+                    MessageBox.Show(Messages.InvalidUser, "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -116,7 +116,7 @@ namespace ibks.Forms.Pages.Mail
                 {
                     var mailStatementId = Convert.ToInt16(DataGridViewMailStatements.Rows[i].Cells[1].Value);
 
-                    var isItOnTheTable = userMailStatements.Data.Find(x=> x.MailStatementId == mailStatementId);
+                    var isItOnTheTable = userMailStatements.Data.Find(x => x.MailStatementId == mailStatementId);
 
                     if (isItOnTheTable != null)
                     {
