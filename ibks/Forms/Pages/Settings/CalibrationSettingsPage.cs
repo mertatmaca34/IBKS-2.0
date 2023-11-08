@@ -40,13 +40,14 @@ namespace ibks.Forms.Pages.Settings
 
                         var res = _calibrationLimitManager.Add(calibrationLimit);
 
-                        MessageBox.Show($"{calibrationBar.Parameter}: {res.Message}");
                     }
                 }
+                MessageBox.Show("Kalibrasyon ayarları başarıyla güncellendi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
             catch (Exception)
             {
-                MessageBox.Show(Messages.CalibrationLimitIncompleteInfo);
+                MessageBox.Show(Messages.CalibrationLimitIncompleteInfo, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -41,13 +41,13 @@ namespace ibks.Forms.Pages.Mail
 
                 var res = _mailStatementManager.Add(mailStatement);
 
-                MessageBox.Show(res.Message);
+                MessageBox.Show(res.Message, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 var res = _mailStatementManager.Add(mailStatement);
 
-                MessageBox.Show(res.Message);
+                MessageBox.Show(res.Message, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             AssignDataGridView();
@@ -221,7 +221,7 @@ namespace ibks.Forms.Pages.Mail
 
                 var res = _mailStatementManager.Delete(mailStatement);
 
-                MessageBox.Show(res.Message);
+                MessageBox.Show(res.Message, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 AssignDataGridView();
             }

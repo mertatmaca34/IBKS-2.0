@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Entities.DTOs;
 
 namespace ibks.Forms
@@ -39,14 +40,14 @@ namespace ibks.Forms
             var userToLogin = _authManager.Login(userForLoginDto);
             if (!userToLogin.Success)
             {
-                MessageBox.Show(userToLogin.Message);
+                MessageBox.Show(userToLogin.Message, "Başarısız", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 this.ReturnValue = false;
                 this.Close();
             }
             else
             {
-                MessageBox.Show(userToLogin.Message);
+                MessageBox.Show(userToLogin.Message, "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.ReturnValue = true;
                 this.Close();
