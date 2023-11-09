@@ -4,7 +4,6 @@ using Core.Utilities.Results;
 using Entities.Concrete.API;
 using ibks.Services.Mail.Abstract;
 using ibks.Utils;
-using Newtonsoft.Json;
 using PLC;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
@@ -70,20 +69,23 @@ namespace ibks.Forms.Pages
                 {
                     var res = await _sendDataController.SendData(data.Data);
 
-                    if (res.Success)
+                    if (res.Data.objects != null)
                     {
-                        data.Data.IsSent = true;
+                        if (res.Success)
+                        {
+                            data.Data.IsSent = true;
+                        }
+                        else
+                        {
+                            data.Data.IsSent = false;
+                        }
+
+                        StaticInstantData.Assign(res.Data.objects);
+
+                        _sendDataManager.Add(data.Data);
+
+                        AssignStationInfoControl(res);
                     }
-                    else
-                    {
-                        data.Data.IsSent = false;
-                    }
-
-                    StaticInstantData.Assign(res.Data.objects);
-
-                    _sendDataManager.Add(data.Data);
-
-                    AssignStationInfoControl(res);
                 }
             }
         }
