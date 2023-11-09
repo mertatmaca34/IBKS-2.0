@@ -108,6 +108,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "MailPage";
             Text = "MailPage";
+            SizeChanged += MailPage_SizeChanged;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

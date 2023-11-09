@@ -68,5 +68,17 @@ namespace ibks.Forms.Pages
             _selectedMenuItem.BackColor = hoverBlue;
             _selectedMenuItem.ForeColor = Color.Black;
         }
+
+        private void MailPage_StyleChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void MailPage_SizeChanged(object sender, EventArgs e)
+        {
+            foreach (Form activeForm in PanelContent.Controls)
+            {
+                activeForm.Size = PanelContent.Size;
+            }
+        }
     }
 }
