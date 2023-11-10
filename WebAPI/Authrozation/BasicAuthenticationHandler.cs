@@ -36,7 +36,7 @@ namespace WebAPI.Authrozation
                 // Burada kullanıcı adı ve şifrenin doğruluğunu kontrol edebilirsiniz.
                 // Örneğin, veritabanında veya başka bir doğrulama kaynağında kontrol edebilirsiniz.
 
-                if (username == "istanbul_iski_sile" && password == "iskiist34")
+                if (username == "iski" && password == "iski")
                 {
                     var claims = new[] { new Claim(ClaimTypes.Name, username) };
                     var identity = new ClaimsIdentity(claims, Scheme.Name);
