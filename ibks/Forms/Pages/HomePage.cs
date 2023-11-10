@@ -69,7 +69,7 @@ namespace ibks.Forms.Pages
                 {
                     var res = await _sendDataController.SendData(data.Data);
 
-                    if (res.Data.objects != null)
+                    if (res.Data != null && res.Data.objects != null)
                     {
                         if (res.Success)
                         {
