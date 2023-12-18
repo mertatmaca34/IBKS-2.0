@@ -76,7 +76,22 @@ namespace ibks.Services.Mail.Services
             var lastSentTime = lastSentTimes[mailStatementId];
             var cooldownTime = defaultMailStatements.FirstOrDefault(x => x.Id == mailStatementId)?.CoolDown ?? TimeSpan.Zero;
 
-            return DateTime.Now - lastSentTime > cooldownTime;
+            bool isItFirst = DateTime.Now - lastSentTime > new TimeSpan(0, 19, 0);
+            bool canSend = DateTime.Now - lastSentTime > cooldownTime;
+
+
+            if (isItFirst && canSend)
+            {
+                return false;
+            }
+            else if (!isItFirst && canSend)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
 

@@ -63,10 +63,6 @@ namespace WebAPI.Controllers
 
                 return desResponseContent!;
 
-                /*var result = JsonConvert.DeserializeObject<LoginResult>(desResponseContent.objects.ToString());
-
-                var ticketId = result.TicketId.ToString();*/
-
             }
             catch (HttpRequestException)
             {

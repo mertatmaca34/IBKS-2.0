@@ -33,7 +33,9 @@ namespace WebAPI.Utils
 
                     var loginInfo = _apiManager.Get().Data;
 
-                    await _login.Login(loginInfo.UserName, loginInfo.Password);
+                    var loginRes = await _login.Login(loginInfo.UserName, loginInfo.Password);
+
+                    Constants.Constants.TicketId = loginRes.objects.TicketId;
 
                     Constants.Constants.HttpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = Constants.Constants.TicketId.ToString() }));
                 }

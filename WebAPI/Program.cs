@@ -39,6 +39,7 @@ namespace WebAPI
             builder.Services.AddScoped<ISendDataDal, EfSendDataDal>();
             builder.Services.AddScoped<ICalibrationDal, EfCalibrationDal>();
             builder.Services.AddScoped<ICalibrationService, CalibrationManager>();
+            builder.Services.AddHttpClient<IHttpClientOperations, HttpClientOperations>();
 
             //builder.Services.AddDbContext<IBKSContext>(p =>
             //{

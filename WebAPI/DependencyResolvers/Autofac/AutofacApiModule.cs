@@ -36,7 +36,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<SampleManager>().As<ISampleService>().SingleInstance();
             builder.RegisterType<PlcManager>().As<IPlcService>().SingleInstance();
 
-            builder.RegisterType<HttpClientAssign>().As<IHttpClientAssign>().SingleInstance();
+            //builder.RegisterType<HttpClientAssign>().As<IHttpClientAssign>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
