@@ -53,38 +53,34 @@ namespace ibks.Forms.Pages
                 AssignAnalogSensorStatements();
                 AssignAverageOfLast60Minutes();
                 AssignSystemStatement();
-                SendDataAndAssignStatationInfoControl();
+                SendDataAndAssignStationInfoControl();
             }; bgw.RunWorkerAsync();
 
             await _checkStatements.Check();
         }
 
-        private async void SendDataAndAssignStatationInfoControl()
+        private async void SendDataAndAssignStationInfoControl()
         {
             var data = DataProcessingHelper.MergedSendData(_stationManager);
 
-            if (data.Success)
+            if (!data.Success) return;
+            if (!SendDataHelper.IsItTime(data.Data.Readtime).Success) return;
+            var res = await _sendDataController.SendData(data.Data);
+
+            if (res.Success)
             {
-                if (SendDataHelper.IsItTime(data.Data.Readtime).Success)
-                {
-                    var res = await _sendDataController.SendData(data.Data);
+                data.Data.IsSent = true;
 
-                    if (res.Success)
-                    {
-                        data.Data.IsSent = true;
+                StaticInstantData.Assign(res.Data.objects);
 
-                        StaticInstantData.Assign(res.Data.objects);
-
-                        AssignStationInfoControl(res);
-                    }
-                    else
-                    {
-                        data.Data.IsSent = false;
-                    }
-
-                    _sendDataManager.Add(data.Data);
-                }
+                AssignStationInfoControl(res);
             }
+            else
+            {
+                data.Data.IsSent = false;
+            }
+
+            _sendDataManager.Add(data.Data);
         }
 
         private void AssignAnalogSensors()
@@ -137,17 +133,15 @@ namespace ibks.Forms.Pages
         {
             var data = ValueAvarages.Last60MinAvg(_sendDataManager);
 
-            if (data != null)
-            {
-                ChannelAkm.AvgDataOf60Min = data.Data.Akm.ToString();
-                ChannelCozunmusOksijen.AvgDataOf60Min = data.Data.CozunmusOksijen.ToString();
-                ChannelSicaklik.AvgDataOf60Min = data.Data.KabinSicaklik.ToString();
-                ChannelPh.AvgDataOf60Min = data.Data.Ph.ToString();
-                ChannelIletkenlik.AvgDataOf60Min = data.Data.Iletkenlik.ToString();
-                ChannelKoi.AvgDataOf60Min = data.Data.Koi.ToString();
-                ChannelAkisHizi.AvgDataOf60Min = data.Data.NumuneHiz.ToString();
-                ChannelDebi.AvgDataOf60Min = data.Data.TesisDebi.ToString();
-            }
+            if (data?.Data == null) return;
+            ChannelAkm.AvgDataOf60Min = data.Data.Akm.ToString();
+            ChannelCozunmusOksijen.AvgDataOf60Min = data.Data.CozunmusOksijen.ToString();
+            ChannelSicaklik.AvgDataOf60Min = data.Data.KabinSicaklik.ToString();
+            ChannelPh.AvgDataOf60Min = data.Data.Ph.ToString();
+            ChannelIletkenlik.AvgDataOf60Min = data.Data.Iletkenlik.ToString();
+            ChannelKoi.AvgDataOf60Min = data.Data.Koi.ToString();
+            ChannelAkisHizi.AvgDataOf60Min = data.Data.NumuneHiz.ToString();
+            ChannelDebi.AvgDataOf60Min = data.Data.TesisDebi.ToString();
         }
 
         private void AssignStationInfoControl(IDataResult<ResultStatus<SendDataResult>> deserializedResult)
@@ -170,25 +164,16 @@ namespace ibks.Forms.Pages
 
         private async void TimerGetMissingDates_Tick(object sender, EventArgs e)
         {
-            var missedDatas = _sendDataManager.GetAll(x => x.IsSent == false);
+            var missedData = _sendDataManager.GetAll(x => x.IsSent == false);
 
-            if (missedDatas.Data.Count > 0)
+            if (missedData.Data.Count <= 0) return;
+            foreach (var item in missedData.Data)
             {
-                foreach (var item in missedDatas.Data)
-                {
-                    var res = await _sendDataController.SendData(item);
+                var res = await _sendDataController.SendData(item);
 
-                    if (res.Success)
-                    {
-                        item.IsSent = true;
-                    }
-                    else
-                    {
-                        item.IsSent = false;
-                    }
+                item.IsSent = res.Success;
 
-                    _sendDataManager.Add(item);
-                }
+                _sendDataManager.Add(item);
             }
         }
     }
