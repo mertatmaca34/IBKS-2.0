@@ -30,11 +30,11 @@ namespace ibks.Forms.Pages
         /// </summary>
         private void InitializeComponent()
         {
-            ChartArea chartArea1 = new ChartArea();
-            Legend legend1 = new Legend();
-            Series series1 = new Series();
-            Series series2 = new Series();
-            Title title1 = new Title();
+            ChartArea chartArea3 = new ChartArea();
+            Legend legend3 = new Legend();
+            Series series5 = new Series();
+            Series series6 = new Series();
+            Title title3 = new Title();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel23 = new TableLayoutPanel();
@@ -65,7 +65,7 @@ namespace ibks.Forms.Pages
             panel18 = new Panel();
             tableLayoutPanel15 = new TableLayoutPanel();
             tableLayoutPanel16 = new TableLayoutPanel();
-            ButtonPhSpann = new Button();
+            ButtonPhSpan = new Button();
             panel10 = new Panel();
             tableLayoutPanel17 = new TableLayoutPanel();
             label13 = new Label();
@@ -568,7 +568,7 @@ namespace ibks.Forms.Pages
             tableLayoutPanel16.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 85F));
             tableLayoutPanel16.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
             tableLayoutPanel16.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 85F));
-            tableLayoutPanel16.Controls.Add(ButtonPhSpann, 7, 0);
+            tableLayoutPanel16.Controls.Add(ButtonPhSpan, 7, 0);
             tableLayoutPanel16.Controls.Add(panel10, 0, 0);
             tableLayoutPanel16.Controls.Add(tableLayoutPanel17, 1, 0);
             tableLayoutPanel16.Controls.Add(ButtonPhZero, 5, 0);
@@ -590,20 +590,20 @@ namespace ibks.Forms.Pages
             tableLayoutPanel16.Size = new Size(561, 59);
             tableLayoutPanel16.TabIndex = 0;
             // 
-            // ButtonPhSpann
+            // ButtonPhSpan
             // 
-            ButtonPhSpann.BackColor = Color.FromArgb(0, 131, 200);
-            ButtonPhSpann.Dock = DockStyle.Fill;
-            ButtonPhSpann.FlatAppearance.BorderSize = 0;
-            ButtonPhSpann.ForeColor = Color.White;
-            ButtonPhSpann.Location = new Point(485, 15);
-            ButtonPhSpann.Margin = new Padding(10, 15, 15, 15);
-            ButtonPhSpann.Name = "ButtonPhSpann";
-            ButtonPhSpann.Size = new Size(61, 29);
-            ButtonPhSpann.TabIndex = 5;
-            ButtonPhSpann.Text = "SPAN";
-            ButtonPhSpann.UseVisualStyleBackColor = false;
-            ButtonPhSpann.Click += ButtonPhSpann_Click;
+            ButtonPhSpan.BackColor = Color.FromArgb(0, 131, 200);
+            ButtonPhSpan.Dock = DockStyle.Fill;
+            ButtonPhSpan.FlatAppearance.BorderSize = 0;
+            ButtonPhSpan.ForeColor = Color.White;
+            ButtonPhSpan.Location = new Point(485, 15);
+            ButtonPhSpan.Margin = new Padding(10, 15, 15, 15);
+            ButtonPhSpan.Name = "ButtonPhSpan";
+            ButtonPhSpan.Size = new Size(61, 29);
+            ButtonPhSpan.TabIndex = 5;
+            ButtonPhSpan.Text = "SPAN";
+            ButtonPhSpan.UseVisualStyleBackColor = false;
+            ButtonPhSpan.Click += ButtonPhSpan_Click;
             // 
             // panel10
             // 
@@ -1017,73 +1017,73 @@ namespace ibks.Forms.Pages
             // 
             // ChartCalibration
             // 
-            chartArea1.Area3DStyle.LightStyle = LightStyle.Realistic;
-            chartArea1.AxisX.InterlacedColor = Color.White;
-            chartArea1.AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
-            chartArea1.AxisX.LineWidth = 3;
-            chartArea1.AxisX.MajorGrid.LineColor = Color.Silver;
-            chartArea1.AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
-            chartArea1.AxisX.ScaleBreakStyle.LineDashStyle = ChartDashStyle.DashDot;
-            chartArea1.AxisX.ScaleBreakStyle.LineWidth = 10;
-            chartArea1.AxisX.ScaleBreakStyle.MaxNumberOfBreaks = 1;
-            chartArea1.AxisY.IsStartedFromZero = false;
-            chartArea1.AxisY.MajorGrid.Interval = 0D;
-            chartArea1.AxisY.MajorGrid.IntervalOffset = 0D;
-            chartArea1.AxisY.MajorGrid.IntervalOffsetType = DateTimeIntervalType.Auto;
-            chartArea1.AxisY.MajorGrid.IntervalType = DateTimeIntervalType.Auto;
-            chartArea1.AxisY.MajorGrid.LineColor = Color.Silver;
-            chartArea1.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
-            chartArea1.AxisY.ScaleBreakStyle.BreakLineStyle = BreakLineStyle.Wave;
-            chartArea1.AxisY.ScaleBreakStyle.CollapsibleSpaceThreshold = 10;
-            chartArea1.AxisY.ScaleBreakStyle.MaxNumberOfBreaks = 1;
-            chartArea1.AxisY.ScaleBreakStyle.Spacing = 5D;
-            chartArea1.AxisY2.Maximum = 10D;
-            chartArea1.AxisY2.Minimum = 5D;
-            chartArea1.AxisY2.ScaleBreakStyle.BreakLineStyle = BreakLineStyle.Wave;
-            chartArea1.AxisY2.ScaleBreakStyle.CollapsibleSpaceThreshold = 10;
-            chartArea1.AxisY2.ScaleBreakStyle.Spacing = 1D;
-            chartArea1.AxisY2.ScaleBreakStyle.StartFromZero = StartFromZero.Yes;
-            chartArea1.BackColor = Color.White;
-            chartArea1.InnerPlotPosition.Auto = false;
-            chartArea1.InnerPlotPosition.Height = 88.59933F;
-            chartArea1.InnerPlotPosition.Width = 94.71543F;
-            chartArea1.InnerPlotPosition.X = 5F;
-            chartArea1.InnerPlotPosition.Y = 2F;
-            chartArea1.Name = "ChartArea1";
-            ChartCalibration.ChartAreas.Add(chartArea1);
+            chartArea3.Area3DStyle.LightStyle = LightStyle.Realistic;
+            chartArea3.AxisX.InterlacedColor = Color.White;
+            chartArea3.AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
+            chartArea3.AxisX.LineWidth = 3;
+            chartArea3.AxisX.MajorGrid.LineColor = Color.Silver;
+            chartArea3.AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
+            chartArea3.AxisX.ScaleBreakStyle.LineDashStyle = ChartDashStyle.DashDot;
+            chartArea3.AxisX.ScaleBreakStyle.LineWidth = 10;
+            chartArea3.AxisX.ScaleBreakStyle.MaxNumberOfBreaks = 1;
+            chartArea3.AxisY.IsStartedFromZero = false;
+            chartArea3.AxisY.MajorGrid.Interval = 0D;
+            chartArea3.AxisY.MajorGrid.IntervalOffset = 0D;
+            chartArea3.AxisY.MajorGrid.IntervalOffsetType = DateTimeIntervalType.Auto;
+            chartArea3.AxisY.MajorGrid.IntervalType = DateTimeIntervalType.Auto;
+            chartArea3.AxisY.MajorGrid.LineColor = Color.Silver;
+            chartArea3.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
+            chartArea3.AxisY.ScaleBreakStyle.BreakLineStyle = BreakLineStyle.Wave;
+            chartArea3.AxisY.ScaleBreakStyle.CollapsibleSpaceThreshold = 10;
+            chartArea3.AxisY.ScaleBreakStyle.MaxNumberOfBreaks = 1;
+            chartArea3.AxisY.ScaleBreakStyle.Spacing = 5D;
+            chartArea3.AxisY2.Maximum = 10D;
+            chartArea3.AxisY2.Minimum = 5D;
+            chartArea3.AxisY2.ScaleBreakStyle.BreakLineStyle = BreakLineStyle.Wave;
+            chartArea3.AxisY2.ScaleBreakStyle.CollapsibleSpaceThreshold = 10;
+            chartArea3.AxisY2.ScaleBreakStyle.Spacing = 1D;
+            chartArea3.AxisY2.ScaleBreakStyle.StartFromZero = StartFromZero.Yes;
+            chartArea3.BackColor = Color.White;
+            chartArea3.InnerPlotPosition.Auto = false;
+            chartArea3.InnerPlotPosition.Height = 88.59933F;
+            chartArea3.InnerPlotPosition.Width = 94.71543F;
+            chartArea3.InnerPlotPosition.X = 5F;
+            chartArea3.InnerPlotPosition.Y = 2F;
+            chartArea3.Name = "ChartArea1";
+            ChartCalibration.ChartAreas.Add(chartArea3);
             ChartCalibration.Dock = DockStyle.Fill;
-            legend1.BackColor = Color.WhiteSmoke;
-            legend1.ItemColumnSpacing = 0;
-            legend1.Name = "Legend1";
-            ChartCalibration.Legends.Add(legend1);
+            legend3.BackColor = Color.WhiteSmoke;
+            legend3.ItemColumnSpacing = 0;
+            legend3.Name = "Legend1";
+            ChartCalibration.Legends.Add(legend3);
             ChartCalibration.Location = new Point(1, 1);
             ChartCalibration.Margin = new Padding(1);
             ChartCalibration.Name = "ChartCalibration";
-            series1.BorderWidth = 2;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = SeriesChartType.Spline;
-            series1.Color = Color.Lime;
-            series1.CustomProperties = "LabelStyle=Center";
-            series1.Legend = "Legend1";
-            series1.MarkerSize = 8;
-            series1.MarkerStyle = MarkerStyle.Circle;
-            series1.Name = "Kalibrasyon Değeri";
-            series1.XValueType = ChartValueType.Time;
-            series1.YValueType = ChartValueType.Double;
-            series2.BorderWidth = 2;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = SeriesChartType.Spline;
-            series2.Color = Color.Blue;
-            series2.Legend = "Legend1";
-            series2.Name = "Referans Değeri";
-            series2.XValueType = ChartValueType.Time;
-            series2.YValueType = ChartValueType.Double;
-            ChartCalibration.Series.Add(series1);
-            ChartCalibration.Series.Add(series2);
+            series5.BorderWidth = 2;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = SeriesChartType.Spline;
+            series5.Color = Color.Lime;
+            series5.CustomProperties = "LabelStyle=Center";
+            series5.Legend = "Legend1";
+            series5.MarkerSize = 8;
+            series5.MarkerStyle = MarkerStyle.Circle;
+            series5.Name = "Kalibrasyon Değeri";
+            series5.XValueType = ChartValueType.Time;
+            series5.YValueType = ChartValueType.Double;
+            series6.BorderWidth = 2;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = SeriesChartType.Spline;
+            series6.Color = Color.Blue;
+            series6.Legend = "Legend1";
+            series6.Name = "Referans Değeri";
+            series6.XValueType = ChartValueType.Time;
+            series6.YValueType = ChartValueType.Double;
+            ChartCalibration.Series.Add(series5);
+            ChartCalibration.Series.Add(series6);
             ChartCalibration.Size = new Size(1152, 305);
             ChartCalibration.TabIndex = 54;
-            title1.Name = "Kalibrasyon Grafiği";
-            ChartCalibration.Titles.Add(title1);
+            title3.Name = "Kalibrasyon Grafiği";
+            ChartCalibration.Titles.Add(title3);
             // 
             // tableLayoutPanel7
             // 
@@ -1506,7 +1506,7 @@ namespace ibks.Forms.Pages
         private Panel panel18;
         private TableLayoutPanel tableLayoutPanel15;
         private TableLayoutPanel tableLayoutPanel16;
-        private Button ButtonPhSpann;
+        private Button ButtonPhSpan;
         private Panel panel10;
         private TableLayoutPanel tableLayoutPanel17;
         private Label label13;

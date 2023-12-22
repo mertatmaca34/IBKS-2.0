@@ -6,11 +6,11 @@ namespace ibks.Forms.Pages
 {
     public partial class MailPage : Form
     {
-        readonly IMailServerService _mailServerManager;
-        readonly IAuthService _authManager;
-        readonly IUserService _userManager;
-        readonly IMailStatementService _mailStatementManager;
-        readonly IUserMailStatementService _userMailStatementManager;
+        private readonly IMailServerService _mailServerManager;
+        private readonly IAuthService _authManager;
+        private readonly IUserService _userManager;
+        private readonly IMailStatementService _mailStatementManager;
+        private readonly IUserMailStatementService _userMailStatementManager;
 
         private ToolStripMenuItem? _selectedMenuItem;
 

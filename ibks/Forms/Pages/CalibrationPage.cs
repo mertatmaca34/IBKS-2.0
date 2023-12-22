@@ -6,11 +6,11 @@ namespace ibks.Forms.Pages
 {
     public partial class CalibrationPage : Form
     {
-        readonly ICalibrationService _calibrationManager;
-        readonly ICalibrationLimitService _calibrationLimitManager;
-        readonly IStationService _stationManager;
-        readonly IApiService _apiManager;
-        readonly ISendCalibrationController _sendCalibrationController;
+        private readonly ICalibrationService _calibrationManager;
+        private readonly ICalibrationLimitService _calibrationLimitManager;
+        private readonly IStationService _stationManager;
+        private readonly IApiService _apiManager;
+        private readonly ISendCalibrationController _sendCalibrationController;
 
         readonly CalibrationOps _calibrationOps;
 
@@ -94,7 +94,7 @@ namespace ibks.Forms.Pages
             }
         }
 
-        private void ButtonPhSpann_Click(object sender, EventArgs e)
+        private void ButtonPhSpan_Click(object sender, EventArgs e)
         {
             var calibrationLimits = _calibrationLimitManager.Get(x => x.Parameter == "Ph");
 
@@ -123,5 +123,6 @@ namespace ibks.Forms.Pages
                 _calibrationOps.StartCalibration("Iletkenlik", "Span", calibrationLimits.Data.SpanTimeStamp, _controls);
             }
         }
+
     }
 }
