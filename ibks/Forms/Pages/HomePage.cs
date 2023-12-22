@@ -19,27 +19,20 @@ namespace ibks.Forms.Pages
         private readonly IStationService _stationManager;
         private readonly ISendDataService _sendDataManager;
         private readonly ICalibrationService _calibrationManager;
-        private readonly IApiService _apiManager;
-        private readonly ILogin _login;
         private readonly ISendDataController _sendDataController;
-        private readonly IGetMissingDatesController _getMissingDatesController;
         private readonly ICheckStatements _checkStatements;
 
         public HomePage(IStationService stationManager, ISendDataService sendDataManager,
-            ICalibrationService calibrationManager, IApiService apiManager, ILogin login,
-            ISendDataController sendDataController, ICheckStatements checkStatements,
-            IGetMissingDatesController getMissingDatesController)
+            ICalibrationService calibrationManager, ISendDataController sendDataController, 
+            ICheckStatements checkStatements)
         {
             InitializeComponent();
 
-            _apiManager = apiManager;
             _stationManager = stationManager;
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
-            _login = login;
             _sendDataController = sendDataController;
             _checkStatements = checkStatements;
-            _getMissingDatesController = getMissingDatesController;
         }
 
         private async void TimerAssignUI_Tick(object sender, EventArgs e)

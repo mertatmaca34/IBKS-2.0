@@ -59,7 +59,7 @@ namespace ibks.Forms
             _getMissingDatesController = getMissingDatesController;
             _sampleManager = sampleManager;
 
-            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _apiManager, _login, _sendDataController, _checkStatements, _getMissingDatesController);
+            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, _sendDataController, _checkStatements);
             _simulationPage = new SimulationPage();
             _reportingPage = new ReportingPage(_sendDataManager, _calibrationManager, _sampleManager);
             _calibrationPage = new CalibrationPage(_calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, _sendCalibrationController);
