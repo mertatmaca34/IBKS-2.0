@@ -126,7 +126,7 @@ namespace ibks.Forms.Pages
         {
             var data = ValueAvarages.Last60MinAvg(_sendDataManager);
 
-            if (data?.Data == null) return;
+            if (data.Data == null) return;
             ChannelAkm.AvgDataOf60Min = data.Data.Akm.ToString();
             ChannelCozunmusOksijen.AvgDataOf60Min = data.Data.CozunmusOksijen.ToString();
             ChannelSicaklik.AvgDataOf60Min = data.Data.KabinSicaklik.ToString();
