@@ -14,16 +14,16 @@ namespace ibks.Forms.Pages
 {
     public partial class HomePage : Form
     {
-        readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
+        private readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
-        readonly IStationService _stationManager;
-        readonly ISendDataService _sendDataManager;
-        readonly ICalibrationService _calibrationManager;
-        readonly IApiService _apiManager;
-        readonly ILogin _login;
-        readonly ISendDataController _sendDataController;
-        readonly IGetMissingDatesController _getMissingDatesController;
-        readonly ICheckStatements _checkStatements;
+        private readonly IStationService _stationManager;
+        private readonly ISendDataService _sendDataManager;
+        private readonly ICalibrationService _calibrationManager;
+        private readonly IApiService _apiManager;
+        private readonly ILogin _login;
+        private readonly ISendDataController _sendDataController;
+        private readonly IGetMissingDatesController _getMissingDatesController;
+        private readonly ICheckStatements _checkStatements;
 
         public HomePage(IStationService stationManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, IApiService apiManager, ILogin login,
@@ -127,10 +127,10 @@ namespace ibks.Forms.Pages
         private void AssignStatusBar()
         {
             StatusBarControl.ConnectionStatement = "Bağlantı Durumu: " + RealTimeCalculations.ConnectionStatus();
-            StatusBarControl.ConnectionTime = "Bağlantı Zamanı: " + _sharp7Service.ConnectionTime.ToString();
+            StatusBarControl.ConnectionTime = "Bağlantı Zamanı: " + _sharp7Service.ConnectionTime;
             StatusBarControl.GunlukYikamaKalan = "Günlük Yıkamaya Kalan: " + RealTimeCalculations.GunlukYikamayaKalan();
             StatusBarControl.HaftalikYikamaKalan = "Haftalık Yıkamaya Kalan: " + RealTimeCalculations.HaftalikYikamayaKalan();
-            StatusBarControl.SistemSaati = "Sistem Saati: " + _sharp7Service.S71200.DB4.SystemTime.ToString();
+            StatusBarControl.SistemSaati = "Sistem Saati: " + _sharp7Service.S71200.DB4.SystemTime;
         }
 
         private void AssignAverageOfLast60Minutes()
