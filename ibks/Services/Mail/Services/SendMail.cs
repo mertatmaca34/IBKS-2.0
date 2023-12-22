@@ -7,8 +7,8 @@ namespace ibks.Services.Mail.Services
 {
     public class SendMail : ISendMail
     {
-        readonly IMailServerService _mailServerService;
-        readonly IStationService _stationManager;
+        private readonly IMailServerService _mailServerService;
+        private readonly IStationService _stationManager;
 
         public SendMail(IMailServerService mailServerService, IStationService stationManager)
         {
@@ -20,44 +20,40 @@ namespace ibks.Services.Mail.Services
         {
             var settings = _mailServerService.Get().Data;
 
-            if (settings != null)
+            var stationName = _stationManager.Get().Data.StationName;
+
+            if (settings?.Host == null) return false;
+
+            SmtpClient smtpClient = new()
             {
-                SmtpClient smtpClient = new()
-                {
-                    EnableSsl = settings.UseSSL,
-                    Port = Convert.ToInt16(settings.Port),
-                    Host = settings.Host,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = settings.UseDefaultCredentials,
-                    Credentials = new NetworkCredential(settings.UserName, settings.Password)
-                };
+                EnableSsl = settings.UseSSL,
+                Port = Convert.ToInt16(settings.Port),
+                Host = settings.Host,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = settings.UseDefaultCredentials,
+                Credentials = new NetworkCredential(settings.UserName, settings.Password)
+            };
 
-                var stationName = _stationManager.Get().Data.StationName;
+            MailMessage mailMessage = new()
+            {
+                From = new MailAddress(settings.UserName),
+                Subject = $"{stationName} - {subject}",
+                Body = body,
+                IsBodyHtml = true
+            };
 
-                MailMessage mailMessage = new()
-                {
-                    From = new MailAddress(settings.UserName),
-                    Subject = $"{stationName} - {subject}",
-                    Body = body,
-                    IsBodyHtml = true
-                };
+            mailMessage.To.Add(mailName);
 
-                mailMessage.To.Add(mailName);
+            try
+            {
+                await smtpClient.SendMailAsync(mailMessage);
 
-                try
-                {
-                    await smtpClient.SendMailAsync(mailMessage);
-
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    await Console.Out.WriteLineAsync(ex.Message);
-                    return false;
-                }
+                return true;
             }
-            else
+            catch (Exception ex)
             {
+                await Console.Out.WriteLineAsync(ex.Message);
+
                 return false;
             }
         }
