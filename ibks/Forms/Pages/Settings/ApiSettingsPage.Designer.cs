@@ -87,7 +87,7 @@
             titleBarControl2.Name = "titleBarControl2";
             titleBarControl2.Padding = new Padding(1);
             titleBarControl2.Size = new Size(1148, 32);
-            titleBarControl2.TabIndex = 5;
+            titleBarControl2.TabIndex = 0;
             titleBarControl2.TitleBarText = "GİRİŞ BİLGİLERİ";
             // 
             // SettingsControlPassword
@@ -99,7 +99,7 @@
             SettingsControlPassword.Location = new Point(3, 233);
             SettingsControlPassword.Name = "SettingsControlPassword";
             SettingsControlPassword.Size = new Size(1148, 58);
-            SettingsControlPassword.TabIndex = 4;
+            SettingsControlPassword.TabIndex = 3;
             // 
             // SettingsControlUsername
             // 
@@ -110,7 +110,7 @@
             SettingsControlUsername.Location = new Point(3, 169);
             SettingsControlUsername.Name = "SettingsControlUsername";
             SettingsControlUsername.Size = new Size(1148, 58);
-            SettingsControlUsername.TabIndex = 3;
+            SettingsControlUsername.TabIndex = 2;
             // 
             // titleBarControl1
             // 
@@ -120,7 +120,7 @@
             titleBarControl1.Name = "titleBarControl1";
             titleBarControl1.Padding = new Padding(1);
             titleBarControl1.Size = new Size(1148, 32);
-            titleBarControl1.TabIndex = 1;
+            titleBarControl1.TabIndex = 0;
             titleBarControl1.TitleBarText = "API AYARLARI";
             // 
             // SettingsControlApiUrl
@@ -132,7 +132,7 @@
             SettingsControlApiUrl.Location = new Point(3, 41);
             SettingsControlApiUrl.Name = "SettingsControlApiUrl";
             SettingsControlApiUrl.Size = new Size(1148, 58);
-            SettingsControlApiUrl.TabIndex = 2;
+            SettingsControlApiUrl.TabIndex = 1;
             // 
             // ButtonSave
             // 
@@ -146,7 +146,7 @@
             ButtonSave.Margin = new Padding(8);
             ButtonSave.Name = "ButtonSave";
             ButtonSave.Size = new Size(224, 43);
-            ButtonSave.TabIndex = 3;
+            ButtonSave.TabIndex = 1;
             ButtonSave.Text = "Kaydet";
             ButtonSave.UseVisualStyleBackColor = false;
             ButtonSave.Click += ButtonSave_Click;

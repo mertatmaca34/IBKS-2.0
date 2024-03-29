@@ -23,7 +23,7 @@ namespace ibks.Forms.Pages
         private readonly ICheckStatements _checkStatements;
 
         public HomePage(IStationService stationManager, ISendDataService sendDataManager,
-            ICalibrationService calibrationManager, ISendDataController sendDataController, 
+            ICalibrationService calibrationManager, ISendDataController sendDataController,
             ICheckStatements checkStatements)
         {
             InitializeComponent();
@@ -49,6 +49,8 @@ namespace ibks.Forms.Pages
                 SendDataAndAssignStationInfoControl();
             }; bgw.RunWorkerAsync();
 
+            GC.Collect();
+
             await _checkStatements.Check();
         }
 
@@ -56,24 +58,28 @@ namespace ibks.Forms.Pages
         {
             var data = DataProcessingHelper.MergedSendData(_stationManager);
 
-            if (!data.Success) return;
-            if (!SendDataHelper.IsItTime(data.Data.Readtime).Success) return;
-            var res = await _sendDataController.SendData(data.Data);
-
-            if (res.Success)
+            if (data.Success)
             {
-                data.Data.IsSent = true;
+                if (SendDataHelper.IsItTime(data.Data.Readtime).Success)
+                {
+                    var res = await _sendDataController.SendData(data.Data);
 
-                StaticInstantData.Assign(res.Data.objects);
+                    if (res.Success)
+                    {
+                        data.Data.IsSent = true;
 
-                AssignStationInfoControl(res);
+                        StaticInstantData.Assign(res.Data.objects);
+
+                        AssignStationInfoControl(res);
+                    }
+                    else
+                    {
+                        data.Data.IsSent = false;
+                    }
+
+                    _sendDataManager.Add(data.Data);
+                }
             }
-            else
-            {
-                data.Data.IsSent = false;
-            }
-
-            _sendDataManager.Add(data.Data);
         }
 
         private void AssignAnalogSensors()
@@ -102,15 +108,15 @@ namespace ibks.Forms.Pages
 
         private void AssignDigitalSensors()
         {
-            DigitalSensorKapi.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Kapi);
-            DigitalSensorDuman.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Duman);
-            DigitalSensorSuBaskini.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.SuBaskini);
-            DigitalSensorAcilStop.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.AcilStop);
-            DigitalSensorPompa1Termik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Pompa1Termik);
-            DigitalSensorPompa2Termik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Pompa2Termik);
-            DigitalSensorTSuPompaTermik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.TemizSuTermik);
-            DigitalSensorYikamaTanki.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.YikamaTanki);
-            DigitalSensorEnerji.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.InputTags.Enerji);
+            DigitalSensorKapi.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Kabin_KapiAcildi);
+            DigitalSensorDuman.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Kabin_Duman);
+            DigitalSensorSuBaskini.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Kabin_SuBaskini);
+            DigitalSensorAcilStop.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Kabin_AcilStopBasili);
+            DigitalSensorPompa1Termik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Pompa1Termik);
+            DigitalSensorPompa2Termik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Pompa2Termik);
+            DigitalSensorTSuPompaTermik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Pompa3Termik);
+            DigitalSensorYikamaTanki.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.TankDolu);
+            DigitalSensorEnerji.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Kabin_EnerjiYok);
         }
 
         private void AssignStatusBar()
@@ -126,15 +132,17 @@ namespace ibks.Forms.Pages
         {
             var data = ValueAvarages.Last60MinAvg(_sendDataManager);
 
-            if (data.Data == null) return;
-            ChannelAkm.AvgDataOf60Min = data.Data.Akm.ToString();
-            ChannelCozunmusOksijen.AvgDataOf60Min = data.Data.CozunmusOksijen.ToString();
-            ChannelSicaklik.AvgDataOf60Min = data.Data.KabinSicaklik.ToString();
-            ChannelPh.AvgDataOf60Min = data.Data.Ph.ToString();
-            ChannelIletkenlik.AvgDataOf60Min = data.Data.Iletkenlik.ToString();
-            ChannelKoi.AvgDataOf60Min = data.Data.Koi.ToString();
-            ChannelAkisHizi.AvgDataOf60Min = data.Data.NumuneHiz.ToString();
-            ChannelDebi.AvgDataOf60Min = data.Data.TesisDebi.ToString();
+            if (data != null && data.Data != null)
+            {
+                ChannelAkm.AvgDataOf60Min = data.Data.Akm.ToString();
+                ChannelCozunmusOksijen.AvgDataOf60Min = data.Data.CozunmusOksijen.ToString();
+                ChannelSicaklik.AvgDataOf60Min = data.Data.KabinSicaklik.ToString();
+                ChannelPh.AvgDataOf60Min = data.Data.Ph.ToString();
+                ChannelIletkenlik.AvgDataOf60Min = data.Data.Iletkenlik.ToString();
+                ChannelKoi.AvgDataOf60Min = data.Data.Koi.ToString();
+                ChannelAkisHizi.AvgDataOf60Min = data.Data.NumuneHiz.ToString();
+                ChannelDebi.AvgDataOf60Min = data.Data.TesisDebi.ToString();
+            }
         }
 
         private void AssignStationInfoControl(IDataResult<ResultStatus<SendDataResult>> deserializedResult)
@@ -168,6 +176,11 @@ namespace ibks.Forms.Pages
 
                 _sendDataManager.Add(item);
             }
+        }
+
+        private void ChannelAkm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

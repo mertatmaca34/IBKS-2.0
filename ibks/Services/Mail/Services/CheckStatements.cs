@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities;
 using Entities.Concrete;
 using ibks.Services.Mail.Abstract;
 using ibks.Utils;
@@ -37,7 +39,7 @@ namespace ibks.Services.Mail.Services
 
         public async Task Check()
         {
-            if (_sharp7Service.S71200.MBTags != null && _sharp7Service.S71200.MBTags.ModAutoMu == true)
+            if (_sharp7Service.S71200.DB42 != null && _sharp7Service.S71200.DB42.Kabin_Oto == true)
             {
                 foreach (var mailStatement in mailStatements)
                 {
@@ -56,7 +58,13 @@ namespace ibks.Services.Mail.Services
                                     mailStatement.CoolDown = defaultMailStatements.FirstOrDefault(x => x.Id == mailStatement.Id)?.CoolDown ?? TimeSpan.Zero;
                                     lastSentTimes[mailStatement.Id] = DateTime.Now;
 
+
+                                    TempLog.Write(DateTime.Now + ": Mail Durumu Oluştu.");
+
                                     var res = await _sendMail.MailSend(user.Email, mailStatement.StatementName, mailBody);
+
+                                    if(res)
+                                        TempLog.Write(DateTime.Now + ": Mail Gönderildi");
                                 }
                             }
                         }
@@ -136,7 +144,7 @@ namespace ibks.Services.Mail.Services
 
             object tagsDTO = null;
 
-            if (_sharp7Service.S71200.MBTags.GetType().GetProperty(mailStatement.Parameter) != null)
+            /*if (_sharp7Service.S71200.MBTags.GetType().GetProperty(mailStatement.Parameter) != null)
             {
                 tagsDTO = _sharp7Service.S71200.MBTags;
             }
@@ -155,7 +163,7 @@ namespace ibks.Services.Mail.Services
             if (mailStatement.Statement == "Varsa" && value2 || mailStatement.Statement == "Yoksa" && !value2)
             {
                 return mailStatement.Content;
-            }
+            }*/
 
             
             return "-1";

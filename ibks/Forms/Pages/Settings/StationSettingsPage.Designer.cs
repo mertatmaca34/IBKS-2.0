@@ -100,7 +100,7 @@
             StationSettingsControlStationId.Location = new Point(3, 105);
             StationSettingsControlStationId.Name = "StationSettingsControlStationId";
             StationSettingsControlStationId.Size = new Size(1148, 58);
-            StationSettingsControlStationId.TabIndex = 3;
+            StationSettingsControlStationId.TabIndex = 2;
             // 
             // titleBarControl1
             // 
@@ -110,7 +110,7 @@
             titleBarControl1.Name = "titleBarControl1";
             titleBarControl1.Padding = new Padding(1);
             titleBarControl1.Size = new Size(1148, 32);
-            titleBarControl1.TabIndex = 1;
+            titleBarControl1.TabIndex = 0;
             titleBarControl1.TitleBarText = "İSTASYON AYARLARI";
             // 
             // StationSettingsControlStationName
@@ -122,7 +122,7 @@
             StationSettingsControlStationName.Location = new Point(3, 41);
             StationSettingsControlStationName.Name = "StationSettingsControlStationName";
             StationSettingsControlStationName.Size = new Size(1148, 58);
-            StationSettingsControlStationName.TabIndex = 2;
+            StationSettingsControlStationName.TabIndex = 1;
             // 
             // StationSettingsPage
             // 

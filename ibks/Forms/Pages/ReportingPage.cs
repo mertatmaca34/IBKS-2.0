@@ -8,12 +8,12 @@ namespace ibks.Forms.Pages
 {
     public partial class ReportingPage : Form
     {
-        readonly ISendDataService _sendDataManager;
-        readonly ICalibrationService _calibrationManager;
-        readonly ISampleService _sampleManager;
+        private readonly ISendDataService _sendDataManager;
+        private readonly ICalibrationService _calibrationManager;
+        private readonly ISampleService _sampleManager;
 
-        readonly DateTime _today;
-        readonly DateTime _tomorrow;
+        private DateTime _today { get { return DateTime.Now.Date; } }
+        private DateTime _tomorrow { get { return _today.AddDays(1); } }
 
         public ReportingPage(ISendDataService sendDataManager, ICalibrationService calibrationManager, ISampleService sampleManager)
         {
@@ -23,10 +23,7 @@ namespace ibks.Forms.Pages
             _calibrationManager = calibrationManager;
             _sampleManager = sampleManager;
 
-            _today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
-            _tomorrow = _today.AddDays(1);
-
-            //DataGridViewDatas.AutoGenerateColumns = false;
+            //DataGridViewData.AutoGenerateColumns = false;
         }
 
         private void ButtonGenerate_Click(object sender, EventArgs e)

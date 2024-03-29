@@ -182,9 +182,35 @@ namespace PLC.Sharp7.Services
                         S71200.DB41.UpsSicaklik = Get.Real(S71200.Buffer41, 160);
                         S71200.DB41.UpsYuk = Get.Real(S71200.Buffer41, 164);
 
-                        res = client?.DBRead(4, 0, 12, S71200.Buffer4);
+                        res = client?.DBRead(100, 0, 12, S71200.Buffer4);
 
                         S71200.DB4.SystemTime = Get.Time(S71200.Buffer4, 0);
+
+                        res = client?.DBRead(42, 0, 3, S71200.Buffer42);
+
+                        S71200.DB42.Kabin_Oto                = Get.Bit(S71200.Buffer42, 0, 0);
+                        S71200.DB42.Kabin_Bakim              = Get.Bit(S71200.Buffer42, 0, 1);
+                        S71200.DB42.Kabin_Kalibrasyon        = Get.Bit(S71200.Buffer42, 0, 2);
+                        S71200.DB42.Kabin_Duman              = Get.Bit(S71200.Buffer42, 0, 3);
+                        S71200.DB42.Kabin_SuBaskini          = Get.Bit(S71200.Buffer42, 0, 4);
+                        S71200.DB42.Kabin_KapiAcildi         = Get.Bit(S71200.Buffer42, 0, 5);
+                        S71200.DB42.Kabin_EnerjiYok          = Get.Bit(S71200.Buffer42, 0, 6);
+                        S71200.DB42.Kabin_AcilStopBasili     = Get.Bit(S71200.Buffer42, 0, 7);
+                        S71200.DB42.Kabin_HaftalikYikamada   = Get.Bit(S71200.Buffer42, 1, 0);
+                        S71200.DB42.Kabin_SaatlikYikamada    = Get.Bit(S71200.Buffer42, 1, 1);
+                        S71200.DB42.Pompa1Termik             = Get.Bit(S71200.Buffer42, 1, 2);
+                        S71200.DB42.Pompa2Termik             = Get.Bit(S71200.Buffer42, 1, 3);
+                        S71200.DB42.Pompa3Termik             = Get.Bit(S71200.Buffer42, 1, 4);
+                        S71200.DB42.TankDolu                 = Get.Bit(S71200.Buffer42, 1, 5);
+                        S71200.DB42.Pompa1Calisiyor          = Get.Bit(S71200.Buffer42, 1, 6);
+                        S71200.DB42.Pompa2Calisiyor          = Get.Bit(S71200.Buffer42, 1, 7);
+                        S71200.DB42.Pompa3Calisiyor          = Get.Bit(S71200.Buffer42, 2, 0);
+                        S71200.DB42.AkmTetik                 = Get.Bit(S71200.Buffer42, 2, 1);
+                        S71200.DB42.KoiTetik                 = Get.Bit(S71200.Buffer42, 2, 2);
+                        S71200.DB42.PhTetik                  = Get.Bit(S71200.Buffer42, 2, 3);
+                        S71200.DB42.ManuelTetik              = Get.Bit(S71200.Buffer42, 2, 4);
+                        S71200.DB42.SimNumuneTetik           = Get.Bit(S71200.Buffer42, 2, 5);
+
                         res = client?.DBRead(12, 0, 28, S71200.Buffer12);
 
                         S71200.DB12.HaftaGunu = Get.Byte(S71200.Buffer12, 4);
@@ -193,7 +219,7 @@ namespace PLC.Sharp7.Services
                         S71200.DB12.GunlukYikamaSaat = Get.Byte(S71200.Buffer12, 25);
                         S71200.DB12.GunlukYikamaDakika = Get.Byte(S71200.Buffer12, 26);
 
-                        res = client?.EBRead(0, 30, S71200.InputTagsBuffer);
+                        /*res = client?.EBRead(0, 30, S71200.InputTagsBuffer);
 
                         S71200.InputTags.ReadTime = S71200.DB4.SystemTime;
                         S71200.InputTags.Kapi = Get.Input(S71200.InputTagsBuffer, 25, 5);
@@ -218,7 +244,7 @@ namespace PLC.Sharp7.Services
                         S71200.MBTags.ModKalibrasyonMu = Get.MB(S71200.MBTagsBuffer, 10, 5);
                         S71200.MBTags.AkmTetik = Get.MB(S71200.MBTagsBuffer, 101, 1);
                         S71200.MBTags.KoiTetik = Get.MB(S71200.MBTagsBuffer, 101, 2);
-                        S71200.MBTags.PhTetik = Get.MB(S71200.MBTagsBuffer, 101, 3);
+                        S71200.MBTags.PhTetik = Get.MB(S71200.MBTagsBuffer, 101, 3);*/
                     }
                     else
                     {

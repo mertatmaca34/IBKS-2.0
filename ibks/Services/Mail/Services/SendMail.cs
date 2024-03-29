@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities;
 using ibks.Services.Mail.Abstract;
 using System.Net;
 using System.Net.Mail;
@@ -52,7 +53,7 @@ namespace ibks.Services.Mail.Services
             }
             catch (Exception ex)
             {
-                await Console.Out.WriteLineAsync(ex.Message);
+                TempLog.Write(DateTime.Now + ": Mail Gönderilemedi Detay: " + ex.Message);
 
                 return false;
             }

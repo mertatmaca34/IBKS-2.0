@@ -8,11 +8,11 @@ namespace PLC.Sharp7.Helpers
 
         public static int GetStatus()
         {
-            return _sharp7Service.S71200.MBTags.YikamaVarMi ? 23
-            : _sharp7Service.S71200.MBTags.HaftalikYikamaVarMi ? 24
-            : _sharp7Service.S71200.MBTags.ModAutoMu ? 1
-            : _sharp7Service.S71200.MBTags.ModBakimMi ? 25
-            : _sharp7Service.S71200.MBTags.ModKalibrasyonMu ? 9
+            return _sharp7Service.S71200.DB42.Kabin_SaatlikYikamada ? 23
+            : _sharp7Service.S71200.DB42.Kabin_HaftalikYikamada ? 24
+            : _sharp7Service.S71200.DB42.Kabin_Oto ? 1
+            : _sharp7Service.S71200.DB42.Kabin_Bakim ? 25
+            : _sharp7Service.S71200.DB42.Kabin_Kalibrasyon ? 9
             : 0;
         }
     }

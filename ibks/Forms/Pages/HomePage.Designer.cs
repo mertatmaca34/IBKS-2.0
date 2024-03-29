@@ -223,6 +223,7 @@
             ChannelAkm.Name = "ChannelAkm";
             ChannelAkm.Size = new Size(568, 63);
             ChannelAkm.TabIndex = 1;
+            ChannelAkm.Load += ChannelAkm_Load;
             // 
             // tableLayoutPanel3
             // 
@@ -489,11 +490,11 @@
         private Components.ChannelControl ChannelPh;
         private Components.ChannelControl ChannelSicaklik;
         private Components.ChannelControl ChannelCozunmusOksijen;
-        private Components.ChannelControl ChannelAkm;
         private Components.StationInfoControl StationInfoControl;
         private System.Windows.Forms.Timer TimerAssignUI;
         private Components.StatusBarControl StatusBarControl;
         private Components.DigitalSensorBar DigitalSensorBar;
         private System.Windows.Forms.Timer TimerGetMissingDates;
+        private Components.ChannelControl ChannelAkm;
     }
 }

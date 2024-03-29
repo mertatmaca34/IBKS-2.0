@@ -83,7 +83,7 @@ namespace ibks.Utils
             {
                 case "AKM":
                     _calibration.ZeroMeas = sharp7Service.S71200.DB41.Akm;
-                    _calibration.ZeroRef = _calibrationLimitManager.Get(x=> x.Parameter == "AKM").Data.ZeroRef;
+                    _calibration.ZeroRef = _calibrationLimitManager.Get(x => x.Parameter == "AKM").Data.ZeroRef;
                     _calibration.Parameter = "Akm";
                     labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: Akm";
                     break;
@@ -159,7 +159,7 @@ namespace ibks.Utils
                         _calibration.IsItValid = false;
                     }
 
-                    if (calibrationName == "AKM" || calibrationName == "KOi")
+                    if (calibrationName == "AKM" || calibrationName == "KOi" || calibrationName == "pH")
                     {
                         _calibration.TimeStamp = DateTime.Now;
 
@@ -175,10 +175,10 @@ namespace ibks.Utils
                             ZeroMeas = _calibration.ZeroMeas,
                             ZeroDiff = _calibration.ZeroDiff,
                             ZeroSTD = _calibration.ZeroStd,
-                            SpanRef = _calibration.SpanRef,
-                            SpanMeas = _calibration.SpanMeas,
-                            SpanDiff = _calibration.SpanDiff,
-                            SpanSTD = _calibration.SpanStd,
+                            SpanRef = _calibration.ZeroRef,
+                            SpanMeas = _calibration.ZeroMeas,
+                            SpanDiff = _calibration.ZeroDiff,
+                            SpanSTD = _calibration.ZeroStd,
                             ResultFactor = _calibration.ResultFactor,
                             ResultZero = _calibration.IsItValid,
                             ResultSpan = _calibration.IsItValid,

@@ -98,21 +98,21 @@ namespace ibks.Forms.Pages
         private void Animation()
         {
             //Sistem Durumu
-            if (_sharp7Service.S71200?.MBTags?.ModAutoMu == true && _sharp7Service.S71200?.MBTags?.HaftalikYikamaVarMi == false && _sharp7Service.S71200?.MBTags?.YikamaVarMi == false)
+            if (_sharp7Service.S71200?.DB42?.Kabin_Oto == true && _sharp7Service.S71200?.DB42?.Kabin_HaftalikYikamada == false && _sharp7Service.S71200?.DB42?.Kabin_SaatlikYikamada == false)
             {
                 FrameOperations.ChangeFormFrame(this, _autoFrame, _autoFrame2);
             }
-            else if (_sharp7Service.S71200?.MBTags?.ModBakimMi == true && _sharp7Service.S71200?.MBTags?.ModKalibrasyonMu == true)
+            else if (_sharp7Service.S71200?.DB42?.Kabin_Bakim == true && _sharp7Service.S71200?.DB42?.Kabin_Kalibrasyon == true)
             {
                 FrameOperations.ChangeFormFrame(this, _systemMaintenance1, _systemMaintenance1);
             }
-            else if (_sharp7Service.S71200?.MBTags?.YikamaVarMi == true || _sharp7Service.S71200?.MBTags?.HaftalikYikamaVarMi == true)
+            else if (_sharp7Service.S71200?.DB42?.Kabin_SaatlikYikamada == true || _sharp7Service.S71200?.DB42?.Kabin_HaftalikYikamada == true)
             {
                 FrameOperations.ChangeFormFrame(this, _wash1, _wash2);
             }
 
             //Pompa1 Durumu
-            if (_sharp7Service.S71200?.InputTags.Pompa1CalisiyorMu == true)
+            if (_sharp7Service.S71200?.DB42.Pompa1Calisiyor == true)
             {
                 FrameOperations.ChangePictureBoxFrame(PictureBoxPump1, _pump1Animation, _pump1Idle, PumpStatements.Working);
             }
@@ -122,7 +122,7 @@ namespace ibks.Forms.Pages
             }
 
             //Pompa2 Durumu
-            if (_sharp7Service.S71200?.InputTags.Pompa2CalisiyorMu == true)
+            if (_sharp7Service.S71200?.DB42.Pompa2Calisiyor == true)
             {
                 FrameOperations.ChangePictureBoxFrame(PictureBoxPump2, _pump2Animation, _pump2Idle, PumpStatements.Working);
             }
@@ -132,7 +132,7 @@ namespace ibks.Forms.Pages
             }
 
             //Kapı Durumu
-            if (_sharp7Service.S71200?.InputTags.Kapi == true)
+            if (_sharp7Service.S71200?.DB42.Kabin_KapiAcildi == true)
             {
                 FrameOperations.ChangePanelFrame(PanelDoor, _doorOpened);
             }
@@ -142,7 +142,7 @@ namespace ibks.Forms.Pages
             }
 
             //Yıkama Tankı Durumu
-            if (_sharp7Service.S71200?.InputTags.YikamaTanki == true)
+            if (_sharp7Service.S71200?.DB42.TankDolu == true)
             {
                 FrameOperations.ChangePanelFrame(PanelWaterTank, _waterTankEmpty);
             }
