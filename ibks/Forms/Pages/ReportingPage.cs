@@ -14,6 +14,8 @@ namespace ibks.Forms.Pages
 
         private DateTime _today { get { return DateTime.Now.Date; } }
         private DateTime _tomorrow { get { return _today.AddDays(1); } }
+        private DateTime _dateFilterStart { get { return new DateTime(DateTimePickerFirstDate.Value.Year, DateTimePickerFirstDate.Value.Month, DateTimePickerFirstDate.Value.Day, DateTimePickerFirstTime.Value.Hour, DateTimePickerFirstTime.Value.Minute, DateTimePickerFirstTime.Value.Second); } }
+        private DateTime _dateFilterEnd { get { return new DateTime(DateTimePickerLastDate.Value.Year, DateTimePickerLastDate.Value.Month, DateTimePickerLastDate.Value.Day, DateTimePickerLastTime.Value.Hour, DateTimePickerLastTime.Value.Minute, DateTimePickerLastTime.Value.Second); } }
 
         public ReportingPage(ISendDataService sendDataManager, ICalibrationService calibrationManager, ISampleService sampleManager)
         {
@@ -36,7 +38,7 @@ namespace ibks.Forms.Pages
                 if (checkedRadioButton == RadioButtonInstantData)
                 {
                     var data = _sendDataManager.GetAll(
-                        d => d.Readtime > DateTimePickerFirstDate.Value && d.Readtime < DateTimePickerLastDate.Value).Data;
+                        d => d.Readtime > _dateFilterStart && d.Readtime < _dateFilterEnd).Data;
 
                     DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
                         : data.OrderByDescending(d => d.Readtime).ToList();

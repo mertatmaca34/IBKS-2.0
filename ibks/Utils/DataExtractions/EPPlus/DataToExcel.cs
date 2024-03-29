@@ -22,7 +22,15 @@ namespace ibks.Utils.DataExtractions.EPPlus
                     {
                         for (int col = 0; col < dataGridView.Columns.Count; col++)
                         {
-                            worksheet.Cells[row + 2, col + 1].Value = dataGridView.Rows[row].Cells[col].Value.ToString();
+                            object cellValue = dataGridView.Rows[row].Cells[col].Value;
+                            if (cellValue != null)
+                            {
+                                worksheet.Cells[row + 2, col + 1].Value = cellValue.ToString();
+                            }
+                            else
+                            {
+                                worksheet.Cells[row + 2, col + 1].Value = ""; // Boş değerler için
+                            }
                         }
                     }
 
@@ -35,4 +43,5 @@ namespace ibks.Utils.DataExtractions.EPPlus
             }
         }
     }
+
 }
