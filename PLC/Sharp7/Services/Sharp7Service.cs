@@ -21,6 +21,8 @@ namespace PLC.Sharp7.Services
         public S71200 S71200 = new();
 
         public TimeSpan ConnectionTime = new(0, 0, 0);
+        public TimeSpan DailyWashRemaining => new(S71200.DB43.DailyWashHour, S71200.DB43.Minute, S71200.DB43.Second);
+        public TimeSpan WeeklyWashRemaining => new(S71200.DB43.WeeklyWashDay, S71200.DB43.WeeklyWashHour, S71200.DB43.Minute, S71200.DB43.Second);
 
         public static IPlcService? _plcManager;
 
@@ -118,34 +120,45 @@ namespace PLC.Sharp7.Services
             }
         }
 
+        //public void StartSample()
+        //{
+        //    byte[] bytes = new byte[30];
+
+        //    // EBWrite ile veri okunur
+        //    int result = client!.EBRead(0, 30, bytes);
+        //    if (result == 0)
+        //    {
+        //        // Veri okuma başarılı
+
+        //        // Belirli bitin değerini ayarla
+        //        S7.SetBitAt(bytes, 28, 7, true);
+
+        //        // Veriyi yaz
+        //        result = client.EBWrite(0, 30, bytes);
+        //        if (result == 0)
+        //        {
+        //            // Yazma işlemi başarılı
+        //        }
+        //        else
+        //        {
+        //            // Yazma işlemi başarısız
+        //        }
+        //    }
+        //    else
+        //    {
+        //        // Veri okuma başarısız
+        //    }
+        //}
+
         public void StartSample()
         {
-            byte[] bytes = new byte[30];
+            byte[] buffer = new byte[3];
 
-            // EBWrite ile veri okunur
-            int result = client!.EBRead(0, 30, bytes);
-            if (result == 0)
-            {
-                // Veri okuma başarılı
+            client?.DBRead(42, 0, 3, buffer);
 
-                // Belirli bitin değerini ayarla
-                S7.SetBitAt(bytes, 28, 7, true);
+            S7.SetBitAt(buffer, 2, 5, true);
 
-                // Veriyi yaz
-                result = client.EBWrite(0, 30, bytes);
-                if (result == 0)
-                {
-                    // Yazma işlemi başarılı
-                }
-                else
-                {
-                    // Yazma işlemi başarısız
-                }
-            }
-            else
-            {
-                // Veri okuma başarısız
-            }
+            client?.DBWrite(42, 0, 3, buffer);
         }
 
         public void ReadDB41()
@@ -182,10 +195,6 @@ namespace PLC.Sharp7.Services
                         S71200.DB41.UpsSicaklik = Get.Real(S71200.Buffer41, 160);
                         S71200.DB41.UpsYuk = Get.Real(S71200.Buffer41, 164);
 
-                        res = client?.DBRead(100, 0, 12, S71200.Buffer4);
-
-                        S71200.DB4.SystemTime = Get.Time(S71200.Buffer4, 0);
-
                         res = client?.DBRead(42, 0, 3, S71200.Buffer42);
 
                         S71200.DB42.Kabin_Oto                = Get.Bit(S71200.Buffer42, 0, 0);
@@ -211,40 +220,14 @@ namespace PLC.Sharp7.Services
                         S71200.DB42.ManuelTetik              = Get.Bit(S71200.Buffer42, 2, 4);
                         S71200.DB42.SimNumuneTetik           = Get.Bit(S71200.Buffer42, 2, 5);
 
-                        res = client?.DBRead(12, 0, 28, S71200.Buffer12);
+                        res = client?.DBRead(43, 0, 19, S71200.Buffer43);
 
-                        S71200.DB12.HaftaGunu = Get.Byte(S71200.Buffer12, 4);
-                        S71200.DB12.HaftaGunuSaat = Get.Byte(S71200.Buffer12, 5);
-                        S71200.DB12.HaftaGunuDakika = Get.Byte(S71200.Buffer12, 6);
-                        S71200.DB12.GunlukYikamaSaat = Get.Byte(S71200.Buffer12, 25);
-                        S71200.DB12.GunlukYikamaDakika = Get.Byte(S71200.Buffer12, 26);
-
-                        /*res = client?.EBRead(0, 30, S71200.InputTagsBuffer);
-
-                        S71200.InputTags.ReadTime = S71200.DB4.SystemTime;
-                        S71200.InputTags.Kapi = Get.Input(S71200.InputTagsBuffer, 25, 5);
-                        S71200.InputTags.Duman = Get.Input(S71200.InputTagsBuffer, 1, 1);
-                        S71200.InputTags.SuBaskini = Get.Input(S71200.InputTagsBuffer, 0, 7);
-                        S71200.InputTags.AcilStop = Get.Input(S71200.InputTagsBuffer, 25, 7);
-                        S71200.InputTags.Pompa1Termik = Get.Input(S71200.InputTagsBuffer, 27, 3);
-                        S71200.InputTags.Pompa2Termik = Get.Input(S71200.InputTagsBuffer, 27, 6);
-                        S71200.InputTags.TemizSuTermik = Get.Input(S71200.InputTagsBuffer, 28, 2);
-                        S71200.InputTags.YikamaTanki = Get.Input(S71200.InputTagsBuffer, 28, 3);
-                        S71200.InputTags.Enerji = Get.Input(S71200.InputTagsBuffer, 25, 6);
-                        S71200.InputTags.Pompa1CalisiyorMu = Get.Input(S71200.InputTagsBuffer, 27, 4);
-                        S71200.InputTags.Pompa2CalisiyorMu = Get.Input(S71200.InputTagsBuffer, 27, 7);
-
-                        res = client?.MBRead(0, 102, S71200.MBTagsBuffer);
-
-                        S71200.MBTags.ReadTime = S71200.DB4.SystemTime;
-                        S71200.MBTags.YikamaVarMi = Get.MB(S71200.MBTagsBuffer, 24, 1);
-                        S71200.MBTags.HaftalikYikamaVarMi = Get.MB(S71200.MBTagsBuffer, 24, 2);
-                        S71200.MBTags.ModAutoMu = Get.MB(S71200.MBTagsBuffer, 10, 6);
-                        S71200.MBTags.ModBakimMi = Get.MB(S71200.MBTagsBuffer, 10, 4);
-                        S71200.MBTags.ModKalibrasyonMu = Get.MB(S71200.MBTagsBuffer, 10, 5);
-                        S71200.MBTags.AkmTetik = Get.MB(S71200.MBTagsBuffer, 101, 1);
-                        S71200.MBTags.KoiTetik = Get.MB(S71200.MBTagsBuffer, 101, 2);
-                        S71200.MBTags.PhTetik = Get.MB(S71200.MBTagsBuffer, 101, 3);*/
+                        S71200.DB43.SystemTime = Get.Time(S71200.Buffer43, 0);
+                        S71200.DB43.WeeklyWashDay = Get.Byte(S71200.Buffer43, 14);
+                        S71200.DB43.WeeklyWashHour = Get.Byte(S71200.Buffer43, 15);
+                        S71200.DB43.DailyWashHour = Get.Byte(S71200.Buffer43, 16);
+                        S71200.DB43.Minute = Get.Byte(S71200.Buffer43, 17);
+                        S71200.DB43.Second = Get.Byte(S71200.Buffer43, 18);
                     }
                     else
                     {

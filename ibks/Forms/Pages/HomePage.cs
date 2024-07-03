@@ -123,9 +123,9 @@ namespace ibks.Forms.Pages
         {
             StatusBarControl.ConnectionStatement = "Bağlantı Durumu: " + RealTimeCalculations.ConnectionStatus();
             StatusBarControl.ConnectionTime = "Bağlantı Zamanı: " + _sharp7Service.ConnectionTime;
-            StatusBarControl.GunlukYikamaKalan = "Günlük Yıkamaya Kalan: " + RealTimeCalculations.GunlukYikamayaKalan();
-            StatusBarControl.HaftalikYikamaKalan = "Haftalık Yıkamaya Kalan: " + RealTimeCalculations.HaftalikYikamayaKalan();
-            StatusBarControl.SistemSaati = "Sistem Saati: " + _sharp7Service.S71200.DB4.SystemTime;
+            StatusBarControl.GunlukYikamaKalan = $"Günlük Yıkamaya Kalan: {_sharp7Service.DailyWashRemaining}";
+            StatusBarControl.HaftalikYikamaKalan = $"Haftalık Yıkamaya Kalan: {_sharp7Service.WeeklyWashRemaining}";
+            StatusBarControl.SistemSaati = "Sistem Saati: " + _sharp7Service.S71200.DB43.SystemTime;
         }
 
         private void AssignAverageOfLast60Minutes()

@@ -126,8 +126,8 @@ namespace ibks.Utils
 
                     labelTimeStamp.TitleBarText = calibrationTime.ToString();
 
-                    ChartCalibration.Series["Kalibrasyon Değeri"].Points.AddXY(sharp7Service.S71200.DB4.SystemTime.ToString("hh:mm:ss"), _calibration.ZeroMeas);
-                    ChartCalibration.Series["Referans Değeri"].Points.AddXY(sharp7Service.S71200.DB4.SystemTime.ToString("hh:mm:ss"), _calibration.ZeroRef);
+                    ChartCalibration.Series["Kalibrasyon Değeri"].Points.AddXY(sharp7Service.S71200.DB43.SystemTime.ToString("hh:mm:ss"), _calibration.ZeroMeas);
+                    ChartCalibration.Series["Referans Değeri"].Points.AddXY(sharp7Service.S71200.DB43.SystemTime.ToString("hh:mm:ss"), _calibration.ZeroRef);
 
                     measValues.Add(_calibration.ZeroMeas);
 
@@ -261,8 +261,8 @@ namespace ibks.Utils
 
                     labelTimeStamp.TitleBarText = calibrationTime.ToString();
 
-                    ChartCalibration.Series["Kalibrasyon Değeri"].Points.AddXY(sharp7Service.S71200.DB4.SystemTime.ToString("hh:mm:ss"), _calibration.SpanMeas);
-                    ChartCalibration.Series["Referans Değeri"].Points.AddXY(sharp7Service.S71200.DB4.SystemTime.ToString("hh:mm:ss"), _calibration.SpanRef);
+                    ChartCalibration.Series["Kalibrasyon Değeri"].Points.AddXY(sharp7Service.S71200.DB43.SystemTime.ToString("hh:mm:ss"), _calibration.SpanMeas);
+                    ChartCalibration.Series["Referans Değeri"].Points.AddXY(sharp7Service.S71200.DB43.SystemTime.ToString("hh:mm:ss"), _calibration.SpanRef);
 
                     measValues.Add(_calibration.SpanMeas);
 
@@ -294,7 +294,7 @@ namespace ibks.Utils
                         _calibration.IsItValid = false;
                     }
 
-                    _calibration.TimeStamp = sharp7Service.S71200.DB4.SystemTime;
+                    _calibration.TimeStamp = sharp7Service.S71200.DB43.SystemTime;
 
                     //TODO APIYE BAĞLAN
                     if (calibrationName == "pH" || calibrationName == "Iletkenlik")

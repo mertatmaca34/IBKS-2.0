@@ -34,7 +34,7 @@ namespace PLC.Sharp7.Helpers
                     Period = 1,
                     pH = _sharp7Service.S71200.DB41.Ph,
                     pH_Status = _status,
-                    Readtime = _sharp7Service.S71200.DB4.SystemTime,
+                    Readtime = _sharp7Service.S71200.DB43.SystemTime,
                     Sicaklik = _sharp7Service.S71200.DB41.KabinSicaklik,
                     Sicaklik_Status = _status,
                     SoftwareVersion = "1.0.0"

@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
             {
                 result = true,
                 message = "null",
-                objects = _sharp7Service.S71200.DB4.SystemTime
+                objects = _sharp7Service.S71200.DB43.SystemTime
             };
         }
     }
