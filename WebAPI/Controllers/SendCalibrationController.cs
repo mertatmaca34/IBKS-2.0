@@ -13,7 +13,7 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class SendCalibrationController : ControllerBase, ISendCalibrationController
     {
-        IHttpClientAssign _httpClientAssign;
+        readonly IHttpClientAssign _httpClientAssign;
 
         public SendCalibrationController(IHttpClientAssign httpClientAssign)
         {

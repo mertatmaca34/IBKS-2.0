@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
     public class LoginController : ControllerBase, ILogin
     {
         private readonly IApiService _apiManager;
-        private readonly HttpClient _httpClient;
+        private readonly HttpClient? _httpClient;
 
         public LoginController(IApiService apiManager)
         {
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
                     "application/json"
                 );
 
-                _httpClient.Timeout.Add(TimeSpan.FromSeconds(15));
+                _httpClient?.Timeout.Add(TimeSpan.FromSeconds(15));
                 // API'ye POST isteği gönderme
                 var response = await _httpClient.PostAsync("/security/login", content);
                 

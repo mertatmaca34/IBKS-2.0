@@ -152,13 +152,22 @@ namespace PLC.Sharp7.Services
 
         public void StartSample()
         {
-            byte[] buffer = new byte[3];
+            if(client.Connected)
+            {
+                client.Connect();
 
-            client?.DBRead(42, 0, 3, buffer);
+                if(client.Connected)
+                {
+                    byte[] buffer = new byte[3];
 
-            S7.SetBitAt(buffer, 2, 5, true);
+                    client?.DBRead(42, 0, 3, buffer);
 
-            client?.DBWrite(42, 0, 3, buffer);
+                    S7.SetBitAt(buffer, 2, 5, true);
+
+                    var res = client?.DBWrite(42, 0, 3, buffer);
+                }
+            }
+            
         }
 
         public void ReadDB41()

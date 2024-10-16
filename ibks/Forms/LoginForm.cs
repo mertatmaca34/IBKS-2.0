@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Entities.DTOs;
+using System.ComponentModel.DataAnnotations;
 
 namespace ibks.Forms
 {

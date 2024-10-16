@@ -19,8 +19,6 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<GetMissingDatesController>().As<IGetMissingDatesController>().SingleInstance();
             builder.RegisterType<SendCalibrationController>().As<ISendCalibrationController>().SingleInstance();
 
-            builder.RegisterType<SendCalibrationController>().As<ISendCalibrationController>().SingleInstance();
-
             builder.RegisterType<GetCalibrationController>().AsSelf();
             builder.RegisterType<DenemeController>().AsSelf();
             builder.RegisterType<GetChannelInformationController>().AsSelf();
@@ -32,11 +30,11 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<StartSampleController>().AsSelf();
             builder.RegisterType<GetLastDataDateController>().AsSelf();
 
+            //builder.RegisterType<HttpClientAssign>().As<IHttpClientAssign>().SingleInstance();
+
             builder.RegisterType<SendDataManager>().As<ISendDataService>().SingleInstance();
             builder.RegisterType<SampleManager>().As<ISampleService>().SingleInstance();
             builder.RegisterType<PlcManager>().As<IPlcService>().SingleInstance();
-
-            //builder.RegisterType<HttpClientAssign>().As<IHttpClientAssign>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

@@ -88,7 +88,7 @@ namespace ibks.Forms.Pages
             ChannelCozunmusOksijen.InstantData = _sharp7Service.S71200.DB41.CozunmusOksijen + " mg/l";
             ChannelSicaklik.InstantData = _sharp7Service.S71200.DB41.KabinSicaklik + "°C";
             ChannelPh.InstantData = _sharp7Service.S71200.DB41.Ph.ToString();
-            ChannelIletkenlik.InstantData = _sharp7Service.S71200.DB41.Iletkenlik + " mS/cm";
+            ChannelIletkenlik.InstantData = _sharp7Service.S71200.DB41.Iletkenlik + " µS/cm";
             ChannelKoi.InstantData = _sharp7Service.S71200.DB41.Koi + " mg/l";
             ChannelAkisHizi.InstantData = _sharp7Service.S71200.DB41.NumuneHiz + " m³/d";
             ChannelDebi.InstantData = _sharp7Service.S71200.DB41.TesisDebi + " m/s";

@@ -24,9 +24,7 @@ namespace WebAPI.Controllers
         {
             Sharp7Service sharp7Service = new Sharp7Service(_plcManager);
 
-            sharp7Service.WriteToDB50();
-
-            //sharp7Service.StartSample();
+            sharp7Service.StartSample();
 
             Sample sample = new()
             {
