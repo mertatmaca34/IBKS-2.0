@@ -9,12 +9,11 @@ namespace DataAccess.Concrete.Contexts
     {
         //public IBKSContext(DbContextOptions<IBKSContext> optionsBuilder):base(optionsBuilder)
         //{
-
-        //}
+        //}Environment.MachineName\SQLEXPRESS
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=IBKSContext;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(@"Server=" + Environment.MachineName + "\\SQLEXPRESS;Database=IBKSContext;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true");
         }
 
         public DbSet<Api> Apis { get; set; }

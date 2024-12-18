@@ -14,7 +14,7 @@ namespace WebAPI.Utils
         {
             _apiManager = apiManager;
             _login = login;
-            Assign().Wait(); // Burada async-await kullanımı uygun değil
+            //Assign().Wait(); // Burada async-await kullanımı uygun değil
         }
 
         public async Task Assign()
