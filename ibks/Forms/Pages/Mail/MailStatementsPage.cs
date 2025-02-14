@@ -68,14 +68,15 @@ namespace ibks.Forms.Pages.Mail
                 bool statementComboBox = Convert.ToBoolean(cell.EditedFormattedValue);
 
                 var mailStatementId = DataGridViewMailStatements.Rows[e.RowIndex].Cells[1].Value;
-                var userId = _userManager.GetByMail(ComboBoxSelectedUser.Text);
 
-                if (userId != null)
+                var user = _userManager.GetByMail(ComboBoxSelectedUser.Text);
+
+                if (user != null)
                 {
                     UserMailStatement userMailStatement = new()
                     {
                         MailStatementId = (int)mailStatementId,
-                        UserId = userId.Id
+                        UserId = user.Id
                     };
 
                     var existEntity = _userMailStatementManager.Get(u => u.UserId == userMailStatement.UserId && u.MailStatementId == userMailStatement.MailStatementId);
