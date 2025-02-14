@@ -14,7 +14,6 @@ namespace WebAPI.Utils
         {
             _apiManager = apiManager;
             _login = login;
-            //Assign().Wait(); // Burada async-await kullanımı uygun değil
         }
 
         public async Task Assign()
@@ -23,36 +22,48 @@ namespace WebAPI.Utils
 
             var apiData = _apiManager.Get();
 
-            if (apiData.Success)
-            {
-                var apiBaseUrl = apiData.Data.ApiAdress;
+            if (apiData == null || !apiData.Success || apiData.Data == null)
+                throw new Exception("API bilgileri alınamadı");
 
-                if (string.IsNullOrEmpty(Constants.Constants.TicketId.ToString()))
+            var apiBaseUrl = apiData.Data.ApiAdress;
+
+            if (string.IsNullOrEmpty(apiBaseUrl))
+                throw new Exception("API base URL boş.");
+
+            // TicketId null kontrolü
+            if (Constants.Constants.TicketId == null || string.IsNullOrEmpty(Constants.Constants.TicketId.ToString()))
+            {
+                Constants.Constants.HttpClient.BaseAddress = new Uri(apiBaseUrl);
+
+                var loginInfo = apiData.Data;
+
+                if (string.IsNullOrEmpty(loginInfo.UserName) || string.IsNullOrEmpty(loginInfo.Password))
+                    throw new Exception("Login için kullanıcı adı veya şifre eksik.");
+
+                var loginRes = await _login.Login(loginInfo.UserName, loginInfo.Password);
+
+                if (loginRes == null || loginRes.objects == null)
+                    throw new Exception("Login başarısız veya TicketId alınamadı.");
+
+                Constants.Constants.TicketId = loginRes.objects.TicketId;
+
+                Constants.Constants.HttpClient.DefaultRequestHeaders.Add("AToken",
+                    JsonConvert.SerializeObject(new AToken { TicketId = Constants.Constants.TicketId.ToString() }));
+            }
+            else
+            {
+                if (Constants.Constants.HttpClient.DefaultRequestHeaders != null)
                 {
                     Constants.Constants.HttpClient.BaseAddress = new Uri(apiBaseUrl);
-
-                    var loginInfo = _apiManager.Get().Data;
-
-                    var loginRes = await _login.Login(loginInfo.UserName, loginInfo.Password);
-
-                    Constants.Constants.TicketId = loginRes.objects.TicketId;
-
-                    Constants.Constants.HttpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = Constants.Constants.TicketId.ToString() }));
-                }
-                else
-                {
-                    if (Constants.Constants.HttpClient.DefaultRequestHeaders != null)
-                    {
-                        Constants.Constants.HttpClient.BaseAddress = new Uri(apiBaseUrl);
-                        Constants.Constants.HttpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = Constants.Constants.TicketId.ToString() }));
-                    }
+                    Constants.Constants.HttpClient.DefaultRequestHeaders.Add("AToken",
+                        JsonConvert.SerializeObject(new AToken { TicketId = Constants.Constants.TicketId.ToString() }));
                 }
             }
         }
 
         public void AssignHttpClient()
         {
-            // AssignHttpClient metodu için implementasyon
+            // Gerekirse buraya başka ayarlar eklenebilir
         }
     }
 }

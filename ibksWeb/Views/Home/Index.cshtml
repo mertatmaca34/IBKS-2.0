@@ -1,0 +1,56 @@
+﻿@model Entities.Concrete.SendData
+
+@{
+    ViewData["Title"] = "Anlık Veriler";
+}
+
+<div class="container mt-4">
+    <h2 class="section-title mb-3">Anlık Veriler</h2>
+    <p class="update-time mb-4">Son Güncelleme: @(Model?.Readtime.ToString("dd.MM.yyyy HH:mm:ss") ?? "Veri Yok")</p>
+
+    @if (Model != null)
+    {
+        <div class="card p-3">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Akış Hızı</th>
+                        <td>@Model.AkisHizi m³/d</td>
+                    </tr>
+                    <tr>
+                        <th>AKM</th>
+                        <td>@Model.AKM mg/l</td>
+                    </tr>
+                    <tr>
+                        <th>Çözünmüş Oksijen</th>
+                        <td>@Model.CozunmusOksijen mg/l</td>
+                    </tr>
+                    <tr>
+                        <th>Debi</th>
+                        <td>@Model.Debi m³/s</td>
+                    </tr>
+                    <tr>
+                        <th>Kimyasal Oksijen İhtiyacı (KOi)</th>
+                        <td>@Model.KOi mg/l</td>
+                    </tr>
+                    <tr>
+                        <th>pH</th>
+                        <td>@Model.pH</td>
+                    </tr>
+                    <tr>
+                        <th>Sıcaklık</th>
+                        <td>@Model.Sicaklik °C</td>
+                    </tr>
+                    <tr>
+                        <th>İletkenlik</th>
+                        <td>@Model.Iletkenlik µS/cm</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="text-center text-muted">Son 1 saat içinde veri bulunamadı.</p>
+    }
+</div>

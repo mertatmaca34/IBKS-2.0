@@ -1,0 +1,50 @@
+﻿<div class="report-header d-flex justify-content-between align-items-center">
+    <h5 class="fw-bold">Rapor Sonuçları</h5>
+    <div>
+        <button class="btn btn-success me-2" onclick="downloadExcel()">Excel İndir</button>
+        <button class="btn btn-danger" onclick="downloadPdf()">PDF İndir</button>
+    </div>
+</div>
+
+<div class="report-container">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th>Tarih</th>
+                    <th>Akış H.</th>
+                    <th>AKM</th>
+                    <th>Ç. Oksijen</th>
+                    <th>Debi</th>
+                    <th>D. Debi</th>
+                    <th>H. Debi</th>
+                    <th>H. Debi2</th>
+                    <th>KOi</th>
+                    <th>pH</th>
+                    <th>Sıcaklık</th>
+                    <th>İletkenlik</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var data = (dynamic)item;
+                    <tr>
+                        <td>@data.Readtime.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                        <td>@data.AkisHizi</td>
+                        <td>@data.AKM</td>
+                        <td>@data.CozunmusOksijen</td>
+                        <td>@data.Debi</td>
+                        <td>@data.DesarjDebi</td>
+                        <td>@data.HariciDebi</td>
+                        <td>@data.HariciDebi2</td>
+                        <td>@data.KOi</td>
+                        <td>@data.pH</td>
+                        <td>@data.Sicaklik</td>
+                        <td>@data.Iletkenlik</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

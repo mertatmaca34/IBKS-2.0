@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Core.Utilities;
+using Core.Utilities.TempLogs;
 using ibks.Services.Mail.Abstract;
 using System.Net;
 using System.Net.Mail;

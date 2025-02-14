@@ -1,7 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
-using Core.Utilities;
 using Entities.Concrete.API;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +8,7 @@ using Newtonsoft.Json;
 using System.Text;
 using WebAPI.Abstract;
 using WebAPI.Enums;
+using Core.Utilities.TempLogs;
 
 [ApiController]
 [Route("[controller]")]

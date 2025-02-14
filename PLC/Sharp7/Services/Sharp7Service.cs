@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using Core.Utilities.TempLogs;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using PLC.Sharp7.Utils;
@@ -66,7 +67,7 @@ namespace PLC.Sharp7.Services
             else
             {
                 ConnectionTime = new TimeSpan(0, 0, 0);
-
+                
                 Reconnect();
             }
         }
@@ -96,7 +97,7 @@ namespace PLC.Sharp7.Services
 
                 if (res == 0)
                 {
-                    Console.WriteLine($"Bağlantı kapatıldı!");
+                    TempLog.Write($"Bağlantı kapatıldı!");
                 }
             }
         }
@@ -111,7 +112,11 @@ namespace PLC.Sharp7.Services
 
                 if (res == 0)
                 {
-                    Console.WriteLine($"Bağlantı başarılı!");
+                    TempLog.Write($"Yeniden Bağlantı Kuruldu!");
+                }
+                else
+                {
+                    TempLog.Write($"Yeniden Bağlantı Kurulamadı!");
                 }
             }
             else

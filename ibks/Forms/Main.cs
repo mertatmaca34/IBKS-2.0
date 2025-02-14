@@ -3,7 +3,9 @@ using Entities.DTOs;
 using ibks.Forms.Pages;
 using ibks.Services.Mail.Abstract;
 using ibks.Utils;
+using Microsoft.Win32;
 using WebAPI.Abstract;
+using System.Diagnostics;
 
 namespace ibks.Forms
 {
@@ -51,6 +53,7 @@ namespace ibks.Forms
 
         private void Main_Load(object sender, EventArgs e)
         {
+            AddToStartup();
             PageChange.Change(PanelContent, this, _homePage);
             RoundedCorners.MakeRounded(ButtonHomePage, ButtonSimulationPage, ButtonCalibrationPage, ButtonMailPage, ButtonReportingPage, ButtonSettingPage, ButtonNightMode);
             AddSystemAdminToSystem();
@@ -122,13 +125,25 @@ namespace ibks.Forms
                 UserForRegisterDto systemAdmin = new()
                 {
                     Email = "iskiadmin",
-                    FirstName = "Mert",
-                    LastName = "Atmaca",
-                    Password = "1q2w3e"
+                    FirstName = "iski",
+                    LastName = "admin",
+                    Password = "iskiibks"
                 };
 
                 _authManager.Register(systemAdmin, systemAdmin.Password);
             }
+        }
+
+        private void AddToStartup()
+        {
+            string taskName = "IBKS_AutoLaunch"; // Task İsmi
+            string exePath = Application.ExecutablePath; // EXE'nin tam yolu
+
+            // Task Scheduler'a ekleme komutu
+            string cmd = $"schtasks /create /tn \"{taskName}\" /tr \"\\\"{exePath}\\\"\" /sc onlogon /rl lowest /f";
+
+            // Komutu çalıştır
+            Process.Start(new ProcessStartInfo("cmd.exe", "/c " + cmd) { CreateNoWindow = true, UseShellExecute = false });
         }
     }
 }

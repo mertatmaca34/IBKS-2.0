@@ -1,6 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
-using Core.Utilities;
+using Core.Utilities.TempLogs;
 using Entities.Concrete;
 using ibks.Services.Mail.Abstract;
 using ibks.Utils;

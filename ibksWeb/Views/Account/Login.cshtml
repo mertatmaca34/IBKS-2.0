@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Giriş Yap";
+}
+<div class="d-flex justify-content-center align-items-start" style="min-height: calc(100vh - 100px); padding-top: 40px;">
+    <div class="login-container">
+        <div class="login-box">
+            <h2 class="text-center">Giriş Yap</h2>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Error))
+            {
+                <div class="alert alert-danger text-center">@ViewBag.Error</div>
+            }
+
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="alert alert-warning text-center">@ViewBag.Message</div>
+            }
+
+            <form asp-controller="Account" asp-action="Login" method="post">
+                <div class="mb-3">
+                    <label class="form-label">E-Posta</label>
+                    <input type="text" name="email" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Şifre</label>
+                    <input type="password" name="password" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
+            </form>
+
+            <div class="text-center mt-3">
+                <a asp-controller="Account" asp-action="ForgotPassword">Şifremi Unuttum</a> |
+                <a asp-controller="Account" asp-action="Register">Kayıt Ol</a>
+            </div>
+        </div>
+    </div>
+</div>

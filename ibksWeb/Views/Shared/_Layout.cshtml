@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = ViewData["Title"] ?? "ibksWeb";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ibksWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ibksWeb.styles.css" asp-append-version="true" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        /* Main içerik alanı esneyerek footerı alta iter */
+        .content-wrapper {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+            <div class="container d-flex justify-content-between">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">ibksWeb</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"]?.ToString() == "Anlık Veriler" ? "active" : "")"
+                               asp-controller="Home" asp-action="Index">Anlık Veriler</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"]?.ToString() == "Raporlama" ? "active" : "")"
+                               asp-controller="Reports" asp-action="Index">Raporlama</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    @if (Context.Session.GetString("UserLoggedIn") == "true")
+                    {
+                        <a class="btn btn-outline-danger btn-sm" asp-controller="Account" asp-action="Logout">Çıkış Yap</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-primary btn-sm" asp-controller="Account" asp-action="Login">Giriş Yap</a>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content-wrapper mt-5 pt-4 container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

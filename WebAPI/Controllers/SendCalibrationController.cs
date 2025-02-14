@@ -1,4 +1,5 @@
-﻿using Business.Constants;
+﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,13 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class SendCalibrationController : ControllerBase, ISendCalibrationController
     {
-        readonly IHttpClientAssign _httpClientAssign;
+        private readonly IApiService _apiManager;
+        private readonly ILogin _login;
 
-        public SendCalibrationController(IHttpClientAssign httpClientAssign)
+        public SendCalibrationController(IApiService apiManager, ILogin login)
         {
-            _httpClientAssign = httpClientAssign;
+            _apiManager = apiManager;
+            _login = login;
         }
 
         [HttpPost]
@@ -25,31 +28,44 @@ namespace WebAPI.Controllers
         {
             try
             {
-                _httpClientAssign.AssignHttpClient();
+                var apiData = _apiManager.Get();
 
-                if (Constants.Constants.TicketId != null)
+                if (apiData.Data != null)
                 {
-                    var content = new StringContent(
-                        JsonConvert.SerializeObject(data),
-                        Encoding.UTF8,
-                        "application/json"
-                    );
+                    using (HttpClient httpClient = new HttpClient())
+                    {
+                        httpClient.BaseAddress = new Uri(apiData.Data.ApiAdress);
 
-                    var response = await Constants.Constants.HttpClient.PostAsync(StationType.SAIS.ToString() + "/SendCalibration", content);
+                        var loginRes = await _login.Login(apiData.Data.UserName, apiData.Data.Password);
 
-                    response.EnsureSuccessStatusCode();
+                        if (loginRes != null && loginRes.objects != null)
+                        {
+                            httpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = loginRes.objects.TicketId.ToString() }));
 
-                    var responseContent = await response.Content.ReadAsStringAsync();
+                            var content = new StringContent(
+                                JsonConvert.SerializeObject(data),
+                                Encoding.UTF8,
+                                "application/json");
 
-                    var desResponseContent = JsonConvert.DeserializeObject<ResultStatus>(responseContent)!;
+                            var response = await httpClient.PostAsync(StationType.SAIS.ToString() + "/SendCalibration", content);
+                            response.EnsureSuccessStatusCode();
 
-                    return new SuccessDataResult<ResultStatus>(desResponseContent, Messages.CalibrationSent);
+                            var responseContent = await response.Content.ReadAsStringAsync();
+
+                            var desResponseContent = JsonConvert.DeserializeObject<ResultStatus>(responseContent)!;
+
+                            return new SuccessDataResult<ResultStatus>(desResponseContent, Messages.CalibrationSent);
+                        }
+                        else
+                        {
+                            return new ErrorDataResult<ResultStatus>(null, Messages.ApiLoginFailed);
+                        }
+                    }
                 }
                 else
                 {
-                    return new ErrorDataResult<ResultStatus>(null, Messages.ApiLoginFailed);
+                    return new ErrorDataResult<ResultStatus>(null, "LoginRes or LoginRes.objects is null");
                 }
-
             }
             catch (HttpRequestException)
             {

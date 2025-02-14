@@ -1,0 +1,144 @@
+﻿@{
+    ViewData["Title"] = "Raporlama";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Sol Kolon: Rapor Filtresi -->
+        <div class="col-md-3">
+            <div class="card p-3 mb-3">
+                <h5 class="fw-bold">Rapor Filtresi</h5>
+                <form id="reportForm">
+                    <div class="mb-3">
+                        <label for="reportType" class="form-label">Rapor Tipi</label>
+                        <select class="form-control" id="reportType">
+                            <option value="InstantData">Anlık Sensör Verileri</option>
+                            <option value="CalibrationData">Kalibrasyon Verileri</option>
+                            <option value="SampleData">Numune Verileri</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="period" class="form-label">Periyot</label>
+                        <select class="form-control" id="period" onchange="updateDateRange()">
+                            <option value="daily">Günlük</option>
+                            <option value="weekly">Haftalık</option>
+                            <option value="monthly">Aylık</option>
+                            <option value="custom">Özel</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Başlangıç Tarihi</label>
+                        <input type="datetime-local" class="form-control" id="startDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="endDate" class="form-label">Bitiş Tarihi</label>
+                        <input type="datetime-local" class="form-control" id="endDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="sortOrder" class="form-label">Sıralama</label>
+                        <select class="form-control" id="sortOrder">
+                            <option value="Artan">Artan</option>
+                            <option value="Azalan">Azalan</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" onclick="generateReport()">Raporu Getir</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sağ Kolon: Rapor Sonuçları -->
+        <div class="col-md-9">
+            <div class="card p-3">
+                <div id="reportResults" class="report-container">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td colspan="12" class="text-center text-muted">Henüz bir rapor oluşturulmadı.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function updateDateRange() {
+            const now = new Date();
+            let startDate = new Date();
+            let endDate = new Date();
+            const period = document.getElementById("period").value;
+
+            if (period === "daily") {
+                startDate.setHours(0, 0, 0, 0);
+                endDate.setHours(23, 59, 59, 999);
+            } else if (period === "weekly") {
+                const firstDayOfWeek = now.getDate() - now.getDay() + 1;
+                startDate.setDate(firstDayOfWeek);
+                startDate.setHours(0, 0, 0, 0);
+                endDate.setDate(firstDayOfWeek + 6);
+                endDate.setHours(23, 59, 59, 999);
+            } else if (period === "monthly") {
+                startDate.setDate(1);
+                startDate.setHours(0, 0, 0, 0);
+                const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                endDate = new Date(lastDay);
+                endDate.setHours(23, 59, 59, 999);
+            }
+            document.getElementById("startDate").value = formatLocalDateTime(startDate);
+            document.getElementById("endDate").value = formatLocalDateTime(endDate);
+        }
+
+        function formatLocalDateTime(date) {
+            const tzOffset = date.getTimezoneOffset() * 60000;
+            return new Date(date - tzOffset).toISOString().slice(0, 16);
+        }
+
+        function generateReport() {
+            $.ajax({
+                url: '/Reports/GetReport',
+                type: 'POST',
+                data: {
+                    reportType: $('#reportType').val(),
+                    startDate: $('#startDate').val(),
+                    endDate: $('#endDate').val(),
+                    sortOrder: $('#sortOrder').val()
+                },
+                success: function(response) {
+                    $('#reportResults').html(response);
+                },
+                error: function(err) {
+                    alert("Rapor getirilirken hata oluştu.");
+                }
+            });
+        }
+
+        // Excel ve PDF indirme fonksiyonlarında, form temizliği için formu oluşturduktan sonra işlem sonrası formu kaldırabilirsin.
+        function downloadExcel() {
+            const form = $('<form action="/Reports/DownloadExcel" method="post">' +
+                '<input type="hidden" name="reportType" value="' + $('#reportType').val() + '" />' +
+                '<input type="hidden" name="startDate" value="' + $('#startDate').val() + '" />' +
+                '<input type="hidden" name="endDate" value="' + $('#endDate').val() + '" />' +
+                '</form>');
+            $('body').append(form);
+            form.submit();
+        }
+
+        function downloadPdf() {
+            const form = $('<form action="/Reports/DownloadPdf" method="post">' +
+                '<input type="hidden" name="reportType" value="' + $('#reportType').val() + '" />' +
+                '<input type="hidden" name="startDate" value="' + $('#startDate').val() + '" />' +
+                '<input type="hidden" name="endDate" value="' + $('#endDate').val() + '" />' +
+                '</form>');
+            $('body').append(form);
+            form.submit();
+        }
+
+        $(document).ready(function () {
+            $("html, body").scrollTop(0);
+            updateDateRange();
+        });
+    </script>
+}
