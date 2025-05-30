@@ -1,11 +1,12 @@
 ﻿using Business.Abstract;
+using Business.Concrete;
 using Entities.DTOs;
 using ibks.Forms.Pages;
 using ibks.Services.Mail.Abstract;
 using ibks.Utils;
 using Microsoft.Win32;
-using WebAPI.Abstract;
 using System.Diagnostics;
+using WebAPI.Abstract;
 
 namespace ibks.Forms
 {
@@ -13,7 +14,6 @@ namespace ibks.Forms
     {
         private readonly HomePage _homePage;
         private readonly SimulationPage _simulationPage;
-        private readonly ReportingPage _reportingPage;
         private readonly CalibrationPage _calibrationPage;
 
         private readonly IStationService _stationManager;
@@ -25,6 +25,9 @@ namespace ibks.Forms
         private readonly IUserService _userManager;
         private readonly IMailStatementService _mailStatementManager;
         private readonly IUserMailStatementService _userMailStatementManager;
+        private readonly ISendDataService _sendDataManager;
+        private readonly ICalibrationService _calibrationManager;
+        private readonly ISampleService _sampleManager;
 
         public Main(IStationService stationManager, IApiService apiManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager,
@@ -44,10 +47,9 @@ namespace ibks.Forms
             _userManager = userManager;
             _mailStatementManager = mailStatementManager;
             _userMailStatementManager = userMailStatementManager;
-
+            _sampleManager = sampleManager;
             _homePage = new HomePage(_stationManager, sendDataManager, calibrationManager, sendDataController, checkStatements);
             _simulationPage = new SimulationPage();
-            _reportingPage = new ReportingPage(sendDataManager, calibrationManager, sampleManager);
             _calibrationPage = new CalibrationPage(calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, sendCalibrationController);
         }
 
@@ -90,7 +92,7 @@ namespace ibks.Forms
 
         private void ButtonReportingPage_Click(object sender, EventArgs e)
         {
-            PageChange.Change(PanelContent, this, _reportingPage);
+            PageChange.Change(PanelContent, this, new ReportingPage(_sendDataManager, _calibrationManager, _sampleManager));
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonReportingPage);
         }
 

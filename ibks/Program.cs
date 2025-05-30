@@ -37,7 +37,7 @@ namespace ibks
 
                     //context.Database.Migrate();
 
-                    context.Database.EnsureCreated();
+                    //context.Database.EnsureCreated();
 
                     Application.EnableVisualStyles();
 
