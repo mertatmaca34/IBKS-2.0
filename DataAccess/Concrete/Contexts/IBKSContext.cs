@@ -13,7 +13,24 @@ namespace DataAccess.Concrete.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=254-135-044-33\SQLEXPRESS;Database=IBKSContext;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true");
+            if (!optionsBuilder.IsConfigured)
+            {
+                var server = $"{Environment.UserName}\\SQLEXPRESS";
+                var connectionString =
+                    $"Server={server};Database=IBKSContext;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
+
+                try
+                {
+                    optionsBuilder.UseSqlServer(connectionString);
+
+                    using var connection = new Microsoft.Data.SqlClient.SqlConnection(connectionString);
+                    connection.Open();
+                }
+                catch
+                {
+                    // Silently handle connection errors so application can continue
+                }
+            }
         }
 
         public DbSet<Api> Apis { get; set; }
