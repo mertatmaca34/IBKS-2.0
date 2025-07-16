@@ -2,6 +2,8 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
 using DataAccess.Concrete.Contexts;
+using Microsoft.EntityFrameworkCore;
+using System.Windows.Forms;
 using ibks.DependencyResolvers.Autofac;
 using ibks.Forms;
 using Microsoft.AspNetCore.Authentication;
@@ -35,6 +37,18 @@ namespace ibks
 
                     var context = scope.ServiceProvider.GetRequiredService<IBKSContext>();
 
+                    try
+                    {
+                        if (!context.Database.CanConnect())
+                        {
+                            MessageBox.Show("Veritabanına bağlanılamadı.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Veritabanına bağlanırken hata: {ex.Message}", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
                     //context.Database.Migrate();
 
                     //context.Database.EnsureCreated();
@@ -46,7 +60,7 @@ namespace ibks
             }
             else
             {
-                MessageBox.Show("Uygulama zaten �al���yor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Uygulama zaten çalýþýyor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
