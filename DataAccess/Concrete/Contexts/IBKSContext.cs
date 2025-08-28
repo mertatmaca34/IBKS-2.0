@@ -1,41 +1,36 @@
-using Core.Entities.Concrete;
+﻿using Core.Entities.Concrete;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
-using System.IO;
 
 namespace DataAccess.Concrete.Contexts
 {
     public class IBKSContext : DbContext
     {
+        //public IBKSContext(DbContextOptions<IBKSContext> optionsBuilder):base(optionsBuilder)
+        //{
+        //}Environment.MachineName\SQLEXPRESS
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+                // Dinamik olarak bilgisayar adını alıyoruz
 
-                var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                    .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
-                    .Build();
+                var connectionString =
+                    "Server=(LocalDB)\\MSSQLLocalDB;Database=IBKSContext;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
 
-                var connectionString = configuration.GetConnectionString("SqlServer");
-
-                if (!string.IsNullOrEmpty(connectionString))
+                try
                 {
-                    try
-                    {
-                        optionsBuilder.UseSqlServer(connectionString);
+                    optionsBuilder.UseSqlServer(connectionString);
 
-                        using var connection = new Microsoft.Data.SqlClient.SqlConnection(connectionString);
-                        connection.Open();
-                    }
-                    catch
-                    {
-                        // hata olursa sessizce geç
-                    }
+                    using var connection = new Microsoft.Data.SqlClient.SqlConnection(connectionString);
+                    connection.Open();
+                }
+                catch
+                {
+                    // hata olursa sessizce geç
                 }
             }
         }
@@ -61,4 +56,3 @@ namespace DataAccess.Concrete.Contexts
         public DbSet<UserMailStatement> UserMailStatements { get; set; }
     }
 }
-
