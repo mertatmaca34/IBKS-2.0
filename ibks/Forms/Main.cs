@@ -48,6 +48,8 @@ namespace ibks.Forms
             _mailStatementManager = mailStatementManager;
             _userMailStatementManager = userMailStatementManager;
             _sampleManager = sampleManager;
+            _sendDataManager = sendDataManager;
+
             _homePage = new HomePage(_stationManager, sendDataManager, calibrationManager, sendDataController, checkStatements);
             _simulationPage = new SimulationPage();
             _calibrationPage = new CalibrationPage(calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, sendCalibrationController);

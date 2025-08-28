@@ -31,28 +31,28 @@
             components = new System.ComponentModel.Container();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
-            ChannelDebi = new Components.ChannelControl();
-            ChannelAkisHizi = new Components.ChannelControl();
-            ChannelKoi = new Components.ChannelControl();
-            ChannelIletkenlik = new Components.ChannelControl();
-            ChannelPh = new Components.ChannelControl();
-            ChannelSicaklik = new Components.ChannelControl();
-            ChannelCozunmusOksijen = new Components.ChannelControl();
-            channelControl1 = new Components.ChannelControl();
-            ChannelAkm = new Components.ChannelControl();
+            ChannelDebi = new ibks.Components.ChannelControl();
+            ChannelAkisHizi = new ibks.Components.ChannelControl();
+            ChannelKoi = new ibks.Components.ChannelControl();
+            ChannelIletkenlik = new ibks.Components.ChannelControl();
+            ChannelPh = new ibks.Components.ChannelControl();
+            ChannelSicaklik = new ibks.Components.ChannelControl();
+            ChannelCozunmusOksijen = new ibks.Components.ChannelControl();
+            channelControl1 = new ibks.Components.ChannelControl();
+            ChannelAkm = new ibks.Components.ChannelControl();
             tableLayoutPanel3 = new TableLayoutPanel();
-            DigitalSensorKapi = new Components.DigitalSensorControl();
-            DigitalSensorDuman = new Components.DigitalSensorControl();
-            DigitalSensorSuBaskini = new Components.DigitalSensorControl();
-            DigitalSensorPompa2Termik = new Components.DigitalSensorControl();
-            DigitalSensorPompa1Termik = new Components.DigitalSensorControl();
-            DigitalSensorAcilStop = new Components.DigitalSensorControl();
-            DigitalSensorTSuPompaTermik = new Components.DigitalSensorControl();
-            DigitalSensorYikamaTanki = new Components.DigitalSensorControl();
-            DigitalSensorEnerji = new Components.DigitalSensorControl();
-            DigitalSensorBar = new Components.DigitalSensorBar();
-            StationInfoControl = new Components.StationInfoControl();
-            StatusBarControl = new Components.StatusBarControl();
+            DigitalSensorKapi = new ibks.Components.DigitalSensorControl();
+            DigitalSensorDuman = new ibks.Components.DigitalSensorControl();
+            DigitalSensorSuBaskini = new ibks.Components.DigitalSensorControl();
+            DigitalSensorPompa2Termik = new ibks.Components.DigitalSensorControl();
+            DigitalSensorPompa1Termik = new ibks.Components.DigitalSensorControl();
+            DigitalSensorAcilStop = new ibks.Components.DigitalSensorControl();
+            DigitalSensorTSuPompaTermik = new ibks.Components.DigitalSensorControl();
+            DigitalSensorYikamaTanki = new ibks.Components.DigitalSensorControl();
+            DigitalSensorEnerji = new ibks.Components.DigitalSensorControl();
+            DigitalSensorBar = new ibks.Components.DigitalSensorBar();
+            StationInfoControl = new ibks.Components.StationInfoControl();
+            StatusBarControl = new ibks.Components.StatusBarControl();
             TimerAssignUI = new System.Windows.Forms.Timer(components);
             TimerGetMissingDates = new System.Windows.Forms.Timer(components);
             tableLayoutPanel1.SuspendLayout();
@@ -444,13 +444,13 @@
             // TimerAssignUI
             // 
             TimerAssignUI.Enabled = true;
-            TimerAssignUI.Interval = 1000;
+            TimerAssignUI.Interval = 5000;
             TimerAssignUI.Tick += TimerAssignUI_Tick;
             // 
             // TimerGetMissingDates
             // 
             TimerGetMissingDates.Enabled = true;
-            TimerGetMissingDates.Interval = 1200000;
+            TimerGetMissingDates.Interval = 21600000;
             TimerGetMissingDates.Tick += TimerGetMissingDates_Tick;
             // 
             // HomePage

@@ -56,7 +56,7 @@ namespace ibks.Forms.Pages
 
         private async void SendDataAndAssignStationInfoControl()
         {
-            /*var data = DataProcessingHelper.MergedSendData(_stationManager);
+            var data = DataProcessingHelper.MergedSendData(_stationManager);
 
             if (data.Success)
             {
@@ -79,7 +79,7 @@ namespace ibks.Forms.Pages
 
                     _sendDataManager.Add(data.Data);
                 }
-            }*/
+            }
         }
 
         private void AssignAnalogSensors()

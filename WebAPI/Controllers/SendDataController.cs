@@ -48,7 +48,7 @@ public class SendDataController : ControllerBase, ISendDataController
                             "application/json");
 
                         var response = await httpClient.PostAsync(StationType.SAIS.ToString() + "/SendData", content);
-                        response.EnsureSuccessStatusCode();
+                        //response.EnsureSuccessStatusCode();
 
                         var responseContent = await response.Content.ReadAsStringAsync();
 
@@ -87,6 +87,22 @@ public class SendDataController : ControllerBase, ISendDataController
             return new ErrorDataResult<ResultStatus<SendDataResult>>(null, "An unexpected error occurred");
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     [HttpGet(Name = "GetSendData")]
     public IEnumerable<SendData>? Get()

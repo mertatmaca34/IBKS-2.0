@@ -2,6 +2,7 @@
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System;
 
 namespace DataAccess.Concrete.Contexts
 {
@@ -15,9 +16,10 @@ namespace DataAccess.Concrete.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var server = $"{Environment.UserName}\\SQLEXPRESS";
+                // Dinamik olarak bilgisayar adını alıyoruz
+
                 var connectionString =
-                    $"Server={server};Database=IBKSContext;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
+                    "Server=(LocalDB)\\MSSQLLocalDB;Database=IBKSContext;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
 
                 try
                 {
@@ -28,7 +30,7 @@ namespace DataAccess.Concrete.Contexts
                 }
                 catch
                 {
-                    // Silently handle connection errors so application can continue
+                    // hata olursa sessizce geç
                 }
             }
         }

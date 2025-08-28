@@ -51,7 +51,7 @@ namespace ibks
 
                     //context.Database.Migrate();
 
-                    //context.Database.EnsureCreated();
+                    context.Database.EnsureCreated();
 
                     Application.EnableVisualStyles();
 
@@ -60,7 +60,7 @@ namespace ibks
             }
             else
             {
-                MessageBox.Show("Uygulama zaten çalýþýyor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Uygulama zaten çalışıyor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
