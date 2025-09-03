@@ -3,6 +3,7 @@ using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
+using System.Windows.Forms;
 
 namespace DataAccess.Concrete.Contexts
 {
@@ -28,9 +29,9 @@ namespace DataAccess.Concrete.Contexts
                     using var connection = new Microsoft.Data.SqlClient.SqlConnection(connectionString);
                     connection.Open();
                 }
-                catch
+                catch (Exception ex)
                 {
-                    // hata olursa sessizce geç
+                    MessageBox.Show($"Veritabanına bağlanılamadı: {ex.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
