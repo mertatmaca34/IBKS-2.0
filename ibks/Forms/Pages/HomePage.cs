@@ -8,6 +8,7 @@ using PLC;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
 using System.ComponentModel;
+using System.Windows.Forms;
 using WebAPI.Abstract;
 
 namespace ibks.Forms.Pages
@@ -75,6 +76,7 @@ namespace ibks.Forms.Pages
                     else
                     {
                         data.Data.IsSent = false;
+                        MessageBox.Show(res.Message, "API Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
 
                     _sendDataManager.Add(data.Data);
@@ -171,6 +173,11 @@ namespace ibks.Forms.Pages
             foreach (var item in missedData.Data)
             {
                 var res = await _sendDataController.SendData(item);
+
+                if (!res.Success)
+                {
+                    MessageBox.Show(res.Message, "API Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
                 item.IsSent = res.Success;
 
