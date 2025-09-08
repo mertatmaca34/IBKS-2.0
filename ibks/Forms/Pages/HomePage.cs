@@ -9,6 +9,7 @@ using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
 using System.ComponentModel;
 using WebAPI.Abstract;
+using Core.Utilities.TempLogs;
 
 namespace ibks.Forms.Pages
 {
@@ -56,29 +57,36 @@ namespace ibks.Forms.Pages
 
         private async void SendDataAndAssignStationInfoControl()
         {
-            var data = DataProcessingHelper.MergedSendData(_stationManager);
-
-            if (data.Success)
+            try
             {
-                if (SendDataHelper.IsItTime(data.Data.Readtime).Success)
+                var data = DataProcessingHelper.MergedSendData(_stationManager);
+
+                if (data.Success)
                 {
-                    var res = await _sendDataController.SendData(data.Data);
-
-                    if (res.Success)
+                    if (SendDataHelper.IsItTime(data.Data.Readtime).Success)
                     {
-                        data.Data.IsSent = true;
+                        var res = await _sendDataController.SendData(data.Data);
 
-                        StaticInstantData.Assign(res.Data.objects);
+                        if (res.Success)
+                        {
+                            data.Data.IsSent = true;
 
-                        AssignStationInfoControl(res);
+                            StaticInstantData.Assign(res.Data.objects);
+
+                            AssignStationInfoControl(res);
+                        }
+                        else
+                        {
+                            data.Data.IsSent = false;
+                        }
+
+                        _sendDataManager.Add(data.Data);
                     }
-                    else
-                    {
-                        data.Data.IsSent = false;
-                    }
-
-                    _sendDataManager.Add(data.Data);
                 }
+            }
+            catch (Exception ex)
+            {
+                TempLog.Write($"{DateTime.Now}: [SendDataAndAssignStationInfoControl] {ex}");
             }
         }
 
