@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OfficeOpenXml;
 using WebAPI.Authrozation;
+using Core.Utilities.TempLogs;
+using System.Threading.Tasks;
 
 namespace ibks
 {
@@ -27,6 +29,17 @@ namespace ibks
         {
             if (mutex.WaitOne(TimeSpan.Zero, true))
             {
+                AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+                    TempLog.Write($"{DateTime.Now}: [UnhandledException] {e.ExceptionObject}");
+                TaskScheduler.UnobservedTaskException += (sender, e) =>
+                {
+                    TempLog.Write($"{DateTime.Now}: [UnobservedTaskException] {e.Exception}");
+                    e.SetObserved();
+                };
+                Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+                Application.ThreadException += (sender, e) =>
+                    TempLog.Write($"{DateTime.Now}: [ThreadException] {e.Exception}");
+
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
                 var host = CreateHostBuilder(args).Build();
@@ -55,7 +68,14 @@ namespace ibks
 
                     Application.EnableVisualStyles();
 
-                    Application.Run(services.GetRequiredService<Main>());
+                    try
+                    {
+                        Application.Run(services.GetRequiredService<Main>());
+                    }
+                    catch (Exception ex)
+                    {
+                        TempLog.Write($"{DateTime.Now}: [ApplicationRun] {ex}");
+                    }
                 }
             }
             else
