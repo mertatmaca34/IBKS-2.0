@@ -67,7 +67,7 @@ namespace ibks.Forms.Pages
                     {
                         var res = await _sendDataController.SendData(data.Data);
 
-                        if (res.Success)
+                        if (res.Success && res.Data != null && res.Data.objects != null)
                         {
                             data.Data.IsSent = true;
 
@@ -77,7 +77,7 @@ namespace ibks.Forms.Pages
                         }
                         else
                         {
-                            data.Data.IsSent = false;
+                            data.Data!.IsSent = false;
                         }
 
                         _sendDataManager.Add(data.Data);
