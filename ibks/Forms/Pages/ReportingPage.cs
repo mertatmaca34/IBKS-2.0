@@ -1,8 +1,12 @@
 ﻿using Business.Abstract;
+using System.Collections.Generic;
 using Entities.Concrete;
 using ibks.Utils;
 using ibks.Utils.DataExtractions.EPPlus;
 using ibks.Utils.DataExtractions.iTextSharp;
+using System.Data;
+using System.Globalization;
+using System.Linq;
 
 namespace ibks.Forms.Pages
 {
@@ -26,6 +30,17 @@ namespace ibks.Forms.Pages
             _sampleManager = sampleManager;
 
             //DataGridViewData.AutoGenerateColumns = false;
+        }
+
+        private class DailyValiditySummary
+        {
+            public DateTime Day { get; set; }
+            public int TotalRecords { get; set; }
+            public int ValidDailyBlockCount { get; set; }
+            public bool DailyWashValid { get; set; }
+            public bool WeeklyWashValid { get; set; }
+            public int? WeeklyWashDuration { get; set; }
+            public bool IsValid { get; set; }
         }
 
         private void ButtonGenerate_Click(object sender, EventArgs e)
@@ -67,12 +82,258 @@ namespace ibks.Forms.Pages
 
                 DataGridViewCustomization("SampleData");
             }
+            else if (selectedReportType == "Veri Geçerlilik Durumu")
+            {
+                GenerateDataValidityReport();
+
+                DataGridViewCustomization("DataValidity");
+            }
             else
             {
                 DataGridViewDatas.DataSource = null;
             }
 
             DataGridViewDatas.Refresh();
+        }
+
+        private void GenerateDataValidityReport()
+        {
+            const int expectedDailyRecordCount = 1440;
+            const double validRatio = 0.8d;
+            var minimumValidRecordCount = (int)Math.Ceiling(expectedDailyRecordCount * validRatio);
+
+            var queryStart = _dateFilterStart.AddDays(-7);
+            var sendData = _sendDataManager.GetAll(
+                d => d.Readtime >= queryStart && d.Readtime < _dateFilterEnd).Data
+                .OrderBy(d => d.Readtime)
+                .ToList();
+
+            var dataTable = CreateDataValidityTable();
+
+            if (_dateFilterEnd <= _dateFilterStart)
+            {
+                DataGridViewDatas.DataSource = dataTable;
+                return;
+            }
+
+            var startDay = _dateFilterStart.Date;
+            var finalDay = _dateFilterEnd.AddTicks(-1).Date;
+
+            var dailySummaries = new List<DailyValiditySummary>();
+
+            for (var day = startDay; day <= finalDay; day = day.AddDays(1))
+            {
+                var dayStart = day;
+                var dayEnd = day.AddDays(1);
+
+                var dailyRecords = sendData
+                    .Where(d => d.Readtime >= dayStart && d.Readtime < dayEnd)
+                    .ToList();
+
+                var validDailySequences = GetConsecutiveSequences(dailyRecords, 23)
+                    .Where(seq => seq.Count >= 4 && seq.Count <= 6)
+                    .ToList();
+
+                var intervals = new List<(DateTime Start, DateTime End)>
+                {
+                    (dayStart, dayStart.AddHours(6)),
+                    (dayStart.AddHours(6), dayStart.AddHours(12)),
+                    (dayStart.AddHours(12), dayStart.AddHours(18)),
+                    (dayStart.AddHours(18), dayEnd)
+                };
+
+                var validBlockCount = intervals.Count(interval =>
+                    validDailySequences.Any(seq =>
+                    {
+                        var sequenceStart = seq.First().Readtime;
+                        return sequenceStart >= interval.Start && sequenceStart < interval.End;
+                    }));
+
+                var dailyWashValid = validBlockCount == intervals.Count;
+
+                var weeklyWindowStart = day.AddDays(-6);
+                var weeklyWindowEnd = dayEnd;
+
+                var weeklyWindowRecords = sendData
+                    .Where(d => d.Readtime >= weeklyWindowStart && d.Readtime < weeklyWindowEnd)
+                    .ToList();
+
+                var validWeeklySequence = GetConsecutiveSequences(weeklyWindowRecords, 24)
+                    .Where(seq => seq.Count >= 16 && seq.Count <= 24)
+                    .OrderByDescending(seq => seq.Count)
+                    .FirstOrDefault();
+
+                var weeklyWashValid = validWeeklySequence != null;
+
+                var totalDailyRecords = dailyRecords.Count;
+                var countedRecords = Math.Min(totalDailyRecords, expectedDailyRecordCount);
+                var dailyPercentage = expectedDailyRecordCount == 0
+                    ? 0
+                    : countedRecords * 100d / expectedDailyRecordCount;
+
+                var hasEnoughRecords = totalDailyRecords >= minimumValidRecordCount;
+
+                var summary = new DailyValiditySummary
+                {
+                    Day = day,
+                    TotalRecords = totalDailyRecords,
+                    ValidDailyBlockCount = validBlockCount,
+                    DailyWashValid = dailyWashValid,
+                    WeeklyWashValid = weeklyWashValid,
+                    WeeklyWashDuration = validWeeklySequence?.Count,
+                    IsValid = hasEnoughRecords && dailyWashValid && weeklyWashValid
+                };
+
+                dailySummaries.Add(summary);
+
+                var row = dataTable.NewRow();
+                row["Tür"] = "Günlük";
+                row["Tarih"] = day.ToString("dd.MM.yyyy");
+                row["Yıkama Verisi"] = FormatDailyWashText(validBlockCount, intervals.Count, dailyWashValid);
+                row["Haftalık Yıkama Verisi"] = FormatWeeklyWashText(weeklyWashValid, validWeeklySequence?.Count);
+                row["Veri Detayı"] = FormatDataDetail(expectedDailyRecordCount, totalDailyRecords, dailyPercentage, "geçerli veri");
+                row["Minimum Gereksinim"] = $"Min {minimumValidRecordCount} veri";
+                row["Durum"] = summary.IsValid ? "Geçerli" : "Geçersiz";
+                dataTable.Rows.Add(row);
+            }
+
+            if (dailySummaries.Any())
+            {
+                AddOverallSummaryRow(dataTable, dailySummaries, expectedDailyRecordCount, minimumValidRecordCount);
+                AddMonthlySummaryRows(dataTable, dailySummaries);
+            }
+
+            DataGridViewDatas.DataSource = dataTable;
+        }
+
+        private static DataTable CreateDataValidityTable()
+        {
+            var table = new DataTable();
+            table.Columns.Add("Tür");
+            table.Columns.Add("Tarih");
+            table.Columns.Add("Yıkama Verisi");
+            table.Columns.Add("Haftalık Yıkama Verisi");
+            table.Columns.Add("Veri Detayı");
+            table.Columns.Add("Minimum Gereksinim");
+            table.Columns.Add("Durum");
+            return table;
+        }
+
+        private static string FormatDailyWashText(int validBlockCount, int totalBlocks, bool isValid)
+        {
+            var statusText = isValid ? "Geçerli" : "Geçersiz";
+            return $"{statusText} ({validBlockCount}/{totalBlocks} blok)";
+        }
+
+        private static string FormatWeeklyWashText(bool isValid, int? duration)
+        {
+            if (!isValid)
+            {
+                return "Geçersiz";
+            }
+
+            return duration.HasValue
+                ? $"Geçerli ({duration.Value} dk)"
+                : "Geçerli";
+        }
+
+        private static string FormatDataDetail(int expected, int actual, double percentage, string unit = "")
+        {
+            if (expected <= 0)
+            {
+                return "0/0 (%0)";
+            }
+
+            var ratio = $"{expected}/{actual}";
+
+            if (!string.IsNullOrWhiteSpace(unit))
+            {
+                ratio += $" {unit}";
+            }
+
+            return $"{ratio} (%{percentage:0.##})";
+        }
+
+        private void AddOverallSummaryRow(DataTable dataTable, List<DailyValiditySummary> dailySummaries, int expectedDailyRecordCount, int minimumValidRecordCount)
+        {
+            var totalDays = dailySummaries.Count;
+            var totalExpectedRecords = expectedDailyRecordCount * totalDays;
+            var totalActualRecords = dailySummaries.Sum(s => s.TotalRecords);
+            var countedRecords = Math.Min(totalActualRecords, totalExpectedRecords);
+            var percentage = totalExpectedRecords == 0
+                ? 0
+                : countedRecords * 100d / totalExpectedRecords;
+
+            var validDayCount = dailySummaries.Count(s => s.IsValid);
+            var requiredValidDays = (int)Math.Ceiling(totalDays * 0.8d);
+
+            var row = dataTable.NewRow();
+            row["Tür"] = "Genel Özet";
+            row["Tarih"] = $"{_dateFilterStart:dd.MM.yyyy} - {_dateFilterEnd.AddTicks(-1):dd.MM.yyyy}";
+            row["Yıkama Verisi"] = $"{dailySummaries.Count(s => s.DailyWashValid)}/{totalDays} geçerli";
+            row["Haftalık Yıkama Verisi"] = $"{dailySummaries.Count(s => s.WeeklyWashValid)}/{totalDays} geçerli";
+            row["Veri Detayı"] = FormatDataDetail(totalExpectedRecords, totalActualRecords, percentage, "geçerli veri");
+            row["Minimum Gereksinim"] = $"Min {minimumValidRecordCount} veri - Min {requiredValidDays} gün";
+            row["Durum"] = validDayCount >= requiredValidDays ? "Geçerli" : "Geçersiz";
+            dataTable.Rows.Add(row);
+        }
+
+        private void AddMonthlySummaryRows(DataTable dataTable, List<DailyValiditySummary> dailySummaries)
+        {
+            var culture = CultureInfo.GetCultureInfo("tr-TR");
+
+            foreach (var monthGroup in dailySummaries
+                         .GroupBy(s => new { s.Day.Year, s.Day.Month })
+                         .OrderBy(g => g.Key.Year)
+                         .ThenBy(g => g.Key.Month))
+            {
+                var totalDays = monthGroup.Count();
+                var validDays = monthGroup.Count(s => s.IsValid);
+                var requiredValidDays = (int)Math.Ceiling(totalDays * 0.8d);
+                var percentage = totalDays == 0 ? 0 : validDays * 100d / totalDays;
+
+                var monthLabel = new DateTime(monthGroup.Key.Year, monthGroup.Key.Month, 1)
+                    .ToString("MMMM yyyy", culture);
+
+                var row = dataTable.NewRow();
+                row["Tür"] = "Aylık";
+                row["Tarih"] = monthLabel;
+                row["Yıkama Verisi"] = "-";
+                row["Haftalık Yıkama Verisi"] = "-";
+                row["Veri Detayı"] = FormatDataDetail(totalDays, validDays, percentage, "geçerli gün");
+                row["Minimum Gereksinim"] = $"Min {requiredValidDays} gün";
+                row["Durum"] = validDays >= requiredValidDays ? "Geçerli" : "Geçersiz";
+                dataTable.Rows.Add(row);
+            }
+        }
+
+        private static List<List<SendData>> GetConsecutiveSequences(List<SendData> data, int debiStatus)
+        {
+            var sequences = new List<List<SendData>>();
+            List<SendData> currentSequence = null;
+            DateTime? lastTimestamp = null;
+
+            foreach (var record in data.OrderBy(d => d.Readtime))
+            {
+                if (record.Debi_Status != debiStatus)
+                {
+                    currentSequence = null;
+                    lastTimestamp = null;
+                    continue;
+                }
+
+                if (currentSequence == null || !lastTimestamp.HasValue ||
+                    (record.Readtime - lastTimestamp.Value).TotalMinutes > 1)
+                {
+                    currentSequence = new List<SendData>();
+                    sequences.Add(currentSequence);
+                }
+
+                currentSequence.Add(record);
+                lastTimestamp = record.Readtime;
+            }
+
+            return sequences;
         }
 
         private void ReportingPage_Load(object sender, EventArgs e)
@@ -92,6 +353,8 @@ namespace ibks.Forms.Pages
         {
             if (DataGridViewDatas.DataSource != null)
             {
+                DataGridViewDatas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+
                 switch (reportType)
                 {
                     case "InstantData":
@@ -126,6 +389,18 @@ namespace ibks.Forms.Pages
                         DataGridViewDatas.Columns[3].HeaderText= "Numune Türü";
 
                         RemoveDataGridViewColumns(0);
+
+                        break;
+
+                    case "DataValidity":
+                        DataGridViewDatas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                        DataGridViewDatas.Columns[0].HeaderText = "Tür";
+                        DataGridViewDatas.Columns[1].HeaderText = "Tarih";
+                        DataGridViewDatas.Columns[2].HeaderText = "Yıkama Verisi";
+                        DataGridViewDatas.Columns[3].HeaderText = "Haftalık Yıkama";
+                        DataGridViewDatas.Columns[4].HeaderText = "Veri Durumu";
+                        DataGridViewDatas.Columns[5].HeaderText = "Minimum Gereksinim";
+                        DataGridViewDatas.Columns[6].HeaderText = "Durum";
 
                         break;
 

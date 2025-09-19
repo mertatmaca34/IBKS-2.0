@@ -162,7 +162,7 @@
             ComboBoxReportType.Dock = DockStyle.Top;
             ComboBoxReportType.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBoxReportType.FormattingEnabled = true;
-            ComboBoxReportType.Items.AddRange(new object[] { "Ölçüm", "Kalibrasyon", "Numune", "Kayıt" });
+            ComboBoxReportType.Items.AddRange(new object[] { "Ölçüm", "Kalibrasyon", "Numune", "Kayıt", "Veri Geçerlilik Durumu" });
             ComboBoxReportType.Location = new Point(3, 19);
             ComboBoxReportType.Name = "ComboBoxReportType";
             ComboBoxReportType.Size = new Size(194, 23);
