@@ -30,45 +30,46 @@ namespace ibks.Forms.Pages
 
         private void ButtonGenerate_Click(object sender, EventArgs e)
         {
-            var checkedRadioButton = GroupBoxReportTypes.Controls.OfType<RadioButton>()
-                           .FirstOrDefault(n => n.Checked);
+            var selectedReportType = ComboBoxReportType.SelectedItem?.ToString();
 
-            if (checkedRadioButton != null)
+            if (string.IsNullOrWhiteSpace(selectedReportType))
             {
-                if (checkedRadioButton == RadioButtonInstantData)
-                {
-                    var data = _sendDataManager.GetAll(
-                        d => d.Readtime > _dateFilterStart && d.Readtime < _dateFilterEnd).Data;
+                return;
+            }
 
-                    DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
-                        : data.OrderByDescending(d => d.Readtime).ToList();
+            if (selectedReportType == "Ölçüm")
+            {
+                var data = _sendDataManager.GetAll(
+                    d => d.Readtime > _dateFilterStart && d.Readtime < _dateFilterEnd).Data;
 
-                    DataGridViewCustomization("InstantData");
-                }
-                else if (checkedRadioButton == RadioButtonCalibrationData)
-                {
-                    var data = _calibrationManager.GetAll(
-                        d => d.TimeStamp > DateTimePickerFirstDate.Value && d.TimeStamp < DateTimePickerLastDate.Value).Data;
+                DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
+                    : data.OrderByDescending(d => d.Readtime).ToList();
 
-                    DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
-                        : data.OrderByDescending(d => d.TimeStamp).ToList();
+                DataGridViewCustomization("InstantData");
+            }
+            else if (selectedReportType == "Kalibrasyon")
+            {
+                var data = _calibrationManager.GetAll(
+                    d => d.TimeStamp > DateTimePickerFirstDate.Value && d.TimeStamp < DateTimePickerLastDate.Value).Data;
 
-                    DataGridViewCustomization("CalibrationData");
-                }
-                else if (checkedRadioButton == RadioButtonSampleData)
-                {
-                    var data = _sampleManager.GetAll(
-                        d => d.DateTime > DateTimePickerFirstDate.Value && d.DateTime < DateTimePickerLastDate.Value).Data;
+                DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
+                    : data.OrderByDescending(d => d.TimeStamp).ToList();
 
-                    DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
-                        : data.OrderByDescending(d => d.DateTime).ToList();
+                DataGridViewCustomization("CalibrationData");
+            }
+            else if (selectedReportType == "Numune")
+            {
+                var data = _sampleManager.GetAll(
+                    d => d.DateTime > DateTimePickerFirstDate.Value && d.DateTime < DateTimePickerLastDate.Value).Data;
 
-                    DataGridViewCustomization("SampleData");
-                }
-                else
-                {
-                    //TODO
-                }
+                DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
+                    : data.OrderByDescending(d => d.DateTime).ToList();
+
+                DataGridViewCustomization("SampleData");
+            }
+            else
+            {
+                DataGridViewDatas.DataSource = null;
             }
 
             DataGridViewDatas.Refresh();
@@ -76,7 +77,7 @@ namespace ibks.Forms.Pages
 
         private void ReportingPage_Load(object sender, EventArgs e)
         {
-            RadioButtonInstantData.Checked = true;
+            ComboBoxReportType.SelectedIndex = ComboBoxReportType.Items.Count > 0 ? 0 : -1;
             RadioButtonDaily.Checked = true;
             RadioButtonSortByFirst.Checked = true;
 
