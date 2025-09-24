@@ -48,12 +48,27 @@ public class SendDataController : ControllerBase, ISendDataController
                             "application/json");
 
                         var response = await httpClient.PostAsync(StationType.SAIS.ToString() + "/SendData", content);
-                        //response.EnsureSuccessStatusCode();
+
+                        if(response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                        {
+                            TempLog.Write(DateTime.Now + ": Hata kodu:" + response.StatusCode);
+                            return new ErrorDataResult<ResultStatus<SendDataResult>>(null, Messages.ApiSendDataFault);
+                        }
+
+                        if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                        {
+                            TempLog.Write(DateTime.Now + ": Hata kodu:" + response.StatusCode);
+                            return new ErrorDataResult<ResultStatus<SendDataResult>>(null, Messages.ApiSendDataFault);
+                        }
 
                         var responseContent = await response.Content.ReadAsStringAsync();
 
                         var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<SendDataResult>>(responseContent)!;
 
+                        if (desResponseContent.message == "Bu saatin datası daha önce kayıt edilmiştir.")
+                        {
+                            return new SuccessDataResult<ResultStatus<SendDataResult>>(desResponseContent, "zaten kayıtlı");
+                        }
                         TempLog.Write(DateTime.Now + ": " + Messages.ApiSendDataSuccces);
 
                         return new SuccessDataResult<ResultStatus<SendDataResult>>(desResponseContent, Messages.ApiSendDataSuccces);

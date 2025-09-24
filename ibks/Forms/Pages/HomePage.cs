@@ -69,6 +69,10 @@ namespace ibks.Forms.Pages
 
                         if (res.Success && res.Data != null && res.Data.objects != null)
                         {
+                            if (res.Message == "zaten kayıtlı")
+                            {
+                                data.Data.IsSent = true;
+                            }
                             data.Data.IsSent = true;
 
                             StaticInstantData.Assign(res.Data.objects);

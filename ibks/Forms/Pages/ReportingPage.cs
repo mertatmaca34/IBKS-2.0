@@ -159,7 +159,7 @@ namespace ibks.Forms.Pages
                     .ToList();
 
                 var validWeeklySequence = GetConsecutiveSequences(weeklyWindowRecords, 24)
-                    .Where(seq => seq.Count >= 16 && seq.Count <= 24)
+                    .Where(seq => seq.Count >= 16 && seq.Count <= 30)
                     .OrderByDescending(seq => seq.Count)
                     .FirstOrDefault();
 
@@ -322,15 +322,20 @@ namespace ibks.Forms.Pages
                     continue;
                 }
 
-                if (currentSequence == null || !lastTimestamp.HasValue ||
-                    (record.Readtime - lastTimestamp.Value).TotalMinutes > 1)
+                else if(currentSequence != null)
+                {
+                    currentSequence.Add(record);
+                    lastTimestamp = record.Readtime;
+                }
+                else if (currentSequence == null)
                 {
                     currentSequence = new List<SendData>();
-                    sequences.Add(currentSequence);
+                    currentSequence.Add(record);
+                    lastTimestamp = record.Readtime;
                 }
 
-                currentSequence.Add(record);
-                lastTimestamp = record.Readtime;
+
+                sequences.Add(currentSequence);
             }
 
             return sequences;
@@ -358,20 +363,20 @@ namespace ibks.Forms.Pages
                 switch (reportType)
                 {
                     case "InstantData":
-                        DataGridViewDatas.Columns[2].HeaderText = "Tarih";
-                        DataGridViewDatas.Columns[4].HeaderText = "Akış Hızı";
-                        DataGridViewDatas.Columns[6].HeaderText = "Çözünmüş Oksijen";
-                        DataGridViewDatas.Columns[8].HeaderText = "Deşarj Debi";
-                        DataGridViewDatas.Columns[9].HeaderText = "Harici Debi";
-                        DataGridViewDatas.Columns[10].HeaderText = "Harici Debi2";
-                        DataGridViewDatas.Columns[13].HeaderText = "Sıcaklık";
-                        DataGridViewDatas.Columns[14].HeaderText = "İletkenlik";
-                        DataGridViewDatas.Columns[26].HeaderText = "Durum";
-                        DataGridViewDatas.Columns[27].HeaderText = "API";
-
-                        ColorExtensions.FromDataGridViewData(DataGridViewDatas, 26);
-
-                        RemoveDataGridViewColumns(25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 3, 1, 0);
+                        RemoveDataGridViewColumns(26,25,24,23,22,21,20,19,18,17,15,10,9,8,3,1,0);
+                        DataGridViewDatas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                        DataGridViewDatas.Columns[0].HeaderText = "Tarih";
+                        DataGridViewDatas.Columns[0].MinimumWidth = 100;
+                        DataGridViewDatas.Columns[1].HeaderText = "Akış Hızı";
+                        DataGridViewDatas.Columns[2].HeaderText = "Akm";
+                        DataGridViewDatas.Columns[3].HeaderText = "Çözünmüş Oksijen";
+                        DataGridViewDatas.Columns[4].HeaderText = "Debi";
+                        DataGridViewDatas.Columns[5].HeaderText = "Koi";
+                        DataGridViewDatas.Columns[6].HeaderText = "Ph";
+                        DataGridViewDatas.Columns[7].HeaderText = "Sıcaklık";
+                        DataGridViewDatas.Columns[8].HeaderText = "İletkenlik";
+                        DataGridViewDatas.Columns[9].HeaderText = "Durum Kodu";
+                        DataGridViewDatas.Columns[10].HeaderText = "Gönderim";
 
                         break;
 

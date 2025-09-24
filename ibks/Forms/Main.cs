@@ -83,13 +83,8 @@ namespace ibks.Forms
 
         private void ButtonMailPage_Click(object sender, EventArgs e)
         {
-            var loginSuccessful = LoginOps.Login(_authManager);
-
-            if (loginSuccessful)
-            {
                 PageChange.Change(PanelContent, this, new MailPage(_mailServerManager, _authManager, _userManager, _mailStatementManager, _userMailStatementManager));
                 ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonMailPage);
-            }
         }
 
         private void ButtonReportingPage_Click(object sender, EventArgs e)
@@ -100,9 +95,6 @@ namespace ibks.Forms
 
         private void ButtonSettingPage_Click(object sender, EventArgs e)
         {
-            var res = LoginOps.Login(_authManager);
-
-            if (res != true) return;
             PageChange.Change(PanelContent, this, new SettingsPage(_calibrationLimitManager, _apiManager, _stationManager, _plcManager));
             ButtonImageExtensions.Replace(TableLayoutPanelLeftBar, ButtonSettingPage);
         }
