@@ -34,7 +34,7 @@ namespace ibks.Forms
             IPlcService plcManager, IMailServerService mailServerManager, IAuthService authManager,
             IUserService userManager, IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager,
             ISendDataController sendDataController, ISendCalibrationController sendCalibrationController,
-            ICheckStatements checkStatements, ISampleService sampleManager)
+            ICheckStatements checkStatements, ISampleService sampleManager, IGetMissingDatesController getMissingDatesController)
         {
             InitializeComponent();
 
@@ -50,7 +50,7 @@ namespace ibks.Forms
             _sampleManager = sampleManager;
             _sendDataManager = sendDataManager;
 
-            _homePage = new HomePage(_stationManager, sendDataManager, calibrationManager, sendDataController, checkStatements);
+            _homePage = new HomePage(_stationManager, sendDataManager, calibrationManager, sendDataController, checkStatements, getMissingDatesController);
             _simulationPage = new SimulationPage();
             _calibrationPage = new CalibrationPage(calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, sendCalibrationController);
         }
