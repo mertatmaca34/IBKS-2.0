@@ -450,7 +450,7 @@
             // TimerGetMissingDates
             // 
             TimerGetMissingDates.Enabled = true;
-            TimerGetMissingDates.Interval = 600000;
+            TimerGetMissingDates.Interval = 60000;
             TimerGetMissingDates.Tick += TimerGetMissingDates_Tick;
             // 
             // HomePage

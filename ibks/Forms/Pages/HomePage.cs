@@ -4,10 +4,14 @@ using Core.Utilities.Results;
 using Entities.Concrete.API;
 using ibks.Services.Mail.Abstract;
 using ibks.Utils;
+using System;
+using Newtonsoft.Json;
 using PLC;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
 using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
 using WebAPI.Abstract;
 using Core.Utilities.TempLogs;
 
@@ -22,10 +26,11 @@ namespace ibks.Forms.Pages
         private readonly ICalibrationService _calibrationManager;
         private readonly ISendDataController _sendDataController;
         private readonly ICheckStatements _checkStatements;
+        private readonly IGetMissingDatesController _getMissingDatesController;
 
         public HomePage(IStationService stationManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ISendDataController sendDataController,
-            ICheckStatements checkStatements)
+            ICheckStatements checkStatements, IGetMissingDatesController getMissingDatesController)
         {
             InitializeComponent();
 
@@ -34,6 +39,7 @@ namespace ibks.Forms.Pages
             _calibrationManager = calibrationManager;
             _sendDataController = sendDataController;
             _checkStatements = checkStatements;
+            _getMissingDatesController = getMissingDatesController;
         }
 
         private async void TimerAssignUI_Tick(object sender, EventArgs e)
@@ -177,9 +183,71 @@ namespace ibks.Forms.Pages
 
         private async void TimerGetMissingDates_Tick(object sender, EventArgs e)
         {
+            try
+            {
+                await ResendMissingDatesAsync();
+                await ResendUnsentDataAsync();
+            }
+            catch (Exception ex)
+            {
+                TempLog.Write($"{DateTime.Now}: [TimerGetMissingDates_Tick] {ex}");
+            }
+        }
+
+        private async Task ResendMissingDatesAsync()
+        {
+            var stationResult = _stationManager.Get();
+
+            if (stationResult?.Data == null)
+            {
+                return;
+            }
+
+            var missingDatesResult = await _getMissingDatesController.GetMissingDates(stationResult.Data.StationId);
+
+            if (!missingDatesResult.Success || missingDatesResult.Data?.objects == null)
+            {
+                return;
+            }
+
+            var serializedObject = JsonConvert.SerializeObject(missingDatesResult.Data.objects);
+            var missingDatePayload = JsonConvert.DeserializeObject<MissingDate>(serializedObject);
+
+            if (missingDatePayload?.MissingDates == null || !missingDatePayload.MissingDates.Any())
+            {
+                return;
+            }
+
+            foreach (var missingDate in missingDatePayload.MissingDates)
+            {
+                var storedData = _sendDataManager
+                    .GetAll(x => x.Stationid == stationResult.Data.StationId && x.Readtime == missingDate)
+                    .Data?
+                    .OrderByDescending(x => x.Id)
+                    .FirstOrDefault();
+
+                if (storedData == null)
+                {
+                    continue;
+                }
+
+                var response = await _sendDataController.SendData(storedData);
+
+                storedData.IsSent = response.Success;
+
+                _sendDataManager.Add(storedData);
+            }
+        }
+
+        private async Task ResendUnsentDataAsync()
+        {
             var missedData = _sendDataManager.GetAll(x => x.IsSent == false);
 
-            if (missedData.Data.Count <= 0) return;
+            if (missedData?.Data == null || !missedData.Data.Any())
+            {
+                return;
+            }
+
             foreach (var item in missedData.Data)
             {
                 var res = await _sendDataController.SendData(item);
