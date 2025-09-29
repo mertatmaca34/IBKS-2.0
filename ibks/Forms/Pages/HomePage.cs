@@ -1,16 +1,19 @@
 ﻿using Business.Abstract;
 using Business.Helpers;
 using Core.Utilities.Results;
+using Entities.Concrete;
 using Entities.Concrete.API;
 using ibks.Services.Mail.Abstract;
 using ibks.Utils;
-using System;
 using Newtonsoft.Json;
 using PLC;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using WebAPI.Abstract;
 using Core.Utilities.TempLogs;
@@ -27,6 +30,13 @@ namespace ibks.Forms.Pages
         private readonly ISendDataController _sendDataController;
         private readonly ICheckStatements _checkStatements;
         private readonly IGetMissingDatesController _getMissingDatesController;
+
+        private readonly CancellationTokenSource _backgroundWorkCts = new();
+        private readonly object _backgroundWorkSync = new();
+        private Task _missingDateResendTask = Task.CompletedTask;
+        private Task _unsentDataResendTask = Task.CompletedTask;
+
+        private const int SendDataBatchSize = 250;
 
         public HomePage(IStationService stationManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ISendDataController sendDataController,
@@ -181,12 +191,12 @@ namespace ibks.Forms.Pages
             DigitalSensorBar.SystemStatementText = TextExtensions.FromStatus();
         }
 
-        private async void TimerGetMissingDates_Tick(object sender, EventArgs e)
+        private void TimerGetMissingDates_Tick(object sender, EventArgs e)
         {
             try
             {
-                await ResendMissingDatesAsync();
-                await ResendUnsentDataAsync();
+                ScheduleBackgroundWork(ref _missingDateResendTask, ResendMissingDatesAsync, "ResendMissingDatesAsync");
+                ScheduleBackgroundWork(ref _unsentDataResendTask, ResendUnsentDataAsync, "ResendUnsentDataAsync");
             }
             catch (Exception ex)
             {
@@ -194,7 +204,7 @@ namespace ibks.Forms.Pages
             }
         }
 
-        private async Task ResendMissingDatesAsync()
+        private async Task ResendMissingDatesAsync(CancellationToken cancellationToken)
         {
             var stationResult = _stationManager.Get();
 
@@ -218,28 +228,26 @@ namespace ibks.Forms.Pages
                 return;
             }
 
-            foreach (var missingDate in missingDatePayload.MissingDates)
+            var missingDateSet = new HashSet<DateTime>(missingDatePayload.MissingDates);
+
+            var storedDataResult = _sendDataManager
+                .GetAll(x => x.Stationid == stationResult.Data.StationId && missingDateSet.Contains(x.Readtime));
+
+            if (storedDataResult?.Data == null || !storedDataResult.Data.Any())
             {
-                var storedData = _sendDataManager
-                    .GetAll(x => x.Stationid == stationResult.Data.StationId && x.Readtime == missingDate)
-                    .Data?
-                    .OrderByDescending(x => x.Id)
-                    .FirstOrDefault();
-
-                if (storedData == null)
-                {
-                    continue;
-                }
-
-                var response = await _sendDataController.SendData(storedData);
-
-                storedData.IsSent = response.Success;
-
-                _sendDataManager.Add(storedData);
+                return;
             }
+
+            var latestRecords = storedDataResult.Data
+                .GroupBy(x => x.Readtime)
+                .Select(group => group.OrderByDescending(x => x.Id).First())
+                .OrderBy(x => x.Readtime)
+                .ToList();
+
+            await ProcessSendDataAsync(latestRecords, cancellationToken);
         }
 
-        private async Task ResendUnsentDataAsync()
+        private async Task ResendUnsentDataAsync(CancellationToken cancellationToken)
         {
             var missedData = _sendDataManager.GetAll(x => x.IsSent == false);
 
@@ -248,19 +256,95 @@ namespace ibks.Forms.Pages
                 return;
             }
 
-            foreach (var item in missedData.Data)
+            var orderedData = missedData.Data
+                .OrderBy(x => x.Readtime)
+                .ToList();
+
+            await ProcessSendDataAsync(orderedData, cancellationToken);
+        }
+
+        private async Task ProcessSendDataAsync(IReadOnlyCollection<SendData> dataToSend, CancellationToken cancellationToken)
+        {
+            if (dataToSend == null || dataToSend.Count == 0)
             {
-                var res = await _sendDataController.SendData(item);
+                return;
+            }
 
-                item.IsSent = res.Success;
+            var batch = new List<SendData>(SendDataBatchSize);
 
-                _sendDataManager.Add(item);
+            foreach (var item in dataToSend)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                batch.Add(item);
+
+                if (batch.Count >= SendDataBatchSize)
+                {
+                    await SendBatchAsync(batch, cancellationToken);
+                    batch.Clear();
+
+                    await Task.Delay(100, cancellationToken);
+                }
+            }
+
+            if (batch.Count > 0)
+            {
+                await SendBatchAsync(batch, cancellationToken);
+            }
+        }
+
+        private async Task SendBatchAsync(List<SendData> batch, CancellationToken cancellationToken)
+        {
+            foreach (var sendData in batch)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var response = await _sendDataController.SendData(sendData);
+
+                sendData.IsSent = response.Success;
+
+                _sendDataManager.Add(sendData);
+            }
+        }
+
+        private void ScheduleBackgroundWork(ref Task backgroundTask, Func<CancellationToken, Task> work, string context)
+        {
+            lock (_backgroundWorkSync)
+            {
+                if (!backgroundTask.IsCompleted)
+                {
+                    return;
+                }
+
+                var cancellationToken = _backgroundWorkCts.Token;
+
+                backgroundTask = Task.Run(async () =>
+                {
+                    try
+                    {
+                        await work(cancellationToken);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                    }
+                    catch (Exception ex)
+                    {
+                        TempLog.Write($"{DateTime.Now}: [{context}] {ex}");
+                    }
+                }, cancellationToken);
             }
         }
 
         private void ChannelAkm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            _backgroundWorkCts.Cancel();
+
+            base.OnFormClosing(e);
         }
     }
 }
