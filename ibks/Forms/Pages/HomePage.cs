@@ -204,7 +204,6 @@ namespace ibks.Forms.Pages
             {
                 ScheduleBackgroundWork(ref _missingDateResendTask, ResendMissingDatesAsync, "ResendMissingDatesAsync");
                 ScheduleBackgroundWork(ref _unsentDataResendTask, ResendUnsentDataAsync, "ResendUnsentDataAsync");
-                ResendMissingDates();
             }
             catch (Exception ex)
             {
@@ -213,7 +212,6 @@ namespace ibks.Forms.Pages
         }
 
         private async Task ResendMissingDatesAsync(CancellationToken cancellationToken)
-        private async void ResendMissingDates()
         {
             var stationResult = _stationManager.Get();
 
@@ -355,12 +353,8 @@ namespace ibks.Forms.Pages
                     }
                 }, cancellationToken);
                         TempLog.Write($"{DateTime.Now}: Eksik veri başarıyla gönderildi: {sendIt.Readtime} Kalan eksik veri sayısı: {allMissingDatesCount}");
-                    }
-                    else
-                    {
                         TempLog.Write($"{DateTime.Now}: Eksik veri gönderilemedi: {sendIt.Readtime} - Hata: {res.Message}");
                         sendIt.IsSent = false;
-                    }
 
                     _sendDataManager.Update(sendIt);
                 }
