@@ -1,12 +1,8 @@
 using Business.Abstract;
 using Business.Helpers;
 using Core.Utilities.Results;
-using Entities.Concrete;
-using Entities.Concrete.API;
-using ibks.Services.Mail.Abstract;
-using ibks.Utils;
-using Newtonsoft.Json;
 using Core.Utilities.TempLogs;
+using Entities.Concrete;
 using Entities.Concrete.API;
 using ibks.Services.Mail.Abstract;
 using ibks.Utils;
@@ -19,6 +15,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ibks.Forms.Pages
 {
@@ -38,7 +35,8 @@ namespace ibks.Forms.Pages
         private Task _missingDateResendTask = Task.CompletedTask;
         private Task _unsentDataResendTask = Task.CompletedTask;
 
-        private const int SendDataBatchSize = 250;
+        private const int SendDataBatchSize = 500;
+        private static readonly TimeSpan SendDataBatchPause = TimeSpan.FromMilliseconds(200);
 
         public HomePage(IStationService stationManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ISendDataController sendDataController,
@@ -202,8 +200,8 @@ namespace ibks.Forms.Pages
         {
             try
             {
-                ScheduleBackgroundWork(ref _missingDateResendTask, ResendMissingDatesAsync, "ResendMissingDatesAsync");
-                ScheduleBackgroundWork(ref _unsentDataResendTask, ResendUnsentDataAsync, "ResendUnsentDataAsync");
+                ScheduleBackgroundWork(ref _missingDateResendTask, ResendMissingDatesAsync, nameof(ResendMissingDatesAsync));
+                ScheduleBackgroundWork(ref _unsentDataResendTask, ResendUnsentDataAsync, nameof(ResendUnsentDataAsync));
             }
             catch (Exception ex)
             {
@@ -227,8 +225,9 @@ namespace ibks.Forms.Pages
                 return;
             }
 
+            var missingDatePayload = missingDatesResult.Data.objects;
 
-            if (missingDatesResult?.Data.objects.MissingDates == null || missingDatesResult?.Data.objects.MissingDates.Count == 0)
+            if (missingDatePayload?.MissingDates == null || missingDatePayload.MissingDates.Count == 0)
             {
                 return;
             }
@@ -255,26 +254,11 @@ namespace ibks.Forms.Pages
         private async Task ResendUnsentDataAsync(CancellationToken cancellationToken)
         {
             var missedData = _sendDataManager.GetAll(x => x.IsSent == false);
-            var allMissingDates = missingDatesResult?.Data.objects.MissingDates;
 
-            var allMissingDatesCount = allMissingDates?.Count;
-
-            if (allMissingDates != null && allMissingDates.Any())
+            if (missedData?.Data == null || missedData.Data.Count == 0)
             {
-                var dtStart = allMissingDates.Min();
-                var dtMax = allMissingDates.Max();
-
-                var _unsentData = _sendDataManager.GetAll(x => x.Readtime > dtStart && x.Readtime < dtMax).Data;
-
-                foreach (var sendIt in _unsentData)
-                {
-                    var res = await _sendDataController.SendData(sendIt);
-
-                    if (res.Success)
-                    {
-                        allMissingDatesCount--;
-
-                        sendIt.IsSent = true;
+                return;
+            }
 
             var orderedData = missedData.Data
                 .OrderBy(x => x.Readtime)
@@ -303,7 +287,10 @@ namespace ibks.Forms.Pages
                     await SendBatchAsync(batch, cancellationToken);
                     batch.Clear();
 
-                    await Task.Delay(100, cancellationToken);
+                    if (SendDataBatchPause > TimeSpan.Zero)
+                    {
+                        await Task.Delay(SendDataBatchPause, cancellationToken);
+                    }
                 }
             }
 
@@ -319,11 +306,25 @@ namespace ibks.Forms.Pages
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var response = await _sendDataController.SendData(sendData);
+                try
+                {
+                    var response = await _sendDataController.SendData(sendData);
+                    sendData.IsSent = response.Success;
 
-                sendData.IsSent = response.Success;
-
-                _sendDataManager.Add(sendData);
+                    if (!response.Success)
+                    {
+                        TempLog.Write($"{DateTime.Now}: [SendBatchAsync] Veri gönderimi başarısız: {sendData.Readtime}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    sendData.IsSent = false;
+                    TempLog.Write($"{DateTime.Now}: [SendBatchAsync] {ex}");
+                }
+                finally
+                {
+                    _sendDataManager.Update(sendData);
+                }
             }
         }
 
@@ -352,15 +353,6 @@ namespace ibks.Forms.Pages
                         TempLog.Write($"{DateTime.Now}: [{context}] {ex}");
                     }
                 }, cancellationToken);
-                        TempLog.Write($"{DateTime.Now}: Eksik veri başarıyla gönderildi: {sendIt.Readtime} Kalan eksik veri sayısı: {allMissingDatesCount}");
-                        TempLog.Write($"{DateTime.Now}: Eksik veri gönderilemedi: {sendIt.Readtime} - Hata: {res.Message}");
-                        sendIt.IsSent = false;
-
-                    _sendDataManager.Update(sendIt);
-                }
-
-                // Her 500’lük batch bittikten sonra istersen bekleme koyabilirsin
-                // await Task.Delay(2000);
             }
         }
 
