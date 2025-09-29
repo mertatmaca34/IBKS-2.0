@@ -1,6 +1,11 @@
-﻿using Business.Abstract;
+using Business.Abstract;
 using Business.Helpers;
 using Core.Utilities.Results;
+using Entities.Concrete;
+using Entities.Concrete.API;
+using ibks.Services.Mail.Abstract;
+using ibks.Utils;
+using Newtonsoft.Json;
 using Core.Utilities.TempLogs;
 using Entities.Concrete.API;
 using ibks.Services.Mail.Abstract;
@@ -8,8 +13,12 @@ using ibks.Utils;
 using PLC;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using WebAPI.Abstract;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ibks.Forms.Pages
 {
@@ -23,6 +32,13 @@ namespace ibks.Forms.Pages
         private readonly ISendDataController _sendDataController;
         private readonly ICheckStatements _checkStatements;
         private readonly IGetMissingDatesController _getMissingDatesController;
+
+        private readonly CancellationTokenSource _backgroundWorkCts = new();
+        private readonly object _backgroundWorkSync = new();
+        private Task _missingDateResendTask = Task.CompletedTask;
+        private Task _unsentDataResendTask = Task.CompletedTask;
+
+        private const int SendDataBatchSize = 250;
 
         public HomePage(IStationService stationManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ISendDataController sendDataController,
@@ -186,6 +202,8 @@ namespace ibks.Forms.Pages
         {
             try
             {
+                ScheduleBackgroundWork(ref _missingDateResendTask, ResendMissingDatesAsync, "ResendMissingDatesAsync");
+                ScheduleBackgroundWork(ref _unsentDataResendTask, ResendUnsentDataAsync, "ResendUnsentDataAsync");
                 ResendMissingDates();
             }
             catch (Exception ex)
@@ -194,6 +212,7 @@ namespace ibks.Forms.Pages
             }
         }
 
+        private async Task ResendMissingDatesAsync(CancellationToken cancellationToken)
         private async void ResendMissingDates()
         {
             var stationResult = _stationManager.Get();
@@ -216,6 +235,28 @@ namespace ibks.Forms.Pages
                 return;
             }
 
+            var missingDateSet = new HashSet<DateTime>(missingDatePayload.MissingDates);
+
+            var storedDataResult = _sendDataManager
+                .GetAll(x => x.Stationid == stationResult.Data.StationId && missingDateSet.Contains(x.Readtime));
+
+            if (storedDataResult?.Data == null || !storedDataResult.Data.Any())
+            {
+                return;
+            }
+
+            var latestRecords = storedDataResult.Data
+                .GroupBy(x => x.Readtime)
+                .Select(group => group.OrderByDescending(x => x.Id).First())
+                .OrderBy(x => x.Readtime)
+                .ToList();
+
+            await ProcessSendDataAsync(latestRecords, cancellationToken);
+        }
+
+        private async Task ResendUnsentDataAsync(CancellationToken cancellationToken)
+        {
+            var missedData = _sendDataManager.GetAll(x => x.IsSent == false);
             var allMissingDates = missingDatesResult?.Data.objects.MissingDates;
 
             var allMissingDatesCount = allMissingDates?.Count;
@@ -237,6 +278,82 @@ namespace ibks.Forms.Pages
 
                         sendIt.IsSent = true;
 
+            var orderedData = missedData.Data
+                .OrderBy(x => x.Readtime)
+                .ToList();
+
+            await ProcessSendDataAsync(orderedData, cancellationToken);
+        }
+
+        private async Task ProcessSendDataAsync(IReadOnlyCollection<SendData> dataToSend, CancellationToken cancellationToken)
+        {
+            if (dataToSend == null || dataToSend.Count == 0)
+            {
+                return;
+            }
+
+            var batch = new List<SendData>(SendDataBatchSize);
+
+            foreach (var item in dataToSend)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                batch.Add(item);
+
+                if (batch.Count >= SendDataBatchSize)
+                {
+                    await SendBatchAsync(batch, cancellationToken);
+                    batch.Clear();
+
+                    await Task.Delay(100, cancellationToken);
+                }
+            }
+
+            if (batch.Count > 0)
+            {
+                await SendBatchAsync(batch, cancellationToken);
+            }
+        }
+
+        private async Task SendBatchAsync(List<SendData> batch, CancellationToken cancellationToken)
+        {
+            foreach (var sendData in batch)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var response = await _sendDataController.SendData(sendData);
+
+                sendData.IsSent = response.Success;
+
+                _sendDataManager.Add(sendData);
+            }
+        }
+
+        private void ScheduleBackgroundWork(ref Task backgroundTask, Func<CancellationToken, Task> work, string context)
+        {
+            lock (_backgroundWorkSync)
+            {
+                if (!backgroundTask.IsCompleted)
+                {
+                    return;
+                }
+
+                var cancellationToken = _backgroundWorkCts.Token;
+
+                backgroundTask = Task.Run(async () =>
+                {
+                    try
+                    {
+                        await work(cancellationToken);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                    }
+                    catch (Exception ex)
+                    {
+                        TempLog.Write($"{DateTime.Now}: [{context}] {ex}");
+                    }
+                }, cancellationToken);
                         TempLog.Write($"{DateTime.Now}: Eksik veri başarıyla gönderildi: {sendIt.Readtime} Kalan eksik veri sayısı: {allMissingDatesCount}");
                     }
                     else
@@ -256,6 +373,13 @@ namespace ibks.Forms.Pages
         private void ChannelAkm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            _backgroundWorkCts.Cancel();
+
+            base.OnFormClosing(e);
         }
     }
 }
