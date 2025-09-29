@@ -1,4 +1,5 @@
-﻿using Business.Constants;
+﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using Entities.Concrete.API;
 using Microsoft.AspNetCore.Authorization;
@@ -15,44 +16,61 @@ namespace WebAPI.Controllers
     [Authorize]
     public class GetMissingDatesController : ControllerBase, IGetMissingDatesController
     {
-        readonly IHttpClientAssign _httpClientAssign;
+        private readonly IApiService _apiManager;
+        private readonly ILogin _login;
 
-        public GetMissingDatesController(IHttpClientAssign httpClientAssign)
+
+        public GetMissingDatesController(IApiService apiManager, ILogin login)
         {
-            _httpClientAssign = httpClientAssign;
+            _apiManager = apiManager;
+            _login = login;
         }
 
         [HttpPost]
-        public async Task<IDataResult<ResultStatus>> GetMissingDates([FromBody] Guid stationId)
+        public async Task<IDataResult<ResultStatus<MissingDate>>> GetMissingDates([FromQuery] Guid stationId)
         {
             try
             {
-                if (Constants.Constants.TicketId != null)
+                var apiData = _apiManager.Get();
+
+                if (apiData.Data != null)
                 {
-                    var content = new StringContent(
-                        JsonConvert.SerializeObject(stationId),
-                        Encoding.UTF8,
-                        "application/json"
-                    );
+                    using (HttpClient httpClient = new HttpClient())
+                    {
+                        httpClient.BaseAddress = new Uri(apiData.Data.ApiAdress);
 
-                    var response = await Constants.Constants.HttpClient.PostAsync(StationType.SAIS.ToString() + "/GetMissingDates", content);
+                        var loginRes = await _login.Login(apiData.Data.UserName, apiData.Data.Password);
 
-                    response.EnsureSuccessStatusCode();
+                        if (loginRes != null && loginRes.objects != null)
+                        {
+                            httpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = loginRes.objects.TicketId.ToString() }));
 
-                    var responseContent = await response.Content.ReadAsStringAsync();
+                            var url = $"SAIS/GetMissingDates?stationId={stationId:D}";
 
-                    var desResponseContent = JsonConvert.DeserializeObject<ResultStatus>(responseContent)!;
+                            using var response = await httpClient.PostAsync(url, new StringContent(string.Empty, Encoding.UTF8, "application/json"));
+                            var responseContent = await response.Content.ReadAsStringAsync();
 
-                    return new SuccessDataResult<ResultStatus>(desResponseContent, Messages.ApiSendDataSuccces);
+                            if (!response.IsSuccessStatusCode)
+                                return new ErrorDataResult<ResultStatus<MissingDate>>(null, $"HTTP {(int)response.StatusCode}: {responseContent}");
+
+                            var deserialized = JsonConvert.DeserializeObject<ResultStatus<MissingDate>>(responseContent)!;
+                            return new SuccessDataResult<ResultStatus<MissingDate>>(deserialized, Messages.ApiSendDataSuccces);
+                        }
+                        else
+                        {
+                            return new ErrorDataResult<ResultStatus<MissingDate>>(null, Messages.ApiLoginFailed);
+                        }
+                    }
                 }
                 else
                 {
-                    return new ErrorDataResult<ResultStatus>(null, Messages.ApiLoginFailed);
+                    return new ErrorDataResult<ResultStatus<MissingDate>>(null, "LoginRes or LoginRes.objects is null");
+
                 }
             }
             catch (HttpRequestException)
             {
-                return new ErrorDataResult<ResultStatus>(null, Messages.ApiSendDataFault);
+                return new ErrorDataResult<ResultStatus<MissingDate>>(null, Messages.ApiSendDataFault);
             }
         }
     }

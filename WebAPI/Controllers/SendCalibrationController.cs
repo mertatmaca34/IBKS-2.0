@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
+using Entities.Concrete;
 using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -16,11 +17,13 @@ namespace WebAPI.Controllers
     {
         private readonly IApiService _apiManager;
         private readonly ILogin _login;
+        private readonly ICalibrationService _calibrationManager;
 
-        public SendCalibrationController(IApiService apiManager, ILogin login)
+        public SendCalibrationController(IApiService apiManager, ILogin login, ICalibrationService calibrationManager)
         {
             _apiManager = apiManager;
             _login = login;
+            _calibrationManager = calibrationManager;
         }
 
         [HttpPost]
@@ -74,9 +77,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet(Name = "SendCalibration")]
-        public IEnumerable<SendCalibration>? Get()
+        public IEnumerable<Calibration>? Get(DateTime start, DateTime end)
         {
-            return null;
+            return _calibrationManager.GetByDateTime(start, end).Data;
         }
     }
 }

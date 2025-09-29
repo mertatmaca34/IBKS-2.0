@@ -18,9 +18,10 @@ namespace DataAccess.Concrete.Contexts
             {
                 // Dinamik olarak bilgisayar adını alıyoruz
 
-                var serverName = $"(localdb)\\MSSQLLocalDB";
+                var serverName = @"(LocalDB)\MSSQLLocalDB"; 
                 var connectionString =
-                    $"Server={serverName};Database=IBKSContext;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
+                                    $"Server={serverName};Database=IBKSContext;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
+
 
                 try
                 {

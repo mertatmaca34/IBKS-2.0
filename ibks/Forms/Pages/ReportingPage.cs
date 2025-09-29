@@ -46,6 +46,8 @@ namespace ibks.Forms.Pages
         private void ButtonGenerate_Click(object sender, EventArgs e)
         {
             var selectedReportType = ComboBoxReportType.SelectedItem?.ToString();
+            var startDate = new DateTime(DateTimePickerFirstDate.Value.Year, DateTimePickerFirstDate.Value.Month, DateTimePickerFirstDate.Value.Day, DateTimePickerFirstTime.Value.Hour, DateTimePickerFirstTime.Value.Minute, DateTimePickerFirstTime.Value.Second);
+            var endDate = new DateTime(DateTimePickerLastDate.Value.Year, DateTimePickerLastDate.Value.Month, DateTimePickerLastDate.Value.Day, DateTimePickerLastTime.Value.Hour, DateTimePickerLastTime.Value.Minute, DateTimePickerLastTime.Value.Second);
 
             if (string.IsNullOrWhiteSpace(selectedReportType))
             {
@@ -55,7 +57,7 @@ namespace ibks.Forms.Pages
             if (selectedReportType == "Ölçüm")
             {
                 var data = _sendDataManager.GetAll(
-                    d => d.Readtime > _dateFilterStart && d.Readtime < _dateFilterEnd).Data;
+                    d => d.Readtime > startDate && d.Readtime < endDate).Data;
 
                 DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
                     : data.OrderByDescending(d => d.Readtime).ToList();
@@ -65,17 +67,24 @@ namespace ibks.Forms.Pages
             else if (selectedReportType == "Kalibrasyon")
             {
                 var data = _calibrationManager.GetAll(
-                    d => d.TimeStamp > DateTimePickerFirstDate.Value && d.TimeStamp < DateTimePickerLastDate.Value).Data;
+                    d => d.TimeStamp > startDate && d.TimeStamp < endDate);
 
-                DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
-                    : data.OrderByDescending(d => d.TimeStamp).ToList();
+                if(data != null && data.Data.Count > 0)
+                {
+                    DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
+                        : data.Data.OrderByDescending(d => d.TimeStamp).ToList();
 
-                DataGridViewCustomization("CalibrationData");
+                    DataGridViewCustomization("CalibrationData");
+                }
+                else
+                {
+                    MessageBox.Show("Seçilen tarih aralıklarında kalibrasyon verisi bulunamamıştır.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else if (selectedReportType == "Numune")
             {
                 var data = _sampleManager.GetAll(
-                    d => d.DateTime > DateTimePickerFirstDate.Value && d.DateTime < DateTimePickerLastDate.Value).Data;
+                    d => d.DateTime > startDate && d.DateTime < endDate).Data;
 
                 DataGridViewDatas.DataSource = RadioButtonSortByFirst.Checked ? data
                     : data.OrderByDescending(d => d.DateTime).ToList();

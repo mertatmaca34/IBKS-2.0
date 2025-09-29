@@ -9,18 +9,25 @@ using DataAccess.Concrete.Contexts;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using WebAPI.Abstract;
 using WebAPI.Authrozation;
+using WebAPI.Controllers;
 using WebAPI.Middlewares;
 
 namespace WebAPI
 {
+
     public class Program
     {
+        internal static IServiceProvider? Services { get; private set; }
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
             var host = CreateHostBuilder(args).Build();
+
+            Services = host.Services;
 
             builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
@@ -28,10 +35,8 @@ namespace WebAPI
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
             // Add services to the container.
-            builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<ISampleService, SampleManager>();
+            builder.Services.AddScoped<IApiService, ApiManager>();
             builder.Services.AddScoped<ISampleDal, EfSampleDal>();
             builder.Services.AddScoped<IPlcService, PlcManager>();
             builder.Services.AddScoped<IPlcDal, EfPlcDal>();
@@ -39,7 +44,12 @@ namespace WebAPI
             builder.Services.AddScoped<ISendDataDal, EfSendDataDal>();
             builder.Services.AddScoped<ICalibrationDal, EfCalibrationDal>();
             builder.Services.AddScoped<ICalibrationService, CalibrationManager>();
+            builder.Services.AddScoped<ISendDataService, SendDataManager>();
+            builder.Services.AddScoped<ILogin, LoginController>();
             builder.Services.AddHttpClient<IHttpClientOperations, HttpClientOperations>();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+            builder.Services.AddControllers();
 
             //builder.Services.AddDbContext<IBKSContext>(p =>
             //{
