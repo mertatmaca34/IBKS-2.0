@@ -1,12 +1,8 @@
 using Business.Abstract;
 using Business.Helpers;
 using Core.Utilities.Results;
-using Entities.Concrete;
-using Entities.Concrete.API;
-using ibks.Services.Mail.Abstract;
-using ibks.Utils;
-using Newtonsoft.Json;
 using Core.Utilities.TempLogs;
+using Entities.Concrete;
 using Entities.Concrete.API;
 using ibks.Services.Mail.Abstract;
 using ibks.Utils;
@@ -19,6 +15,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ibks.Forms.Pages
 {
@@ -38,7 +35,10 @@ namespace ibks.Forms.Pages
         private Task _missingDateResendTask = Task.CompletedTask;
         private Task _unsentDataResendTask = Task.CompletedTask;
 
-        private const int SendDataBatchSize = 250;
+        private const int SendDataBatchSize = 500;
+        private const int MissingDateQueryBatchSize = 250;
+        private const int UnsentDataQueryBatchSize = 2000;
+        private static readonly TimeSpan SendDataBatchPause = TimeSpan.FromMilliseconds(200);
 
         public HomePage(IStationService stationManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ISendDataController sendDataController,
@@ -202,8 +202,8 @@ namespace ibks.Forms.Pages
         {
             try
             {
-                ScheduleBackgroundWork(ref _missingDateResendTask, ResendMissingDatesAsync, "ResendMissingDatesAsync");
-                ScheduleBackgroundWork(ref _unsentDataResendTask, ResendUnsentDataAsync, "ResendUnsentDataAsync");
+                ScheduleBackgroundWork(ref _missingDateResendTask, ResendMissingDatesAsync, nameof(ResendMissingDatesAsync));
+                ScheduleBackgroundWork(ref _unsentDataResendTask, ResendUnsentDataAsync, nameof(ResendUnsentDataAsync));
             }
             catch (Exception ex)
             {
@@ -222,70 +222,113 @@ namespace ibks.Forms.Pages
 
             var missingDatesResult = await _getMissingDatesController.GetMissingDates(stationResult.Data.StationId);
 
-            if (!missingDatesResult.Success || missingDatesResult.Data?.objects == null)
+            if (!missingDatesResult.Success || missingDatesResult.Data?.objects?.MissingDates == null ||
+                missingDatesResult.Data.objects.MissingDates.Count == 0)
             {
                 return;
             }
 
-
-            if (missingDatesResult?.Data.objects.MissingDates == null || missingDatesResult?.Data.objects.MissingDates.Count == 0)
-            {
-                return;
-            }
-
-            var missingDateSet = new HashSet<DateTime>(missingDatePayload.MissingDates);
-
-            var storedDataResult = _sendDataManager
-                .GetAll(x => x.Stationid == stationResult.Data.StationId && missingDateSet.Contains(x.Readtime));
-
-            if (storedDataResult?.Data == null || !storedDataResult.Data.Any())
-            {
-                return;
-            }
-
-            var latestRecords = storedDataResult.Data
-                .GroupBy(x => x.Readtime)
-                .Select(group => group.OrderByDescending(x => x.Id).First())
-                .OrderBy(x => x.Readtime)
+            var orderedMissingDates = missingDatesResult.Data.objects.MissingDates
+                .Distinct()
+                .OrderBy(x => x)
                 .ToList();
 
-            await ProcessSendDataAsync(latestRecords, cancellationToken);
+            foreach (var chunk in Chunk(orderedMissingDates, MissingDateQueryBatchSize))
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                if (chunk.Count == 0)
+                {
+                    continue;
+                }
+
+                List<SendData> latestRecords;
+
+                try
+                {
+                    latestRecords = LoadLatestRecordsForReadTimes(stationResult.Data.StationId, chunk);
+                }
+                catch (Exception ex)
+                {
+                    TempLog.Write($"{DateTime.Now}: [ResendMissingDatesAsync] {ex}");
+                    break;
+                }
+
+                if (latestRecords.Count == 0)
+                {
+                    continue;
+                }
+
+                await ProcessSendDataAsync(latestRecords, cancellationToken);
+            }
         }
 
         private async Task ResendUnsentDataAsync(CancellationToken cancellationToken)
         {
-            var missedData = _sendDataManager.GetAll(x => x.IsSent == false);
-            var allMissingDates = missingDatesResult?.Data.objects.MissingDates;
+            var lastProcessedId = 0;
 
-            var allMissingDatesCount = allMissingDates?.Count;
-
-            if (allMissingDates != null && allMissingDates.Any())
+            while (true)
             {
-                var dtStart = allMissingDates.Min();
-                var dtMax = allMissingDates.Max();
+                cancellationToken.ThrowIfCancellationRequested();
 
-                var _unsentData = _sendDataManager.GetAll(x => x.Readtime > dtStart && x.Readtime < dtMax).Data;
+                List<SendData> unsentBatch;
 
-                foreach (var sendIt in _unsentData)
+                try
                 {
-                    var res = await _sendDataController.SendData(sendIt);
+                    unsentBatch = _sendDataManager.GetUnsentBatch(UnsentDataQueryBatchSize, lastProcessedId);
+                }
+                catch (Exception ex)
+                {
+                    TempLog.Write($"{DateTime.Now}: [ResendUnsentDataAsync] {ex}");
+                    break;
+                }
 
-                    if (res.Success)
-                    {
-                        allMissingDatesCount--;
+                if (unsentBatch == null || unsentBatch.Count == 0)
+                {
+                    break;
+                }
 
-                        sendIt.IsSent = true;
+                var orderedBatch = unsentBatch
+                    .OrderBy(x => x.Readtime)
+                    .ToList();
 
-            var orderedData = missedData.Data
-                .OrderBy(x => x.Readtime)
-                .ToList();
+                await ProcessSendDataAsync(orderedBatch, cancellationToken);
 
-            await ProcessSendDataAsync(orderedData, cancellationToken);
+                lastProcessedId = Math.Max(lastProcessedId, unsentBatch.Max(x => x.Id));
+            }
         }
 
-        private async Task ProcessSendDataAsync(IReadOnlyCollection<SendData> dataToSend, CancellationToken cancellationToken)
+        private List<SendData> LoadLatestRecordsForReadTimes(Guid stationId, IReadOnlyCollection<DateTime> readTimes)
         {
-            if (dataToSend == null || dataToSend.Count == 0)
+            if (readTimes == null || readTimes.Count == 0)
+            {
+                return new List<SendData>();
+            }
+
+            var minReadTime = readTimes.Min();
+            var maxReadTime = readTimes.Max();
+
+            var storedDataResult = _sendDataManager.GetAll(x =>
+                x.Stationid == stationId && x.Readtime >= minReadTime && x.Readtime <= maxReadTime);
+
+            if (storedDataResult?.Data == null || storedDataResult.Data.Count == 0)
+            {
+                return new List<SendData>();
+            }
+
+            var readTimeSet = new HashSet<DateTime>(readTimes);
+
+            return storedDataResult.Data
+                .Where(x => readTimeSet.Contains(x.Readtime))
+                .GroupBy(x => x.Readtime)
+                .Select(group => group.OrderByDescending(x => x.Id).First())
+                .OrderBy(x => x.Readtime)
+                .ToList();
+        }
+
+        private async Task ProcessSendDataAsync(IEnumerable<SendData> dataToSend, CancellationToken cancellationToken)
+        {
+            if (dataToSend == null)
             {
                 return;
             }
@@ -296,6 +339,11 @@ namespace ibks.Forms.Pages
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
+                if (item == null)
+                {
+                    continue;
+                }
+
                 batch.Add(item);
 
                 if (batch.Count >= SendDataBatchSize)
@@ -303,7 +351,10 @@ namespace ibks.Forms.Pages
                     await SendBatchAsync(batch, cancellationToken);
                     batch.Clear();
 
-                    await Task.Delay(100, cancellationToken);
+                    if (SendDataBatchPause > TimeSpan.Zero)
+                    {
+                        await Task.Delay(SendDataBatchPause, cancellationToken);
+                    }
                 }
             }
 
@@ -319,11 +370,51 @@ namespace ibks.Forms.Pages
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var response = await _sendDataController.SendData(sendData);
+                try
+                {
+                    var response = await _sendDataController.SendData(sendData);
+                    sendData.IsSent = response.Success;
 
-                sendData.IsSent = response.Success;
+                    if (!response.Success)
+                    {
+                        TempLog.Write($"{DateTime.Now}: [SendBatchAsync] Veri gönderimi başarısız: {sendData.Readtime}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    sendData.IsSent = false;
+                    TempLog.Write($"{DateTime.Now}: [SendBatchAsync] {ex}");
+                }
+                finally
+                {
+                    _sendDataManager.Update(sendData);
+                }
+            }
+        }
 
-                _sendDataManager.Add(sendData);
+        private static IEnumerable<List<T>> Chunk<T>(IEnumerable<T> source, int size)
+        {
+            if (source == null || size <= 0)
+            {
+                yield break;
+            }
+
+            var buffer = new List<T>(size);
+
+            foreach (var item in source)
+            {
+                buffer.Add(item);
+
+                if (buffer.Count == size)
+                {
+                    yield return buffer;
+                    buffer = new List<T>(size);
+                }
+            }
+
+            if (buffer.Count > 0)
+            {
+                yield return buffer;
             }
         }
 
@@ -352,15 +443,6 @@ namespace ibks.Forms.Pages
                         TempLog.Write($"{DateTime.Now}: [{context}] {ex}");
                     }
                 }, cancellationToken);
-                        TempLog.Write($"{DateTime.Now}: Eksik veri başarıyla gönderildi: {sendIt.Readtime} Kalan eksik veri sayısı: {allMissingDatesCount}");
-                        TempLog.Write($"{DateTime.Now}: Eksik veri gönderilemedi: {sendIt.Readtime} - Hata: {res.Message}");
-                        sendIt.IsSent = false;
-
-                    _sendDataManager.Update(sendIt);
-                }
-
-                // Her 500’lük batch bittikten sonra istersen bekleme koyabilirsin
-                // await Task.Delay(2000);
             }
         }
 

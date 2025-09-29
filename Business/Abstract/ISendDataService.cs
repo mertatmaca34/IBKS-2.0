@@ -1,5 +1,6 @@
-﻿using Core.Utilities.Results;
+using Core.Utilities.Results;
 using Entities.Concrete;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace Business.Abstract
@@ -10,6 +11,7 @@ namespace Business.Abstract
         IResult Delete(SendData sendData);
         IResult Update(SendData sendData);
         IDataResult<List<SendData>> GetAll(Expression<Func<SendData, bool>> filter = null);
+        List<SendData> GetUnsentBatch(int batchSize, int lastProcessedId);
         IDataResult<List<SendData>> GetLast60Minutes();
         IDataResult<List<SendData>> GetLastWashTime();
         IDataResult<List<SendData>> GetLastWashWeekTime();
