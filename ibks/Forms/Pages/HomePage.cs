@@ -36,6 +36,8 @@ namespace ibks.Forms.Pages
         private Task _unsentDataResendTask = Task.CompletedTask;
 
         private const int SendDataBatchSize = 500;
+        private const int MissingDateQueryBatchSize = 250;
+        private const int UnsentDataQueryBatchSize = 2000;
         private static readonly TimeSpan SendDataBatchPause = TimeSpan.FromMilliseconds(200);
 
         public HomePage(IStationService stationManager, ISendDataService sendDataManager,
@@ -62,119 +64,7 @@ namespace ibks.Forms.Pages
                 AssignStatusBar();
                 AssignAnalogSensorStatements();
                 AssignAverageOfLast60Minutes();
-                AssignSystemStatement();
-                SendDataAndAssignStationInfoControl();
-            }; bgw.RunWorkerAsync();
-
-            GC.Collect();
-
-            await _checkStatements.Check();
-        }
-
-        private async void SendDataAndAssignStationInfoControl()
-        {
-            try
-            {
-                var data = DataProcessingHelper.MergedSendData(_stationManager);
-
-                if (data.Success)
-                {
-                    if (SendDataHelper.IsItTime(data.Data.Readtime).Success)
-                    {
-                        var res = await _sendDataController.SendData(data.Data);
-
-                        if (res.Success && res.Data != null && res.Data.objects != null)
-                        {
-                            if (res.Message == "zaten kayıtlı")
-                            {
-                                data.Data.IsSent = true;
-
-                                _sendDataManager.Update(data.Data);
-
-                                return;
-                            }
-
-                            data.Data.IsSent = true;
-
-                            StaticInstantData.Assign(res.Data.objects);
-
-                            AssignStationInfoControl(res);
-                        }
-                        else
-                        {
-                            data.Data!.IsSent = false;
-                        }
-
-                        _sendDataManager.Add(data.Data);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                TempLog.Write($"{DateTime.Now}: [SendDataAndAssignStationInfoControl] {ex}");
-            }
-        }
-
-        private void AssignAnalogSensors()
-        {
-            ChannelAkm.InstantData = _sharp7Service.S71200.DB41.Akm + " mg/l";
-            ChannelCozunmusOksijen.InstantData = _sharp7Service.S71200.DB41.CozunmusOksijen + " mg/l";
-            ChannelSicaklik.InstantData = _sharp7Service.S71200.DB41.KabinSicaklik + "°C";
-            ChannelPh.InstantData = _sharp7Service.S71200.DB41.Ph.ToString();
-            ChannelIletkenlik.InstantData = _sharp7Service.S71200.DB41.Iletkenlik + " µS/cm";
-            ChannelKoi.InstantData = _sharp7Service.S71200.DB41.Koi + " mg/l";
-            ChannelAkisHizi.InstantData = _sharp7Service.S71200.DB41.NumuneHiz + " m³/d";
-            ChannelDebi.InstantData = _sharp7Service.S71200.DB41.TesisDebi + " m/s";
-        }
-
-        private void AssignAnalogSensorStatements()
-        {
-            ChannelAkm.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.Akm);
-            ChannelCozunmusOksijen.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.CozunmusOksijen);
-            ChannelSicaklik.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.KabinSicaklik);
-            ChannelPh.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.Ph);
-            ChannelIletkenlik.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.Iletkenlik);
-            ChannelKoi.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.Koi);
-            ChannelAkisHizi.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.NumuneHiz);
-            ChannelDebi.ChannelStatement = ColorExtensions.FromDouble(_sharp7Service.S71200.DB41.TesisDebi);
-        }
-
-        private void AssignDigitalSensors()
-        {
-            DigitalSensorKapi.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Kabin_KapiAcildi);
-            DigitalSensorDuman.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Kabin_Duman);
-            DigitalSensorSuBaskini.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Kabin_SuBaskini);
-            DigitalSensorAcilStop.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Kabin_AcilStopBasili);
-            DigitalSensorPompa1Termik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Pompa1Termik);
-            DigitalSensorPompa2Termik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Pompa2Termik);
-            DigitalSensorTSuPompaTermik.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Pompa3Termik);
-            DigitalSensorYikamaTanki.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.TankDolu);
-            DigitalSensorEnerji.SensorStatement = ColorExtensions.FromBoolean(_sharp7Service.S71200.DB42.Kabin_EnerjiYok);
-        }
-
-        private void AssignStatusBar()
-        {
-            StatusBarControl.ConnectionStatement = "Bağlantı Durumu: " + RealTimeCalculations.ConnectionStatus();
-            StatusBarControl.ConnectionTime = "Bağlantı Zamanı: " + _sharp7Service.ConnectionTime;
-            StatusBarControl.GunlukYikamaKalan = $"Günlük Yıkamaya Kalan: {_sharp7Service.DailyWashRemaining}";
-            StatusBarControl.HaftalikYikamaKalan = $"Haftalık Yıkamaya Kalan: {_sharp7Service.WeeklyWashRemaining}";
-            StatusBarControl.SistemSaati = "Sistem Saati: " + _sharp7Service.S71200.DB43.SystemTime;
-        }
-
-        private void AssignAverageOfLast60Minutes()
-        {
-            var data = ValueAvarages.Last60MinAvg(_sendDataManager);
-
-            if (data != null && data.Data != null)
-            {
-                ChannelAkm.AvgDataOf60Min = data.Data.Akm.ToString();
-                ChannelCozunmusOksijen.AvgDataOf60Min = data.Data.CozunmusOksijen.ToString();
-                ChannelSicaklik.AvgDataOf60Min = data.Data.KabinSicaklik.ToString();
-                ChannelPh.AvgDataOf60Min = data.Data.Ph.ToString();
-                ChannelIletkenlik.AvgDataOf60Min = data.Data.Iletkenlik.ToString();
-                ChannelKoi.AvgDataOf60Min = data.Data.Koi.ToString();
-                ChannelAkisHizi.AvgDataOf60Min = data.Data.NumuneHiz.ToString();
-                ChannelDebi.AvgDataOf60Min = data.Data.TesisDebi.ToString();
+@@ -180,200 +180,282 @@ namespace ibks.Forms.Pages
             }
         }
 
@@ -220,56 +110,113 @@ namespace ibks.Forms.Pages
 
             var missingDatesResult = await _getMissingDatesController.GetMissingDates(stationResult.Data.StationId);
 
-            if (!missingDatesResult.Success || missingDatesResult.Data?.objects == null)
+            if (!missingDatesResult.Success || missingDatesResult.Data?.objects?.MissingDates == null ||
+                missingDatesResult.Data.objects.MissingDates.Count == 0)
             {
                 return;
             }
 
-            var missingDatePayload = missingDatesResult.Data.objects;
-
-            if (missingDatePayload?.MissingDates == null || missingDatePayload.MissingDates.Count == 0)
-            {
-                return;
-            }
-
-            var missingDateSet = new HashSet<DateTime>(missingDatePayload.MissingDates);
-
-            var storedDataResult = _sendDataManager
-                .GetAll(x => x.Stationid == stationResult.Data.StationId && missingDateSet.Contains(x.Readtime));
-
-            if (storedDataResult?.Data == null || !storedDataResult.Data.Any())
-            {
-                return;
-            }
-
-            var latestRecords = storedDataResult.Data
-                .GroupBy(x => x.Readtime)
-                .Select(group => group.OrderByDescending(x => x.Id).First())
-                .OrderBy(x => x.Readtime)
+            var orderedMissingDates = missingDatesResult.Data.objects.MissingDates
+                .Distinct()
+                .OrderBy(x => x)
                 .ToList();
 
-            await ProcessSendDataAsync(latestRecords, cancellationToken);
+            foreach (var chunk in Chunk(orderedMissingDates, MissingDateQueryBatchSize))
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                if (chunk.Count == 0)
+                {
+                    continue;
+                }
+
+                List<SendData> latestRecords;
+
+                try
+                {
+                    latestRecords = LoadLatestRecordsForReadTimes(stationResult.Data.StationId, chunk);
+                }
+                catch (Exception ex)
+                {
+                    TempLog.Write($"{DateTime.Now}: [ResendMissingDatesAsync] {ex}");
+                    break;
+                }
+
+                if (latestRecords.Count == 0)
+                {
+                    continue;
+                }
+
+                await ProcessSendDataAsync(latestRecords, cancellationToken);
+            }
         }
 
         private async Task ResendUnsentDataAsync(CancellationToken cancellationToken)
         {
-            var missedData = _sendDataManager.GetAll(x => x.IsSent == false);
+            var lastProcessedId = 0;
 
-            if (missedData?.Data == null || missedData.Data.Count == 0)
+            while (true)
             {
-                return;
+                cancellationToken.ThrowIfCancellationRequested();
+
+                List<SendData> unsentBatch;
+
+                try
+                {
+                    unsentBatch = _sendDataManager.GetUnsentBatch(UnsentDataQueryBatchSize, lastProcessedId);
+                }
+                catch (Exception ex)
+                {
+                    TempLog.Write($"{DateTime.Now}: [ResendUnsentDataAsync] {ex}");
+                    break;
+                }
+
+                if (unsentBatch == null || unsentBatch.Count == 0)
+                {
+                    break;
+                }
+
+                var orderedBatch = unsentBatch
+                    .OrderBy(x => x.Readtime)
+                    .ToList();
+
+                await ProcessSendDataAsync(orderedBatch, cancellationToken);
+
+                lastProcessedId = Math.Max(lastProcessedId, unsentBatch.Max(x => x.Id));
             }
-
-            var orderedData = missedData.Data
-                .OrderBy(x => x.Readtime)
-                .ToList();
-
-            await ProcessSendDataAsync(orderedData, cancellationToken);
         }
 
-        private async Task ProcessSendDataAsync(IReadOnlyCollection<SendData> dataToSend, CancellationToken cancellationToken)
+        private List<SendData> LoadLatestRecordsForReadTimes(Guid stationId, IReadOnlyCollection<DateTime> readTimes)
         {
-            if (dataToSend == null || dataToSend.Count == 0)
+            if (readTimes == null || readTimes.Count == 0)
+            {
+                return new List<SendData>();
+            }
+
+            var minReadTime = readTimes.Min();
+            var maxReadTime = readTimes.Max();
+
+            var storedDataResult = _sendDataManager.GetAll(x =>
+                x.Stationid == stationId && x.Readtime >= minReadTime && x.Readtime <= maxReadTime);
+
+            if (storedDataResult?.Data == null || storedDataResult.Data.Count == 0)
+            {
+                return new List<SendData>();
+            }
+
+            var readTimeSet = new HashSet<DateTime>(readTimes);
+
+            return storedDataResult.Data
+                .Where(x => readTimeSet.Contains(x.Readtime))
+                .GroupBy(x => x.Readtime)
+                .Select(group => group.OrderByDescending(x => x.Id).First())
+                .OrderBy(x => x.Readtime)
+                .ToList();
+        }
+
+        private async Task ProcessSendDataAsync(IEnumerable<SendData> dataToSend, CancellationToken cancellationToken)
+        {
+            if (dataToSend == null)
             {
                 return;
             }
@@ -279,6 +226,11 @@ namespace ibks.Forms.Pages
             foreach (var item in dataToSend)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+
+                if (item == null)
+                {
+                    continue;
+                }
 
                 batch.Add(item);
 
@@ -325,6 +277,32 @@ namespace ibks.Forms.Pages
                 {
                     _sendDataManager.Update(sendData);
                 }
+            }
+        }
+
+        private static IEnumerable<List<T>> Chunk<T>(IEnumerable<T> source, int size)
+        {
+            if (source == null || size <= 0)
+            {
+                yield break;
+            }
+
+            var buffer = new List<T>(size);
+
+            foreach (var item in source)
+            {
+                buffer.Add(item);
+
+                if (buffer.Count == size)
+                {
+                    yield return buffer;
+                    buffer = new List<T>(size);
+                }
+            }
+
+            if (buffer.Count > 0)
+            {
+                yield return buffer;
             }
         }
 

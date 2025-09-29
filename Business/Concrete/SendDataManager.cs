@@ -1,16 +1,19 @@
-﻿using Business.Abstract;
+using Business.Abstract;
 using Business.Constants;
 using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Business.Concrete
 {
     public class SendDataManager : ISendDataService
     {
-        ISendDataDal _sendDataDal;
+        private readonly ISendDataDal _sendDataDal;
 
         public SendDataManager(ISendDataDal sendDataDal)
         {
@@ -23,7 +26,7 @@ namespace Business.Concrete
 
             if (result == null)
             {
-                this.Update(sendData);
+                Update(sendData);
 
                 return new SuccessResult(Messages.SendDataUpdated);
             }
@@ -56,6 +59,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<SendData>>(_sendDataDal.GetAll(filter));
         }
 
+        public List<SendData> GetUnsentBatch(int batchSize, int lastProcessedId)
+        {
+            return _sendDataDal.GetUnsentBatch(batchSize, lastProcessedId);
+        }
+
         public IDataResult<List<SendData>> GetLast60Minutes()
         {
             var data = _sendDataDal.GetAll(d => d.Readtime >= DateTime.Now.AddMinutes(-60));
@@ -84,7 +92,7 @@ namespace Business.Concrete
                 return new SuccessResult(Messages.SendDataUpdated);
             }
 
-            this.Add(sendData);
+            Add(sendData);
 
             return new SuccessResult(Messages.SendDataAdded);
         }
@@ -99,10 +107,8 @@ namespace Business.Concrete
                 {
                     return new SuccessResult();
                 }
-                else
-                {
-                    return new ErrorResult(Messages.DataNotFound);
-                }
+
+                return new ErrorResult(Messages.DataNotFound);
             }
 
             return new ErrorResult(Messages.IncompleteInfo);
