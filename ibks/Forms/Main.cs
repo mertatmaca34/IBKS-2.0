@@ -41,6 +41,7 @@ namespace ibks.Forms
             _apiManager = apiManager;
             _stationManager = stationManager;
             _plcManager = plcManager;
+            _calibrationManager = calibrationManager;
             _calibrationLimitManager = calibrationLimitManager;
             _mailServerManager = mailServerManager;
             _authManager = authManager;

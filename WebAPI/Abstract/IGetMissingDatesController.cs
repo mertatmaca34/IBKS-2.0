@@ -6,6 +6,6 @@ namespace WebAPI.Abstract
 {
     public interface IGetMissingDatesController
     {
-        public Task<IDataResult<ResultStatus>> GetMissingDates([FromBody] Guid stationId);
+        public Task<IDataResult<ResultStatus<MissingDate>>> GetMissingDates([FromBody] Guid stationId);
     }
 }

@@ -1,19 +1,15 @@
 ﻿using Business.Abstract;
 using Business.Helpers;
 using Core.Utilities.Results;
+using Core.Utilities.TempLogs;
 using Entities.Concrete.API;
 using ibks.Services.Mail.Abstract;
 using ibks.Utils;
-using System;
-using Newtonsoft.Json;
 using PLC;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
 using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 using WebAPI.Abstract;
-using Core.Utilities.TempLogs;
 
 namespace ibks.Forms.Pages
 {
@@ -78,7 +74,12 @@ namespace ibks.Forms.Pages
                             if (res.Message == "zaten kayıtlı")
                             {
                                 data.Data.IsSent = true;
+
+                                _sendDataManager.Update(data.Data);
+
+                                return;
                             }
+
                             data.Data.IsSent = true;
 
                             StaticInstantData.Assign(res.Data.objects);
@@ -181,12 +182,11 @@ namespace ibks.Forms.Pages
             DigitalSensorBar.SystemStatementText = TextExtensions.FromStatus();
         }
 
-        private async void TimerGetMissingDates_Tick(object sender, EventArgs e)
+        private void TimerGetMissingDates_Tick(object sender, EventArgs e)
         {
             try
             {
-                await ResendMissingDatesAsync();
-                await ResendUnsentDataAsync();
+                ResendMissingDates();
             }
             catch (Exception ex)
             {
@@ -194,7 +194,7 @@ namespace ibks.Forms.Pages
             }
         }
 
-        private async Task ResendMissingDatesAsync()
+        private async void ResendMissingDates()
         {
             var stationResult = _stationManager.Get();
 
@@ -210,51 +210,46 @@ namespace ibks.Forms.Pages
                 return;
             }
 
-            var serializedObject = JsonConvert.SerializeObject(missingDatesResult.Data.objects);
-            var missingDatePayload = JsonConvert.DeserializeObject<MissingDate>(serializedObject);
 
-            if (missingDatePayload?.MissingDates == null || !missingDatePayload.MissingDates.Any())
+            if (missingDatesResult?.Data.objects.MissingDates == null || missingDatesResult?.Data.objects.MissingDates.Count == 0)
             {
                 return;
             }
 
-            foreach (var missingDate in missingDatePayload.MissingDates)
-            {
-                var storedData = _sendDataManager
-                    .GetAll(x => x.Stationid == stationResult.Data.StationId && x.Readtime == missingDate)
-                    .Data?
-                    .OrderByDescending(x => x.Id)
-                    .FirstOrDefault();
+            var allMissingDates = missingDatesResult?.Data.objects.MissingDates;
 
-                if (storedData == null)
+            var allMissingDatesCount = allMissingDates?.Count;
+
+            if (allMissingDates != null && allMissingDates.Any())
+            {
+                var dtStart = allMissingDates.Min();
+                var dtMax = allMissingDates.Max();
+
+                var _unsentData = _sendDataManager.GetAll(x => x.Readtime > dtStart && x.Readtime < dtMax).Data;
+
+                foreach (var sendIt in _unsentData)
                 {
-                    continue;
+                    var res = await _sendDataController.SendData(sendIt);
+
+                    if (res.Success)
+                    {
+                        allMissingDatesCount--;
+
+                        sendIt.IsSent = true;
+
+                        TempLog.Write($"{DateTime.Now}: Eksik veri başarıyla gönderildi: {sendIt.Readtime} Kalan eksik veri sayısı: {allMissingDatesCount}");
+                    }
+                    else
+                    {
+                        TempLog.Write($"{DateTime.Now}: Eksik veri gönderilemedi: {sendIt.Readtime} - Hata: {res.Message}");
+                        sendIt.IsSent = false;
+                    }
+
+                    _sendDataManager.Update(sendIt);
                 }
 
-                var response = await _sendDataController.SendData(storedData);
-
-                storedData.IsSent = response.Success;
-
-                _sendDataManager.Add(storedData);
-            }
-        }
-
-        private async Task ResendUnsentDataAsync()
-        {
-            var missedData = _sendDataManager.GetAll(x => x.IsSent == false);
-
-            if (missedData?.Data == null || !missedData.Data.Any())
-            {
-                return;
-            }
-
-            foreach (var item in missedData.Data)
-            {
-                var res = await _sendDataController.SendData(item);
-
-                item.IsSent = res.Success;
-
-                _sendDataManager.Add(item);
+                // Her 500’lük batch bittikten sonra istersen bekleme koyabilirsin
+                // await Task.Delay(2000);
             }
         }
 

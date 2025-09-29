@@ -9,6 +9,8 @@ using System.Text;
 using WebAPI.Abstract;
 using WebAPI.Enums;
 using Core.Utilities.TempLogs;
+using WebAPI;
+using Business.Concrete;
 
 [ApiController]
 [Route("[controller]")]
@@ -17,9 +19,9 @@ public class SendDataController : ControllerBase, ISendDataController
     private readonly IApiService _apiManager;
     private readonly ILogin _login;
 
-    public SendDataController(IApiService apiManager, ILogin login)
+    public SendDataController(IApiService apiService, ILogin login)
     {
-        _apiManager = apiManager;
+        _apiManager = apiService;
         _login = login;
     }
 
@@ -120,8 +122,10 @@ public class SendDataController : ControllerBase, ISendDataController
 
 
     [HttpGet(Name = "GetSendData")]
-    public IEnumerable<SendData>? Get()
+    public IEnumerable<SendData>? Get(DateTime start, DateTime end)
     {
-        return null;
+        ISendDataService _sendDataManager = Program.Services.GetRequiredService<ISendDataService>();
+
+        return _sendDataManager.GetAll(x=> x.Readtime > start && x.Readtime < end).Data;
     }
 }

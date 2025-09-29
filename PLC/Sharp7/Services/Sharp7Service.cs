@@ -177,7 +177,9 @@ namespace PLC.Sharp7.Services
 
         public void ReadDB41()
         {
-            if (!_worker.IsBusy && client != null & client?.Connected == true)
+            if (_worker.IsBusy)
+                return;
+            if (client != null & client?.Connected == true)
             {
                 _worker.DoWork += delegate
                 {
