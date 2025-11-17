@@ -40,7 +40,6 @@ namespace WebAPI.Controllers
                     password = Hashing.MD5Hash(Hashing.MD5Hash(password))
                 };
 
-                // JSON verisini dönüştürme ve HTTP içeriği ayarlama
                 var content = new StringContent(
                     JsonConvert.SerializeObject(login),
                     Encoding.UTF8,
@@ -48,13 +47,11 @@ namespace WebAPI.Controllers
                 );
 
                 _httpClient?.Timeout.Add(TimeSpan.FromSeconds(15));
-                // API'ye POST isteği gönderme
+
                 var response = await _httpClient.PostAsync("/security/login", content);
                 
-                // İsteğin başarı durumunu kontrol edin (isteğe göre yapılabilir)
                 response.EnsureSuccessStatusCode();
 
-                // API'den dönen cevabı alın
                 var responseContent = await response.Content.ReadAsStringAsync();
 
                 var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<LoginResult>?>(responseContent);
@@ -66,8 +63,6 @@ namespace WebAPI.Controllers
             }
             catch (HttpRequestException)
             {
-                // İstisna durumları yönetme (isteğe göre yapılabilir)
-                // Hata durumunda nasıl bir davranış sergileyeceğinize karar verin
                 return new ResultStatus<LoginResult>();
             }
         }

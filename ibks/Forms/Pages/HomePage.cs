@@ -94,6 +94,8 @@ namespace ibks.Forms.Pages
                             data.Data!.IsSent = false;
                         }
 
+                        TempLog.Write($"{DateTime.Now}: [Dakikalık Veri Gönderimi] {res.Message}");
+
                         _sendDataManager.Add(data.Data);
                     }
                 }
@@ -205,6 +207,12 @@ namespace ibks.Forms.Pages
 
             var stationResult = _stationManager.Get();
 
+            if (!stationResult.Success)
+            {
+                isBusy = false;
+                return;
+            }
+
             var missingDatesResult = await _getMissingDatesController.GetMissingDates(stationResult.Data.StationId);
 
             if (!missingDatesResult.Success || missingDatesResult.Data?.objects == null)
@@ -222,48 +230,39 @@ namespace ibks.Forms.Pages
             var dtStart = allMissingDates!.Min();
             var dtMax = allMissingDates!.Max();
 
-            var _unsentDataRange = _sendDataManager.GetAll(x => x.Readtime > dtStart && x.Readtime < dtMax).Data;
+            var unsentDataRange = _sendDataManager
+            .GetAll(x => x.Readtime > dtStart && x.Readtime < dtMax)
+            .Data;
 
-            List<SendData> _unsentData = new List<SendData>();
+            var lookup = unsentDataRange
+                .GroupBy(x => new DateTime(
+                    x.Readtime.Year,
+                    x.Readtime.Month,
+                    x.Readtime.Day,
+                    x.Readtime.Hour,
+                    x.Readtime.Minute,
+                    0))
+                .ToDictionary(g => g.Key, g => g.First());
 
             foreach (var missingDate in allMissingDates)
             {
-                var sendData = _unsentDataRange.FirstOrDefault(x => x.Readtime == missingDate);
+                var key = new DateTime(
+                    missingDate.Year,
+                    missingDate.Month,
+                    missingDate.Day,
+                    missingDate.Hour,
+                    missingDate.Minute,
+                    0);
 
-                if (sendData != null)
+                if (lookup.TryGetValue(key, out var sendData))
                 {
-                    _unsentData.Add(sendData);
+                    var res = await _sendDataController.SendData(sendData);
+
+                    TempLog.Write($"{sendData.Readtime} {res.Message}");
                 }
             }
 
-            MessageBox.Show("Tamamlandı");
-
             isBusy = false;
-
- /*               var res = await _sendDataController.SendData(sendIt);
-
-                if (res.Success)
-                {
-
-                    sendIt.IsSent = true;
-
-                    TempLog.Write($"{DateTime.Now}: Eksik veri başarıyla gönderildi: {sendIt.Readtime} Kalan eksik veri sayısı: {allMissingDatesCount}");
-                }
-                else
-                {
-                    TempLog.Write($"{DateTime.Now}: Eksik veri gönderilemedi: {sendIt.Readtime} - Hata: {res.Message}");
-                    sendIt.IsSent = false;
-                }
-
-                _sendDataManager.Update(sendIt);
-            }*/
-
-            // Her 500’lük batch bittikten sonra istersen bekleme koyabilirsin
-            // await Task.Delay(2000);
-        }
-        private void ChannelAkm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

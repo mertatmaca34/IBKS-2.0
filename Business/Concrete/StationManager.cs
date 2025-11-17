@@ -38,6 +38,13 @@ namespace Business.Concrete
 
         public IDataResult<Station> Get()
         {
+            var res = _stationDal.Get(s => s.Id == 1);
+
+            if (res == null)
+            {
+                return new ErrorDataResult<Station>(Messages.DataNotFound);
+            }
+
             return new SuccessDataResult<Station>(_stationDal.Get(s => s.Id == 1));
         }
 

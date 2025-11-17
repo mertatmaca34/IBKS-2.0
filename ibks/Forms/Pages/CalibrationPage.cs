@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
+using Entities.Concrete.API;
 using ibks.Utils;
 using WebAPI.Abstract;
 
@@ -66,11 +68,37 @@ namespace ibks.Forms.Pages
 
         private void ButtonAkmZero_Click(object sender, EventArgs e)
         {
+            var getHaziranCalibration = _calibrationManager.GetAll().Data;
+
+            var stationId = _stationManager.Get().Data.StationId;
+            foreach (var item in getHaziranCalibration)
+            {
+                SendCalibration data = new SendCalibration
+                {
+                    CalibrationDate = item.TimeStamp,
+                    Stationid = stationId,
+                    DBColumnName = item.Parameter,
+                    ZeroRef = item.ZeroRef,
+                    ZeroMeas = item.ZeroMeas,
+                    ZeroDiff = item.ZeroDiff,
+                    ZeroSTD = item.ZeroStd,
+                    SpanRef = item.ZeroRef,
+                    SpanMeas = item.ZeroMeas,
+                    SpanDiff = item.ZeroDiff,
+                    SpanSTD = item.ZeroStd,
+                    ResultFactor = item.ResultFactor,
+                    ResultZero = item.IsItValid,
+                    ResultSpan = item.IsItValid,
+                };
+
+                var res = _sendCalibrationController.SendCalibration(data);
+            }
+
             var calibrationLimits = _calibrationLimitManager.Get(x => x.Parameter == "Akm");
 
             if (calibrationLimits != null)
             {
-                _calibrationOps.StartCalibration("AKM", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
+                //_calibrationOps.StartCalibration("AKM", "Zero", calibrationLimits.Data.ZeroTimeStamp, _controls);
             }
         }
 

@@ -8,20 +8,13 @@ namespace DataAccess.Concrete.Contexts
 {
     public class IBKSContext : DbContext
     {
-        //public IBKSContext(DbContextOptions<IBKSContext> optionsBuilder):base(optionsBuilder)
-        //{
-        //}Environment.MachineName\SQLEXPRESS
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // Dinamik olarak bilgisayar adını alıyoruz
-
-                var serverName = @"(LocalDB)\MSSQLLocalDB"; 
+                var serverName = $@"{Environment.MachineName}\SQLEXPRESS";
                 var connectionString =
                                     $"Server={serverName};Database=IBKSContext;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
-
 
                 try
                 {
@@ -32,7 +25,7 @@ namespace DataAccess.Concrete.Contexts
                 }
                 catch
                 {
-                    // hata olursa sessizce geç
+                    //TODO
                 }
             }
         }

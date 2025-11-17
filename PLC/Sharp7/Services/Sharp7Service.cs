@@ -172,7 +172,6 @@ namespace PLC.Sharp7.Services
                     var res = client?.DBWrite(42, 0, 3, buffer);
                 }
             }
-            
         }
 
         public void ReadDB41()
@@ -236,7 +235,7 @@ namespace PLC.Sharp7.Services
                         S71200.DB42.ManuelTetik              = Get.Bit(S71200.Buffer42, 2, 4);
                         S71200.DB42.SimNumuneTetik           = Get.Bit(S71200.Buffer42, 2, 5);
 
-                        res = client?.DBRead(43, 0, 19, S71200.Buffer43);
+                        res = client?.DBRead(100, 0, 19, S71200.Buffer43);
 
                         S71200.DB43.SystemTime = Get.Time(S71200.Buffer43, 0);
                         S71200.DB43.WeeklyWashDay = Get.Byte(S71200.Buffer43, 14);

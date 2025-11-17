@@ -71,7 +71,6 @@ public class SendDataController : ControllerBase, ISendDataController
                         {
                             return new SuccessDataResult<ResultStatus<SendDataResult>>(desResponseContent, "zaten kayıtlı");
                         }
-                        TempLog.Write(DateTime.Now + ": " + Messages.ApiSendDataSuccces);
 
                         return new SuccessDataResult<ResultStatus<SendDataResult>>(desResponseContent, Messages.ApiSendDataSuccces);
                     }

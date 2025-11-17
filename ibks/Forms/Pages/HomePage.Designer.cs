@@ -223,7 +223,6 @@
             ChannelAkm.Name = "ChannelAkm";
             ChannelAkm.Size = new Size(568, 63);
             ChannelAkm.TabIndex = 1;
-            ChannelAkm.Load += ChannelAkm_Load;
             // 
             // tableLayoutPanel3
             // 
