@@ -187,7 +187,7 @@ namespace ibks.Forms.Pages
             DigitalSensorBar.SystemStatementText = TextExtensions.FromStatus();
         }
 
-        private async void TimerGetMissingDates_Tick(object sender, EventArgs e)
+        private void TimerGetMissingDates_Tick(object sender, EventArgs e)
         {
             try
             {

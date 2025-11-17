@@ -2,6 +2,7 @@
 {
     public enum StationStatements
     {
+        SorunYok = 0,
         Gecerli = 1,
         Gecersiz = 4,
         Kalibrasyon = 9,

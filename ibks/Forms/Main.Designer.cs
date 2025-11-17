@@ -74,7 +74,7 @@
             ButtonNightMode.Enabled = false;
             ButtonNightMode.FlatAppearance.BorderSize = 0;
             ButtonNightMode.FlatStyle = FlatStyle.Flat;
-            ButtonNightMode.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            ButtonNightMode.Font = new Font("Calibri", 8.25F);
             ButtonNightMode.ForeColor = Color.DimGray;
             ButtonNightMode.Image = Properties.Resources.black_and_white_24px;
             ButtonNightMode.Location = new Point(8, 605);
@@ -85,6 +85,7 @@
             ButtonNightMode.Text = "Gece Modu";
             ButtonNightMode.TextAlign = ContentAlignment.BottomCenter;
             ButtonNightMode.UseVisualStyleBackColor = true;
+            ButtonNightMode.Visible = false;
             ButtonNightMode.Click += ButtonNightMode_Click;
             // 
             // ButtonSettingPage
@@ -92,7 +93,7 @@
             ButtonSettingPage.Dock = DockStyle.Fill;
             ButtonSettingPage.FlatAppearance.BorderSize = 0;
             ButtonSettingPage.FlatStyle = FlatStyle.Flat;
-            ButtonSettingPage.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            ButtonSettingPage.Font = new Font("Calibri", 8.25F);
             ButtonSettingPage.ForeColor = Color.DimGray;
             ButtonSettingPage.Image = Properties.Resources.settings_24px;
             ButtonSettingPage.Location = new Point(8, 428);
@@ -110,7 +111,7 @@
             ButtonReportingPage.Dock = DockStyle.Fill;
             ButtonReportingPage.FlatAppearance.BorderSize = 0;
             ButtonReportingPage.FlatStyle = FlatStyle.Flat;
-            ButtonReportingPage.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            ButtonReportingPage.Font = new Font("Calibri", 8.25F);
             ButtonReportingPage.ForeColor = Color.DimGray;
             ButtonReportingPage.Image = Properties.Resources.save_24px;
             ButtonReportingPage.Location = new Point(8, 344);
@@ -128,7 +129,7 @@
             ButtonMailPage.Dock = DockStyle.Fill;
             ButtonMailPage.FlatAppearance.BorderSize = 0;
             ButtonMailPage.FlatStyle = FlatStyle.Flat;
-            ButtonMailPage.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            ButtonMailPage.Font = new Font("Calibri", 8.25F);
             ButtonMailPage.ForeColor = Color.DimGray;
             ButtonMailPage.Image = Properties.Resources.alarm_24px;
             ButtonMailPage.Location = new Point(8, 260);
@@ -146,7 +147,7 @@
             ButtonCalibrationPage.Dock = DockStyle.Fill;
             ButtonCalibrationPage.FlatAppearance.BorderSize = 0;
             ButtonCalibrationPage.FlatStyle = FlatStyle.Flat;
-            ButtonCalibrationPage.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            ButtonCalibrationPage.Font = new Font("Calibri", 8.25F);
             ButtonCalibrationPage.ForeColor = Color.DimGray;
             ButtonCalibrationPage.Image = Properties.Resources.azimuth_24px;
             ButtonCalibrationPage.Location = new Point(8, 176);
@@ -164,7 +165,7 @@
             ButtonSimulationPage.Dock = DockStyle.Fill;
             ButtonSimulationPage.FlatAppearance.BorderSize = 0;
             ButtonSimulationPage.FlatStyle = FlatStyle.Flat;
-            ButtonSimulationPage.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            ButtonSimulationPage.Font = new Font("Calibri", 8.25F);
             ButtonSimulationPage.ForeColor = Color.DimGray;
             ButtonSimulationPage.Image = Properties.Resources.monitor_24px;
             ButtonSimulationPage.Location = new Point(8, 92);
@@ -184,7 +185,7 @@
             ButtonHomePage.FlatAppearance.BorderSize = 0;
             ButtonHomePage.FlatAppearance.MouseOverBackColor = Color.FromArgb(230, 230, 230);
             ButtonHomePage.FlatStyle = FlatStyle.Flat;
-            ButtonHomePage.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            ButtonHomePage.Font = new Font("Calibri", 8.25F);
             ButtonHomePage.ForeColor = Color.DimGray;
             ButtonHomePage.Image = Properties.Resources.filled_home_24px;
             ButtonHomePage.Location = new Point(8, 8);

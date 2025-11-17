@@ -12,6 +12,9 @@ namespace ibks.Utils
 
             switch (deserializedResult.AKM_N_Status)
             {
+                case (int)StationStatements.SorunYok:
+                    return Resources.Checkmark_12px;
+
                 case (int)StationStatements.Gecerli:
                     return Resources.Checkmark_12px;
 

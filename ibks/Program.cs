@@ -1,18 +1,19 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
+using Core.Utilities.TempLogs;
 using DataAccess.Concrete.Contexts;
-using Microsoft.EntityFrameworkCore;
-using System.Windows.Forms;
 using ibks.DependencyResolvers.Autofac;
 using ibks.Forms;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OfficeOpenXml;
-using WebAPI.Authrozation;
-using Core.Utilities.TempLogs;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using WebAPI.Authrozation;
+using WebAPI.Services;
 
 namespace ibks
 {
@@ -92,6 +93,14 @@ namespace ibks
             })
             .ConfigureServices((hostContext, services) =>
             {
+                services.AddMemoryCache();
+
+                services.AddHttpClient("ExternalApi", client =>
+                {
+                    client.Timeout = TimeSpan.FromSeconds(30);
+                });
+
+                services.AddScoped<IApiHttpClientFactory, ApiHttpClientFactory>();
             });
     }
 }
