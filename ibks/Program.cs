@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OfficeOpenXml;
 using WebAPI.Authrozation;
+using WebAPI.Services;
 using Core.Utilities.TempLogs;
 using System.Threading.Tasks;
 
@@ -92,6 +93,14 @@ namespace ibks
             })
             .ConfigureServices((hostContext, services) =>
             {
+                services.AddMemoryCache();
+
+                services.AddHttpClient("ExternalApi", client =>
+                {
+                    client.Timeout = TimeSpan.FromSeconds(30);
+                });
+
+                services.AddScoped<IApiHttpClientFactory, ApiHttpClientFactory>();
             });
     }
 }
