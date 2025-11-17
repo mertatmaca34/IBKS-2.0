@@ -1,30 +1,22 @@
-using Autofac.Extensions.DependencyInjection;
-using Autofac;
-using Business.Abstract;
-using Business.Concrete;
-using Business.DependencyResolvers.Autofac;
-using OfficeOpenXml;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
+using Business.DependencyResolvers;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using OfficeOpenXml;
 
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
-{
-    containerBuilder.RegisterModule(new AutofacBusinessModule()); // Business katmanýndaki modülü çaðýr
-});
+builder.Services.AddBusinessDependencies();
+builder.Services.AddMemoryCache();
+builder.Services.AddHttpContextAccessor();
 
 // **Authentication ve Authorization Servisleri**
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Account/Login"; // Giriþ yapýlmadýysa buraya yönlendir
-        options.AccessDeniedPath = "/Account/AccessDenied"; // Yetkisiz eriþim
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Oturum süresi (isteðe baðlý)
+        options.LoginPath = "/Account/Login"; // Giri yaplmadysa buraya ynlendir
+        options.AccessDeniedPath = "/Account/AccessDenied"; // Yetkisiz eriim
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Oturum sresi (istee bal)
     });
 
 builder.Services.AddAuthorization();
