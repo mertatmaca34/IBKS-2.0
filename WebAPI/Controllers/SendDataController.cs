@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
-using WebAPI;
 using WebAPI.Abstract;
 using WebAPI.Enums;
 using WebAPI.Services;
@@ -18,10 +17,12 @@ using WebAPI.Services;
 public class SendDataController : ControllerBase, ISendDataController
 {
     private readonly IApiHttpClientFactory _httpClientFactory;
+    private readonly ISendDataService _sendDataService;
 
-    public SendDataController(IApiHttpClientFactory httpClientFactory)
+    public SendDataController(IApiHttpClientFactory httpClientFactory, ISendDataService sendDataService)
     {
         _httpClientFactory = httpClientFactory;
+        _sendDataService = sendDataService;
     }
 
     [HttpPost]
@@ -81,8 +82,6 @@ public class SendDataController : ControllerBase, ISendDataController
     [HttpGet(Name = "GetSendData")]
     public IEnumerable<SendData>? Get(DateTime start, DateTime end)
     {
-        ISendDataService _sendDataManager = Program.Services.GetRequiredService<ISendDataService>();
-
-        return _sendDataManager.GetAll(x => x.Readtime > start && x.Readtime < end).Data;
+        return _sendDataService.GetAll(x => x.Readtime > start && x.Readtime < end).Data;
     }
 }
