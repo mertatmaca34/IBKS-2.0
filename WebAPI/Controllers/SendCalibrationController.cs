@@ -1,13 +1,15 @@
-﻿using Business.Abstract;
+using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http;
 using System.Text;
 using WebAPI.Abstract;
 using WebAPI.Enums;
+using WebAPI.Services;
 
 namespace WebAPI.Controllers
 {
@@ -15,14 +17,12 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class SendCalibrationController : ControllerBase, ISendCalibrationController
     {
-        private readonly IApiService _apiManager;
-        private readonly ILogin _login;
+        private readonly IApiHttpClientFactory _httpClientFactory;
         private readonly ICalibrationService _calibrationManager;
 
-        public SendCalibrationController(IApiService apiManager, ILogin login, ICalibrationService calibrationManager)
+        public SendCalibrationController(IApiHttpClientFactory httpClientFactory, ICalibrationService calibrationManager)
         {
-            _apiManager = apiManager;
-            _login = login;
+            _httpClientFactory = httpClientFactory;
             _calibrationManager = calibrationManager;
         }
 
@@ -31,48 +31,29 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var apiData = _apiManager.Get();
+                var httpClient = await _httpClientFactory.CreateClientAsync();
 
-                if (apiData.Data != null)
-                {
-                    using (HttpClient httpClient = new HttpClient())
-                    {
-                        httpClient.BaseAddress = new Uri(apiData.Data.ApiAdress);
+                var content = new StringContent(
+                    JsonConvert.SerializeObject(data),
+                    Encoding.UTF8,
+                    "application/json");
 
-                        var loginRes = await _login.Login(apiData.Data.UserName, apiData.Data.Password);
+                var response = await httpClient.PostAsync(StationType.SAIS + "/SendCalibration", content);
+                response.EnsureSuccessStatusCode();
 
-                        if (loginRes != null && loginRes.objects != null)
-                        {
-                            httpClient.DefaultRequestHeaders.Add("AToken", JsonConvert.SerializeObject(new AToken { TicketId = loginRes.objects.TicketId.ToString() }));
+                var responseContent = await response.Content.ReadAsStringAsync();
 
-                            var content = new StringContent(
-                                JsonConvert.SerializeObject(data),
-                                Encoding.UTF8,
-                                "application/json");
+                var desResponseContent = JsonConvert.DeserializeObject<ResultStatus>(responseContent)!;
 
-                            var response = await httpClient.PostAsync(StationType.SAIS.ToString() + "/SendCalibration", content);
-                            response.EnsureSuccessStatusCode();
-
-                            var responseContent = await response.Content.ReadAsStringAsync();
-
-                            var desResponseContent = JsonConvert.DeserializeObject<ResultStatus>(responseContent)!;
-
-                            return new SuccessDataResult<ResultStatus>(desResponseContent, Messages.CalibrationSent);
-                        }
-                        else
-                        {
-                            return new ErrorDataResult<ResultStatus>(null, Messages.ApiLoginFailed);
-                        }
-                    }
-                }
-                else
-                {
-                    return new ErrorDataResult<ResultStatus>(null, "LoginRes or LoginRes.objects is null");
-                }
+                return new SuccessDataResult<ResultStatus>(desResponseContent, Messages.CalibrationSent);
             }
             catch (HttpRequestException)
             {
                 return new ErrorDataResult<ResultStatus>(null, Messages.CalibrationNotSent);
+            }
+            catch (Exception ex)
+            {
+                return new ErrorDataResult<ResultStatus>(null, ex.Message);
             }
         }
 

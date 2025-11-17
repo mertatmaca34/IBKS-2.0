@@ -1,4 +1,4 @@
-﻿using Business.Abstract;
+using Business.Abstract;
 using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -14,19 +14,12 @@ namespace WebAPI.Controllers
     public class LoginController : ControllerBase, ILogin
     {
         private readonly IApiService _apiManager;
-        private readonly HttpClient? _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public LoginController(IApiService apiManager)
+        public LoginController(IApiService apiManager, IHttpClientFactory httpClientFactory)
         {
             _apiManager = apiManager;
-
-            if (_apiManager.Get().Success)
-            {
-                string apiBaseUrl = _apiManager.Get().Data.ApiAdress;
-
-                _httpClient = new HttpClient { BaseAddress = new Uri(apiBaseUrl) };
-                _httpClient.Timeout = TimeSpan.FromSeconds(15);
-            }
+            _httpClientFactory = httpClientFactory;
         }
 
         [HttpPost]
@@ -34,6 +27,30 @@ namespace WebAPI.Controllers
         {
             try
             {
+                var apiData = _apiManager.Get();
+
+                if (apiData?.Data == null || !apiData.Success)
+                {
+                    return new ResultStatus<LoginResult>
+                    {
+                        result = false,
+                        message = "API bilgileri alınamadı."
+                    };
+                }
+
+                if (string.IsNullOrWhiteSpace(apiData.Data.ApiAdress))
+                {
+                    return new ResultStatus<LoginResult>
+                    {
+                        result = false,
+                        message = "API adresi tanımlı değil."
+                    };
+                }
+
+                var httpClient = _httpClientFactory.CreateClient("ExternalApi");
+                httpClient.BaseAddress = new Uri(apiData.Data.ApiAdress);
+                httpClient.Timeout = TimeSpan.FromSeconds(30);
+
                 var login = new Login
                 {
                     username = username,
@@ -46,19 +63,15 @@ namespace WebAPI.Controllers
                     "application/json"
                 );
 
-                _httpClient?.Timeout.Add(TimeSpan.FromSeconds(15));
+                using var response = await httpClient.PostAsync("/security/login", content);
 
-                var response = await _httpClient.PostAsync("/security/login", content);
-                
                 response.EnsureSuccessStatusCode();
 
                 var responseContent = await response.Content.ReadAsStringAsync();
 
-                var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<LoginResult>?>(responseContent);
+                var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<LoginResult>>(responseContent);
 
-                Constants.Constants.TicketId = desResponseContent?.objects.TicketId;
-
-                return desResponseContent!;
+                return desResponseContent ?? new ResultStatus<LoginResult>();
 
             }
             catch (HttpRequestException)

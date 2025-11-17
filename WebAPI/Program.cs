@@ -11,8 +11,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Abstract;
 using WebAPI.Authrozation;
-using WebAPI.Controllers;
 using WebAPI.Middlewares;
+using WebAPI.Controllers;
+using WebAPI.Services;
 
 namespace WebAPI
 {
@@ -46,7 +47,12 @@ namespace WebAPI
             builder.Services.AddScoped<ICalibrationService, CalibrationManager>();
             builder.Services.AddScoped<ISendDataService, SendDataManager>();
             builder.Services.AddScoped<ILogin, LoginController>();
-            builder.Services.AddHttpClient<IHttpClientOperations, HttpClientOperations>();
+            builder.Services.AddMemoryCache();
+            builder.Services.AddHttpClient("ExternalApi", client =>
+            {
+                client.Timeout = TimeSpan.FromSeconds(30);
+            });
+            builder.Services.AddScoped<IApiHttpClientFactory, ApiHttpClientFactory>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddControllers();
