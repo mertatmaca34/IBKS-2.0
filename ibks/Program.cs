@@ -22,7 +22,7 @@ namespace ibks
         ///  The main entry point for the application.
         /// </summary>
         /// 
-        static Mutex mutex = new Mutex(true, "{8D9DFE3E-799B-4F97-BF2D-59DE63F5F087}");
+        static readonly Mutex mutex = new(true, "{8D9DFE3E-799B-4F97-BF2D-59DE63F5F087}");
 
         [STAThread]
         static void Main(string[] args)
@@ -62,8 +62,6 @@ namespace ibks
                         MessageBox.Show($"Veritabanına bağlanırken hata: {ex.Message}", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
 
-                    //context.Database.Migrate();
-
                     context.Database.EnsureCreated();
 
                     Application.EnableVisualStyles();
@@ -94,7 +92,6 @@ namespace ibks
             })
             .ConfigureServices((hostContext, services) =>
             {
-                //services.AddDbContext<IBKSContext>(options=> options.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=DataAccess.Contexts.IBKSContext;Trusted_Connection=True;MultipleActiveResultSets=true"));
             });
     }
 }

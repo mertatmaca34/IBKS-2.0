@@ -36,8 +36,10 @@ namespace WebAPI
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
             // Add services to the container.
+            builder.Services.AddScoped<IApiHttpClientFactory, ApiHttpClientFactory>();
             builder.Services.AddScoped<ISampleService, SampleManager>();
             builder.Services.AddScoped<IApiService, ApiManager>();
+            builder.Services.AddScoped<IApiDal, EfApiDal>();
             builder.Services.AddScoped<ISampleDal, EfSampleDal>();
             builder.Services.AddScoped<IPlcService, PlcManager>();
             builder.Services.AddScoped<IPlcDal, EfPlcDal>();
@@ -45,14 +47,11 @@ namespace WebAPI
             builder.Services.AddScoped<ISendDataDal, EfSendDataDal>();
             builder.Services.AddScoped<ICalibrationDal, EfCalibrationDal>();
             builder.Services.AddScoped<ICalibrationService, CalibrationManager>();
-            builder.Services.AddScoped<ISendDataService, SendDataManager>();
-            builder.Services.AddScoped<ILogin, LoginController>();
             builder.Services.AddMemoryCache();
             builder.Services.AddHttpClient("ExternalApi", client =>
             {
                 client.Timeout = TimeSpan.FromSeconds(30);
             });
-            builder.Services.AddScoped<IApiHttpClientFactory, ApiHttpClientFactory>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddControllers();
