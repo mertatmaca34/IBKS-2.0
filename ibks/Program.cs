@@ -1,13 +1,16 @@
-using Business.DependencyResolvers;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Business.DependencyResolvers.Autofac;
 using DataAccess.Concrete.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Forms;
-using ibks.DependencyResolvers;
+using ibks.DependencyResolvers.Autofac;
 using ibks.Forms;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OfficeOpenXml;
-using WebAPI.DependencyResolvers;
+using WebAPI.Authrozation;
 using Core.Utilities.TempLogs;
 using System.Threading.Tasks;
 
@@ -82,18 +85,16 @@ namespace ibks
 }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureServices((_, services) =>
+            .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+            .ConfigureContainer<ContainerBuilder>(builder =>
             {
-                services.AddBusinessDependencies();
-                services.AddApiLayerDependencies();
-                services.AddWinFormsDependencies();
-
-                services.AddMemoryCache();
-                services.AddHttpContextAccessor();
-                services.AddHttpClient("ExternalApi", client =>
-                {
-                    client.Timeout = TimeSpan.FromSeconds(30);
-                });
+                builder.RegisterModule(new AutofacBusinessModule());
+                builder.RegisterModule(new AutofacApiModule());
+                builder.RegisterModule(new AutofacViewModule());
+            })
+            .ConfigureServices((hostContext, services) =>
+            {
+                //services.AddDbContext<IBKSContext>(options=> options.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=DataAccess.Contexts.IBKSContext;Trusted_Connection=True;MultipleActiveResultSets=true"));
             });
     }
 }
