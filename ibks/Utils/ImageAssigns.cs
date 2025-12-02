@@ -10,9 +10,9 @@ namespace ibks.Utils
         {
             deserializedResult = deserializedResult ?? new SendDataResult() { AKM_N_Status = 4 };
 
-            switch (deserializedResult.AKM_N_Status)
+            switch (deserializedResult.AKM_Status)
             {
-                case (int)StationStatements.SorunYok:
+                case (int)StationStatements.VeriYok:
                     return Resources.Checkmark_12px;
 
                 case (int)StationStatements.Gecerli:

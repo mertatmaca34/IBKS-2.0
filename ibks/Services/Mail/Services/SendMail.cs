@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
 using Core.Utilities.TempLogs;
 using ibks.Services.Mail.Abstract;
+using Serilog;
+using Serilog.Events;
 using System.Net;
 using System.Net.Mail;
 
@@ -53,7 +55,7 @@ namespace ibks.Services.Mail.Services
             }
             catch (Exception ex)
             {
-                TempLog.Write(DateTime.Now + ": Mail Gönderilemedi Detay: " + ex.Message);
+                Log.Write(LogEventLevel.Error, DateTime.Now + ": Mail Gönderilemedi Detay: " + ex.Message);
 
                 return false;
             }

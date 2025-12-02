@@ -1,4 +1,6 @@
-﻿using Business.Abstract;
+﻿using Accessibility;
+using AutoMapper;
+using Business.Abstract;
 using Business.Concrete;
 using Entities.DTOs;
 using ibks.Forms.Pages;
@@ -6,7 +8,9 @@ using ibks.Services.Mail.Abstract;
 using ibks.Utils;
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using WebAPI.Abstract;
+using WebAPI.Infrastructure.RemoteApi;
 
 namespace ibks.Forms
 {
@@ -28,13 +32,15 @@ namespace ibks.Forms
         private readonly ISendDataService _sendDataManager;
         private readonly ICalibrationService _calibrationManager;
         private readonly ISampleService _sampleManager;
+        private readonly IRemoteApiClient _remoteApiClient;
+        private readonly IMapper _mapper;
 
         public Main(IStationService stationManager, IApiService apiManager, ISendDataService sendDataManager,
             ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager,
             IPlcService plcManager, IMailServerService mailServerManager, IAuthService authManager,
             IUserService userManager, IMailStatementService mailStatementManager, IUserMailStatementService userMailStatementManager,
-            ISendDataController sendDataController, ISendCalibrationController sendCalibrationController,
-            ICheckStatements checkStatements, ISampleService sampleManager, IGetMissingDatesController getMissingDatesController)
+            ICheckStatements checkStatements, ISampleService sampleManager, IGetMissingDatesController getMissingDatesController, IRemoteApiClient remoteApiClient,
+            IMapper mapper)
         {
             InitializeComponent();
 
@@ -50,10 +56,12 @@ namespace ibks.Forms
             _userMailStatementManager = userMailStatementManager;
             _sampleManager = sampleManager;
             _sendDataManager = sendDataManager;
+            _remoteApiClient = remoteApiClient;
+            _mapper = mapper;
 
-            _homePage = new HomePage(_stationManager, sendDataManager, calibrationManager, sendDataController, checkStatements, getMissingDatesController);
+            _homePage = new HomePage(_stationManager, _sendDataManager, _calibrationManager, checkStatements, getMissingDatesController, _remoteApiClient, _mapper);
             _simulationPage = new SimulationPage();
-            _calibrationPage = new CalibrationPage(calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, sendCalibrationController);
+            _calibrationPage = new CalibrationPage(calibrationManager, _stationManager, _calibrationLimitManager, _apiManager, _remoteApiClient);
         }
 
         private void Main_Load(object sender, EventArgs e)

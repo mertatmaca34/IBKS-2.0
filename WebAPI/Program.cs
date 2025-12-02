@@ -14,6 +14,7 @@ using WebAPI.Authrozation;
 using WebAPI.Middlewares;
 using WebAPI.Controllers;
 using WebAPI.Services;
+using WebAPI.Infrastructure.RemoteApi;
 
 namespace WebAPI
 {
@@ -40,6 +41,7 @@ namespace WebAPI
             builder.Services.AddScoped<ISampleService, SampleManager>();
             builder.Services.AddScoped<IApiService, ApiManager>();
             builder.Services.AddScoped<IApiDal, EfApiDal>();
+            builder.Services.AddScoped<IRemoteApiClient, RemoteApiClient>();
             builder.Services.AddScoped<ISampleDal, EfSampleDal>();
             builder.Services.AddScoped<IPlcService, PlcManager>();
             builder.Services.AddScoped<IPlcDal, EfPlcDal>();
@@ -86,7 +88,6 @@ namespace WebAPI
             })
             .ConfigureServices((hostContext, services) =>
             {
-                //services.AddDbContext<IBKSContext>(options=> options.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=DataAccess.Contexts.IBKSContext;Trusted_Connection=True;MultipleActiveResultSets=true"));
             });
     }
 }

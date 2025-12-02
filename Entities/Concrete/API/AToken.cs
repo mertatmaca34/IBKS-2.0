@@ -2,7 +2,8 @@
 {
     public class AToken
     {
-        public string TicketId { get; set; }
-        public string DeviceId { get; set; }
+        public Guid? TicketId { get; set; }
+        public Guid? DeviceId { get; set; }
+        public DateTime Expiration { get; set; }
     }
 }

@@ -5,6 +5,8 @@ using Entities.Concrete;
 using ibks.Services.Mail.Abstract;
 using ibks.Utils;
 using PLC.Sharp7.Services;
+using Serilog;
+using Serilog.Events;
 
 namespace ibks.Services.Mail.Services
 {
@@ -59,12 +61,12 @@ namespace ibks.Services.Mail.Services
                                     lastSentTimes[mailStatement.Id] = DateTime.Now;
 
 
-                                    TempLog.Write(DateTime.Now + ": Mail Durumu Oluştu.");
+                                    Log.Write(LogEventLevel.Information,DateTime.Now + ": Mail Durumu Oluştu.");
 
                                     var res = await _sendMail.MailSend(user.Email, mailStatement.StatementName, mailBody);
 
                                     if(res)
-                                        TempLog.Write(DateTime.Now + ": Mail Gönderildi");
+                                        Log.Write(LogEventLevel.Information,DateTime.Now + ": Mail Gönderildi");
                                 }
                             }
                         }

@@ -77,8 +77,13 @@ namespace Business.Concrete
         {
             IResult result = BusinessRules.Run(CheckSendDataExist(sendData));
 
+            
             if (result == null)
             {
+                SendData res = _sendDataDal.GetAll(d => d.Id == sendData.Id || d.Readtime == sendData.Readtime).FirstOrDefault();
+
+                sendData.Id = res!.Id;
+
                 _sendDataDal.Update(sendData);
 
                 return new SuccessResult(Messages.SendDataUpdated);
@@ -93,7 +98,7 @@ namespace Business.Concrete
         {
             if (sendData != null)
             {
-                var filteredData = _sendDataDal.GetAll(d => d.Id == sendData.Id).FirstOrDefault();
+                var filteredData = _sendDataDal.GetAll(d => d.Id == sendData.Id || d.Readtime == sendData.Readtime).FirstOrDefault();
 
                 if (filteredData != null)
                 {

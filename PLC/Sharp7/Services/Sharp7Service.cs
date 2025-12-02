@@ -4,6 +4,8 @@ using Core.Utilities.TempLogs;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using PLC.Sharp7.Utils;
+using Serilog;
+using Serilog.Events;
 using Sharp7;
 using System.ComponentModel;
 
@@ -97,7 +99,7 @@ namespace PLC.Sharp7.Services
 
                 if (res == 0)
                 {
-                    TempLog.Write($"Bağlantı kapatıldı!");
+                    Log.Write(LogEventLevel.Information,$"Bağlantı kapatıldı!");
                 }
             }
         }
@@ -112,11 +114,11 @@ namespace PLC.Sharp7.Services
 
                 if (res == 0)
                 {
-                    TempLog.Write($"Yeniden Bağlantı Kuruldu!");
+                    Log.Write(LogEventLevel.Information,$"Yeniden Bağlantı Kuruldu!");
                 }
                 else
                 {
-                    TempLog.Write($"Yeniden Bağlantı Kurulamadı!");
+                    Log.Write(LogEventLevel.Information,$"Yeniden Bağlantı Kurulamadı!");
                 }
             }
             else
@@ -205,7 +207,7 @@ namespace PLC.Sharp7.Services
                         S71200.DB42.ManuelTetik              = Get.Bit(S71200.Buffer42, 2, 4);
                         S71200.DB42.SimNumuneTetik           = Get.Bit(S71200.Buffer42, 2, 5);
 
-                        res = client?.DBRead(100, 0, 19, S71200.Buffer43);
+                        res = client?.DBRead(43, 0, 19, S71200.Buffer43);
 
                         S71200.DB43.SystemTime = Get.Time(S71200.Buffer43, 0);
                         S71200.DB43.WeeklyWashDay = Get.Byte(S71200.Buffer43, 14);

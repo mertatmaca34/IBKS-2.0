@@ -86,7 +86,7 @@ namespace WebAPI.Services
 
                 var ticket = new TicketInfo
                 {
-                    TicketId = loginResult.objects.TicketId.Value.ToString(),
+                    TicketId = loginResult.objects.TicketId.Value,
                     ExpiresAt = DateTimeOffset.UtcNow.AddMinutes(30)
                 };
 
@@ -118,7 +118,7 @@ namespace WebAPI.Services
 
         private sealed class TicketInfo
         {
-            public string TicketId { get; set; } = string.Empty;
+            public Guid? TicketId { get; set; }
             public DateTimeOffset ExpiresAt { get; set; }
         }
     }

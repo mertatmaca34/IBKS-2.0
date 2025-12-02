@@ -3,6 +3,7 @@ using Entities.Concrete;
 using Entities.Concrete.API;
 using ibks.Utils;
 using WebAPI.Abstract;
+using WebAPI.Infrastructure.RemoteApi;
 
 namespace ibks.Forms.Pages
 {
@@ -12,24 +13,24 @@ namespace ibks.Forms.Pages
         private readonly ICalibrationLimitService _calibrationLimitManager;
         private readonly IStationService _stationManager;
         private readonly IApiService _apiManager;
-        private readonly ISendCalibrationController _sendCalibrationController;
+        private readonly IRemoteApiClient _remoteApiClient;
 
         readonly CalibrationOps _calibrationOps;
 
         readonly List<Control> _controls;
 
-        public CalibrationPage(ICalibrationService calibrationManager, IStationService stationManager, ICalibrationLimitService calibrationLimitManager, IApiService apiManager, ISendCalibrationController sendCalibrationController)
+        public CalibrationPage(ICalibrationService calibrationManager, IStationService stationManager, ICalibrationLimitService calibrationLimitManager, IApiService apiManager,  IRemoteApiClient remoteApiClient)
         {
             _calibrationManager = calibrationManager;
             _stationManager = stationManager;
             _calibrationLimitManager = calibrationLimitManager;
-            _sendCalibrationController = sendCalibrationController;
             _controls = new List<Control>();
+            _remoteApiClient = remoteApiClient;
 
             InitializeComponent();
             _apiManager = apiManager;
 
-            _calibrationOps = new CalibrationOps(_stationManager, _calibrationManager, _sendCalibrationController, _calibrationLimitManager);
+            _calibrationOps = new CalibrationOps(_stationManager, _calibrationManager,  _calibrationLimitManager, _remoteApiClient);
         }
 
         private void CalibrationPage_Load(object sender, EventArgs e)
@@ -91,7 +92,7 @@ namespace ibks.Forms.Pages
                     ResultSpan = item.IsItValid,
                 };
 
-                var res = _sendCalibrationController.SendCalibration(data);
+                var res = _remoteApiClient.SendCalibration(data);
             }
 
             var calibrationLimits = _calibrationLimitManager.Get(x => x.Parameter == "Akm");

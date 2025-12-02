@@ -1,6 +1,6 @@
+using AutoMapper;
 using Business.Abstract;
 using Business.Helpers;
-using Core.Utilities.Results;
 using Core.Utilities.TempLogs;
 using Entities.Concrete;
 using Entities.Concrete.API;
@@ -9,8 +9,11 @@ using ibks.Utils;
 using PLC;
 using PLC.Sharp7.Helpers;
 using PLC.Sharp7.Services;
+using Serilog;
+using Serilog.Events;
 using System.ComponentModel;
 using WebAPI.Abstract;
+using WebAPI.Infrastructure.RemoteApi;
 
 namespace ibks.Forms.Pages
 {
@@ -20,23 +23,26 @@ namespace ibks.Forms.Pages
 
         private readonly Sharp7Service _sharp7Service = Sharp7Service.Instance;
 
+        private readonly IMapper _mapper;
         private readonly IStationService _stationManager;
         private readonly ISendDataService _sendDataManager;
         private readonly ICalibrationService _calibrationManager;
-        private readonly ISendDataController _sendDataController;
         private readonly ICheckStatements _checkStatements;
         private readonly IGetMissingDatesController _getMissingDatesController;
+        private readonly IRemoteApiClient _remoteApiClient;
 
         public HomePage(IStationService stationManager, ISendDataService sendDataManager,
-            ICalibrationService calibrationManager, ISendDataController sendDataController,
-            ICheckStatements checkStatements, IGetMissingDatesController getMissingDatesController)
+            ICalibrationService calibrationManager, 
+            ICheckStatements checkStatements, IGetMissingDatesController getMissingDatesController,
+            IRemoteApiClient remoteApiClient, IMapper mapper)
         {
             InitializeComponent();
 
+            _mapper = mapper;
+            _remoteApiClient = remoteApiClient;
             _stationManager = stationManager;
             _sendDataManager = sendDataManager;
             _calibrationManager = calibrationManager;
-            _sendDataController = sendDataController;
             _checkStatements = checkStatements;
             _getMissingDatesController = getMissingDatesController;
         }
@@ -62,47 +68,31 @@ namespace ibks.Forms.Pages
 
         private async void SendDataAndAssignStationInfoControl()
         {
-            try
-            {
-                var data = DataProcessingHelper.MergedSendData(_stationManager);
+            var data = DataProcessingHelper.MergedSendData(_stationManager);
 
-                if (data.Success)
+            if (data.Success)
+            {
+                if (SendDataHelper.IsItTime(data.Data.Readtime).Success)
                 {
-                    if (SendDataHelper.IsItTime(data.Data.Readtime).Success)
+                    var res = await _remoteApiClient.SendData(data.Data);
+
+                    if (res.message == "Bu saatin datası daha önce kayıt edilmiştir.")
                     {
-                        var res = await _sendDataController.SendData(data.Data);
-
-                        if (res.Success && res.Data != null && res.Data.objects != null)
-                        {
-                            if (res.Message == "zaten kayıtlı")
-                            {
-                                data.Data.IsSent = true;
-
-                                _sendDataManager.Update(data.Data);
-
-                                return;
-                            }
-
-                            data.Data.IsSent = true;
-
-                            StaticInstantData.Assign(res.Data.objects);
-
-                            AssignStationInfoControl(res);
-                        }
-                        else
-                        {
-                            data.Data!.IsSent = false;
-                        }
-
-                        TempLog.Write($"{DateTime.Now}: [Dakikalık Veri Gönderimi] {res.Message}");
-
-                        _sendDataManager.Add(data.Data);
+                        data.Data.IsSent = true;
                     }
+                    else
+                    {
+                        data.Data.IsSent = res.result;
+                    }
+
+                    StaticInstantData.Assign(res.objects);
+
+                    AssignStationInfoControl(res);
+
+                    Log.Write(LogEventLevel.Information,$"{data.Data.Readtime}: {res.message}");
+
+                    _sendDataManager.Add(data.Data);
                 }
-            }
-            catch (Exception ex)
-            {
-                TempLog.Write($"{DateTime.Now}: [SendDataAndAssignStationInfoControl] {ex}");
             }
         }
 
@@ -169,7 +159,7 @@ namespace ibks.Forms.Pages
             }
         }
 
-        private void AssignStationInfoControl(IDataResult<ResultStatus<SendDataResult>> deserializedResult)
+        private void AssignStationInfoControl(ResultStatus<SendDataResult> deserializedResult)
         {
             StationInfoStatements.AssignLastWashStatements(deserializedResult, _sendDataManager, StationInfoControl);
             StationInfoStatements.AssignCalibrationImage(deserializedResult, StationInfoControl);
@@ -195,7 +185,7 @@ namespace ibks.Forms.Pages
             }
             catch (Exception ex)
             {
-                TempLog.Write($"{DateTime.Now}: [TimerGetMissingDates_Tick] {ex}");
+                Log.Write(LogEventLevel.Information, $"{DateTime.Now}: [TimerGetMissingDates_Tick] {ex}");
             }
         }
 
@@ -256,9 +246,15 @@ namespace ibks.Forms.Pages
 
                 if (lookup.TryGetValue(key, out var sendData))
                 {
-                    var res = await _sendDataController.SendData(sendData);
+                    var res = await _remoteApiClient.SendData(sendData);
 
-                    TempLog.Write($"{sendData.Readtime} {res.Message}");
+                    var mappedRes = _mapper.Map<SendData>(res.objects);
+
+                    mappedRes.IsSent = res.result;
+
+                    _sendDataManager.Update(mappedRes);
+
+                    Log.Write(LogEventLevel.Information, $"{sendData.Readtime} {res.message}");
                 }
             }
 

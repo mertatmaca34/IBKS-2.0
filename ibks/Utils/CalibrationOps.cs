@@ -5,6 +5,7 @@ using ibks.Components;
 using PLC.Sharp7.Services;
 using System.Windows.Forms.DataVisualization.Charting;
 using WebAPI.Abstract;
+using WebAPI.Infrastructure.RemoteApi;
 using Timer = System.Windows.Forms.Timer;
 
 namespace ibks.Utils
@@ -16,21 +17,21 @@ namespace ibks.Utils
         public bool isCalibrationInProgress;
         readonly double _tolerance = 1.10;
 
-        Calibration _calibration = new Calibration();
+        Calibration _calibration = new();
 
         readonly IStationService _stationManager;
         readonly ICalibrationService _calibrationManager;
-        readonly ISendCalibrationController _sendCalibrationController;
         readonly ICalibrationLimitService _calibrationLimitManager;
+        readonly IRemoteApiClient _remoteApiClient;
 
-        Station stationInfo = new Station();
+        readonly Station stationInfo = new();
 
-        public CalibrationOps(IStationService stationManager, ICalibrationService calibrationManager, ISendCalibrationController sendCalibrationController, ICalibrationLimitService calibrationLimitManager)
+        public CalibrationOps(IStationService stationManager, ICalibrationService calibrationManager, ICalibrationLimitService calibrationLimitManager, IRemoteApiClient remoteApiClient)
         {
             _stationManager = stationManager;
             _calibrationManager = calibrationManager;
-            _sendCalibrationController = sendCalibrationController;
             _calibrationLimitManager = calibrationLimitManager;
+            _remoteApiClient = remoteApiClient;
 
             var stationData = stationManager.Get();
 
@@ -38,13 +39,6 @@ namespace ibks.Utils
             {
                 stationInfo.StationId = _stationManager.Get().Data.StationId;
             }
-        }
-
-        private async void SendCalibration(SendCalibration data)
-        {
-            var res = await _sendCalibrationController.SendCalibration(data);
-
-            MessageBox.Show(res.Message);
         }
 
         public void StartCalibration(string calibrationName, string calibrationType, int calibrationTime, List<Control> controls)
@@ -117,7 +111,7 @@ namespace ibks.Utils
                 Enabled = true
             };
 
-            timerCalibration.Tick += delegate
+            timerCalibration.Tick += async delegate
             {
                 //Kalibrasyon süresi 0 olduğunda bitecek
                 if (calibrationTime >= 0)
@@ -185,8 +179,10 @@ namespace ibks.Utils
                         };
 
                         //TODO KALİBRASYONU GÖNDER
+                        var res = await _remoteApiClient.SendCalibration(data);
+
+                        MessageBox.Show(res.message, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: -";
-                        SendCalibration(data);
 
                         //Kalibrasyonu kaydet
                         _calibration.TimeStamp = DateTime.Now;
@@ -208,7 +204,7 @@ namespace ibks.Utils
 
         public void StartSpanCalibration(string calibrationName, int calibrationTime, List<Control> controls)
         {
-            List<double> measValues = new List<double>();
+            List<double> measValues = new();
 
             TitleBarControl labelTimeStamp = (TitleBarControl)controls.FirstOrDefault(c => c.Name == "TitleBarControlTimeRemain")!;
             Chart ChartCalibration = (Chart)controls.FirstOrDefault(c => c.Name == "ChartCalibration")!;
@@ -252,7 +248,7 @@ namespace ibks.Utils
                 Enabled = true
             };
 
-            timerCalibration.Tick += delegate
+            timerCalibration.Tick += async delegate
             {
                 //Kalibrasyon süresi 0 olduğunda bitecek
                 if (calibrationTime >= 0)
@@ -324,7 +320,10 @@ namespace ibks.Utils
 
                         //TODO KALİBRASYONU GÖNDER
                         labelActiveCalibration.TitleBarText = "Aktif Kalibrasyon: -";
-                        SendCalibration(data);
+
+                        var res = await _remoteApiClient.SendCalibration(data);
+
+                        MessageBox.Show(res.message, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         //Kalibrasyonu kaydet
                         _calibration.TimeStamp = DateTime.Now;
