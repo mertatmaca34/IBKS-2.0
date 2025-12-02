@@ -4,6 +4,7 @@ using Entities.Concrete;
 using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Serilog;
 using System.Net;
 using System.Text;
 using WebAPI.Enums;
@@ -55,8 +56,10 @@ public class RemoteApiClient(IApiService apiService) : IRemoteApiClient
 
         var response = await httpClient.PostAsync(StationType.SAIS + url, content);
 
-        if (response.StatusCode != HttpStatusCode.OK)
+        if (response.StatusCode != HttpStatusCode.OK && Token.Expiration < DateTime.Now.AddMinutes(5))
         {
+            Log.Write(Serilog.Events.LogEventLevel.Warning, "Token süresi dolmuş, yenileniyor.");
+
             await SetValidTicketAsync();
 
             response.Dispose();
@@ -111,6 +114,8 @@ public class RemoteApiClient(IApiService apiService) : IRemoteApiClient
             Token.TicketId = desResponseContent?.objects.TicketId;
             Token.DeviceId = desResponseContent?.objects.DeviceId;
             Token.Expiration = DateTime.Now.AddMinutes(25);
+
+            Log.Information("API'ye başarılı bir şekilde giriş yapıldı ve ticket yenilendi", Token.TicketId);
 
             return desResponseContent ?? new ResultStatus<LoginResult>();
         }
