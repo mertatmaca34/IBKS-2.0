@@ -13,6 +13,7 @@ namespace DataAccess.Concrete.Contexts
             if (!optionsBuilder.IsConfigured)
             {
                 var serverName = $@"{Environment.MachineName}\SQLEXPRESS";
+                var localDb = "(LocalDB)\\MSSQLLocalDB";
                 var connectionString =
                                     $"Server={serverName};Database=IBKSContext;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
 

@@ -7,6 +7,6 @@ namespace WebAPI.Infrastructure.RemoteApi;
 
 public interface IRemoteApiClient
 {
-    Task<ResultStatus<SendDataResult>> SendData(SendData data);
-    Task<ResultStatus<SendCalibrationResult>> SendCalibration(SendCalibration data);
+    Task<ResultStatus<SendDataResult>> SendData(SendData data, CancellationToken ct = default);
+    Task<ResultStatus<SendCalibrationResult>> SendCalibration(SendCalibration data, CancellationToken ct = default);
 }

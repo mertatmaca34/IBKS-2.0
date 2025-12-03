@@ -5,6 +5,7 @@ using Entities.Concrete.API;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Serilog;
+using System;
 using System.Net;
 using System.Text;
 using WebAPI.Enums;
@@ -12,10 +13,24 @@ using WebAPI.Utils;
 
 namespace WebAPI.Infrastructure.RemoteApi;
 
-public class RemoteApiClient(IApiService apiService) : IRemoteApiClient
+public class RemoteApiClient : IRemoteApiClient
 {
     public AToken Token = new();
     public HttpClient httpClient = new();
+    private readonly IApiService _apiService;
+
+    public RemoteApiClient(IApiService apiService)
+    {
+        _apiService = apiService;
+
+        var res = _apiService.Get();
+
+        if (res.Success && res.Data != null)
+        {
+            httpClient.Timeout = TimeSpan.FromSeconds(30);
+            httpClient.BaseAddress = new Uri(res.Data.ApiAdress);
+        }
+    }
 
     public StringContent PrepareStringContent(object data)
     {
@@ -48,47 +63,60 @@ public class RemoteApiClient(IApiService apiService) : IRemoteApiClient
         }
     }
 
-    public async Task<ResultStatus<T>> PostData<T>(object data, string url)
+    public async Task<ResultStatus<T>> PostData<T>(object data, string url, CancellationToken ct = default)
     {
         var content = PrepareStringContent(data);
 
         await SetValidTicketAsync();
 
-        var response = await httpClient.PostAsync(StationType.SAIS + url, content);
-
-        if (response.StatusCode != HttpStatusCode.OK && Token.Expiration < DateTime.Now.AddMinutes(5))
+        try
         {
-            Log.Write(Serilog.Events.LogEventLevel.Warning, "Token süresi dolmuş, yenileniyor.");
+            var response = await httpClient.PostAsync(StationType.SAIS + url, content, ct);
 
-            await SetValidTicketAsync();
+            if (response.StatusCode != HttpStatusCode.OK && Token.Expiration < DateTime.Now.AddMinutes(5))
+            {
+                await SetValidTicketAsync();
 
-            response.Dispose();
+                Log.Write(Serilog.Events.LogEventLevel.Warning, "Token süresi dolmuş, yenileniyor.");
 
-            response = await httpClient.PostAsync(StationType.SAIS + url, content);
+                response.Dispose();
+
+                response = await httpClient.PostAsync(StationType.SAIS + url, content, ct);
+            }
+            else if (response.StatusCode == HttpStatusCode.Conflict)
+            {
+                return new ResultStatus<T>
+                {
+                    result = false,
+                    message = "Bu saatin datası daha önce kayıt edilmiştir.",
+                };
+            }
+
+            var responseContent = await response.Content.ReadAsStringAsync(ct);
+
+            var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<T>>(responseContent)!;
+
+            return desResponseContent;
         }
-        else if (response.StatusCode == HttpStatusCode.Conflict)
+        catch (Exception ex)
         {
+            Log.Error(ex.Message, ex.StackTrace, ex.InnerException);
+
             return new ResultStatus<T>
             {
                 result = false,
-                message = "Bu saatin datası daha önce kayıt edilmiştir.",
+                message = "API ile iletişim kurulamadı: " + ex.Message
             };
         }
-
-        var responseContent = await response.Content.ReadAsStringAsync();
-
-        var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<T>>(responseContent)!;
-
-        return desResponseContent;
     }
 
-    public async Task<ResultStatus<SendDataResult>> SendData(SendData data) => await PostData<SendDataResult>(data, "/SendData");
+    public async Task<ResultStatus<SendDataResult>> SendData(SendData data, CancellationToken ct = default) => await PostData<SendDataResult>(data, "/SendData", ct);
 
-    public async Task<ResultStatus<SendCalibrationResult>> SendCalibration(SendCalibration data) => await PostData<SendCalibrationResult>(data, "/SendCalibration");
+    public async Task<ResultStatus<SendCalibrationResult>> SendCalibration(SendCalibration data, CancellationToken ct = default) => await PostData<SendCalibrationResult>(data, "/SendCalibration", ct);
 
-    public async Task<ResultStatus<LoginResult>> Login()
+    public async Task<ResultStatus<LoginResult>> Login(CancellationToken ct = default)
     {
-        var resApiService = apiService.Get();
+        var resApiService = _apiService.Get();
 
         if (resApiService.Success && resApiService.Data != null)
         {
@@ -100,24 +128,26 @@ public class RemoteApiClient(IApiService apiService) : IRemoteApiClient
 
             var content = PrepareStringContent(login);
 
-            httpClient.Timeout = TimeSpan.FromSeconds(30);
-            httpClient.BaseAddress = new Uri(resApiService.Data.ApiAdress);
+            var res = await httpClient.PostAsync("/security/login", content, ct);
 
-            using var response = await httpClient.PostAsync("/security/login", content);
+            var responseContent = await res.Content.ReadAsStringAsync(ct);
 
-            response.EnsureSuccessStatusCode();
+            var deserializedResponse = JsonConvert.DeserializeObject<ResultStatus<LoginResult>>(responseContent);
 
-            var responseContent = await response.Content.ReadAsStringAsync();
+            if (deserializedResponse != null && deserializedResponse.result)
+            {
+                Token.TicketId = deserializedResponse?.objects.TicketId;
+                Token.DeviceId = deserializedResponse?.objects.DeviceId;
+                Token.Expiration = DateTime.Now.AddMinutes(25);
 
-            var desResponseContent = JsonConvert.DeserializeObject<ResultStatus<LoginResult>>(responseContent);
+                Log.Information("API'ye başarılı bir şekilde giriş yapıldı ve ticket yenilendi", Token.TicketId);
+            }
+            else
+            {
+                Log.Error("API'ye giriş yapılamadı: " + deserializedResponse.message);
+            }
 
-            Token.TicketId = desResponseContent?.objects.TicketId;
-            Token.DeviceId = desResponseContent?.objects.DeviceId;
-            Token.Expiration = DateTime.Now.AddMinutes(25);
-
-            Log.Information("API'ye başarılı bir şekilde giriş yapıldı ve ticket yenilendi", Token.TicketId);
-
-            return desResponseContent ?? new ResultStatus<LoginResult>();
+            return deserializedResponse ?? new ResultStatus<LoginResult>();
         }
 
         return new ResultStatus<LoginResult>

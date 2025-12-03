@@ -14,7 +14,12 @@ namespace ibks.Mapping
     {
         public SendDataMappingProfile()
         {
-            CreateMap<SendDataResult, SendData>();
+            CreateMap<SendDataResult, SendData>()
+            .ForMember(dest => dest.Readtime, opt => opt.MapFrom(src => src.ReadTime))
+            .AfterMap((src, dest) =>
+            {
+                dest.SoftwareVersion = "1.0.0";
+            });
         }
     }
 

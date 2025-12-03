@@ -189,7 +189,7 @@ namespace ibks.Forms.Pages
             }
         }
 
-        private async void ResendMissingDates()
+        private async void ResendMissingDates(CancellationToken ct = default)
         {
             if (isBusy) return;
 
@@ -246,15 +246,22 @@ namespace ibks.Forms.Pages
 
                 if (lookup.TryGetValue(key, out var sendData))
                 {
-                    var res = await _remoteApiClient.SendData(sendData);
+                    var res = await _remoteApiClient.SendData(sendData, ct);
 
-                    var mappedRes = _mapper.Map<SendData>(res.objects);
+                    if (res != null && res.result)
+                    {
+                        var mappedRes = _mapper.Map<SendData>(res.objects);
 
-                    mappedRes.IsSent = res.result;
+                        mappedRes.IsSent = res.result;
 
-                    _sendDataManager.Update(mappedRes);
+                        _sendDataManager.Update(mappedRes);
 
-                    Log.Write(LogEventLevel.Information, $"{sendData.Readtime} {res.message}");
+                        Log.Write(LogEventLevel.Information, $"{sendData.Readtime} {res.message}");
+                    }
+                    else
+                    {
+                        Log.Write(LogEventLevel.Information, $"{sendData.Readtime} gönderilemedi: {res?.message}");
+                    }
                 }
             }
 
