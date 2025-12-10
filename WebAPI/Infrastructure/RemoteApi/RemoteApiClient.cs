@@ -67,10 +67,10 @@ public class RemoteApiClient : IRemoteApiClient
     {
         var content = PrepareStringContent(data);
 
-        await SetValidTicketAsync();
-
         try
         {
+            await SetValidTicketAsync();
+
             var response = await httpClient.PostAsync(StationType.SAIS + url, content, ct);
 
             if (response.StatusCode != HttpStatusCode.OK && Token.Expiration < DateTime.Now.AddMinutes(5))

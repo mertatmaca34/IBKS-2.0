@@ -58,7 +58,7 @@ namespace ibks.Forms.Pages
                 AssignAnalogSensorStatements();
                 AssignAverageOfLast60Minutes();
                 AssignSystemStatement();
-                SendDataAndAssignStationInfoControl();
+                using var _ = SendDataAndAssignStationInfoControl();
             }; bgw.RunWorkerAsync();
 
             GC.Collect();
@@ -66,34 +66,52 @@ namespace ibks.Forms.Pages
             await _checkStatements.Check();
         }
 
-        private async void SendDataAndAssignStationInfoControl()
+        private async Task SendDataAndAssignStationInfoControl()
         {
             var data = DataProcessingHelper.MergedSendData(_stationManager);
 
-            if (data.Success)
+            if (!data.Success)
+                return;
+
+            if (!SendDataHelper.IsItTime(data.Data.Readtime).Success)
+                return;
+
+            ResultStatus<SendDataResult> res;
+
+            try
             {
-                if (SendDataHelper.IsItTime(data.Data.Readtime).Success)
-                {
-                    var res = await _remoteApiClient.SendData(data.Data);
-
-                    if (res.message == "Bu saatin datası daha önce kayıt edilmiştir.")
-                    {
-                        data.Data.IsSent = true;
-                    }
-                    else
-                    {
-                        data.Data.IsSent = res.result;
-                    }
-
-                    StaticInstantData.Assign(res.objects);
-
-                    AssignStationInfoControl(res);
-
-                    Log.Write(LogEventLevel.Information,$"{data.Data.Readtime}: {res.message}");
-
-                    _sendDataManager.Add(data.Data);
-                }
+                res = await _remoteApiClient.SendData(data.Data);
             }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "SendData çağrısı sırasında beklenmeyen hata.");
+                return;
+            }
+
+            if (res.message == "Bu saatin datası daha önce kayıt edilmiştir.")
+            {
+                data.Data.IsSent = true;
+                _sendDataManager.Add(data.Data);
+                return;
+            }
+            else
+            {
+                data.Data.IsSent = res.result;
+            }
+
+            if (!res.result)
+            {
+                Log.Write(LogEventLevel.Warning, $"{data.Data.Readtime}: Veri gönderilemedi. Mesaj: {res.message}");
+                return;
+            }
+
+            StaticInstantData.Assign(res.objects);
+
+            AssignStationInfoControl(res);
+
+            Log.Write(LogEventLevel.Information, $"{data.Data.Readtime}: {res.message}");
+
+            _sendDataManager.Add(data.Data);
         }
 
         private void AssignAnalogSensors()
